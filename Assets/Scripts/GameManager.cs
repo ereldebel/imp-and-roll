@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float borderRelativeWidth;
 	[SerializeField] private float loseAreaRelativeWidth;
 	[SerializeField] private float borderChangeSpeed = 0.01f;
+	[SerializeField] private Transform border;
 
 	private static GameManager _shared;
 
@@ -44,5 +45,6 @@ public class GameManager : MonoBehaviour
 		var change = Time.deltaTime * borderChangeSpeed;
 		_borderX += normalizedXPosition < _borderX ? -change : change;
 		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
+		border.position = new Vector3(_arenaWidth * (_borderX - 0.5f), 0.5f, 0);
 	}
 }

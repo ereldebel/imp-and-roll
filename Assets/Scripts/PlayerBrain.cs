@@ -1,47 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerBrain : MonoBehaviour
 {
-    public Vector2 MovementStick { get; set; }
+	public Vector2 MovementStick { get; set; }
 
-    public Vector2 AimingStick { get; set; }
-    [SerializeField] private float speed;
-    private Rigidbody myRigid;
+	public Vector2 AimingStick { get; set; }
+	public bool movementByPush;
+	
+	[SerializeField] private float speed;
+	
+	private Rigidbody _myRigid;
+	private GameObject _ball; //if not null than it is held by the player and is a child of the game object.
 
-    public bool MovementByPush;
-    // Start is called before the first frame update
-    void Start()
-    {
-        myRigid = GetComponent<Rigidbody>();
-    }
+	private void Start()
+	{
+		_myRigid = GetComponent<Rigidbody>();
+	}
 
-    public void ShootBall(float power)//Since Ball will be used by both of us, added a "template" of the function, we should decide how we want the player and ball behaviour to be.
-    {
-        //Ball.rigidbody.addforce(power*AimingStick);
-    }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+	private void FixedUpdate()
+	{
+		if (movementByPush)
+		{
+			if (MovementStick.sqrMagnitude > 0.1)
+			{
+				_myRigid.AddForce(new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed), ForceMode.Impulse);
+			}
+		}
+		else
+		{
+			if (MovementStick.sqrMagnitude > 0.1)
+			{
+				_myRigid.velocity = new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed);
+			}
+			else
+			{
+				_myRigid.velocity = Vector3.zero;
+			}
+		}
+	}
+	
+	public void ShootBall(float power) //Since Ball will be used by both of us, added a "template" of the function, we should decide how we want the player and ball behaviour to be.
+	{
+		//Ball.rigidbody.addforce(power*AimingStick);
+	}
 
-        if (MovementByPush)
-        {
-            if (MovementStick.sqrMagnitude > 0.1)
-            {
-                myRigid.AddForce(new Vector3(MovementStick.x*speed, 0, MovementStick.y*speed),ForceMode.Impulse);
-            }
-        }
-        else
-        {
-            if (MovementStick.sqrMagnitude > 0.1)
-            {
-                myRigid.velocity = new Vector3(MovementStick.x*speed, 0, MovementStick.y*speed);
-            }
-            else
-            {
-                myRigid.velocity = Vector3.zero;
-            }
-        }
-    }
+	public void PickupBall()
+	{
+		throw new NotImplementedException();
+	}
 }
