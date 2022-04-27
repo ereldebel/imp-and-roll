@@ -17,6 +17,10 @@ public class PlayerBrain : MonoBehaviour
         myRigid = GetComponent<Rigidbody>();
     }
 
+    public void ShootBall(float power)//Since Ball will be used by both of us, added a "template" of the function, we should decide how we want the player and ball behaviour to be.
+    {
+        //Ball.rigidbody.addforce(power*AimingStick);
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
