@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+	#region Serialized Fields
+
 	[SerializeField] private Ball ball;
 	[SerializeField] private GameObject arena;
 	[SerializeField] private string arenaMaterialBorderXValueName = "BorderX";
@@ -10,6 +12,10 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float borderChangeSpeed = 0.01f;
 	[SerializeField] private Transform border;
 
+	#endregion
+
+	#region Private Fields
+
 	private static GameManager _shared;
 
 	private float _borderX = 0.5f;
@@ -17,6 +23,10 @@ public class GameManager : MonoBehaviour
 	private float _arenaWidth;
 	private const float PlaneWidth = 10;
 	private int _shaderBorderXVar;
+
+	#endregion
+
+	#region Function Events
 
 	private void Awake()
 	{
@@ -37,6 +47,10 @@ public class GameManager : MonoBehaviour
 		UpdateBorder();
 	}
 
+	#endregion
+
+	#region Private Methods
+
 	private void UpdateBorder()
 	{
 		if (!ball.Grounded) return;
@@ -47,4 +61,6 @@ public class GameManager : MonoBehaviour
 		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
 		border.position = new Vector3(_arenaWidth * (_borderX - 0.5f), 0.5f, 0);
 	}
+
+	#endregion
 }
