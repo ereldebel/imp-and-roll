@@ -1,10 +1,13 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxLoadingShotTime;
+    public float maxLoadingShotTime = 1;
     private PlayerBrain _myBrain;
     private float _holdShootTimer = 0;
     private void Awake()
