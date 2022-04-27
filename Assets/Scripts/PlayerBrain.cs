@@ -8,39 +8,38 @@ public class PlayerBrain : MonoBehaviour
 
     public Vector2 AimingStick { get; set; }
     [SerializeField] private float speed;
-    private Rigidbody myRigid;
+    private Rigidbody _myRigid;
 
-    public bool MovementByPush;
-    // Start is called before the first frame update
-    void Start()
+    public bool movementByPush;
+
+    private void Start()
     {
-        myRigid = GetComponent<Rigidbody>();
+        _myRigid = GetComponent<Rigidbody>();
     }
 
-    public void ShootBall(float power)//Since Ball will be used by both of us, added a "template" of the function, we should decide how we want the player and ball behaviour to be.
+    public void ShootBall(float power) //Since Ball will be used by both of us, added a "template" of the function, we should decide how we want the player and ball behaviour to be.
     {
         //Ball.rigidbody.addforce(power*AimingStick);
     }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
 
-        if (MovementByPush)
+    private void FixedUpdate()
+    {
+        if (movementByPush)
         {
             if (MovementStick.sqrMagnitude > 0.1)
             {
-                myRigid.AddForce(new Vector3(MovementStick.x*speed, 0, MovementStick.y*speed),ForceMode.Impulse);
+                _myRigid.AddForce(new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed), ForceMode.Impulse);
             }
         }
         else
         {
             if (MovementStick.sqrMagnitude > 0.1)
             {
-                myRigid.velocity = new Vector3(MovementStick.x*speed, 0, MovementStick.y*speed);
+                _myRigid.velocity = new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed);
             }
             else
             {
-                myRigid.velocity = Vector3.zero;
+                _myRigid.velocity = Vector3.zero;
             }
         }
     }
