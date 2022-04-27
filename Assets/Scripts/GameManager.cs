@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject arena;
 	[SerializeField] private string arenaMaterialBorderXValueName = "BorderX";
 	[SerializeField] private float borderRelativeWidth;
+	[SerializeField] private float loseAreaRelativeWidth;
 	[SerializeField] private float borderChangeSpeed = 0.01f;
 
 	private static GameManager _shared;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
 		_arenaMaterial = arena.GetComponent<Renderer>().material;
 		_arenaWidth = arena.transform.localScale.x * PlaneWidth;
 		_shaderBorderXVar = Shader.PropertyToID(arenaMaterialBorderXValueName);
+		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
 	}
 
 	private void OnValidate()
