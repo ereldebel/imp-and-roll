@@ -6,11 +6,10 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private Ball ball;
 	[SerializeField] private GameObject arena;
+	[SerializeField] private Transform border;
 	[SerializeField] private string arenaMaterialBorderXValueName = "BorderX";
 	[SerializeField] private float borderRelativeWidth;
-	[SerializeField] private float loseAreaRelativeWidth;
 	[SerializeField] private float borderChangeSpeed = 0.01f;
-	[SerializeField] private Transform border;
 
 	#endregion
 

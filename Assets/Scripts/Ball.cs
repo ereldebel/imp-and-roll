@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public class Ball : MonoBehaviour
 		_collider = GetComponent<SphereCollider>();
 		_rigidbody = GetComponent<Rigidbody>();
 		_transform = transform;
-		_checkSphereRadius = _collider.radius + groundedDistance;
+	}
+
+	private void OnValidate()
+	{
+		_checkSphereRadius = GetComponent<SphereCollider>().radius + groundedDistance;
 	}
 
 	public void Pickup(Transform newParent)
