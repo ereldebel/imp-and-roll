@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+[RequireComponent(typeof(PlayerBrain))]
 public class PlayerController : MonoBehaviour
 {
 	public float maxLoadingShotTime = 1;
@@ -37,6 +37,12 @@ public class PlayerController : MonoBehaviour
 				: maxLoadingShotTime); //If player held the button for "too long" give max instead
 			_holdShootTimer = 0;
 		}
+	}
+	
+	public void OnPickup(InputAction.CallbackContext context)
+	{
+		if (context.started)
+			_myBrain.PickupBall();
 	}
 
 	private void Update()

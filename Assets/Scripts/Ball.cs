@@ -11,16 +11,31 @@ public class Ball : MonoBehaviour
 
 	private SphereCollider _collider;
 	private Rigidbody _rigidbody;
+	private Transform _transform;
 	private float _checkSphereRadius;
 
 	private void Awake()
 	{
 		_collider = GetComponent<SphereCollider>();
 		_rigidbody = GetComponent<Rigidbody>();
+		_transform = transform;
 		_checkSphereRadius = _collider.radius + groundedDistance;
 	}
 
-	private void OnValidate()
+	public void Pickup(Transform newParent)
 	{
+		_transform.SetParent(newParent);
+		_transform.localPosition = Vector3.zero;
+	}
+	
+	public void Release()
+	{
+		_transform.SetParent(null);
+	}
+	
+	public void Throw(Vector3 velocity)
+	{
+		_rigidbody.AddForce(velocity);
+		_transform.SetParent(null);
 	}
 }

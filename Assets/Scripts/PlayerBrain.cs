@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerBrain : MonoBehaviour
@@ -20,21 +19,26 @@ public class PlayerBrain : MonoBehaviour
 	#region Serialized Fields
 
 	[SerializeField] private float speed;
-
+	[SerializeField] private float pickupRadius;
+	[SerializeField] private string ballLayer = "Ball";
+	
 	#endregion
 
 	#region Private Fields
 
 	private Rigidbody _myRigid;
-	private GameObject _ball; //if not null than it is held by the player and is a child of the game object.
+	private int _ballLayer;
+	
+	private Ball _ball; //if not null than it is held by the player and is a child of the game object.
 
 	#endregion
 
 	#region Function Events
 
-	private void Start()
+	private void Awake()
 	{
 		_myRigid = GetComponent<Rigidbody>();
+		_ballLayer = LayerMask.GetMask(ballLayer);
 	}
 
 	private void FixedUpdate()
@@ -63,15 +67,23 @@ public class PlayerBrain : MonoBehaviour
 
 	#region Public Methods
 
-	public void
-		ShootBall(float power) //Since Ball will be used by both of us, added a "template" of the function, we should decide how we want the player and ball behaviour to be.
+	public void ShootBall(float power)
 	{
-		//Ball.rigidbody.addforce(power*AimingStick);
+		if (_ball == null) return;
+		//_ball.Throw(power*AimingStick); // TODO: should convert to vector3 on XZ and add desired angle upwards
+		_ball = null;
 	}
 
 	public void PickupBall()
 	{
-		throw new NotImplementedException();
+		if (_ball == null) return;
+		var groundProjection = transform.position;
+		groundProjection.y = 0;
+		if (!Physics.CapsuleCast(transform.position,groundProjection, pickupRadius, Vector3.down, out var hit,
+			    _ballLayer)) return;
+		_ball = hit.collider.gameObject.GetComponent<Ball>();
+		if (_ball != null)
+			_ball.Pickup(transform);
 	}
 
 	#endregion
