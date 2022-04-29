@@ -19,6 +19,7 @@ public class PlayerBrain : MonoBehaviour
 
 	[SerializeField] private bool movementByPush;
 	[SerializeField] private float speed;
+	[SerializeField] private float throwPower, throwYPower;
 	[SerializeField] private float pickupDistance;
 	[SerializeField] private LayerMask ballMask;
 
@@ -77,8 +78,8 @@ public class PlayerBrain : MonoBehaviour
 	public void ThrowBall(float power)
 	{
 		if (_ball == null) return;
-		// _ball.Throw(power*AimingStick); // TODO: should convert to vector3 on XZ and add desired angle upwards
-		// _ball = null;
+		_ball.Throw(throwPower*power*new Vector3(AimingStick.x,throwYPower,AimingStick.y));
+		_ball = null;
 	}
 
 	public void PickupBall()

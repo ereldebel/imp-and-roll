@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerBrain))]
 public class PlayerController : MonoBehaviour
 {
+	[SerializeField] private float minLoadingShotTime = 0.1f;
 	[SerializeField] private float maxLoadingShotTime = 1;
 	private PlayerBrain _myBrain;
 	private float _holdShootTimer = 0;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
 		if (context.canceled)
 		{
+			_holdShootTimer = _holdShootTimer > minLoadingShotTime ? _holdShootTimer : minLoadingShotTime;
 			_myBrain.ThrowBall(_holdShootTimer < maxLoadingShotTime
 				? _holdShootTimer
 				: maxLoadingShotTime); //If player held the button for "too long" give max instead
