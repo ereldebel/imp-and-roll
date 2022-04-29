@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 	private float _arenaWidth;
 	private const float PlaneWidth = 10;
 	private int _shaderBorderXVar;
+	private float _borderRelativeWidth;
 
 	#endregion
 
@@ -34,11 +35,12 @@ public class GameManager : MonoBehaviour
 		_arenaWidth = arena.transform.localScale.x * PlaneWidth;
 		_shaderBorderXVar = Shader.PropertyToID(arenaMaterialBorderXValueName);
 		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
+		OnValidate();
 	}
 
 	private void OnValidate()
 	{
-		borderRelativeWidth /= 2;
+		_borderRelativeWidth = borderRelativeWidth / 2;
 	}
 
 	private void Update()

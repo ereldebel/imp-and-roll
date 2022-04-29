@@ -1,37 +1,39 @@
-using System;
 using UnityEngine;
 
 public class PlayerBrain : MonoBehaviour
 {
 	#region Public Properties
 
-	public Vector2 MovementStick { get; set; }
-
-	public Vector2 AimingStick { get; set; }
+	public Vector2 MovementStick { private get; set; }
+	public Vector2 AimingStick { private get; set; }
 
 	#endregion;
 
-	#region Public Fields
+	#region Private Properties
 
-	public bool movementByPush;
+	private Vector3 ColliderBottom => transform.position + _diffFromColliderCenterToBottom;
 
 	#endregion
 
 	#region Serialized Fields
 
+	[SerializeField] private bool movementByPush;
 	[SerializeField] private float speed;
 	[SerializeField] private float pickupDistance;
-	[SerializeField] private string ballLayer = "Ball";
+	[SerializeField] private LayerMask ballMask;
 
 	#endregion
 
 	#region Private Fields
 
 	private Rigidbody _myRigid;
-	private int _ballLayer;
+	private float _colliderRadius;
 	private float _pickupRadius;
+	private Vector3 _diffFromColliderCenterToBottom;
 
 	private Ball _ball; //if not null than it is held by the player and is a child of the game object.
+
+	private static Collider[] TempColliders = new Collider[5];
 
 	#endregion
 
@@ -40,12 +42,16 @@ public class PlayerBrain : MonoBehaviour
 	private void Awake()
 	{
 		_myRigid = GetComponent<Rigidbody>();
-		_ballLayer = LayerMask.GetMask(ballLayer);
+		OnValidate();
 	}
 
 	private void OnValidate()
 	{
-		_pickupRadius = GetComponent<CapsuleCollider>().radius + pickupDistance;
+		var t = transform;
+		_colliderRadius = transform.localScale.x * GetComponent<CapsuleCollider>().radius;
+		_pickupRadius = _colliderRadius + pickupDistance;
+		_diffFromColliderCenterToBottom =
+			t.rotation * (0.5f * t.localScale.y * GetComponent<CapsuleCollider>().height * Vector3.down);
 	}
 
 	private void FixedUpdate()
@@ -71,20 +77,26 @@ public class PlayerBrain : MonoBehaviour
 	public void ThrowBall(float power)
 	{
 		if (_ball == null) return;
-		//_ball.Throw(power*AimingStick); // TODO: should convert to vector3 on XZ and add desired angle upwards
-		_ball = null;
+		// _ball.Throw(power*AimingStick); // TODO: should convert to vector3 on XZ and add desired angle upwards
+		// _ball = null;
 	}
 
 	public void PickupBall()
 	{
-		if (_ball != null) return;
-		var groundProjection = transform.position;
-		groundProjection.y = 0;
-		if (!Physics.CapsuleCast(transform.position, groundProjection, _pickupRadius, Vector3.down, out var hit,
-			    Mathf.Infinity, _ballLayer)) return;
-		_ball = hit.collider.gameObject.GetComponent<Ball>();
 		if (_ball != null)
-			_ball.Pickup(transform);
+		{
+			_ball.Release((transform.position.x > 0 ? Vector3.left : Vector3.right) * _colliderRadius +
+			              _diffFromColliderCenterToBottom);
+			_ball = null;
+			return;
+		}
+
+		if (Physics.OverlapCapsuleNonAlloc(transform.position, ColliderBottom, _pickupRadius, TempColliders,
+			    ballMask.value) <= 0) return;
+		_ball = TempColliders[0].gameObject.GetComponent<Ball>();
+		if (_ball == null) return;
+		if (_ball.Grounded && _ball.Pickup(transform)) return;
+		_ball = null;
 	}
 
 	#endregion

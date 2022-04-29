@@ -1,25 +1,37 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-	public bool Grounded => Physics.CheckSphere(_rigidbody.position, _checkSphereRadius);
+	#region Public Properties
 
-	public float XPosition => _rigidbody.position.x;
+	public float XPosition => transform.position.x;
+	public bool Grounded => Physics.CheckSphere(transform.position, _checkSphereRadius);
+	public bool Held { get; private set; }
+
+	#endregion
+
+	#region Serialized Fields
 
 	[Tooltip("The distance of the ball from the ground that the ball is already considered grounded.")] [SerializeField]
 	private float groundedDistance = 0.1f;
 
-	private SphereCollider _collider;
+	#endregion
+
+	#region Private Fields
+
 	private Rigidbody _rigidbody;
 	private Transform _transform;
 	private float _checkSphereRadius;
 
+	#endregion
+
+	#region Function Events
+
 	private void Awake()
 	{
-		_collider = GetComponent<SphereCollider>();
 		_rigidbody = GetComponent<Rigidbody>();
 		_transform = transform;
+		OnValidate();
 	}
 
 	private void OnValidate()
@@ -27,20 +39,43 @@ public class Ball : MonoBehaviour
 		_checkSphereRadius = GetComponent<SphereCollider>().radius + groundedDistance;
 	}
 
-	public void Pickup(Transform newParent)
+	#endregion
+
+	#region Public Methods
+
+	public bool Pickup(Transform newParent)
 	{
+		if (Held)
+			return false;
+		Held = true;
 		_transform.SetParent(newParent);
 		_transform.localPosition = Vector3.zero;
-	}
-	
-	public void Release()
-	{
-		_transform.SetParent(null);
+		gameObject.SetActive(false);
+		return true;
 	}
 	
 	public void Throw(Vector3 velocity)
 	{
+		Release();
 		_rigidbody.AddForce(velocity);
-		_transform.SetParent(null);
 	}
+	
+	public void Release(Vector3 posChange)
+	{
+		_transform.position += posChange;
+		Release();
+	}
+
+	#endregion
+
+	#region Private Methods
+
+	private void Release()
+	{
+		gameObject.SetActive(true);
+		_transform.SetParent(null);
+		Held = false;
+	}
+
+	#endregion
 }
