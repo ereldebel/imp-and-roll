@@ -2,16 +2,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerBrain))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-	[SerializeField] private float minLoadingShotTime = 0.1f;
-	[SerializeField] private float maxLoadingShotTime = 1;
 	private PlayerBrain _myBrain;
-	private float _holdShootTimer = 0;
+	private PlayerInput _playerInput;
+	private Camera _camera;
 
 	private void Awake()
 	{
 		_myBrain = GetComponent<PlayerBrain>();
+		_playerInput = GetComponent<PlayerInput>();
+		_camera = Camera.main;
 	}
 
 	public void OnMovement(InputAction.CallbackContext context)
@@ -21,24 +23,19 @@ public class PlayerController : MonoBehaviour
 
 	public void OnAim(InputAction.CallbackContext context)
 	{
-		_myBrain.AimingStick = context.ReadValue<Vector2>();
+		if (_playerInput.currentControlScheme == "Keyboard")
+			_myBrain.MousePos = ScreenToWorld2D(context.ReadValue<Vector2>());
+		else
+			_myBrain.AimingStick = context.ReadValue<Vector2>();
 	}
 
 	public void OnThrow(InputAction.CallbackContext context)
 	{
 		if (context.started)
-		{
-			_holdShootTimer = 0;
-		}
+			_myBrain.LoadThrow();
 
 		if (context.canceled)
-		{
-			_holdShootTimer = _holdShootTimer > minLoadingShotTime ? _holdShootTimer : minLoadingShotTime;
-			_myBrain.ThrowBall(_holdShootTimer < maxLoadingShotTime
-				? _holdShootTimer
-				: maxLoadingShotTime); //If player held the button for "too long" give max instead
-			_holdShootTimer = 0;
-		}
+			_myBrain.ThrowBall();
 	}
 	
 	public void OnPickup(InputAction.CallbackContext context)
@@ -46,9 +43,11 @@ public class PlayerController : MonoBehaviour
 		if (context.started)
 			_myBrain.PickupBall();
 	}
-
-	private void Update()
+	
+	private Vector2 ScreenToWorld2D(Vector2 screenPos)
 	{
-		_holdShootTimer += Time.deltaTime;
+		if (_camera == null) return Vector2.zero;
+		var worldPos3d = _camera.ScreenToWorldPoint(screenPos);
+		return new Vector2(worldPos3d.x, worldPos3d.z);
 	}
 }

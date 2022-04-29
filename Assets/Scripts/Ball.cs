@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
 	public float XPosition => transform.position.x;
 	public bool Grounded => Physics.CheckSphere(transform.position, _checkSphereRadius);
 	public bool Held { get; private set; }
+	public float Radius { get; private set; }
 
 	#endregion
 
@@ -36,7 +37,8 @@ public class Ball : MonoBehaviour
 
 	private void OnValidate()
 	{
-		_checkSphereRadius = GetComponent<SphereCollider>().radius + groundedDistance;
+		Radius = GetComponent<SphereCollider>().radius;
+		_checkSphereRadius =Radius + groundedDistance;
 	}
 
 	#endregion
@@ -54,10 +56,10 @@ public class Ball : MonoBehaviour
 		return true;
 	}
 	
-	public void Throw(Vector3 velocity)
+	public void Throw(Vector3 velocity, Vector3 posChange)
 	{
-		Release();
-		_rigidbody.AddForce(velocity);
+		Release(posChange);
+		_rigidbody.AddForce(velocity, ForceMode.Impulse);
 	}
 	
 	public void Release(Vector3 posChange)

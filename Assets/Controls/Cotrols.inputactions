@@ -15,19 +15,19 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Throw",
-                    "type": "Button",
-                    "id": "87071c01-4c1c-461a-9f56-8a4e4ea40cf3",
-                    "expectedControlType": "Button",
+                    "name": "Aim",
+                    "type": "PassThrough",
+                    "id": "6e0d4d85-14c1-4479-9f9a-9a07945dd2e4",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aim",
-                    "type": "PassThrough",
-                    "id": "6e0d4d85-14c1-4479-9f9a-9a07945dd2e4",
-                    "expectedControlType": "Vector2",
+                    "name": "Throw",
+                    "type": "Button",
+                    "id": "87071c01-4c1c-461a-9f56-8a4e4ea40cf3",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -111,8 +111,52 @@
                 },
                 {
                     "name": "",
+                    "id": "f9744ec1-ea16-4035-bbd4-462cc31875e7",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba39d74f-8063-4cbe-93b0-03a34d5cc072",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9c91263-e961-4fe5-9f2d-0b679267e09f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Pick Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f9958e0-84f3-4693-89db-4d4718df65d4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Pick Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "728a8b46-e3bb-4b76-9618-e4acbea432f9",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -128,39 +172,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f9744ec1-ea16-4035-bbd4-462cc31875e7",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9f9958e0-84f3-4693-89db-4d4718df65d4",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Pick Up",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f9c91263-e961-4fe5-9f2d-0b679267e09f",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Pick Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4437818291732569122}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 7, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7, y: 0.25, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,14 +95,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4437818291732569122}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!136 &1189386908854717527
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -229,6 +229,10 @@ MonoBehaviour:
   ballMask:
     serializedVersion: 2
     m_Bits: 64
+  maxThrowVelocity: 15
+  throwYPower: 1
+  minThrowLoadingTime: 0.1
+  maxThrowLoadingTime: 1
 --- !u!114 &4320430827449331697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,4 +245,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c582f92cd41ff48b6d2679c192485a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLoadingShotTime: 0

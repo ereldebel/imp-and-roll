@@ -1,11 +1,24 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerBrain : MonoBehaviour
 {
 	#region Public Properties
 
-	public Vector2 MovementStick { private get; set; }
-	public Vector2 AimingStick { private get; set; }
+	public Vector2 MovementStick { get; set; }
+	public Vector2 AimingStick
+	{
+		set => _aimDirection=value.normalized;
+	}
+
+	public Vector2 MousePos
+	{
+		set
+		{
+			var pos = transform.position;
+			_aimDirection = (value - new Vector2(pos.x, pos.z)).normalized;
+		}
+	}
 
 	#endregion;
 
@@ -19,9 +32,12 @@ public class PlayerBrain : MonoBehaviour
 
 	[SerializeField] private bool movementByPush;
 	[SerializeField] private float speed;
-	[SerializeField] private float throwPower, throwYPower;
 	[SerializeField] private float pickupDistance;
 	[SerializeField] private LayerMask ballMask;
+	[SerializeField] private float maxThrowVelocity;
+	[SerializeField] private float throwYPower;
+	[SerializeField] private float minThrowLoadingTime = 0.1f;
+	[SerializeField] private float maxThrowLoadingTime = 1;
 
 	#endregion
 
@@ -31,6 +47,8 @@ public class PlayerBrain : MonoBehaviour
 	private float _colliderRadius;
 	private float _pickupRadius;
 	private Vector3 _diffFromColliderCenterToBottom;
+	private float _loadStartTime = -1;
+	private Vector2 _aimDirection;
 
 	private Ball _ball; //if not null than it is held by the player and is a child of the game object.
 
@@ -49,10 +67,11 @@ public class PlayerBrain : MonoBehaviour
 	private void OnValidate()
 	{
 		var t = transform;
-		_colliderRadius = transform.localScale.x * GetComponent<CapsuleCollider>().radius;
+		var scale = t.localScale;
+		_colliderRadius = scale.x * GetComponent<CapsuleCollider>().radius;
 		_pickupRadius = _colliderRadius + pickupDistance;
 		_diffFromColliderCenterToBottom =
-			t.rotation * (0.5f * t.localScale.y * GetComponent<CapsuleCollider>().height * Vector3.down);
+			t.rotation * (0.5f * scale.y * GetComponent<CapsuleCollider>().height * Vector3.down);
 	}
 
 	private void FixedUpdate()
@@ -75,10 +94,18 @@ public class PlayerBrain : MonoBehaviour
 
 	#region Public Methods
 
-	public void ThrowBall(float power)
+	public void LoadThrow()
+	{
+		_loadStartTime = Time.time;
+	}
+
+	public void ThrowBall()
 	{
 		if (_ball == null) return;
-		_ball.Throw(throwPower*power*new Vector3(AimingStick.x,throwYPower,AimingStick.y));
+		var clampedLoadTime = Mathf.Clamp(Time.time - _loadStartTime, minThrowLoadingTime, maxThrowLoadingTime);
+		_loadStartTime = -1;
+		_ball.Throw(maxThrowVelocity * clampedLoadTime * new Vector3(_aimDirection.x, throwYPower, _aimDirection.y),
+			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius));
 		_ball = null;
 	}
 
@@ -86,7 +113,7 @@ public class PlayerBrain : MonoBehaviour
 	{
 		if (_ball != null)
 		{
-			_ball.Release((transform.position.x > 0 ? Vector3.left : Vector3.right) * _colliderRadius +
+			_ball.Release((transform.position.x > 0 ? Vector3.left : Vector3.right) * (_colliderRadius + _ball.Radius) +
 			              _diffFromColliderCenterToBottom);
 			_ball = null;
 			return;

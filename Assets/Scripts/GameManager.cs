@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
 	private void OnValidate()
 	{
+		
 		_borderRelativeWidth = borderRelativeWidth / 2;
 	}
 

@@ -46,11 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   arena: {fileID: 0}
-  arenaMaterialBorderXValueName: BorderX
-  borderRelativeWidth: 0.025
-  loseAreaRelativeWidth: 0
-  borderChangeSpeed: 0.01
   border: {fileID: 0}
+  arenaMaterialBorderXValueName: BorderX
+  borderRelativeWidth: 0.01
+  borderChangeSpeed: 0.01
 --- !u!114 &6793810490810583986
 MonoBehaviour:
   m_ObjectHideFlags: 0
