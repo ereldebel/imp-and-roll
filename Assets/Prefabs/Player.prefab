@@ -229,8 +229,8 @@ MonoBehaviour:
   ballMask:
     serializedVersion: 2
     m_Bits: 64
-  maxThrowVelocity: 35
-  throwYPower: 0.1
+  maxThrowVelocity: 40
+  throwYPower: 0.15
   minThrowLoadingTime: 0.1
   maxThrowLoadingTime: 1
   knockOutDuration: 1

@@ -10,7 +10,8 @@ namespace Player
 		private PlayerBrain _myBrain;
 		private PlayerInput _playerInput;
 		private Camera _camera;
-
+		Plane plane = new Plane(Vector3.up, 0);
+		
 		private void Awake()
 		{
 			_myBrain = GetComponent<PlayerBrain>();
@@ -49,7 +50,10 @@ namespace Player
 		private Vector2 ScreenToWorld2D(Vector2 screenPos)
 		{
 			if (_camera == null) return Vector2.zero;
-			var worldPos3d = _camera.ScreenToWorldPoint(screenPos);
+			var worldPos3d = Vector3.zero;
+			var ray = _camera.ScreenPointToRay(screenPos);
+			if (plane.Raycast(ray, out var distance))
+				worldPos3d = ray.GetPoint(distance);
 			return new Vector2(worldPos3d.x, worldPos3d.z);
 		}
 	}

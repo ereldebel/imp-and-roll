@@ -45,7 +45,7 @@ namespace Player
 		[SerializeField] private float maxThrowLoadingTime = 1;
 		[SerializeField] private float knockOutDuration = 1;
 		[SerializeField] private bool enableMovementWhileLoadingThrow = false;
-		
+
 		#endregion
 
 		#region Private Fields
@@ -61,7 +61,7 @@ namespace Player
 
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
 
-		private static Collider[] TempColliders = new Collider[5];
+		private static readonly Collider[] TempColliders = new Collider[5];
 
 		#endregion
 
@@ -95,13 +95,13 @@ namespace Player
 
 		public void LoadThrow()
 		{
+			_myRigid.velocity = Vector3.zero;
 			_loadStartTime = Time.time;
 		}
 
 		public bool ThrowBall()
 		{
 			if (_ball == null) return false;
-			_myRigid.velocity=Vector3.zero;
 			var clampedLoadTime = Mathf.Clamp(Time.time - _loadStartTime, minThrowLoadingTime, maxThrowLoadingTime);
 			_loadStartTime = -1;
 			_ball.Throw(maxThrowVelocity * clampedLoadTime * new Vector3(_aimDirection.x, throwYPower, _aimDirection.y),
@@ -129,17 +129,18 @@ namespace Player
 			_ball = null;
 			return false;
 		}
-		
+
 		public void TakeHit(Vector3 normal)
 		{
-			_myRigid.AddForce(Vector3.Reflect(normal,Vector3.up),ForceMode.Impulse);
-			if (knockOutDuration >0)
+			_myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
+			if (knockOutDuration > 0)
 				StartCoroutine(Knockout());
 		}
 
 		#endregion
 
 		#region Private Methods and Coroutines
+
 		private void Move()
 		{
 			if (_knockedOut || (!enableMovementWhileLoadingThrow && _loadStartTime >= 0)) return;
@@ -157,7 +158,7 @@ namespace Player
 					_myRigid.velocity = Vector3.zero;
 			}
 		}
-		
+
 		private IEnumerator Knockout()
 		{
 			var color = _spriteRenderer.color;
@@ -167,7 +168,7 @@ namespace Player
 			_knockedOut = false;
 			_spriteRenderer.color = color;
 		}
-		
+
 		#endregion
 	}
 }
