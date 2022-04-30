@@ -225,14 +225,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementByPush: 0
   speed: 2
-  pickupDistance: 1
+  pickupDistance: 0.25
   ballMask:
     serializedVersion: 2
     m_Bits: 64
-  maxThrowVelocity: 15
-  throwYPower: 1
+  maxThrowVelocity: 35
+  throwYPower: 0.1
   minThrowLoadingTime: 0.1
   maxThrowLoadingTime: 1
+  knockOutDuration: 1
+  enableMovementWhileLoadingThrow: 0
 --- !u!114 &4320430827449331697
 MonoBehaviour:
   m_ObjectHideFlags: 0

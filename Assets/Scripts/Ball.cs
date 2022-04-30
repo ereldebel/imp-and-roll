@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour
 	[Tooltip("The distance of the ball from the ground that the ball is already considered grounded.")] [SerializeField]
 	private float groundedDistance = 0.1f;
 
+	private float dragWhileOnFloor = 1;
+
 	#endregion
 
 	#region Private Fields
@@ -23,6 +25,8 @@ public class Ball : MonoBehaviour
 	private Rigidbody _rigidbody;
 	private Transform _transform;
 	private float _checkSphereRadius;
+	private bool _thrown = false;
+	private float _defaultBallDrag;
 
 	#endregion
 
@@ -32,13 +36,23 @@ public class Ball : MonoBehaviour
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		_transform = transform;
+		_defaultBallDrag = _rigidbody.drag;
 		OnValidate();
 	}
 
 	private void OnValidate()
 	{
 		Radius = GetComponent<SphereCollider>().radius;
-		_checkSphereRadius =Radius + groundedDistance;
+		_checkSphereRadius = Radius + groundedDistance;
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (!_thrown) return;
+		foreach (var contact in collision.contacts)
+			contact.otherCollider.GetComponent<IHittable>()?.TakeHit(contact.normal);
+		_rigidbody.drag = dragWhileOnFloor;
+		_thrown = false;
 	}
 
 	#endregion
@@ -47,7 +61,7 @@ public class Ball : MonoBehaviour
 
 	public bool Pickup(Transform newParent)
 	{
-		if (Held)
+		if (Held || _thrown)
 			return false;
 		Held = true;
 		_transform.SetParent(newParent);
@@ -55,13 +69,14 @@ public class Ball : MonoBehaviour
 		gameObject.SetActive(false);
 		return true;
 	}
-	
+
 	public void Throw(Vector3 velocity, Vector3 posChange)
 	{
 		Release(posChange);
 		_rigidbody.AddForce(velocity, ForceMode.Impulse);
+		_thrown = true;
 	}
-	
+
 	public void Release(Vector3 posChange)
 	{
 		_transform.position += posChange;
@@ -77,6 +92,7 @@ public class Ball : MonoBehaviour
 		gameObject.SetActive(true);
 		_transform.SetParent(null);
 		Held = false;
+		_rigidbody.drag = _defaultBallDrag;
 	}
 
 	#endregion

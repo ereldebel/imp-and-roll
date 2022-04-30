@@ -13,14 +13,20 @@ public class GameManager : MonoBehaviour
 
 	#endregion
 
+	#region Public Properties
+
+	public static float ArenaWidth => _shared._arenaWidth;
+
+	#endregion
+
 	#region Private Fields
 
 	private static GameManager _shared;
 
 	private float _borderX = 0.5f;
 	private Material _arenaMaterial;
-	private float _arenaWidth;
 	private const float PlaneWidth = 10;
+	private float _arenaWidth;
 	private int _shaderBorderXVar;
 	private float _borderRelativeWidth;
 
@@ -40,7 +46,6 @@ public class GameManager : MonoBehaviour
 
 	private void OnValidate()
 	{
-		
 		_borderRelativeWidth = borderRelativeWidth / 2;
 	}
 
@@ -57,7 +62,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (!ball.Grounded) return;
 		var normalizedXPosition = ball.XPosition / _arenaWidth + 0.5f;
-		if (Mathf.Abs(normalizedXPosition - _borderX) < borderRelativeWidth) return;
+		if (Mathf.Abs(normalizedXPosition - _borderX) < _borderRelativeWidth) return;
 		var change = Time.deltaTime * borderChangeSpeed;
 		_borderX += normalizedXPosition < _borderX ? -change : change;
 		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
