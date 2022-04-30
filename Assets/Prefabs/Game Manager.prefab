@@ -49,7 +49,7 @@ MonoBehaviour:
   border: {fileID: 0}
   arenaMaterialBorderXValueName: BorderX
   borderRelativeWidth: 0.01
-  borderChangeSpeed: 0.01
+  borderChangeSpeed: 0.02
 --- !u!114 &6793810490810583986
 MonoBehaviour:
   m_ObjectHideFlags: 0
