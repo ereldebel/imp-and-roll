@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 	private float _arenaWidth;
 	private int _shaderBorderXVar;
 	private float _borderRelativeWidth;
+	private bool _ballOnRight;
 
 	#endregion
 
@@ -56,15 +58,37 @@ public class GameManager : MonoBehaviour
 
 	#endregion
 
+	#region Public Methods
+
+	public static void MonsterGotBall()
+	{
+		GameOver(!_shared._ballOnRight);
+	}
+	
+	public static void MonsterGotPlayer(bool rightLost)
+	{
+		GameOver(!rightLost);
+	}
+
+	#endregion
+
 	#region Private Methods
 
+	private static void GameOver(bool rightWon)
+	{
+		var player = rightWon ? "right player" : "left player";
+		print($"{player} won!");
+		SceneManager.LoadScene(0);
+	}
+	
 	private void UpdateBorder()
 	{
 		if (!ball.Grounded) return;
 		var normalizedXPosition = ball.XPosition / _arenaWidth + 0.5f;
 		if (Mathf.Abs(normalizedXPosition - _borderX) < _borderRelativeWidth) return;
 		var change = Time.deltaTime * borderChangeSpeed;
-		_borderX += normalizedXPosition < _borderX ? -change : change;
+		_ballOnRight = normalizedXPosition > _borderX;
+		_borderX += _ballOnRight ? change : -change;
 		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
 		border.position = new Vector3(_arenaWidth * (_borderX - 0.5f), 0.5f, 0);
 	}

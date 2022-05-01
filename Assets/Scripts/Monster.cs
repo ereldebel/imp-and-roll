@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Monster : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class Monster : MonoBehaviour
 	[SerializeField] private LayerMask playerMask;
 	[SerializeField] private float speed = 1;
 
-	private static readonly Collider[] TempColliders = new Collider[2];
+	private static readonly Collider[] TempColliders = new Collider[3];
 
 	private void Update()
 	{
@@ -35,7 +34,10 @@ public class Monster : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		print($"{collision.gameObject.name} lost");
-		SceneManager.LoadScene(0);
+		var other = collision.gameObject;
+		if (other.CompareTag("Ball"))
+			GameManager.MonsterGotBall();
+		else
+			GameManager.MonsterGotPlayer(other.name.EndsWith("1"));
 	}
 }

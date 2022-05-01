@@ -54,7 +54,7 @@ namespace Player
 		private Vector2 DirectionTo(Vector3 destination)
 		{
 			var pos = transform.position;
-			return new Vector2(destination.x - pos.x, destination.z - pos.z);
+			return new Vector2(destination.x - pos.x, destination.z - pos.z).normalized;
 		}
 	}
 }
