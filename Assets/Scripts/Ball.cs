@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 
 	public float XPosition => transform.position.x;
 	public bool Grounded => Physics.CheckSphere(transform.position, _checkSphereRadius);
+	public float Mass => _rigidbody.mass;
 	public bool Held { get; private set; }
 	public float Radius { get; private set; }
 

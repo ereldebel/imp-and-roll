@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,7 +12,11 @@ namespace Player
 
 		public Vector2 AimingStick
 		{
-			set => _aimDirection = value.normalized;
+			set
+			{
+				_aimDirection = value.normalized;
+				ChangedAimDirection?.Invoke();
+			}
 		}
 
 		public Vector2 MousePos
@@ -20,10 +25,18 @@ namespace Player
 			{
 				var pos = transform.position;
 				_aimDirection = (value - new Vector2(pos.x, pos.z)).normalized;
+				ChangedAimDirection?.Invoke();
 			}
 		}
 
-		public float ThrowLoadTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
+		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
+
+		public Vector3 ThrowOrigin =>
+			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius);
+
+		public Vector3 ThrowVelocity =>
+			maxThrowVelocity * Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime) *
+			new Vector3(_aimDirection.x, throwYPower, _aimDirection.y);
 
 		#endregion;
 
@@ -64,6 +77,14 @@ namespace Player
 
 		#endregion
 
+		#region Public C# Events
+
+		public event Action<Ball> StartedChargingThrow;
+		public event Action ChangedAimDirection;
+		public event Action BallThrown;
+
+		#endregion
+
 		#region Function Events
 
 		private void Awake()
@@ -94,18 +115,19 @@ namespace Player
 
 		public void ChargeThrow()
 		{
+			if (_ball == null) return;
 			_myRigid.velocity = Vector3.zero;
 			_chargeStartTime = Time.time;
+			StartedChargingThrow?.Invoke(_ball);
 		}
 
 		public bool ThrowBall()
 		{
 			if (_ball == null) return false;
-			var clampedLoadTime = Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 			_chargeStartTime = -1;
-			_ball.Throw(maxThrowVelocity * clampedLoadTime * new Vector3(_aimDirection.x, throwYPower, _aimDirection.y),
-				new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius));
+			_ball.Throw(ThrowVelocity, ThrowOrigin);
 			_ball = null;
+			BallThrown?.Invoke();
 			return true;
 		}
 

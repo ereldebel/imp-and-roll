@@ -26,7 +26,7 @@ namespace Player
 			if (_throwing)
 			{
 				_brain.AimingStick = DirectionTo(otherPlayer.position);
-				if (_brain.ThrowLoadTime > throwLoad)
+				if (_brain.ThrowChargeTime > throwLoad)
 				{
 					_brain.ThrowBall();
 					_throwing = false;
