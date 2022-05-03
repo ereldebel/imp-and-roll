@@ -37,7 +37,7 @@ namespace Player
 				if (_brain.PickupBall())
 				{
 					_throwing = true;
-					_brain.LoadThrow();
+					_brain.ChargeThrow();
 				}
 				else
 					_brain.MovementStick = DirectionTo(ball.position);

@@ -23,7 +23,7 @@ namespace Player
 			}
 		}
 
-		public float ThrowLoadTime => _loadStartTime > 0 ? Time.time - _loadStartTime : 0;
+		public float ThrowLoadTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
 
 		#endregion;
 
@@ -35,16 +35,15 @@ namespace Player
 
 		#region Serialized Fields
 
-		[SerializeField] private bool movementByPush;
 		[SerializeField] private float speed;
 		[SerializeField] private float pickupDistance;
 		[SerializeField] private LayerMask ballMask;
 		[SerializeField] private float maxThrowVelocity;
 		[SerializeField] private float throwYPower;
-		[SerializeField] private float minThrowLoadingTime = 0.1f;
-		[SerializeField] private float maxThrowLoadingTime = 1;
+		[SerializeField] private float minThrowChargeTime = 0.1f;
+		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockOutDuration = 1;
-		[SerializeField] private bool enableMovementWhileLoadingThrow = false;
+		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 
 		#endregion
 
@@ -55,7 +54,7 @@ namespace Player
 		private float _colliderRadius;
 		private float _pickupRadius;
 		private Vector3 _diffFromColliderCenterToBottom;
-		private float _loadStartTime = -1;
+		private float _chargeStartTime = -1;
 		private Vector2 _aimDirection;
 		private bool _knockedOut;
 
@@ -93,17 +92,17 @@ namespace Player
 
 		#region Public Methods
 
-		public void LoadThrow()
+		public void ChargeThrow()
 		{
 			_myRigid.velocity = Vector3.zero;
-			_loadStartTime = Time.time;
+			_chargeStartTime = Time.time;
 		}
 
 		public bool ThrowBall()
 		{
 			if (_ball == null) return false;
-			var clampedLoadTime = Mathf.Clamp(Time.time - _loadStartTime, minThrowLoadingTime, maxThrowLoadingTime);
-			_loadStartTime = -1;
+			var clampedLoadTime = Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
+			_chargeStartTime = -1;
 			_ball.Throw(maxThrowVelocity * clampedLoadTime * new Vector3(_aimDirection.x, throwYPower, _aimDirection.y),
 				new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius));
 			_ball = null;
@@ -143,20 +142,13 @@ namespace Player
 
 		private void Move()
 		{
-			if (_knockedOut || (!enableMovementWhileLoadingThrow && _loadStartTime >= 0)) return;
-			if (movementByPush)
-			{
-				if (MovementStick.sqrMagnitude > 0.1)
-					_myRigid.AddForce(new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed),
-						ForceMode.Impulse);
-			}
+			if (_knockedOut) return;
+			Vector3 velocity;
+			if (MovementStick.sqrMagnitude > 0.1)
+				velocity = new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed);
 			else
-			{
-				if (MovementStick.sqrMagnitude > 0.1)
-					_myRigid.velocity = new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed);
-				else
-					_myRigid.velocity = Vector3.zero;
-			}
+				velocity = Vector3.zero;
+			_myRigid.velocity = _chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity;
 		}
 
 		private IEnumerator Knockout()

@@ -35,7 +35,7 @@ namespace Player
 		public void OnThrow(InputAction.CallbackContext context)
 		{
 			if (context.started)
-				_myBrain.LoadThrow();
+				_myBrain.ChargeThrow();
 
 			if (context.canceled)
 				_myBrain.ThrowBall();
