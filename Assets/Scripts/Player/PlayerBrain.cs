@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace Player
 {
 	[RequireComponent(typeof(CharacterController))]
-
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
 		#region Public Properties
@@ -54,7 +52,8 @@ namespace Player
 		#region Serialized Fields
 
 		[SerializeField] private float speed;
-		[SerializeField] private float dodgerollSpeed;
+		[SerializeField] private float dodgeRollSpeed;
+		[SerializeField] private float rollDuration = 0.25f;
 		[SerializeField] private float pickupDistance;
 		[SerializeField] private LayerMask ballMask;
 		[SerializeField] private float maxThrowForce;
@@ -62,7 +61,6 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
-		[SerializeField] private float rollDuration = 0.25f;
 		[SerializeField] private float knockOutDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 
@@ -72,6 +70,7 @@ namespace Player
 
 		private SpriteRenderer _spriteRenderer;
 		private Collider _collider;
+		private CharacterController _controller;
 		private float _colliderRadius;
 		private float _pickupRadius;
 		private Vector3 _diffFromColliderCenterToBottom;
@@ -101,6 +100,7 @@ namespace Player
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_collider = GetComponent<Collider>();
+			_controller = GetComponent<CharacterController>();
 			OnValidate();
 		}
 
@@ -161,11 +161,11 @@ namespace Player
 			return false;
 		}
 
-		public void TakeHit(Vector3 normal)
+		public void TakeHit(Vector3 contactPoint, Vector3 velocity)
 		{
 			// _myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
-			if (knockOutDuration > 0 && !_rolling)
-				StartCoroutine(Knockout(Vector3.Reflect(normal, Vector3.up)));
+			if (!(knockOutDuration > 0) || _rolling) return;
+			StartCoroutine(Knockout(velocity));
 		}
 
 		public void DodgeRoll()
@@ -173,6 +173,7 @@ namespace Player
 			print(MovementStick);
 			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
 		}
+
 		#endregion
 
 		#region Private Methods and Coroutines
@@ -180,26 +181,27 @@ namespace Player
 		private void ProcessMovementInput()
 		{
 			if (_knockedOut || _rolling) return;
-			Vector3 velocity;
 			if (MovementStick.sqrMagnitude <= 0.1) return;
-			velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
+			var velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
 			if (_chargeStartTime >= 0)
 				velocity *= movementRelativeSpeedWhileCharging;
-			Move(velocity);
+			// Move(velocity);
+			_controller.SimpleMove(velocity);
 		}
-		
+
 		private static Vector3 vector2_to_vector3XZ(Vector2 input)
 		{
-			return new Vector3(input.x,0, input.y);
+			return new Vector3(input.x, 0, input.y);
 		}
 
 		private IEnumerator DodgeRoll(Vector3 rollDir)
 		{
 			_rolling = true;
 			print(rollDir);
-			for (int i = 0; i < rollDuration/Time.fixedDeltaTime; i++)
+			for (var i = 0; i < rollDuration / Time.fixedDeltaTime; i++)
 			{
-				Move(dodgerollSpeed * rollDir);
+				// Move(dodgeRollSpeed * rollDir);
+				_controller.SimpleMove(dodgeRollSpeed * rollDir);
 				yield return new WaitForFixedUpdate();
 			}
 
@@ -212,10 +214,11 @@ namespace Player
 			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
 			knockBackDir.y = 0;
-			for (int i = 0; i < knockBackDuration / Time.fixedDeltaTime; i++)
+			for (var i = 0; i < knockBackDuration / Time.fixedDeltaTime; i++)
 			{
 				print(knockBackDir);
-				Move(knockBackDir);
+				// Move(knockBackDir);
+				_controller.SimpleMove(knockBackDir);
 				yield return new WaitForFixedUpdate();
 			}
 
@@ -224,29 +227,28 @@ namespace Player
 			_spriteRenderer.color = color;
 		}
 
-		private void Move(Vector3 velocity)
-		{
-			velocity *= Time.fixedDeltaTime;
-			// velocity.y += 0.5f * Physics.gravity.y * _squaredFixedDeltaTime;
-			var pos = transform.position + velocity;
-			if (Physics.CapsuleCast(ColliderTop, ColliderBottom, _colliderRadius, velocity, out var hit,
-				    velocity.magnitude))
-				velocity = velocity.normalized * hit.distance;
-			var numOverlaps =
-				Physics.OverlapCapsuleNonAlloc(ColliderTop, ColliderBottom, _colliderRadius, TempColliders);
-			for (var i = 0; i < numOverlaps; ++i)
-			{
-				var other = TempColliders[i];
-				if (other.gameObject == gameObject) continue;
-				var otherTransform = other.transform;
-				if (!Physics.ComputePenetration(_collider, pos, transform.rotation, other, otherTransform.position,
-					    otherTransform.rotation, out var positionVectorFix, out var positionDistanceFix)) continue;
-				pos += new Vector3(positionVectorFix.x, 0, positionVectorFix.z) * positionDistanceFix;
-				velocity -= Vector3.Project(velocity, positionVectorFix);
-			}
-
-			transform.position = pos;
-		}
+		// private void Move(Vector3 velocity)
+		// {
+		// 	velocity *= Time.fixedDeltaTime;
+		// 	var pos = transform.position + velocity;
+		// 	if (Physics.CapsuleCast(ColliderTop, ColliderBottom, _colliderRadius, velocity, out var hit,
+		// 		    velocity.magnitude))
+		// 		velocity = velocity.normalized * hit.distance;
+		// 	var numOverlaps =
+		// 		Physics.OverlapCapsuleNonAlloc(ColliderTop, ColliderBottom, _colliderRadius, TempColliders);
+		// 	for (var i = 0; i < numOverlaps; ++i)
+		// 	{
+		// 		var other = TempColliders[i];
+		// 		if (other.gameObject == gameObject) continue;
+		// 		var otherTransform = other.transform;
+		// 		if (!Physics.ComputePenetration(_collider, pos, transform.rotation, other, otherTransform.position,
+		// 			    otherTransform.rotation, out var positionVectorFix, out var positionDistanceFix)) continue;
+		// 		pos += new Vector3(positionVectorFix.x, 0, positionVectorFix.z) * positionDistanceFix;
+		// 		velocity -= Vector3.Project(velocity, positionVectorFix);
+		// 	}
+		//
+		// 	transform.position = pos;
+		// }
 
 		#endregion
 	}

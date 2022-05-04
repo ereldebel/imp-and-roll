@@ -1,5 +1,5 @@
 {
-    "name": "Cotrols",
+    "name": "Controls",
     "maps": [
         {
             "name": "Player",
@@ -198,7 +198,7 @@
                 {
                     "name": "",
                     "id": "b3a55bc2-ec10-47a6-b373-fd85176ccd56",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
