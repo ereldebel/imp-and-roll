@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Player
 {
+	[RequireComponent(typeof(CharacterController))]
+
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
 		#region Public Properties
@@ -44,6 +46,7 @@ namespace Player
 		#region Private Properties
 
 		private Vector3 ColliderBottom => transform.position + _diffFromColliderCenterToBottom;
+		private CharacterController _controller;
 
 		#endregion
 
@@ -56,6 +59,8 @@ namespace Player
 		[SerializeField] private float throwYForce;
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
+		[SerializeField] private float knockBackDuration = 0.5f;
+
 		[SerializeField] private float knockOutDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 
@@ -63,7 +68,6 @@ namespace Player
 
 		#region Private Fields
 
-		private Rigidbody _myRigid;
 		private SpriteRenderer _spriteRenderer;
 		private float _colliderRadius;
 		private float _pickupRadius;
@@ -90,8 +94,8 @@ namespace Player
 
 		private void Awake()
 		{
-			_myRigid = GetComponent<Rigidbody>();
 			_spriteRenderer = GetComponent<SpriteRenderer>();
+			_controller = GetComponent<CharacterController>();
 			OnValidate();
 		}
 
@@ -117,7 +121,7 @@ namespace Player
 		public void ChargeThrow()
 		{
 			if (_ball == null) return;
-			_myRigid.velocity = Vector3.zero;
+			// _myRigid.velocity = Vector3.zero;
 			_chargeStartTime = Time.time;
 			StartedChargingThrow?.Invoke(_ball);
 		}
@@ -154,9 +158,9 @@ namespace Player
 
 		public void TakeHit(Vector3 normal)
 		{
-			_myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
+			// _myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
 			if (knockOutDuration > 0)
-				StartCoroutine(Knockout());
+				StartCoroutine(Knockout(Vector3.Reflect(normal, Vector3.up)));
 		}
 
 		#endregion
@@ -168,18 +172,26 @@ namespace Player
 			if (_knockedOut) return;
 			Vector3 velocity;
 			if (MovementStick.sqrMagnitude > 0.1)
-				velocity = new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed);
+				velocity = new Vector3(MovementStick.x * speed/50, 0, MovementStick.y * speed/50);
 			else
 				velocity = Vector3.zero;
-			_myRigid.velocity = _chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity;
+			_controller.Move(_chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity);
 		}
 
-		private IEnumerator Knockout()
+		private IEnumerator Knockout(Vector3 knockbackDir)
 		{
 			var color = _spriteRenderer.color;
 			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
-			yield return new WaitForSeconds(knockOutDuration);
+			Vector3 temp = knockbackDir;
+			temp.y = 0;
+			knockbackDir = temp;
+			for (int i = 0; i < knockBackDuration*50; i++)
+			{
+				_controller.Move(-knockbackDir*Time.fixedDeltaTime);
+				yield return new WaitForFixedUpdate();
+			}
+			yield return new WaitForSeconds(knockOutDuration - knockBackDuration);
 			_knockedOut = false;
 			_spriteRenderer.color = color;
 		}

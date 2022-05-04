@@ -51,6 +51,7 @@ public class Ball : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
+		
 		if (!_thrown) return;
 		foreach (var contact in collision.contacts)
 			contact.otherCollider.GetComponent<IHittable>()?.TakeHit(contact.normal);
