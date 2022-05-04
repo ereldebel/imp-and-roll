@@ -46,15 +46,15 @@ namespace Player
 		#region Private Properties
 
 		private Vector3 ColliderBottom => transform.position + _diffFromColliderCenterToBottom;
+		private Vector3 ColliderTop => transform.position - _diffFromColliderCenterToBottom;
 		private CharacterController _controller;
-
 		#endregion
 
 		#region Serialized Fields
 
 		[SerializeField] private float speed;
-		[SerializeField] private float dodgerollSpeed;
-
+		[SerializeField] private float dodgeRollSpeed;
+		[SerializeField] private float rollDuration = 0.25f;
 		[SerializeField] private float pickupDistance;
 		[SerializeField] private LayerMask ballMask;
 		[SerializeField] private float maxThrowForce;
@@ -62,7 +62,6 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
-		[SerializeField] private float rollDuration = 0.25f;
 		
 
 		[SerializeField] private float knockOutDuration = 1;
@@ -73,6 +72,8 @@ namespace Player
 		#region Private Fields
 
 		private SpriteRenderer _spriteRenderer;
+		private Collider _collider;
+		private CharacterController _controller;
 		private float _colliderRadius;
 		private float _pickupRadius;
 		private Vector3 _diffFromColliderCenterToBottom;
@@ -109,6 +110,7 @@ namespace Player
 		private void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
+			_collider = GetComponent<Collider>();
 			_controller = GetComponent<CharacterController>();
 			OnValidate();
 		}
@@ -125,7 +127,7 @@ namespace Player
 
 		private void FixedUpdate()
 		{
-			Move();
+			ProcessMovementInput();
 			PickupBall();
 		}
 
@@ -171,11 +173,11 @@ namespace Player
 			return false;
 		}
 
-		public void TakeHit(Vector3 normal)
+		public void TakeHit(Vector3 contactPoint, Vector3 velocity)
 		{
 			// _myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
-			if (knockOutDuration > 0 && !_rolling)
-				StartCoroutine(Knockout(Vector3.Reflect(normal, Vector3.up)));
+			if (!(knockOutDuration > 0) || _rolling) return;
+			StartCoroutine(Knockout(velocity));
 		}
 
 		public void DodgeRoll()
@@ -187,21 +189,26 @@ namespace Player
 
 		#region Private Methods and Coroutines
 
-		private void Move()
+		private void ProcessMovementInput()
 		{
 			if (_knockedOut || _rolling) return;
-			Vector3 velocity;
-			if (MovementStick.sqrMagnitude > 0.1)
-				velocity = new Vector3(MovementStick.x * speed/50, 0, MovementStick.y * speed/50);
-			else
-				velocity = Vector3.zero;
-			_controller.Move(_chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity);
+			if (MovementStick.sqrMagnitude <= 0.1) return;
+			var velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
+			if (_chargeStartTime >= 0)
+				velocity *= movementRelativeSpeedWhileCharging;
+			// Move(velocity);
+			_controller.SimpleMove(velocity);
 		}
+
+		private static Vector3 vector2_to_vector3XZ(Vector2 input)
+		{
+			return new Vector3(input.x, 0, input.y);
+		}
+
 		private IEnumerator DodgeRoll(Vector3 rollDir)
 		{
 			_rolling = true;
-			print(rollDir);
-			for (int i = 0; i < rollDuration*50; i++)
+			for (var i = 0; i < rollDuration / Time.fixedDeltaTime; i++)
 			{
 				_controller.Move(dodgerollSpeed*rollDir*Time.fixedDeltaTime);
 				yield return new WaitForFixedUpdate();
@@ -209,7 +216,8 @@ namespace Player
 			_rolling = false;
 
 		}
-		private IEnumerator Knockout(Vector3 knockbackDir)
+
+		private IEnumerator Knockout(Vector3 knockBackDir)
 		{
 			var color = _spriteRenderer.color;
 			_spriteRenderer.color = Color.gray;

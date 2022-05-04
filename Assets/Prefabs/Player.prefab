@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4437818291732569120}
   - component: {fileID: 4437818291732569121}
+  - component: {fileID: 646895662889384994}
   - component: {fileID: 1189386908854717527}
   - component: {fileID: 5085160740069576546}
   - component: {fileID: 3525636514363418516}
@@ -17,7 +18,6 @@ GameObject:
   - component: {fileID: 932001333787194856}
   - component: {fileID: 8896554067578677268}
   - component: {fileID: 5905099638005712058}
-  - component: {fileID: 646895662889384994}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -90,6 +90,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!143 &646895662889384994
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437818291732569122}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.5
+  m_Radius: 0.5
+  m_SlopeLimit: 0
+  m_StepOffset: 0
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1189386908854717527
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -227,17 +245,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  dodgerollSpeed: 10
+  dodgeRollSpeed: 10
+  rollDuration: 0.25
   pickupDistance: 0.25
   ballMask:
     serializedVersion: 2
     m_Bits: 64
   maxThrowForce: 40
-  throwYForce: 0.3
+  throwYForce: 0.2
   minThrowChargeTime: 0.1
   maxThrowChargeTime: 1
   knockBackDuration: 0.5
-  rollDuration: 0.25
   knockOutDuration: 1
   movementRelativeSpeedWhileCharging: 0.5
 --- !u!114 &4320430827449331697
@@ -443,21 +461,3 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!143 &646895662889384994
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4437818291732569122}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 0
-  m_StepOffset: 0
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
