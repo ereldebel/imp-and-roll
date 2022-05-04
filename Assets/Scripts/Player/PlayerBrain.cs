@@ -170,7 +170,6 @@ namespace Player
 
 		public void DodgeRoll()
 		{
-			print(MovementStick);
 			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
 		}
 
@@ -197,7 +196,6 @@ namespace Player
 		private IEnumerator DodgeRoll(Vector3 rollDir)
 		{
 			_rolling = true;
-			print(rollDir);
 			for (var i = 0; i < rollDuration / Time.fixedDeltaTime; i++)
 			{
 				// Move(dodgeRollSpeed * rollDir);
@@ -216,7 +214,6 @@ namespace Player
 			knockBackDir.y = 0;
 			for (var i = 0; i < knockBackDuration / Time.fixedDeltaTime; i++)
 			{
-				print(knockBackDir);
 				// Move(knockBackDir);
 				_controller.SimpleMove(knockBackDir);
 				yield return new WaitForFixedUpdate();
