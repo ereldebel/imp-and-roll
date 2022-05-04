@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Player
 {
 	[RequireComponent(typeof(CharacterController))]
-
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
 		#region Public Properties
@@ -160,7 +159,7 @@ namespace Player
 		{
 			// _myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
 			if (knockOutDuration > 0)
-				StartCoroutine(Knockout(Vector3.Reflect(normal, Vector3.up)));
+				StartCoroutine(Knockout(-normal));
 		}
 
 		#endregion
@@ -172,25 +171,24 @@ namespace Player
 			if (_knockedOut) return;
 			Vector3 velocity;
 			if (MovementStick.sqrMagnitude > 0.1)
-				velocity = new Vector3(MovementStick.x * speed/50, 0, MovementStick.y * speed/50);
+				velocity = new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed);
 			else
 				velocity = Vector3.zero;
-			_controller.Move(_chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity);
+			_controller.SimpleMove((_chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity)*Time.fixedDeltaTime);
 		}
 
-		private IEnumerator Knockout(Vector3 knockbackDir)
+		private IEnumerator Knockout(Vector3 knockBackDir)
 		{
 			var color = _spriteRenderer.color;
 			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
-			Vector3 temp = knockbackDir;
-			temp.y = 0;
-			knockbackDir = temp;
-			for (int i = 0; i < knockBackDuration*50; i++)
+			knockBackDir.y = 0;
+			for (int i = 0; i < knockBackDuration / Time.fixedDeltaTime; i++)
 			{
-				_controller.Move(-knockbackDir*Time.fixedDeltaTime);
+				_controller.Move(knockBackDir * Time.fixedDeltaTime);
 				yield return new WaitForFixedUpdate();
 			}
+
 			yield return new WaitForSeconds(knockOutDuration - knockBackDuration);
 			_knockedOut = false;
 			_spriteRenderer.color = color;
