@@ -7,23 +7,31 @@ namespace Player
 	{
 		[SerializeField] private int numOfSteps;
 		[SerializeField] private float timeStepInterval;
+		[SerializeField] private Color[] gradientColors = new Color[] {Color.clear, Color.white};
 
 		private PlayerBrain _brain;
 		private LineRenderer _lineRenderer;
 		private Ball _ball;
 		private Quaternion _rotation;
 
-		private Vector3[] trajectoryPoints;
+		private bool _charged;
+		private Vector3[] _trajectoryPoints;
 
 		private void Awake()
 		{
 			_brain = GetComponent<PlayerBrain>();
-			trajectoryPoints = new Vector3[numOfSteps];
-			_rotation = Quaternion.Inverse(transform.rotation);
+			_lineRenderer = GetComponent<LineRenderer>();
 			_brain.StartedChargingThrow += Enable;
 			_brain.BallThrown += Disable;
-			_lineRenderer = GetComponent<LineRenderer>();
-			_lineRenderer.positionCount = numOfSteps;
+			OnValidate();
+			enabled = false;
+		}
+
+		private void OnValidate()
+		{
+			_rotation = Quaternion.Inverse(transform.rotation);
+			_trajectoryPoints = new Vector3[numOfSteps];
+			GetComponent<LineRenderer>().positionCount = numOfSteps;
 		}
 
 		private void OnDestroy()
@@ -32,18 +40,30 @@ namespace Player
 			_brain.BallThrown -= Disable;
 		}
 
+		private void Update()
+		{
+			// if (_charged) return;
+			// if (_brain.ThrowCharge >= 1)
+			// {
+			// 	_charged = true;
+			// 	_brain.ChangedAimDirection += DrawTrajectory;
+			// }
+
+			DrawTrajectory();
+		}
+
 		private void Enable(Ball ball)
 		{
 			enabled = true;
 			_lineRenderer.enabled = true;
 			_ball = ball;
 			DrawTrajectory();
-			_brain.ChangedAimDirection += DrawTrajectory;
 		}
 
 		private void Disable()
 		{
-			_brain.ChangedAimDirection -= DrawTrajectory;
+			if (_charged)
+				_brain.ChangedAimDirection -= DrawTrajectory;
 			_lineRenderer.enabled = false;
 			enabled = false;
 		}
@@ -56,10 +76,10 @@ namespace Player
 			{
 				var posAtTime = _brain.ThrowOrigin + throwVelocity * timeStep;
 				posAtTime.y += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
-				trajectoryPoints[timeStep] = _rotation * posAtTime;
+				_trajectoryPoints[timeStep] = _rotation * posAtTime;
 			}
 
-			_lineRenderer.SetPositions(trajectoryPoints);
+			_lineRenderer.SetPositions(_trajectoryPoints);
 		}
 	}
 }

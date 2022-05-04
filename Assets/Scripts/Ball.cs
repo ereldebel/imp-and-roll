@@ -17,7 +17,7 @@ public class Ball : MonoBehaviour
 	[Tooltip("The distance of the ball from the ground that the ball is already considered grounded.")] [SerializeField]
 	private float groundedDistance = 0.1f;
 
-	private float dragWhileOnFloor = 1;
+	[SerializeField] private float dragWhileOnFloor = -1;
 
 	#endregion
 
@@ -43,6 +43,8 @@ public class Ball : MonoBehaviour
 
 	private void OnValidate()
 	{
+		if (dragWhileOnFloor < 0)
+			dragWhileOnFloor = _defaultBallDrag;
 		Radius = GetComponent<SphereCollider>().radius;
 		_checkSphereRadius = Radius + groundedDistance;
 	}

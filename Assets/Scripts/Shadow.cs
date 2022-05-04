@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Shadow : MonoBehaviour
 {
-	[SerializeField] private float a = 0.5f;
-	[SerializeField] private float b = -0.25f;
+	[SerializeField] private float modifier = 0.25f;
+	[SerializeField] private float constant = 1.075f;
 
 	private Transform _parent;
 	private Transform _transform;
@@ -22,7 +22,7 @@ public class Shadow : MonoBehaviour
 		var objHeight = pos.y;
 		pos.y = 0;
 		_transform.position = pos;
-		_transform.localScale = (a * objHeight + b) * Vector3.one;
+		_transform.localScale = (modifier * objHeight + constant) * Vector3.one;
 		_transform.rotation = _rotation;
 	}
 }

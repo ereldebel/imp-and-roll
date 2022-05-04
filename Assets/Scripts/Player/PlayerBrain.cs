@@ -35,8 +35,9 @@ namespace Player
 			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius);
 
 		public Vector3 ThrowVelocity =>
-			maxThrowVelocity * Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime) *
-			new Vector3(_aimDirection.x, throwYPower, _aimDirection.y);
+			maxThrowForce * ThrowCharge * new Vector3(_aimDirection.x, throwYForce, _aimDirection.y);
+
+		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
 		#endregion;
 
@@ -51,8 +52,8 @@ namespace Player
 		[SerializeField] private float speed;
 		[SerializeField] private float pickupDistance;
 		[SerializeField] private LayerMask ballMask;
-		[SerializeField] private float maxThrowVelocity;
-		[SerializeField] private float throwYPower;
+		[SerializeField] private float maxThrowForce;
+		[SerializeField] private float throwYForce;
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockOutDuration = 1;
