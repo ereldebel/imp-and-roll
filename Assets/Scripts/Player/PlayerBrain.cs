@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Player
 {
-	[RequireComponent(typeof(CharacterController))]
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
 		#region Public Properties
@@ -45,7 +44,7 @@ namespace Player
 		#region Private Properties
 
 		private Vector3 ColliderBottom => transform.position + _diffFromColliderCenterToBottom;
-		private CharacterController _controller;
+		private Vector3 ColliderTop => transform.position - _diffFromColliderCenterToBottom;
 
 		#endregion
 
@@ -59,7 +58,6 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
-
 		[SerializeField] private float knockOutDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 
@@ -68,6 +66,7 @@ namespace Player
 		#region Private Fields
 
 		private SpriteRenderer _spriteRenderer;
+		private Collider _collider;
 		private float _colliderRadius;
 		private float _pickupRadius;
 		private Vector3 _diffFromColliderCenterToBottom;
@@ -94,7 +93,7 @@ namespace Player
 		private void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
-			_controller = GetComponent<CharacterController>();
+			_collider = GetComponent<Collider>();
 			OnValidate();
 		}
 
@@ -110,7 +109,7 @@ namespace Player
 
 		private void FixedUpdate()
 		{
-			Move();
+			ProcessMovementInput();
 		}
 
 		#endregion
@@ -166,15 +165,15 @@ namespace Player
 
 		#region Private Methods and Coroutines
 
-		private void Move()
+		private void ProcessMovementInput()
 		{
 			if (_knockedOut) return;
 			Vector3 velocity;
-			if (MovementStick.sqrMagnitude > 0.1)
-				velocity = new Vector3(MovementStick.x * speed, 0, MovementStick.y * speed);
-			else
-				velocity = Vector3.zero;
-			_controller.SimpleMove((_chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity)*Time.fixedDeltaTime);
+			if (MovementStick.sqrMagnitude <= 0.1) return;
+			velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
+			if (_chargeStartTime >= 0)
+				velocity *= movementRelativeSpeedWhileCharging;
+			Move(velocity);
 		}
 
 		private IEnumerator Knockout(Vector3 knockBackDir)
@@ -185,13 +184,37 @@ namespace Player
 			knockBackDir.y = 0;
 			for (int i = 0; i < knockBackDuration / Time.fixedDeltaTime; i++)
 			{
-				_controller.Move(knockBackDir * Time.fixedDeltaTime);
+				Move(knockBackDir);
 				yield return new WaitForFixedUpdate();
 			}
 
 			yield return new WaitForSeconds(knockOutDuration - knockBackDuration);
 			_knockedOut = false;
 			_spriteRenderer.color = color;
+		}
+
+		private void Move(Vector3 velocity)
+		{
+			velocity *= Time.fixedDeltaTime;
+			// velocity.y += 0.5f * Physics.gravity.y * _squaredFixedDeltaTime;
+			var pos = transform.position + velocity;
+			if (Physics.CapsuleCast(ColliderTop, ColliderBottom, _colliderRadius, velocity, out var hit,
+				    velocity.magnitude))
+				velocity = velocity.normalized * hit.distance;
+			var numOverlaps =
+				Physics.OverlapCapsuleNonAlloc(ColliderTop, ColliderBottom, _colliderRadius, TempColliders);
+			for (var i = 0; i < numOverlaps; ++i)
+			{
+				var other = TempColliders[i];
+				if (other.gameObject == gameObject) continue;
+				var otherTransform = other.transform;
+				if (!Physics.ComputePenetration(_collider, pos, transform.rotation, other, otherTransform.position,
+					    otherTransform.rotation, out var positionVectorFix, out var positionDistanceFix)) continue;
+				pos += new Vector3(positionVectorFix.x, 0, positionVectorFix.z) * positionDistanceFix;
+				velocity -= Vector3.Project(velocity, positionVectorFix);
+			}
+
+			transform.position = pos;
 		}
 
 		#endregion
