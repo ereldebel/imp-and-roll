@@ -193,6 +193,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7189aa3c-9640-4182-9357-b5703abccf13
     m_ActionName: Player/Pick Up[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4320430827449331697}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnDodgeRoll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6e6ad36e-4200-4325-9c0d-f6bd785258db
+    m_ActionName: Player/Dodge Roll[/XInputControllerWindows/buttonEast,/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -211,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  dodgerollSpeed: 10
   pickupDistance: 0.25
   ballMask:
     serializedVersion: 2
@@ -219,6 +236,8 @@ MonoBehaviour:
   throwYForce: 0.3
   minThrowChargeTime: 0.1
   maxThrowChargeTime: 1
+  knockBackDuration: 0.5
+  rollDuration: 0.25
   knockOutDuration: 1
   movementRelativeSpeedWhileCharging: 0.5
 --- !u!114 &4320430827449331697

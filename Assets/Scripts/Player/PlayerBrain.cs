@@ -53,6 +53,8 @@ namespace Player
 		#region Serialized Fields
 
 		[SerializeField] private float speed;
+		[SerializeField] private float dodgerollSpeed;
+
 		[SerializeField] private float pickupDistance;
 		[SerializeField] private LayerMask ballMask;
 		[SerializeField] private float maxThrowForce;
@@ -60,6 +62,8 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
+		[SerializeField] private float rollDuration = 0.25f;
+		
 
 		[SerializeField] private float knockOutDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
@@ -75,6 +79,8 @@ namespace Player
 		private float _chargeStartTime = -1;
 		private Vector2 _aimDirection;
 		private bool _knockedOut;
+		private bool _rolling;
+
 
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
 
@@ -89,7 +95,13 @@ namespace Player
 		public event Action BallThrown;
 
 		#endregion
+		#region Private Functions
 
+		private Vector3 vector2_to_vector3XZ(Vector2 input)
+		{
+			return new Vector3(input.x,0, input.y);
+		}
+		#endregion
 		#region Function Events
 
 		private void Awake()
@@ -159,17 +171,22 @@ namespace Player
 		public void TakeHit(Vector3 normal)
 		{
 			// _myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
-			if (knockOutDuration > 0)
+			if (knockOutDuration > 0 && !_rolling)
 				StartCoroutine(Knockout(Vector3.Reflect(normal, Vector3.up)));
 		}
 
+		public void DodgeRoll()
+		{
+			print(MovementStick);
+			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
+		}
 		#endregion
 
 		#region Private Methods and Coroutines
 
 		private void Move()
 		{
-			if (_knockedOut) return;
+			if (_knockedOut || _rolling) return;
 			Vector3 velocity;
 			if (MovementStick.sqrMagnitude > 0.1)
 				velocity = new Vector3(MovementStick.x * speed/50, 0, MovementStick.y * speed/50);
@@ -177,7 +194,18 @@ namespace Player
 				velocity = Vector3.zero;
 			_controller.Move(_chargeStartTime >= 0 ? velocity * movementRelativeSpeedWhileCharging : velocity);
 		}
+		private IEnumerator DodgeRoll(Vector3 rollDir)
+		{
+			_rolling = true;
+			print(rollDir);
+			for (int i = 0; i < rollDuration*50; i++)
+			{
+				_controller.Move(dodgerollSpeed*rollDir*Time.fixedDeltaTime);
+				yield return new WaitForFixedUpdate();
+			}
+			_rolling = false;
 
+		}
 		private IEnumerator Knockout(Vector3 knockbackDir)
 		{
 			var color = _spriteRenderer.color;
