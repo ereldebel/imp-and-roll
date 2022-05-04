@@ -95,6 +95,7 @@ namespace Player
 		public event Action BallThrown;
 
 		#endregion
+		
 		#region Private Functions
 
 		private Vector3 vector2_to_vector3XZ(Vector2 input)
@@ -102,6 +103,7 @@ namespace Player
 			return new Vector3(input.x,0, input.y);
 		}
 		#endregion
+		
 		#region Function Events
 
 		private void Awake()
@@ -216,6 +218,7 @@ namespace Player
 			knockbackDir = temp;
 			for (int i = 0; i < knockBackDuration*50; i++)
 			{
+				print(knockbackDir);
 				_controller.Move(-knockbackDir*Time.fixedDeltaTime);
 				yield return new WaitForFixedUpdate();
 			}
