@@ -47,7 +47,6 @@ namespace Player
 
 		private Vector3 ColliderBottom => transform.position + _diffFromColliderCenterToBottom;
 		private Vector3 ColliderTop => transform.position - _diffFromColliderCenterToBottom;
-		private CharacterController _controller;
 		#endregion
 
 		#region Serialized Fields
@@ -96,15 +95,7 @@ namespace Player
 		public event Action BallThrown;
 
 		#endregion
-		
-		#region Private Functions
 
-		private Vector3 vector2_to_vector3XZ(Vector2 input)
-		{
-			return new Vector3(input.x,0, input.y);
-		}
-		#endregion
-		
 		#region Function Events
 
 		private void Awake()
@@ -210,7 +201,7 @@ namespace Player
 			_rolling = true;
 			for (var i = 0; i < rollDuration / Time.fixedDeltaTime; i++)
 			{
-				_controller.Move(dodgerollSpeed*rollDir*Time.fixedDeltaTime);
+				_controller.Move(dodgeRollSpeed*rollDir*Time.fixedDeltaTime);
 				yield return new WaitForFixedUpdate();
 			}
 			_rolling = false;
@@ -222,13 +213,13 @@ namespace Player
 			var color = _spriteRenderer.color;
 			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
-			Vector3 temp = knockbackDir;
+			Vector3 temp = knockBackDir;
 			temp.y = 0;
-			knockbackDir = temp;
+			knockBackDir = temp;
 			for (int i = 0; i < knockBackDuration*50; i++)
 			{
-				print(knockbackDir);
-				_controller.Move(-knockbackDir*Time.fixedDeltaTime);
+				print(knockBackDir);
+				_controller.Move(-knockBackDir*Time.fixedDeltaTime);
 				yield return new WaitForFixedUpdate();
 			}
 			yield return new WaitForSeconds(knockOutDuration - knockBackDuration);
