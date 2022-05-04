@@ -126,6 +126,7 @@ namespace Player
 		private void FixedUpdate()
 		{
 			Move();
+			PickupBall();
 		}
 
 		#endregion
@@ -152,14 +153,14 @@ namespace Player
 
 		public bool PickupBall()
 		{
-			if (_ball != null)
-			{
-				_ball.Release((transform.position.x > 0 ? Vector3.left : Vector3.right) *
-				              (_colliderRadius + _ball.Radius) +
-				              _diffFromColliderCenterToBottom);
-				_ball = null;
-				return true;
-			}
+			// if (_ball != null)
+			// {
+			// 	_ball.Release((transform.position.x > 0 ? Vector3.left : Vector3.right) *
+			// 	              (_colliderRadius + _ball.Radius) +
+			// 	              _diffFromColliderCenterToBottom);
+			// 	_ball = null;
+			// 	return true;
+			// }
 
 			if (Physics.OverlapCapsuleNonAlloc(transform.position, ColliderBottom, _pickupRadius, TempColliders,
 				    ballMask.value) <= 0) return false;
