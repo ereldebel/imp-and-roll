@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pick Up",
-                    "type": "Button",
-                    "id": "7189aa3c-9640-4182-9357-b5703abccf13",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Dodge Roll",
                     "type": "Button",
                     "id": "6e6ad36e-4200-4325-9c0d-f6bd785258db",
@@ -137,28 +128,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f9c91263-e961-4fe5-9f2d-0b679267e09f",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Pick Up",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9f9958e0-84f3-4693-89db-4d4718df65d4",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Pick Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

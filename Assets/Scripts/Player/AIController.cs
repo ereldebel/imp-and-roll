@@ -34,7 +34,7 @@ namespace Player
 			}
 			else if ((_rightSide && ballIsOnBorderRight) || (!_rightSide && !ballIsOnBorderRight))
 			{
-				if (_brain.PickupBall())
+				if (_brain.HasBall)
 				{
 					_throwing = true;
 					_brain.ChargeThrow();

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 	private static GameManager _shared;
 
 	private float _borderX = 0.5f;
-	private Material _arenaMaterial;
+	// private Material _arenaMaterial;
 	private const float PlaneWidth = 10;
 	private float _arenaWidth;
 	private int _shaderBorderXVar;
@@ -39,10 +39,10 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		_shared = this;
-		_arenaMaterial = arena.GetComponent<Renderer>().material;
+		// _arenaMaterial = arena.GetComponent<Renderer>().material;
 		_arenaWidth = arena.transform.localScale.x * PlaneWidth;
 		_shaderBorderXVar = Shader.PropertyToID(arenaMaterialBorderXValueName);
-		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
+		// _arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
 		OnValidate();
 	}
 
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 		var change = Time.deltaTime * borderChangeSpeed;
 		_ballOnRight = normalizedXPosition > _borderX;
 		_borderX += _ballOnRight ? change : -change;
-		_arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
+		// _arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
 		border.position = new Vector3(_arenaWidth * (_borderX - 0.5f), 0.5f, 0);
 	}
 

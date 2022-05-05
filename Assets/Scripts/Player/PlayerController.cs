@@ -11,7 +11,7 @@ namespace Player
 		private PlayerInput _playerInput;
 		private Camera _camera;
 		Plane plane = new Plane(Vector3.up, 0);
-		
+
 		private void Awake()
 		{
 			_myBrain = GetComponent<PlayerBrain>();
@@ -41,11 +41,6 @@ namespace Player
 				_myBrain.ThrowBall();
 		}
 
-		public void OnPickup(InputAction.CallbackContext context)
-		{
-			if (context.started)
-				_myBrain.PickupBall();
-		}
 		public void OnDodgeRoll(InputAction.CallbackContext context)
 		{
 			if (context.started)

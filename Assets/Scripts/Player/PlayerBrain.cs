@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Player
 {
 	[RequireComponent(typeof(CharacterController))]
-
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
 		#region Public Properties
@@ -40,6 +39,7 @@ namespace Player
 			maxThrowForce * ThrowCharge * new Vector3(_aimDirection.x, throwYForce, _aimDirection.y);
 
 		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
+		public bool HasBall => _ball != null;
 
 		#endregion;
 
@@ -47,6 +47,7 @@ namespace Player
 
 		private Vector3 ColliderBottom => transform.position + _diffFromColliderCenterToBottom;
 		private Vector3 ColliderTop => transform.position - _diffFromColliderCenterToBottom;
+
 		#endregion
 
 		#region Serialized Fields
@@ -61,7 +62,7 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
-		
+
 
 		[SerializeField] private float knockOutDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
@@ -129,7 +130,6 @@ namespace Player
 		public void ChargeThrow()
 		{
 			if (_ball == null) return;
-			// _myRigid.velocity = Vector3.zero;
 			_chargeStartTime = Time.time;
 			StartedChargingThrow?.Invoke(_ball);
 		}
@@ -144,29 +144,8 @@ namespace Player
 			return true;
 		}
 
-		public bool PickupBall()
-		{
-			// if (_ball != null)
-			// {
-			// 	_ball.Release((transform.position.x > 0 ? Vector3.left : Vector3.right) *
-			// 	              (_colliderRadius + _ball.Radius) +
-			// 	              _diffFromColliderCenterToBottom);
-			// 	_ball = null;
-			// 	return true;
-			// }
-
-			if (Physics.OverlapCapsuleNonAlloc(transform.position, ColliderBottom, _pickupRadius, TempColliders,
-				    ballMask.value) <= 0) return false;
-			_ball = TempColliders[0].gameObject.GetComponent<Ball>();
-			if (_ball == null) return false;
-			if (_ball.Grounded && _ball.Pickup(transform)) return true;
-			_ball = null;
-			return false;
-		}
-
 		public void TakeHit(Vector3 contactPoint, Vector3 velocity)
 		{
-			// _myRigid.AddForce(Vector3.Reflect(normal, Vector3.up), ForceMode.Impulse);
 			if (!(knockOutDuration > 0) || _rolling) return;
 			StartCoroutine(Knockout(velocity));
 		}
@@ -176,9 +155,22 @@ namespace Player
 			print(MovementStick);
 			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
 		}
+
 		#endregion
 
 		#region Private Methods and Coroutines
+		
+		private bool PickupBall()
+		{
+			if (_ball != null ||
+			    Physics.OverlapCapsuleNonAlloc(transform.position, ColliderBottom, _pickupRadius, TempColliders,
+				    ballMask.value) <= 0) return false;
+			_ball = TempColliders[0].gameObject.GetComponent<Ball>();
+			if (_ball == null) return false;
+			if (_ball.Grounded && _ball.Pickup(transform)) return true;
+			_ball = null;
+			return false;
+		}
 
 		private void ProcessMovementInput()
 		{
@@ -187,7 +179,6 @@ namespace Player
 			var velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
 			if (_chargeStartTime >= 0)
 				velocity *= movementRelativeSpeedWhileCharging;
-			// Move(velocity);
 			_controller.SimpleMove(velocity);
 		}
 
@@ -201,11 +192,11 @@ namespace Player
 			_rolling = true;
 			for (var i = 0; i < rollDuration / Time.fixedDeltaTime; i++)
 			{
-				_controller.Move(dodgeRollSpeed*rollDir*Time.fixedDeltaTime);
+				_controller.Move(dodgeRollSpeed * Time.fixedDeltaTime * rollDir);
 				yield return new WaitForFixedUpdate();
 			}
-			_rolling = false;
 
+			_rolling = false;
 		}
 
 		private IEnumerator Knockout(Vector3 knockBackDir)
@@ -216,12 +207,13 @@ namespace Player
 			Vector3 temp = knockBackDir;
 			temp.y = 0;
 			knockBackDir = temp;
-			for (int i = 0; i < knockBackDuration*50; i++)
+			for (int i = 0; i < knockBackDuration * 50; i++)
 			{
 				print(knockBackDir);
-				_controller.Move(-knockBackDir*Time.fixedDeltaTime);
+				_controller.Move(-knockBackDir * Time.fixedDeltaTime);
 				yield return new WaitForFixedUpdate();
 			}
+
 			yield return new WaitForSeconds(knockOutDuration - knockBackDuration);
 			_knockedOut = false;
 			_spriteRenderer.color = color;
