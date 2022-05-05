@@ -180,7 +180,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.48
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -236,7 +236,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
-  m_Emitting: 0
+  m_Emitting: 1
 --- !u!1 &6698415983913952548
 GameObject:
   m_ObjectHideFlags: 0
