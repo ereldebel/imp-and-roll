@@ -10,10 +10,8 @@ namespace ArenaDivision
 		[SerializeField] private float ySpeed = 0.5f;
 		[SerializeField] private float maxHeight = 5;
 		[SerializeField] private float chainRemainder = 0.1f;
-		[SerializeField] private Rigidbody divider;
-		[SerializeField] private GameObject chainLinkPrefab;
+		[SerializeField] private Transform divider;
 
-		private Rigidbody _rigidBody;
 		private float _halfOfArenaWidth;
 		private Transform _ball;
 		private float _chainLength;
@@ -24,9 +22,7 @@ namespace ArenaDivision
 
 		private void Awake()
 		{
-			_rigidBody = GetComponent<Rigidbody>();
 			OnValidate();
-			CreateChain();
 		}
 
 		private void Start()
@@ -56,23 +52,9 @@ namespace ArenaDivision
 				GameManager.MonsterGotPlayer(other.name.EndsWith("1"));
 		}
 
-		private void CreateChain()
-		{
-			Quaternion chainLinkRotation = chainLinkPrefab.transform.rotation;
-			var prev = divider.GetComponent<HingeJoint>();
-			for (float y = 0; y < _chainLength; y += 0.2f)
-			{
-				var curr = Instantiate(chainLinkPrefab, Vector3.up * y, chainLinkRotation);
-				prev.connectedBody = curr.GetComponent<Rigidbody>();
-				prev = curr.GetComponent<HingeJoint>();
-			}
-
-			prev.connectedBody = _rigidBody;
-		}
-
 		private void Move()
 		{
-			var pos = _rigidBody.position;
+			var pos = transform.position;
 			var ballPos = _ball.position;
 			var dividerPos = divider.position;
 			var chasingCloseObject = GetClosestObject(pos, ballPos, out var closestObjDir);
@@ -86,7 +68,7 @@ namespace ArenaDivision
 			if (movingTowardsDivider)
 				xMovement *= 2;
 			pos += new Vector3(xMovement, yMovement, zMovement);
-			_rigidBody.position = pos;
+			transform.position = pos;
 			if (Vector3.Distance(pos, dividerPos) < _chainLength || movingTowardsDivider) return;
 			dividerPos.x += xMovement;
 			divider.position = dividerPos;
