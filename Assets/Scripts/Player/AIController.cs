@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -6,10 +7,10 @@ namespace Player
 	public class AIController : MonoBehaviour
 	{
 		[SerializeField] private Transform otherPlayer;
-		[SerializeField] private Transform ball;
 		[SerializeField] private Transform border;
 		[SerializeField] private float throwLoad = 0.8f;
 
+		private Transform _ball;
 		private PlayerBrain _brain;
 		private bool _rightSide;
 		private bool _throwing;
@@ -20,9 +21,14 @@ namespace Player
 			_brain = GetComponent<PlayerBrain>();
 		}
 
+		private void Start()
+		{
+			_ball = GameManager.BallTransform;
+		}
+
 		private void Update()
 		{
-			var ballIsOnBorderRight = ball.position.x > border.position.x;
+			var ballIsOnBorderRight = _ball.position.x > border.position.x;
 			if (_throwing)
 			{
 				_brain.AimingStick = DirectionTo(otherPlayer.position);
@@ -40,11 +46,11 @@ namespace Player
 					_brain.ChargeThrow();
 				}
 				else
-					_brain.MovementStick = DirectionTo(ball.position);
+					_brain.MovementStick = DirectionTo(_ball.position);
 			}
 			else
 			{
-				var midOfPlayerPartX = GameManager.ArenaWidth / 4;
+				var midOfPlayerPartX = GameManager.ArenaLength / 4;
 				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
 				midOfPlayerPartX += border.position.x / 2;
 				_brain.MovementStick = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));

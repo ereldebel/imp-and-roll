@@ -4,7 +4,7 @@ public class Ball : MonoBehaviour
 {
 	#region Public Properties
 
-	public float XPosition => transform.position.x;
+	public Vector3 Position => transform.position;
 	public bool Grounded => Physics.CheckSphere(transform.position, _checkSphereRadius);
 	public float Mass => _rigidbody.mass;
 	public bool Held { get; private set; }

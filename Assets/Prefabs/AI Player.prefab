@@ -65,6 +65,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherPlayer: {fileID: 0}
-  ball: {fileID: 0}
   border: {fileID: 0}
   throwLoad: 0.8

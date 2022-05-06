@@ -7,16 +7,14 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private Ball ball;
 	[SerializeField] private GameObject arena;
-	[SerializeField] private Transform border;
-	[SerializeField] private string arenaMaterialBorderXValueName = "BorderX";
-	[SerializeField] private float borderRelativeWidth;
-	[SerializeField] private float borderChangeSpeed = 0.01f;
 
 	#endregion
 
 	#region Public Properties
 
-	public static float ArenaWidth => _shared._arenaWidth;
+	public static Transform BallTransform => _shared.ball.transform;
+	public static float ArenaLength => _shared._arenaDimensions[0];
+	public static float ArenaWidth => _shared._arenaDimensions[1];
 
 	#endregion
 
@@ -24,12 +22,8 @@ public class GameManager : MonoBehaviour
 
 	private static GameManager _shared;
 
-	private float _borderX = 0.5f;
-	// private Material _arenaMaterial;
 	private const float PlaneWidth = 10;
-	private float _arenaWidth;
-	private int _shaderBorderXVar;
-	private float _borderRelativeWidth;
+	private Vector2 _arenaDimensions;
 	private bool _ballOnRight;
 
 	#endregion
@@ -39,21 +33,8 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		_shared = this;
-		// _arenaMaterial = arena.GetComponent<Renderer>().material;
-		_arenaWidth = arena.transform.localScale.x * PlaneWidth;
-		_shaderBorderXVar = Shader.PropertyToID(arenaMaterialBorderXValueName);
-		// _arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
-		OnValidate();
-	}
-
-	private void OnValidate()
-	{
-		_borderRelativeWidth = borderRelativeWidth / 2;
-	}
-
-	private void Update()
-	{
-		UpdateBorder();
+		var scale = arena.transform.localScale;
+		_arenaDimensions = new Vector2(scale.x * PlaneWidth, scale.y * PlaneWidth);
 	}
 
 	#endregion
@@ -64,7 +45,7 @@ public class GameManager : MonoBehaviour
 	{
 		GameOver(!_shared._ballOnRight);
 	}
-	
+
 	public static void MonsterGotPlayer(bool rightLost)
 	{
 		GameOver(!rightLost);
@@ -79,18 +60,6 @@ public class GameManager : MonoBehaviour
 		var player = rightWon ? "right player" : "left player";
 		print($"{player} won!");
 		SceneManager.LoadScene(0);
-	}
-	
-	private void UpdateBorder()
-	{
-		if (!ball.Grounded) return;
-		var normalizedXPosition = ball.XPosition / _arenaWidth + 0.5f;
-		if (Mathf.Abs(normalizedXPosition - _borderX) < _borderRelativeWidth) return;
-		var change = Time.deltaTime * borderChangeSpeed;
-		_ballOnRight = normalizedXPosition > _borderX;
-		_borderX += _ballOnRight ? change : -change;
-		// _arenaMaterial.SetFloat(_shaderBorderXVar, _borderX);
-		border.position = new Vector3(_arenaWidth * (_borderX - 0.5f), 0.5f, 0);
 	}
 
 	#endregion
