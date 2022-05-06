@@ -1,19 +1,19 @@
-using System;
 using UnityEngine;
 
 namespace ArenaDivision
 {
 	public class Monster : MonoBehaviour
 	{
-		[SerializeField] private float sightRadius = 5;
-
+		[SerializeField] private float sightRadius = 1;
 		[SerializeField] private LayerMask playerMask;
 		[SerializeField] private float speed = 1;
-		[SerializeField] private float ySpeed = 1;
+		[SerializeField] private float ySpeed = 0.5f;
 		[SerializeField] private float maxHeight = 5;
 		[SerializeField] private float chainRemainder = 0.1f;
-		[SerializeField] private Transform divider;
+		[SerializeField] private Rigidbody divider;
+		[SerializeField] private GameObject chainLinkPrefab;
 
+		private Rigidbody _rigidBody;
 		private float _halfOfArenaWidth;
 		private Transform _ball;
 		private float _chainLength;
@@ -22,11 +22,17 @@ namespace ArenaDivision
 
 		private static readonly Collider[] TempColliders = new Collider[3];
 
+		private void Awake()
+		{
+			_rigidBody = GetComponent<Rigidbody>();
+			OnValidate();
+			CreateChain();
+		}
+
 		private void Start()
 		{
 			_ball = GameManager.BallTransform;
 			_halfOfArenaWidth = GameManager.ArenaWidth / 2;
-			OnValidate();
 		}
 
 		private void OnValidate()
@@ -41,20 +47,46 @@ namespace ArenaDivision
 			Move();
 		}
 
+		private void OnCollisionEnter(Collision collision)
+		{
+			var other = collision.gameObject;
+			if (other.CompareTag("Ball"))
+				GameManager.MonsterGotBall();
+			else
+				GameManager.MonsterGotPlayer(other.name.EndsWith("1"));
+		}
+
+		private void CreateChain()
+		{
+			Quaternion chainLinkRotation = chainLinkPrefab.transform.rotation;
+			var prev = divider.GetComponent<HingeJoint>();
+			for (float y = 0; y < _chainLength; y += 0.2f)
+			{
+				var curr = Instantiate(chainLinkPrefab, Vector3.up * y, chainLinkRotation);
+				prev.connectedBody = curr.GetComponent<Rigidbody>();
+				prev = curr.GetComponent<HingeJoint>();
+			}
+
+			prev.connectedBody = _rigidBody;
+		}
+
 		private void Move()
 		{
-			var pos = transform.position;
+			var pos = _rigidBody.position;
 			var ballPos = _ball.position;
 			var dividerPos = divider.position;
 			var chasingCloseObject = GetClosestObject(pos, ballPos, out var closestObjDir);
-			var xMovement = Mathf.Sign(ballPos.x - pos.x) * _fixedSpeed;
-			var yMovement = chasingCloseObject ? closestObjDir.y * _fixedYSpeed : Mathf.Min(maxHeight - pos.y, _fixedYSpeed);
+			var ballDist = ballPos.x - pos.x;
+			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _fixedSpeed : 0;
+			var yMovement = chasingCloseObject
+				? closestObjDir.y * _fixedYSpeed
+				: Mathf.Min(maxHeight - pos.y, _fixedYSpeed);
 			var zMovement = closestObjDir.z * _fixedSpeed;
-			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) >= 0;
+			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) > 0;
 			if (movingTowardsDivider)
 				xMovement *= 2;
 			pos += new Vector3(xMovement, yMovement, zMovement);
-			transform.position = pos;
+			_rigidBody.position = pos;
 			if (Vector3.Distance(pos, dividerPos) < _chainLength || movingTowardsDivider) return;
 			dividerPos.x += xMovement;
 			divider.position = dividerPos;
@@ -79,15 +111,6 @@ namespace ArenaDivision
 
 			closestObjDir = closestPos - pos;
 			return playersSeen > 0;
-		}
-
-		private void OnCollisionEnter(Collision collision)
-		{
-			var other = collision.gameObject;
-			if (other.CompareTag("Ball"))
-				GameManager.MonsterGotBall();
-			else
-				GameManager.MonsterGotPlayer(other.name.EndsWith("1"));
 		}
 	}
 }
