@@ -2437,8 +2437,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 32
-    tilesY: 1
+    tilesX: 1
+    tilesY: 32
     animationType: 1
     rowIndex: 0
     cycles: 1
