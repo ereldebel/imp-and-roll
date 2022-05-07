@@ -12,8 +12,10 @@ namespace ArenaDivision
 		[SerializeField] private float chainRemainder = 0.1f;
 		[SerializeField] private Transform divider;
 
-		private float _halfOfArenaWidth;
 		private Transform _ball;
+		private SpriteRenderer _spriteRenderer;
+		private LineRenderer _lineRenderer;
+		private float _halfOfArenaWidth;
 		private float _chainLength;
 		private float _fixedSpeed;
 		private float _fixedYSpeed;
@@ -22,6 +24,10 @@ namespace ArenaDivision
 
 		private void Awake()
 		{
+			_spriteRenderer = GetComponent<SpriteRenderer>();
+			_lineRenderer = GetComponent<LineRenderer>();
+			_lineRenderer.positionCount = 2;
+			_lineRenderer.SetPosition(0, Vector3.zero);
 			OnValidate();
 		}
 
@@ -41,6 +47,7 @@ namespace ArenaDivision
 		private void FixedUpdate()
 		{
 			Move();
+			UpdateSpectralChain();
 		}
 
 		private void OnCollisionEnter(Collision collision)
@@ -58,11 +65,12 @@ namespace ArenaDivision
 			var ballPos = _ball.position;
 			var dividerPos = divider.position;
 			var chasingCloseTarget = GetClosestTarget(pos, ballPos, out var closestObjDir);
+			_spriteRenderer.flipX = closestObjDir.x > pos.x;
 			var ballDist = ballPos.x - pos.x;
 			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _fixedSpeed : 0;
 			var yMovement = chasingCloseTarget
 				? closestObjDir.y * _fixedYSpeed
-				: Mathf.Min(maxHeight - pos.y, _fixedYSpeed);
+				: Mathf.Min(maxHeight - pos.y, 2 * _fixedYSpeed);
 			var zMovement = closestObjDir.z * _fixedSpeed;
 			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) > 0;
 			if (movingTowardsDivider)
@@ -72,6 +80,13 @@ namespace ArenaDivision
 			if (Vector3.Distance(pos, dividerPos) < _chainLength || movingTowardsDivider) return;
 			dividerPos.x += xMovement;
 			divider.position = dividerPos;
+		}
+
+		private void UpdateSpectralChain()
+		{
+			var closestDividerPoint = divider.position;
+			closestDividerPoint.z = transform.position.z;
+			_lineRenderer.SetPosition(1, transform.InverseTransformPoint(closestDividerPoint));
 		}
 
 		private bool GetClosestTarget(Vector3 pos, Vector3 defaultObjPos, out Vector3 closestTargetDir)
