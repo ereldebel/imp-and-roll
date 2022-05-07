@@ -7,7 +7,6 @@ namespace Player
 	{
 		[SerializeField] private int numOfSteps;
 		[SerializeField] private float timeStepInterval;
-		[SerializeField] private Color[] gradientColors = new Color[] {Color.clear, Color.white};
 
 		private PlayerBrain _brain;
 		private LineRenderer _lineRenderer;
@@ -30,7 +29,8 @@ namespace Player
 		private void OnValidate()
 		{
 			_rotation = Quaternion.Inverse(transform.rotation);
-			_trajectoryPoints = new Vector3[numOfSteps];
+			_trajectoryPoints = new Vector3[numOfSteps + 1];
+			_trajectoryPoints[0] = Vector3.zero;
 			GetComponent<LineRenderer>().positionCount = numOfSteps;
 		}
 
@@ -42,12 +42,12 @@ namespace Player
 
 		private void Update()
 		{
-			// if (_charged) return;
-			// if (_brain.ThrowCharge >= 1)
-			// {
-			// 	_charged = true;
-			// 	_brain.ChangedAimDirection += DrawTrajectory;
-			// }
+			if (_charged) return;
+			if (_brain.ThrowCharge >= 1)
+			{
+				_charged = true;
+				_brain.ChangedAimDirection += DrawTrajectory;
+			}
 
 			DrawTrajectory();
 		}
@@ -64,6 +64,7 @@ namespace Player
 		{
 			if (_charged)
 				_brain.ChangedAimDirection -= DrawTrajectory;
+			_charged = false;
 			_lineRenderer.enabled = false;
 			enabled = false;
 		}
@@ -76,9 +77,8 @@ namespace Player
 			{
 				var posAtTime = _brain.ThrowOrigin + throwVelocity * timeStep;
 				posAtTime.y += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
-				_trajectoryPoints[timeStep] = _rotation * posAtTime;
+				_trajectoryPoints[timeStep+1] = _rotation * posAtTime;
 			}
-
 			_lineRenderer.SetPositions(_trajectoryPoints);
 		}
 	}

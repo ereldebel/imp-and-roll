@@ -33,7 +33,7 @@ namespace Player
 		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
 
 		public Vector3 ThrowOrigin =>
-			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius);
+			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius+throwOriginEpsilon);
 
 		public Vector3 ThrowVelocity =>
 			maxThrowForce * ThrowCharge * new Vector3(_aimDirection.x, throwYForce, _aimDirection.y);
@@ -62,10 +62,9 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
-
-
 		[SerializeField] private float knockOutDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
+		[SerializeField] private float throwOriginEpsilon = 0.1f;
 
 		#endregion
 

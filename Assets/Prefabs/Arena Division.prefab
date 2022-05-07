@@ -251,7 +251,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5851243975382083767}
-  m_LocalRotation: {x: 0.46173108, y: -0.0077404683, z: 0.0040294332, w: 0.886977}
+  m_LocalRotation: {x: 0.440722, y: -0.0015667367, z: 0.0007692325, w: 0.89764196}
   m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -342,4 +342,3 @@ MonoBehaviour:
   maxHeight: 5
   chainRemainder: 0.1
   divider: {fileID: 5851243974168832105}
-  chainLinkPrefab: {fileID: 7473959898986047754, guid: d83bc8c444783ee4a882b2ba78f735d6, type: 3}
