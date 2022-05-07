@@ -5,7 +5,7 @@ namespace ArenaDivision
 	public class Monster : MonoBehaviour
 	{
 		[SerializeField] private float sightRadius = 1;
-		[SerializeField] private LayerMask playerMask;
+		[SerializeField] private LayerMask targetLayerMask;
 		[SerializeField] private float speed = 1;
 		[SerializeField] private float ySpeed = 0.5f;
 		[SerializeField] private float maxHeight = 5;
@@ -57,10 +57,10 @@ namespace ArenaDivision
 			var pos = transform.position;
 			var ballPos = _ball.position;
 			var dividerPos = divider.position;
-			var chasingCloseObject = GetClosestObject(pos, ballPos, out var closestObjDir);
+			var chasingCloseTarget = GetClosestTarget(pos, ballPos, out var closestObjDir);
 			var ballDist = ballPos.x - pos.x;
 			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _fixedSpeed : 0;
-			var yMovement = chasingCloseObject
+			var yMovement = chasingCloseTarget
 				? closestObjDir.y * _fixedYSpeed
 				: Mathf.Min(maxHeight - pos.y, _fixedYSpeed);
 			var zMovement = closestObjDir.z * _fixedSpeed;
@@ -74,12 +74,12 @@ namespace ArenaDivision
 			divider.position = dividerPos;
 		}
 
-		private bool GetClosestObject(Vector3 pos, Vector3 defaultObjPos, out Vector3 closestObjDir)
+		private bool GetClosestTarget(Vector3 pos, Vector3 defaultObjPos, out Vector3 closestTargetDir)
 		{
 			var playersSeen =
 				Physics.OverlapBoxNonAlloc(Vector3.right * pos.x,
-					new Vector3(sightRadius, maxHeight, _halfOfArenaWidth), TempColliders, Quaternion.identity,
-					playerMask.value);
+					new Vector3(sightRadius, maxHeight + 1, _halfOfArenaWidth), TempColliders, Quaternion.identity,
+					targetLayerMask.value);
 			var closestPos = defaultObjPos;
 			var closestDist = Vector3.Distance(pos, defaultObjPos);
 			for (var i = 0; i < playersSeen; ++i)
@@ -91,7 +91,7 @@ namespace ArenaDivision
 				closestDist = dist;
 			}
 
-			closestObjDir = closestPos - pos;
+			closestTargetDir = closestPos - pos;
 			return playersSeen > 0;
 		}
 	}

@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5851243974137138928}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 0.3230912, y: 0.0016516913, z: -0.0005638905, w: 0.94636625}
   m_LocalPosition: {x: 3, y: -0.5, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
@@ -334,11 +334,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRadius: 1
-  playerMask:
+  targetLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   speed: 1.5
   ySpeed: 0.5
   maxHeight: 5
-  chainRemainder: 0.1
+  chainRemainder: 0.01
   divider: {fileID: 5851243974168832105}
