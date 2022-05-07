@@ -29,8 +29,7 @@ namespace Player
 		private void OnValidate()
 		{
 			_rotation = Quaternion.Inverse(transform.rotation);
-			_trajectoryPoints = new Vector3[numOfSteps + 1];
-			_trajectoryPoints[0] = Vector3.zero;
+			_trajectoryPoints = new Vector3[numOfSteps];
 			GetComponent<LineRenderer>().positionCount = numOfSteps;
 		}
 
@@ -77,7 +76,7 @@ namespace Player
 			{
 				var posAtTime = _brain.ThrowOrigin + throwVelocity * timeStep;
 				posAtTime.y += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
-				_trajectoryPoints[timeStep+1] = _rotation * posAtTime;
+				_trajectoryPoints[timeStep] = _rotation * posAtTime;
 			}
 			_lineRenderer.SetPositions(_trajectoryPoints);
 		}

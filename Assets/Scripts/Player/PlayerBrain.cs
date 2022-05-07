@@ -127,7 +127,6 @@ namespace Player
 		private void FixedUpdate()
 		{
 			ProcessMovementInput();
-			PickupBall();
 		}
 
 		#endregion
@@ -151,7 +150,7 @@ namespace Player
 			return true;
 		}
 
-		public void TakeHit(Vector3 contactPoint, Vector3 velocity)
+		public void TakeHit(Vector3 velocity)
 		{
 			if (knockOutDuration <= 0 || _rolling) return;
 			StartCoroutine(Knockout(velocity));
@@ -168,16 +167,14 @@ namespace Player
 
 		#region Private Methods and Coroutines
 
-		private bool PickupBall()
+		private void OnCollisionEnter(Collision collision)
 		{
-			if (_ball != null ||
-			    Physics.OverlapCapsuleNonAlloc(transform.position, ColliderBottom, _pickupRadius, TempColliders,
-				    ballMask.value) <= 0) return false;
-			_ball = TempColliders[0].gameObject.GetComponent<Ball>();
-			if (_ball == null) return false;
-			if (_ball.Grounded && _ball.Pickup(transform)) return true;
-			_ball = null;
-			return false;
+			if (_ball != null || _knockedOut) return;
+			var ball = collision.gameObject.GetComponent<Ball>();
+			if (ball == null) return;
+			if (ball.Thrown) return;
+			_ball = ball;
+			_ball.Pickup(transform);
 		}
 
 		private void ProcessMovementInput()

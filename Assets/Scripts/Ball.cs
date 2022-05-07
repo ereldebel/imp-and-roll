@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
 	public float Mass => _rigidbody.mass;
 	public bool Held { get; private set; }
 	public float Radius { get; private set; }
+	public bool Thrown => _thrown;
 
 	#endregion
 
@@ -53,7 +54,7 @@ public class Ball : MonoBehaviour
 	{
 		if (!_thrown) return;
 		foreach (var contact in collision.contacts)
-			contact.otherCollider.GetComponent<IHittable>()?.TakeHit(contact.point, _rigidbody.velocity);
+			contact.otherCollider.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
 		_rigidbody.drag = dragWhileOnFloor;
 		_thrown = false;
 	}

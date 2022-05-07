@@ -2,5 +2,5 @@
 
 public interface IHittable
 {
-	void TakeHit(Vector3 contactPoint, Vector3 velocity);
+	void TakeHit(Vector3 velocity);
 }
