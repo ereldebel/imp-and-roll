@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -33,7 +34,7 @@ namespace Player
 		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
 
 		public Vector3 ThrowOrigin =>
-			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius+throwOriginEpsilon);
+			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius + throwOriginEpsilon);
 
 		public Vector3 ThrowVelocity =>
 			maxThrowForce * ThrowCharge * new Vector3(_aimDirection.x, throwYForce, _aimDirection.y);
@@ -73,6 +74,7 @@ namespace Player
 		private SpriteRenderer _spriteRenderer;
 		private Collider _collider;
 		private CharacterController _controller;
+		private Animator _animator;
 		private float _colliderRadius;
 		private float _pickupRadius;
 		private Vector3 _diffFromColliderCenterToBottom;
@@ -85,6 +87,10 @@ namespace Player
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
 
 		private static readonly Collider[] TempColliders = new Collider[5];
+		private static readonly int AnimatorRunning = Animator.StringToHash("Running");
+		private static readonly int AnimatorX = Animator.StringToHash("X Direction");
+		private static readonly int AnimatorZ = Animator.StringToHash("Z Direction");
+		private static readonly int AnimatorDodge = Animator.StringToHash("Dodge");
 
 		#endregion
 
@@ -103,6 +109,8 @@ namespace Player
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_collider = GetComponent<Collider>();
 			_controller = GetComponent<CharacterController>();
+			_animator = GetComponent<Animator>();
+			_spriteRenderer.flipX = transform.position.x < 0;
 			OnValidate();
 		}
 
@@ -145,20 +153,21 @@ namespace Player
 
 		public void TakeHit(Vector3 contactPoint, Vector3 velocity)
 		{
-			if (!(knockOutDuration > 0) || _rolling) return;
+			if (knockOutDuration <= 0 || _rolling) return;
 			StartCoroutine(Knockout(velocity));
 		}
 
 		public void DodgeRoll()
 		{
 			print(MovementStick);
+			if (MovementStick == Vector2.zero) return;
 			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
 		}
 
 		#endregion
 
 		#region Private Methods and Coroutines
-		
+
 		private bool PickupBall()
 		{
 			if (_ball != null ||
@@ -174,10 +183,19 @@ namespace Player
 		private void ProcessMovementInput()
 		{
 			if (_knockedOut || _rolling) return;
-			if (MovementStick.sqrMagnitude <= 0.1) return;
+			if (MovementStick.sqrMagnitude <= 0.1)
+			{
+				_animator.SetBool(AnimatorRunning, false);
+				return;
+			}
+
+			_animator.SetBool(AnimatorRunning, true);
+			_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(MovementStick.x)));
+			_animator.SetFloat(AnimatorZ, Mathf.Round(MovementStick.y));
 			var velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
 			if (_chargeStartTime >= 0)
 				velocity *= movementRelativeSpeedWhileCharging;
+			_spriteRenderer.flipX = velocity.x > 0;
 			_controller.SimpleMove(velocity);
 		}
 
@@ -188,6 +206,8 @@ namespace Player
 
 		private IEnumerator DodgeRoll(Vector3 rollDir)
 		{
+			rollDir = rollDir.normalized;
+			_animator.SetTrigger(AnimatorDodge);
 			_rolling = true;
 			for (var i = 0; i < rollDuration / Time.fixedDeltaTime; i++)
 			{
@@ -200,13 +220,14 @@ namespace Player
 
 		private IEnumerator Knockout(Vector3 knockBackDir)
 		{
+			_animator.SetBool(AnimatorRunning, false);
 			var color = _spriteRenderer.color;
 			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
-			Vector3 temp = knockBackDir;
+			var temp = knockBackDir;
 			temp.y = 0;
 			knockBackDir = temp;
-			for (int i = 0; i < knockBackDuration * 50; i++)
+			for (var i = 0; i < knockBackDuration * 50; i++)
 			{
 				print(knockBackDir);
 				_controller.Move(-knockBackDir * Time.fixedDeltaTime);

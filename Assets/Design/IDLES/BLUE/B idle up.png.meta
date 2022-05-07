@@ -13,7 +13,13 @@ TextureImporter:
     second: B idle up_2
   - first:
       213: -9058487581229563503
+    second: B idle up_2
+  - first:
+      213: -4231524238309738952
     second: B idle up_3
+  - first:
+      213: -4407152444144592331
+    second: B idle up_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,12 +136,12 @@ TextureImporter:
       name: B idle up_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 444
-        height: 746
+        x: 81
+        y: 78
+        width: 294
+        height: 556
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -151,12 +157,12 @@ TextureImporter:
       name: B idle up_1
       rect:
         serializedVersion: 2
-        x: 444
-        y: 0
-        width: 444
-        height: 746
+        x: 515
+        y: 77
+        width: 295
+        height: 555
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,19 +178,19 @@ TextureImporter:
       name: B idle up_2
       rect:
         serializedVersion: 2
-        x: 888
-        y: 0
-        width: 444
-        height: 746
+        x: 979
+        y: 77
+        width: 290
+        height: 556
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b835b00fa36228000800000000000000
-      internalID: 36633781549618059
+      spriteID: 191468ee989c94280800000000000000
+      internalID: -9058487581229563503
       vertices: []
       indices: 
       edges: []
@@ -193,19 +199,19 @@ TextureImporter:
       name: B idle up_3
       rect:
         serializedVersion: 2
-        x: 1332
-        y: 0
-        width: 444
-        height: 746
+        x: 1424
+        y: 77
+        width: 295
+        height: 555
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 191468ee989c94280800000000000000
-      internalID: -9058487581229563503
+      spriteID: 836b715ff1b9645c0800000000000000
+      internalID: -4231524238309738952
       vertices: []
       indices: 
       edges: []

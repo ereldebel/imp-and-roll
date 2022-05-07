@@ -80,18 +80,13 @@ public class Ball : MonoBehaviour
 		_thrown = true;
 	}
 
-	public void Release(Vector3 posChange)
-	{
-		_transform.position += posChange;
-		Release();
-	}
-
 	#endregion
 
 	#region Private Methods
 
-	private void Release()
+	private void Release(Vector3 posChange)
 	{
+		_transform.position += posChange;
 		gameObject.SetActive(true);
 		_transform.SetParent(null);
 		Held = false;

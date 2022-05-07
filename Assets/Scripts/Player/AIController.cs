@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Player
@@ -53,14 +52,18 @@ namespace Player
 				var midOfPlayerPartX = GameManager.ArenaLength / 4;
 				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
 				midOfPlayerPartX += border.position.x / 2;
-				_brain.MovementStick = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));
+				var movementDirection = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));
+				_brain.MovementStick =
+					movementDirection.sqrMagnitude > 0.5f ? movementDirection.normalized : Vector2.zero;
+				if (movementDirection.sqrMagnitude > 100)
+					_brain.DodgeRoll();
 			}
 		}
 
 		private Vector2 DirectionTo(Vector3 destination)
 		{
 			var pos = transform.position;
-			return new Vector2(destination.x - pos.x, destination.z - pos.z).normalized;
+			return new Vector2(destination.x - pos.x, destination.z - pos.z);
 		}
 	}
 }

@@ -130,10 +130,10 @@ TextureImporter:
       name: R idle side_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 444
-        height: 746
+        x: 81
+        y: 75
+        width: 267
+        height: 558
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,10 +151,10 @@ TextureImporter:
       name: R idle side_1
       rect:
         serializedVersion: 2
-        x: 444
-        y: 0
-        width: 444
-        height: 746
+        x: 530
+        y: 71
+        width: 269
+        height: 562
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +172,10 @@ TextureImporter:
       name: R idle side_2
       rect:
         serializedVersion: 2
-        x: 888
-        y: 0
-        width: 444
-        height: 746
+        x: 983
+        y: 75
+        width: 271
+        height: 557
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +193,10 @@ TextureImporter:
       name: R idle side_3
       rect:
         serializedVersion: 2
-        x: 1332
-        y: 0
-        width: 444
-        height: 746
+        x: 1436
+        y: 71
+        width: 269
+        height: 562
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

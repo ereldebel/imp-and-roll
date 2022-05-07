@@ -14,6 +14,12 @@ TextureImporter:
   - first:
       213: 6940000672204142255
     second: R idle up_3
+  - first:
+      213: -7383020295085845943
+    second: R idle up_4
+  - first:
+      213: 609546411431678021
+    second: R idle up_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,10 +136,10 @@ TextureImporter:
       name: R idle up_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 444
-        height: 746
+        x: 81
+        y: 78
+        width: 294
+        height: 556
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,10 +157,10 @@ TextureImporter:
       name: R idle up_1
       rect:
         serializedVersion: 2
-        x: 444
-        y: 0
-        width: 444
-        height: 746
+        x: 515
+        y: 77
+        width: 295
+        height: 555
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +178,10 @@ TextureImporter:
       name: R idle up_2
       rect:
         serializedVersion: 2
-        x: 888
-        y: 0
-        width: 444
-        height: 746
+        x: 862
+        y: 229
+        width: 5
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +199,10 @@ TextureImporter:
       name: R idle up_3
       rect:
         serializedVersion: 2
-        x: 1332
-        y: 0
-        width: 444
-        height: 746
+        x: 979
+        y: 77
+        width: 290
+        height: 556
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,6 +212,48 @@ TextureImporter:
       bones: []
       spriteID: fa633b777d5df4060800000000000000
       internalID: 6940000672204142255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: R idle up_4
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 77
+        width: 295
+        height: 555
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94298e5982e3a8990800000000000000
+      internalID: -7383020295085845943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: R idle up_5
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 229
+        width: 5
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 540df7f4b3b857800800000000000000
+      internalID: 609546411431678021
       vertices: []
       indices: 
       edges: []
