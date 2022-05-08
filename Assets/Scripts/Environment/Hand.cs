@@ -10,17 +10,15 @@ namespace Environment
 		[SerializeField] private float yMaxVal;
 		[SerializeField] private bool followX;
 		[SerializeField] private GameObject objectToFollow;
-		// [SerializeField] private string textureMaterialValueName = "BorderY";
 		[SerializeField] private HandType type;
-		
+		[SerializeField] private float positionFix;
+
 		#endregion
 
 		private Vector3 _startingPos;
-		private Material _handMaterial;
 		private float _yMinVal;
-		private int _shaderBorderYVar;
-		private Collider _myCollider;
-		private float[] borderValues = {7,-8,11.5f,-15.5f};
+		private readonly float[] _borderValues = {7, -8, -11.5f, 11.5f};
+
 		private enum HandType
 		{
 			Top = 0,
@@ -32,33 +30,26 @@ namespace Environment
 		private void Awake()
 		{
 			_startingPos = transform.localPosition;
-			_yMinVal = _startingPos.z;
-			_handMaterial = GetComponent<Renderer>().material;
-			_myCollider = GetComponent<Collider>();
-			print(_startingPos);
+			_yMinVal = _startingPos.y;
 		}
 
 		private void FixedUpdate()
 		{
 			var pos = _startingPos;
+			var objectPos = objectToFollow.transform.position;
 			if (followX)
 			{
-				pos.x = objectToFollow.transform.position.x;
-				var t = Math.Abs(borderValues[(int)type] - objectToFollow.transform.position.z);
+				pos.x = objectPos.x+positionFix;
+				var t = Math.Abs(_borderValues[(int) type] - objectPos.z);
 				if (t < 5)
-				{
-					pos.z = Mathf.Lerp(yMaxVal, _yMinVal, t/5);
-				}
+					pos.y = Mathf.Lerp(yMaxVal, _yMinVal, t / 5);
 			}
 			else
 			{
-				pos.z = objectToFollow.transform.position.z;
-				pos.y = -objectToFollow.transform.position.z;
-				var t = Math.Abs(borderValues[(int)type] - objectToFollow.transform.position.x);
+				pos.z = objectPos.z+positionFix;
+				var t = Math.Abs(_borderValues[(int) type] - objectPos.x);
 				if (t < 3)
-				{
-					pos.y = Mathf.Lerp(yMaxVal, _yMinVal, t/3);
-				}
+					pos.y = Mathf.Lerp(yMaxVal, _yMinVal, t / 3);
 			}
 
 			transform.localPosition = pos;

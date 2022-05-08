@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hand Material
+  m_Name: Right Hand Material
   m_Shader: {fileID: -6465566751694194690, guid: 5485d94e58a5c03449541615982f45ab, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -123,8 +123,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Tilt: 0
-    - _VisibleFromThisY: 0
+    - _Tilt: 1.05
+    - _VisibleFromThisY: 10.9
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
