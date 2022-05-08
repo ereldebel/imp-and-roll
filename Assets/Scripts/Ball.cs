@@ -48,8 +48,8 @@ public class Ball : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (!Thrown) return;
-		if (collision.gameObject != _thrower)
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
+		if (collision.gameObject == _thrower) return;
+		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
 		Thrown = false;
 	}
 
