@@ -240,9 +240,10 @@ MonoBehaviour:
   minThrowChargeTime: 0.1
   maxThrowChargeTime: 1
   knockBackDuration: 0.5
-  knockOutDuration: 1
+  stunDuration: 1
   movementRelativeSpeedWhileCharging: 0.5
   throwOriginEpsilon: 0.1
+  stunBarPercentagePerHit: 0.2
 --- !u!114 &4320430827449331697
 MonoBehaviour:
   m_ObjectHideFlags: 0

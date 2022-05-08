@@ -39,17 +39,19 @@ namespace Environment
 			var objectPos = objectToFollow.transform.position;
 			if (followX)
 			{
-				pos.x = objectPos.x+positionFix;
+				pos.x = objectPos.x + positionFix;
 				var t = Math.Abs(_borderValues[(int) type] - objectPos.z);
 				if (t < 5)
 					pos.y = Mathf.Lerp(yMaxVal, _yMinVal, t / 5);
 			}
 			else
 			{
-				pos.z = objectPos.z+positionFix;
+				pos.z = objectPos.z + positionFix;
 				var t = Math.Abs(_borderValues[(int) type] - objectPos.x);
 				if (t < 3)
-					pos.y = Mathf.Lerp(yMaxVal, _yMinVal, t / 3);
+				{
+					pos += transform.rotation * Vector3.up * Mathf.Lerp(yMaxVal, _yMinVal, t / 3);
+				}
 			}
 
 			transform.localPosition = pos;
