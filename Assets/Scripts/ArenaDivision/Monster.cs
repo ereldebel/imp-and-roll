@@ -4,30 +4,49 @@ namespace ArenaDivision
 {
 	public class Monster : MonoBehaviour
 	{
+		#region Serialized Fields
+
 		[SerializeField] private float sightRadius = 1;
 		[SerializeField] private LayerMask targetLayerMask;
-		[SerializeField] private float speed = 1;
-		[SerializeField] private float ySpeed = 0.5f;
+		[SerializeField] private float baseSpeed = 1;
+		[SerializeField] private float baseYSpeed = 0.5f;
 		[SerializeField] private float maxHeight = 5;
 		[SerializeField] private float chainRemainder = 0.1f;
+		[SerializeField] private float maxXDistFromMonster = 1;
 		[SerializeField] private Transform divider;
+		[SerializeField] private bool constantSpeeds;
 
-		private Transform _ball;
+		#endregion;
+
+		#region Private Fields
+
 		private SpriteRenderer _spriteRenderer;
 		private LineRenderer _lineRenderer;
+		private Collider _collider;
+
+		private Transform _ball;
 		private float _halfOfArenaWidth;
 		private float _chainLength;
-		private float _fixedSpeed;
-		private float _fixedYSpeed;
+		private float _fixedBaseSpeed;
+		private float _fixedBaseYSpeed;
+		private float _startTime;
+		private float _speed = 1;
+		private float _ySpeed = 0.5f;
 
 		private static readonly Collider[] TempColliders = new Collider[3];
+
+		#endregion
+
+		#region Function Events
 
 		private void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_lineRenderer = GetComponent<LineRenderer>();
+			_collider = GetComponent<Collider>();
 			_lineRenderer.positionCount = 2;
 			_lineRenderer.SetPosition(0, Vector3.zero);
+			_startTime = Time.time;
 			OnValidate();
 		}
 
@@ -40,8 +59,16 @@ namespace ArenaDivision
 		private void OnValidate()
 		{
 			_chainLength = maxHeight + chainRemainder;
-			_fixedSpeed = speed * Time.fixedDeltaTime;
-			_fixedYSpeed = ySpeed * Time.fixedDeltaTime;
+			_fixedBaseSpeed = baseSpeed * Time.fixedDeltaTime;
+			_fixedBaseYSpeed = baseYSpeed * Time.fixedDeltaTime;
+		}
+
+		private void Update()
+		{
+			if (constantSpeeds) return;
+			var speedMultiplier = Mathf.Log10(Time.time - _startTime + 10) * 0.6f;
+			_speed = _fixedBaseSpeed * speedMultiplier;
+			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
 		}
 
 		private void FixedUpdate()
@@ -50,34 +77,35 @@ namespace ArenaDivision
 			UpdateSpectralChain();
 		}
 
-		private void OnCollisionEnter(Collision collision)
+		private void OnTriggerEnter(Collider other)
 		{
-			var other = collision.gameObject;
-			if (other.CompareTag("Ball"))
-				GameManager.MonsterGotBall();
-			else
-				GameManager.MonsterGotPlayer(other.name.EndsWith("1"));
+			GameManager.GameOver(transform.position.x > divider.position.x);
 		}
+
+		#endregion
+
+		#region Private Methods
 
 		private void Move()
 		{
 			var pos = transform.position;
 			var ballPos = _ball.position;
 			var dividerPos = divider.position;
-			var chasingCloseTarget = GetClosestTarget(pos, ballPos, out var closestObjDir);
-			_spriteRenderer.flipX = closestObjDir.x > pos.x;
+			var chasingCloseTarget = GetClosestTarget(pos, ballPos, out var closestTargetDir);
+			_collider.enabled = closestTargetDir.sqrMagnitude < 1;
+			_spriteRenderer.flipX = closestTargetDir.x > dividerPos.x;
 			var ballDist = ballPos.x - pos.x;
-			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _fixedSpeed : 0;
+			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _speed : 0;
 			var yMovement = chasingCloseTarget
-				? closestObjDir.y * _fixedYSpeed
-				: Mathf.Min(maxHeight - pos.y, 2 * _fixedYSpeed);
-			var zMovement = closestObjDir.z * _fixedSpeed;
+				? closestTargetDir.y * _ySpeed
+				: Mathf.Min(maxHeight - pos.y, 2 * _ySpeed);
+			var zMovement = closestTargetDir.z * _speed;
 			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) > 0;
 			if (movingTowardsDivider)
 				xMovement *= 2;
 			pos += new Vector3(xMovement, yMovement, zMovement);
 			transform.position = pos;
-			if (Vector3.Distance(pos, dividerPos) < _chainLength || movingTowardsDivider) return;
+			if (Mathf.Abs(pos.x - dividerPos.x) < maxXDistFromMonster || movingTowardsDivider) return;
 			dividerPos.x += xMovement;
 			divider.position = dividerPos;
 		}
@@ -93,7 +121,7 @@ namespace ArenaDivision
 		{
 			var playersSeen =
 				Physics.OverlapBoxNonAlloc(Vector3.right * pos.x,
-					new Vector3(sightRadius, maxHeight + 1, _halfOfArenaWidth), TempColliders, Quaternion.identity,
+					new Vector3(sightRadius, maxHeight, _halfOfArenaWidth), TempColliders, Quaternion.identity,
 					targetLayerMask.value);
 			var closestPos = defaultObjPos;
 			var closestDist = Vector3.Distance(pos, defaultObjPos);
@@ -109,5 +137,7 @@ namespace ArenaDivision
 			closestTargetDir = closestPos - pos;
 			return playersSeen > 0;
 		}
+
+		#endregion
 	}
 }

@@ -166,6 +166,17 @@
                 },
                 {
                     "name": "",
+                    "id": "83ad7676-89cc-492a-8108-ac8ff2471760",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Dodge Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b3a55bc2-ec10-47a6-b373-fd85176ccd56",
                     "path": "<Keyboard>/shift",
                     "interactions": "",

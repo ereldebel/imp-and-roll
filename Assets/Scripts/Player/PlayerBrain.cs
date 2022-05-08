@@ -129,6 +129,17 @@ namespace Player
 			ProcessMovementInput();
 		}
 
+
+		private void OnCollisionEnter(Collision collision)
+		{
+			PickupBall(collision);
+		}
+
+		private void OnCollisionStay(Collision collision)
+		{
+			PickupBall(collision);
+		}
+
 		#endregion
 
 		#region Public Methods
@@ -140,14 +151,13 @@ namespace Player
 			StartedChargingThrow?.Invoke(_ball);
 		}
 
-		public bool ThrowBall()
+		public void ThrowBall()
 		{
-			if (_ball == null) return false;
+			if (_ball == null) return;
 			_chargeStartTime = -1;
-			_ball.Throw(ThrowVelocity, ThrowOrigin);
+			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
 			_ball = null;
 			BallThrown?.Invoke();
-			return true;
 		}
 
 		public void TakeHit(Vector3 velocity)
@@ -158,16 +168,15 @@ namespace Player
 
 		public void DodgeRoll()
 		{
-			print(MovementStick);
-			if (MovementStick == Vector2.zero) return;
+			if (MovementStick == Vector2.zero || _chargeStartTime > 0 || _knockedOut) return;
 			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
 		}
 
 		#endregion
 
-		#region Private Methods and Coroutines
+		#region Private Methods
 
-		private void OnCollisionEnter(Collision collision)
+		private void PickupBall(Collision collision)
 		{
 			if (_ball != null || _knockedOut) return;
 			var ball = collision.gameObject.GetComponent<Ball>();
@@ -201,6 +210,10 @@ namespace Player
 			return new Vector3(input.x, 0, input.y);
 		}
 
+		#endregion
+
+		#region Private Coroutines
+
 		private IEnumerator DodgeRoll(Vector3 rollDir)
 		{
 			rollDir = rollDir.normalized;
@@ -226,7 +239,6 @@ namespace Player
 			knockBackDir = temp;
 			for (var i = 0; i < knockBackDuration * 50; i++)
 			{
-				print(knockBackDir);
 				_controller.Move(-knockBackDir * Time.fixedDeltaTime);
 				yield return new WaitForFixedUpdate();
 			}

@@ -7,9 +7,8 @@ public class Ball : MonoBehaviour
 	public Vector3 Position => transform.position;
 	public bool Grounded => Physics.CheckSphere(transform.position, _checkSphereRadius);
 	public float Mass => _rigidbody.mass;
-	public bool Held { get; private set; }
 	public float Radius { get; private set; }
-	public bool Thrown => _thrown;
+	public bool Thrown { get; private set; } = false;
 
 	#endregion
 
@@ -18,17 +17,16 @@ public class Ball : MonoBehaviour
 	[Tooltip("The distance of the ball from the ground that the ball is already considered grounded.")] [SerializeField]
 	private float groundedDistance = 0.1f;
 
-	[SerializeField] private float dragWhileOnFloor = -1;
-
 	#endregion
 
 	#region Private Fields
 
 	private Rigidbody _rigidbody;
 	private Transform _transform;
+	
+	private GameObject _thrower = null;
 	private float _checkSphereRadius;
-	private bool _thrown = false;
-	private float _defaultBallDrag;
+	private bool _held = false;
 
 	#endregion
 
@@ -38,47 +36,43 @@ public class Ball : MonoBehaviour
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		_transform = transform;
-		_defaultBallDrag = _rigidbody.drag;
 		OnValidate();
 	}
 
 	private void OnValidate()
 	{
-		if (dragWhileOnFloor < 0)
-			dragWhileOnFloor = _defaultBallDrag;
 		Radius = GetComponent<SphereCollider>().radius;
 		_checkSphereRadius = Radius + groundedDistance;
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (!_thrown) return;
-		foreach (var contact in collision.contacts)
-			contact.otherCollider.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
-		_rigidbody.drag = dragWhileOnFloor;
-		_thrown = false;
+		if (!Thrown) return;
+		if (collision.gameObject != _thrower)
+			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
+		Thrown = false;
 	}
 
 	#endregion
 
 	#region Public Methods
 
-	public bool Pickup(Transform newParent)
+	public void Pickup(Transform newParent)
 	{
-		if (Held || _thrown)
-			return false;
-		Held = true;
+		if (_held || Thrown)
+			return;
+		_held = true;
 		_transform.SetParent(newParent);
 		_transform.localPosition = Vector3.zero;
 		gameObject.SetActive(false);
-		return true;
 	}
 
-	public void Throw(Vector3 velocity, Vector3 posChange)
+	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
 	{
 		Release(posChange);
 		_rigidbody.AddForce(velocity, ForceMode.Impulse);
-		_thrown = true;
+		Thrown = true;
+		_thrower = thrower;
 	}
 
 	#endregion
@@ -90,8 +84,7 @@ public class Ball : MonoBehaviour
 		_transform.position += posChange;
 		gameObject.SetActive(true);
 		_transform.SetParent(null);
-		Held = false;
-		_rigidbody.drag = _defaultBallDrag;
+		_held = false;
 	}
 
 	#endregion
