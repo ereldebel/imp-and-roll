@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
 	private const float PlaneWidth = 10;
 	private Vector2 _arenaDimensions;
-	private bool _ballOnRight;
 
 	#endregion
 
@@ -40,27 +39,14 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-
-	public static void MonsterGotBall()
+	
+	public static void GameOver(bool rightLost)
 	{
-		GameOver(!_shared._ballOnRight);
-	}
-
-	public static void MonsterGotPlayer(bool rightLost)
-	{
-		GameOver(!rightLost);
-	}
-
-	#endregion
-
-	#region Private Methods
-
-	private static void GameOver(bool rightWon)
-	{
-		var player = rightWon ? "right player" : "left player";
+		var player = rightLost ? "left player" : "right player";
 		print($"{player} won!");
 		SceneManager.LoadScene(0);
 	}
 
 	#endregion
+	
 }
