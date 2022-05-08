@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: f35d74651bfced74b8759eb2c8cd401f
+guid: 5b74956bf2d9b6e409d79d3cfe8e6fb1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3597094427677947664
-    second: balltrailparticles_0
+      213: -895201404426183375
+    second: hand right_0
   - first:
-      213: 6822271872542415200
-    second: balltrailparticles_1
+      213: -6652212920056506209
+    second: hand right_1
   - first:
-      213: -1182121337207664743
-    second: balltrailparticles_2
-  - first:
-      213: 3662301060007141734
-    second: balltrailparticles_3
-  - first:
-      213: -7566493094905107672
-    second: balltrailparticles_4
+      213: 3141900250404257756
+    second: hand right_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -61,7 +55,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,106 +124,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: balltrailparticles_0
+      name: hand right_0
       rect:
         serializedVersion: 2
-        x: 235
-        y: 1673
-        width: 18
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 57
+        width: 409
+        height: 741
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f808be1dad841ec0800000000000000
-      internalID: -3597094427677947664
+      spriteID: 13d1fbec01b9393f0800000000000000
+      internalID: -895201404426183375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: balltrailparticles_1
+      name: hand right_1
       rect:
         serializedVersion: 2
-        x: 285
-        y: 1700
-        width: 12
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 409
+        y: 55
+        width: 409
+        height: 748
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06997044f149dae50800000000000000
-      internalID: 6822271872542415200
+      spriteID: f9894c918979ea3a0800000000000000
+      internalID: -6652212920056506209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: balltrailparticles_2
+      name: hand right_2
       rect:
         serializedVersion: 2
-        x: 266
-        y: 1711
-        width: 9
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 818
+        y: 56
+        width: 409
+        height: 750
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99fc35e28e2489fe0800000000000000
-      internalID: -1182121337207664743
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: balltrailparticles_3
-      rect:
-        serializedVersion: 2
-        x: 317
-        y: 1699
-        width: 4
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 661234e096b13d230800000000000000
-      internalID: 3662301060007141734
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: balltrailparticles_4
-      rect:
-        serializedVersion: 2
-        x: 268
-        y: 1697
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 82b2cb28e9a6ef690800000000000000
-      internalID: -7566493094905107672
+      spriteID: cdf7e0991a54a9b20800000000000000
+      internalID: 3141900250404257756
       vertices: []
       indices: 
       edges: []
@@ -237,7 +189,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1e9d2e395c417dc44988ee39a0f8ef9b
     internalID: 0
     vertices: []
     indices: 
