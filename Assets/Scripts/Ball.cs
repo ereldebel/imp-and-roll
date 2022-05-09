@@ -62,9 +62,10 @@ public class Ball : MonoBehaviour
 		if (_held || Thrown)
 			return;
 		_held = true;
-		_transform.SetParent(newParent);
 		_transform.localPosition = Vector3.zero;
 		gameObject.SetActive(false);
+		if (transform.parent.gameObject.activeSelf)
+			_transform.SetParent(newParent);
 	}
 
 	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
@@ -83,8 +84,9 @@ public class Ball : MonoBehaviour
 	{
 		_transform.position += posChange;
 		gameObject.SetActive(true);
-		_transform.SetParent(null);
 		_held = false;
+		if (transform.parent.gameObject.activeSelf)
+			_transform.SetParent(null);
 	}
 
 	#endregion

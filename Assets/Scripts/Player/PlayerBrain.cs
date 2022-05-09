@@ -16,6 +16,7 @@ namespace Player
 		{
 			set
 			{
+				if (value.sqrMagnitude < 0.9f) return;
 				_aimDirection = value.normalized;
 				ChangedAimDirection?.Invoke();
 			}
@@ -56,8 +57,6 @@ namespace Player
 		[SerializeField] private float speed;
 		[SerializeField] private float dodgeRollSpeed;
 		[SerializeField] private float rollDuration = 0.25f;
-		[SerializeField] private float pickupDistance;
-		[SerializeField] private LayerMask ballMask;
 		[SerializeField] private float maxThrowForce;
 		[SerializeField] private float throwYForce;
 		[SerializeField] private float minThrowChargeTime = 0.1f;
