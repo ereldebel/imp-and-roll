@@ -49,9 +49,7 @@ namespace Environment
 				pos.z = objectPos.z + positionFix;
 				var t = Math.Abs(_borderValues[(int) type] - objectPos.x);
 				if (t < 3)
-				{
 					pos += transform.rotation * Vector3.up * Mathf.Lerp(yMaxVal, _yMinVal, t / 3);
-				}
 			}
 
 			transform.localPosition = pos;
