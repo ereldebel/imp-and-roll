@@ -63,6 +63,7 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
+		[SerializeField] private float knockBackRelativeSpeed = 0.5f;
 		[SerializeField] private float stunDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 		[SerializeField] private float throwOriginEpsilon = 0.1f;
@@ -183,7 +184,8 @@ namespace Player
 			if (ball == null) return;
 			if (ball.Thrown) return;
 			_ball = ball;
-			_ball.Pickup(transform);
+			if (gameObject.activeSelf)
+				_ball.Pickup(transform);
 		}
 
 		private void ProcessMovementInput()
@@ -246,7 +248,7 @@ namespace Player
 			knockBackDir.y = 0;
 			for (var i = 0; i < knockBackDuration * 50; i++)
 			{
-				_controller.SimpleMove(-knockBackDir);
+				_controller.SimpleMove(-knockBackDir*knockBackRelativeSpeed);
 				yield return new WaitForFixedUpdate();
 			}
 
