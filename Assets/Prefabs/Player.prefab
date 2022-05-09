@@ -242,7 +242,7 @@ MonoBehaviour:
   knockBackDuration: 0.5
   stunDuration: 1
   movementRelativeSpeedWhileCharging: 0.5
-  throwOriginEpsilon: 0.1
+  throwOriginEpsilon: 0.3
   stunBarPercentagePerHit: 0.2
 --- !u!114 &4320430827449331697
 MonoBehaviour:

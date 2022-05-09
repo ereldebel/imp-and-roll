@@ -6144,6 +6144,22 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2404601894454443637, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 6ec35b47323094349a7b96591cef6b1e, type: 2}
+    - target: {fileID: 2404601894615327607, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 6ec35b47323094349a7b96591cef6b1e, type: 2}
+    - target: {fileID: 2404601894664939263, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 6ec35b47323094349a7b96591cef6b1e, type: 2}
+    - target: {fileID: 2404601894964390749, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 6ec35b47323094349a7b96591cef6b1e, type: 2}
     - target: {fileID: 4768281717189239725, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
       propertyPath: m_Name
       value: Debugging Divisions

@@ -45,7 +45,7 @@ namespace Player
 					_brain.ChargeThrow();
 				}
 				else
-					_brain.MovementStick = DirectionTo(_ball.position);
+					_brain.MovementStick = DirectionTo(_ball.position).normalized;
 			}
 			else
 			{
