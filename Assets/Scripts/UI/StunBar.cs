@@ -18,7 +18,7 @@ namespace UI
 		{
 			if (!playerBrain.gameObject.activeSelf)
 				gameObject.SetActive(false);
-			bar.SetFloat(BarPercentage, 0);
+			bar.SetFloat(BarPercentage, 1);
 			_image = GetComponent<Image>();
 			_regularFace = _image.sprite;
 			playerBrain.StunStarted += StunStarted;

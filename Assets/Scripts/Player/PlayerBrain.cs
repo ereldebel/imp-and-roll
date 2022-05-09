@@ -73,17 +73,15 @@ namespace Player
 		#region Private Fields
 
 		private SpriteRenderer _spriteRenderer;
-		private Collider _collider;
 		private CharacterController _controller;
 		private Animator _animator;
 		private float _colliderRadius;
-		private float _pickupRadius;
 		private Vector3 _diffFromColliderCenterToBottom;
 		private float _chargeStartTime = -1;
 		private Vector2 _aimDirection;
 		private bool _knockedOut;
 		private bool _rolling;
-		private float _stunBar = 0;
+		private float _stunBar = 1;
 
 
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
@@ -111,7 +109,6 @@ namespace Player
 		private void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
-			_collider = GetComponent<Collider>();
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
 			_spriteRenderer.flipX = transform.position.x < 0;
@@ -123,7 +120,6 @@ namespace Player
 			var t = transform;
 			var scale = t.localScale;
 			_colliderRadius = scale.x * GetComponent<CapsuleCollider>().radius;
-			_pickupRadius = _colliderRadius + pickupDistance;
 			_diffFromColliderCenterToBottom =
 				t.rotation * (0.5f * scale.y * GetComponent<CapsuleCollider>().height * Vector3.down);
 		}
@@ -235,15 +231,15 @@ namespace Player
 		private IEnumerator Stun(Vector3 knockBackDir)
 		{
 			_animator.SetBool(AnimatorRunning, false);
-			_stunBar += stunBarPercentagePerHit;
-			StunStarted?.Invoke(Mathf.Min(_stunBar, 1));
+			_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
 			var currStunDuration = stunDuration;
-			if (_stunBar >= 1)
+			if (_stunBar <= 0)
 			{
-				_stunBar = 0;
+				_stunBar = 1;
 				currStunDuration *= 2;
 			}
 
+			StunStarted?.Invoke(_stunBar);
 			var color = _spriteRenderer.color;
 			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
