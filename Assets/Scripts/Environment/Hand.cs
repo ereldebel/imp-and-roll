@@ -9,6 +9,8 @@ namespace Environment
 
 		[SerializeField] private float yMaxVal;
 		[SerializeField] private bool followX;
+		[SerializeField] private bool followHeight;
+
 		[SerializeField] private GameObject objectToFollow;
 		[SerializeField] private HandType type;
 		[SerializeField] private float positionFix;
@@ -37,19 +39,20 @@ namespace Environment
 		{
 			var pos = _startingPos;
 			var objectPos = objectToFollow.transform.position;
+			var currMaxY = followHeight ? yMaxVal + objectPos.y : yMaxVal;
 			if (followX)
 			{
 				pos.x = objectPos.x + positionFix;
 				var t = Math.Abs(_borderValues[(int) type] - objectPos.z);
 				if (t < 5)
-					pos.y = Mathf.Lerp(yMaxVal, _yMinVal, t / 5);
+					pos.y = Mathf.Lerp(currMaxY, _yMinVal, t / 5);
 			}
 			else
 			{
 				pos.z = objectPos.z + positionFix;
 				var t = Math.Abs(_borderValues[(int) type] - objectPos.x);
 				if (t < 3)
-					pos += transform.rotation * Vector3.up * Mathf.Lerp(yMaxVal, _yMinVal, t / 3);
+					pos += transform.rotation * Vector3.up * Mathf.Lerp(currMaxY, _yMinVal, t / 3);
 			}
 
 			transform.localPosition = pos;
