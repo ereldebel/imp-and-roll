@@ -70,7 +70,7 @@ public class Ball : MonoBehaviour
 	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
 	{
 		Release(posChange);
-		_rigidbody.AddForce(velocity, ForceMode.Impulse);
+		_rigidbody.velocity = velocity;
 		Thrown = true;
 		_thrower = thrower;
 	}
