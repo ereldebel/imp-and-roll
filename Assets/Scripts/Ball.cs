@@ -84,9 +84,8 @@ public class Ball : MonoBehaviour
 	{
 		_transform.position += posChange;
 		gameObject.SetActive(true);
+		_transform.SetParent(null);
 		_held = false;
-		if (transform.parent.gameObject.activeSelf)
-			_transform.SetParent(null);
 	}
 
 	#endregion

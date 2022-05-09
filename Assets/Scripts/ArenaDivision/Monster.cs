@@ -66,7 +66,7 @@ namespace ArenaDivision
 		private void Update()
 		{
 			if (constantSpeeds) return;
-			var speedMultiplier = Mathf.Log10(Time.time - _startTime + 10) * 6;
+			var speedMultiplier = Mathf.Log10(Time.time - _startTime + 10) * 0.6f;
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
 		}
