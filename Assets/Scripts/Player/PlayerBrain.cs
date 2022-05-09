@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -16,6 +15,7 @@ namespace Player
 		{
 			set
 			{
+				if (_aimDirection.sqrMagnitude < 0.9) return;
 				_aimDirection = value.normalized;
 				ChangedAimDirection?.Invoke();
 			}
@@ -34,7 +34,8 @@ namespace Player
 		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
 
 		public Vector3 ThrowOrigin =>
-			new Vector3(_aimDirection.x, 0, _aimDirection.y) * (_colliderRadius + _ball.Radius + throwOriginEpsilon);
+			new Vector3(_aimDirection.x, 0, _aimDirection.y) *
+			(_colliderRadius + _ball.Radius + speed * Time.fixedDeltaTime + throwOriginEpsilon);
 
 		public Vector3 ThrowVelocity =>
 			maxThrowForce * ThrowCharge * new Vector3(_aimDirection.x, throwYForce, _aimDirection.y);
@@ -169,7 +170,7 @@ namespace Player
 
 		public void DodgeRoll()
 		{
-			if (MovementStick == Vector2.zero || _chargeStartTime > 0 || _knockedOut) return;
+			if (MovementStick == Vector2.zero || _chargeStartTime > 0 || _knockedOut || _rolling) return;
 			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
 		}
 
@@ -248,7 +249,7 @@ namespace Player
 			knockBackDir.y = 0;
 			for (var i = 0; i < knockBackDuration * 50; i++)
 			{
-				_controller.SimpleMove(-knockBackDir*knockBackRelativeSpeed);
+				_controller.SimpleMove(-knockBackDir * knockBackRelativeSpeed);
 				yield return new WaitForFixedUpdate();
 			}
 

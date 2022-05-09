@@ -235,11 +235,12 @@ MonoBehaviour:
   ballMask:
     serializedVersion: 2
     m_Bits: 64
-  maxThrowForce: 40
+  maxThrowForce: 50
   throwYForce: 0.2
   minThrowChargeTime: 0.1
   maxThrowChargeTime: 1
   knockBackDuration: 0.5
+  knockBackRelativeSpeed: 0.5
   stunDuration: 1
   movementRelativeSpeedWhileCharging: 0.5
   throwOriginEpsilon: 0.3
