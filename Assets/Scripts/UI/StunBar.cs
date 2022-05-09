@@ -27,6 +27,7 @@ namespace UI
 
 		private void OnDestroy()
 		{
+			bar.SetFloat(BarPercentage, 1);
 			playerBrain.StunStarted -= StunStarted;
 			playerBrain.StunEnded -= StunEnded;
 		}

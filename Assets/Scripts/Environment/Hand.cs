@@ -17,6 +17,7 @@ namespace Environment
 
 		#endregion
 
+		private SpriteRenderer _spriteRenderer;
 		private Vector3 _startingPos;
 		private float _yMinVal;
 		private readonly float[] _borderValues = {7, -8, -11.5f, 11.5f};
@@ -31,8 +32,17 @@ namespace Environment
 
 		private void Awake()
 		{
+			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_startingPos = transform.localPosition;
 			_yMinVal = _startingPos.y;
+		}
+
+		private void Update()
+		{
+			if (_spriteRenderer.enabled && !objectToFollow.activeSelf)
+				_spriteRenderer.enabled = false;
+			if (!_spriteRenderer.enabled && objectToFollow.activeSelf)
+				_spriteRenderer.enabled = true;
 		}
 
 		private void FixedUpdate()
