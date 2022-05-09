@@ -44,16 +44,17 @@ namespace Environment
 				}
 			}
 		}
-		
+
 		private IEnumerator ChangeRate()
 		{
 			while (_change)
 			{
 				yield return new WaitForSeconds(Random.Range(5, 10));
-				var nextMultiplier = Random.Range(3.5f,10);
+				var nextMultiplier = Random.Range(3.5f, 10);
 				while (_change && Math.Abs(_emission.rateOverTimeMultiplier - nextMultiplier) > 0.01)
 				{
-					_emission.rateOverTimeMultiplier = Mathf.Lerp(_emission.rateOverTimeMultiplier, nextMultiplier, 0.01f);
+					_emission.rateOverTimeMultiplier =
+						Mathf.Lerp(_emission.rateOverTimeMultiplier, nextMultiplier, 0.01f);
 					yield return new WaitForFixedUpdate();
 				}
 			}

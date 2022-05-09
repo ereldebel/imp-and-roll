@@ -63,9 +63,10 @@ namespace Player
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float knockBackDuration = 0.5f;
-		[SerializeField] private float knockOutDuration = 1;
+		[SerializeField] private float stunDuration = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 		[SerializeField] private float throwOriginEpsilon = 0.1f;
+		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
 
 		#endregion
 
@@ -82,6 +83,7 @@ namespace Player
 		private Vector2 _aimDirection;
 		private bool _knockedOut;
 		private bool _rolling;
+		private float _stunBar = 0;
 
 
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
@@ -99,6 +101,8 @@ namespace Player
 		public event Action<Ball> StartedChargingThrow;
 		public event Action ChangedAimDirection;
 		public event Action BallThrown;
+		public event Action<float> StunStarted;
+		public event Action StunEnded;
 
 		#endregion
 
@@ -162,8 +166,8 @@ namespace Player
 
 		public void TakeHit(Vector3 velocity)
 		{
-			if (knockOutDuration <= 0 || _rolling) return;
-			StartCoroutine(Knockout(velocity));
+			if (stunDuration <= 0 || _rolling) return;
+			StartCoroutine(Stun(velocity));
 		}
 
 		public void DodgeRoll()
@@ -221,31 +225,39 @@ namespace Player
 			_rolling = true;
 			for (var i = 0; i < rollDuration / Time.fixedDeltaTime; i++)
 			{
-				_controller.Move(dodgeRollSpeed * Time.fixedDeltaTime * rollDir);
+				_controller.SimpleMove(dodgeRollSpeed * rollDir);
 				yield return new WaitForFixedUpdate();
 			}
 
 			_rolling = false;
 		}
 
-		private IEnumerator Knockout(Vector3 knockBackDir)
+		private IEnumerator Stun(Vector3 knockBackDir)
 		{
 			_animator.SetBool(AnimatorRunning, false);
+			_stunBar += stunBarPercentagePerHit;
+			StunStarted?.Invoke(Mathf.Min(_stunBar, 1));
+			var currStunDuration = stunDuration;
+			if (_stunBar >= 1)
+			{
+				_stunBar = 0;
+				currStunDuration *= 2;
+			}
+
 			var color = _spriteRenderer.color;
 			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
-			var temp = knockBackDir;
-			temp.y = 0;
-			knockBackDir = temp;
+			knockBackDir.y = 0;
 			for (var i = 0; i < knockBackDuration * 50; i++)
 			{
-				_controller.Move(-knockBackDir * Time.fixedDeltaTime);
+				_controller.SimpleMove(-knockBackDir);
 				yield return new WaitForFixedUpdate();
 			}
 
-			yield return new WaitForSeconds(knockOutDuration - knockBackDuration);
+			yield return new WaitForSeconds(currStunDuration - knockBackDuration);
 			_knockedOut = false;
 			_spriteRenderer.color = color;
+			StunEnded?.Invoke();
 		}
 
 		#endregion

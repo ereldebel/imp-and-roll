@@ -23,7 +23,7 @@ public class Ball : MonoBehaviour
 
 	private Rigidbody _rigidbody;
 	private Transform _transform;
-	
+
 	private GameObject _thrower = null;
 	private float _checkSphereRadius;
 	private bool _held = false;

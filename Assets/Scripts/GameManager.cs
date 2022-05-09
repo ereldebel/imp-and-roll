@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	
+
 	public static void GameOver(bool rightLost)
 	{
 		var player = rightLost ? "left player" : "right player";
@@ -48,5 +48,4 @@ public class GameManager : MonoBehaviour
 	}
 
 	#endregion
-	
 }

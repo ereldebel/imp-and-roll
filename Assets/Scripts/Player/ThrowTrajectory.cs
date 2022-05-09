@@ -78,6 +78,7 @@ namespace Player
 				posAtTime.y += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
 				_trajectoryPoints[timeStep] = _rotation * posAtTime;
 			}
+
 			_lineRenderer.SetPositions(_trajectoryPoints);
 		}
 	}
