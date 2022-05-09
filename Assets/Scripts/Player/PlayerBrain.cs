@@ -150,6 +150,7 @@ namespace Player
 		{
 			if (_ball == null) return;
 			_chargeStartTime = Time.time;
+			AimingStick = MovementStick.normalized;
 			StartedChargingThrow?.Invoke(_ball);
 		}
 
