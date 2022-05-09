@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &45047670 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5332363031841549171, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+  m_PrefabInstance: {fileID: 5332363031439824201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &101550305
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,11 +690,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dist: 16.4
+--- !u!4 &539959420 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 161067343215516415, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+  m_PrefabInstance: {fileID: 5332363031439824201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &560536426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2543116477350477694, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
+  m_PrefabInstance: {fileID: 576757197771022181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &588419210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4437818291732569120, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
   m_PrefabInstance: {fileID: 740539320}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &634974471
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 45047670}
+    m_Modifications:
+    - target: {fileID: 3588176085878057640, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: yMaxVal
+      value: 17.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057640, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: positionFix
+      value: -3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057640, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: followHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057640, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: objectToFollow
+      value: 
+      objectReference: {fileID: 560536426}
+    - target: {fileID: 3588176085878057641, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057641, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8500004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057641, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057641, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057641, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588176085878057654, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
+      propertyPath: m_Name
+      value: Left Side Hand Ball
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0c0518513e659c4c9b0e30001819742, type: 3}
 --- !u!1 &658736336
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,11 +894,141 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
+--- !u!1001 &789520618
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1507856877}
+    m_Modifications:
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275204, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275205, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: m_Name
+      value: Far Side Hand Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275207, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: followHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267704970001275207, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
+      propertyPath: objectToFollow
+      value: 
+      objectReference: {fileID: 560536426}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58ee2fa812b9f694aaec30a108c4ae99, type: 3}
 --- !u!4 &848204191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1607518932847514373, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
   m_PrefabInstance: {fileID: 576757197771022181}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1089635724
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 539959420}
+    m_Modifications:
+    - target: {fileID: 274678698290988658, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: followHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988658, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: objectToFollow
+      value: 
+      objectReference: {fileID: 560536426}
+    - target: {fileID: 274678698290988668, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_Name
+      value: Close Side Hand Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274678698290988669, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 00a79578177219b40afc31ba6e49eac6, type: 3}
 --- !u!1 &1249010533
 GameObject:
   m_ObjectHideFlags: 0
@@ -5847,6 +6041,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449020718}
   m_CullTransparentMesh: 1
+--- !u!4 &1507856877 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 161067342584482792, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+  m_PrefabInstance: {fileID: 5332363031439824201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540873664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2404601894398821233, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
@@ -5868,6 +6067,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c29a9e05b4a25c419fbe6a5d878edb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1637547753 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 161067343496522198, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+  m_PrefabInstance: {fileID: 5332363031439824201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1713206638 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4437818291732569122, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
@@ -5957,6 +6161,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
+--- !u!1001 &1890768700
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1637547753}
+    m_Modifications:
+    - target: {fileID: 3484782921947559040, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782921947559040, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8500004
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782921947559040, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782921947559040, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782921947559040, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782921947559041, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: followHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782921947559041, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: objectToFollow
+      value: 
+      objectReference: {fileID: 560536426}
+    - target: {fileID: 3484782921947559071, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
+      propertyPath: m_Name
+      value: Right Side Hand Ball
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c9d60364dcf3314cb0a6d05647628b6, type: 3}
 --- !u!1001 &576757197771022181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6095,7 +6340,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8388167452162292303, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
   m_PrefabInstance: {fileID: 576757197771022181}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 560536426}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82f1d25b5aa24744a0e8595de54c2d66, type: 3}
