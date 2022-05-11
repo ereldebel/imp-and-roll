@@ -339,11 +339,14 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 72
-  speed: 1.5
-  ySpeed: 0.5
+  baseSpeed: 1
+  baseYSpeed: 0.5
   maxHeight: 5
   chainRemainder: 0.01
+  maxXDistFromMonster: 1
   divider: {fileID: 5851243974168832105}
+  constantSpeeds: 0
+  timeToSpeedUp: 30
 --- !u!120 &4017327835214303576
 LineRenderer:
   m_ObjectHideFlags: 0

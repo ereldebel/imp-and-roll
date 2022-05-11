@@ -15,7 +15,7 @@ namespace ArenaDivision
 		[SerializeField] private float maxXDistFromMonster = 1;
 		[SerializeField] private Transform divider;
 		[SerializeField] private bool constantSpeeds;
-
+		[SerializeField] private float timeToSpeedUp = 60;
 		#endregion;
 
 		#region Private Fields
@@ -66,7 +66,8 @@ namespace ArenaDivision
 		private void Update()
 		{
 			if (constantSpeeds) return;
-			var speedMultiplier = Mathf.Log10(Time.time - _startTime + 10) * 0.6f;
+			// ReSharper disable once PossibleLossOfFraction
+			var speedMultiplier = ((int) ((Time.time - _startTime) / timeToSpeedUp) + 1) * 0.6f;// TODO keep looking at values
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
 		}

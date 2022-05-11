@@ -35,7 +35,6 @@ namespace UI
 
 		private void StunStarted(float percentage)
 		{
-			print(percentage);
 			_image.sprite = stunnedFace;
 			bar.SetFloat(BarPercentage,  Mathf.Lerp(barMaxMin[0],barMaxMin[1],percentage));
 		}
