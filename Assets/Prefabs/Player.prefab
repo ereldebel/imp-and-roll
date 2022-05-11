@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 5905099638005712058}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.55
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -235,9 +235,9 @@ MonoBehaviour:
   ballMask:
     serializedVersion: 2
     m_Bits: 64
-  maxThrowForce: 50
-  throwYForce: 0.2
-  minThrowChargeTime: 0.1
+  maxThrowForce: 25
+  throwYForce: 0.15
+  minThrowChargeTime: 0
   maxThrowChargeTime: 1
   knockBackDuration: 0.5
   knockBackRelativeSpeed: 0.5
@@ -245,6 +245,10 @@ MonoBehaviour:
   movementRelativeSpeedWhileCharging: 0.5
   throwOriginEpsilon: 0.3
   stunBarPercentagePerHit: 0.2
+  stunFreq:
+  - 0.3
+  - 0.5
+  - 0.3
 --- !u!114 &4320430827449331697
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -15,7 +17,8 @@ namespace Player
 		{
 			set
 			{
-				if (_aimDirection.sqrMagnitude < 0.9) return;
+				
+				if (value.sqrMagnitude < 0.7) return;
 				_aimDirection = value.normalized;
 				ChangedAimDirection?.Invoke();
 			}
@@ -69,6 +72,8 @@ namespace Player
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 		[SerializeField] private float throwOriginEpsilon = 0.1f;
 		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
+		[SerializeField] private float[] stunFreq = {0.3f, 0.5f, 0.3f}; // LowFreq,HighFreq,RumbleDuration
+
 
 		#endregion
 
@@ -84,6 +89,7 @@ namespace Player
 		private bool _knockedOut;
 		private bool _rolling;
 		private float _stunBar = 1;
+		private Gamepad _myGamepad;
 
 
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
@@ -114,6 +120,7 @@ namespace Player
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
 			_spriteRenderer.flipX = transform.position.x < 0;
+			_myGamepad = GetGamepad();
 			OnValidate();
 		}
 
@@ -142,6 +149,31 @@ namespace Player
 			PickupBall(collision);
 		}
 
+		#region Gamepad Functions
+
+		private void RumblePulse(float lowFreq, float highFreq, float rumbleDur) // Call this
+		{
+			if (_myGamepad != null)
+			{
+				_myGamepad.SetMotorSpeeds(lowFreq,highFreq);
+				
+				Invoke(nameof(StopRumble), rumbleDur);
+			}
+		}
+		private void StopRumble()
+		{
+			if (_myGamepad != null)
+			{
+				_myGamepad.SetMotorSpeeds(0,0);
+			}
+		}
+		private Gamepad GetGamepad()
+		{
+			var playerInput = GetComponent<PlayerInput>(); // This checks if its a player or an AI
+			return playerInput ? Gamepad.all.FirstOrDefault(g => playerInput.devices.Any(d => d.deviceId == g.deviceId)) : null;
+		}
+
+		#endregion
 		#endregion
 
 		#region Public Methods
@@ -166,6 +198,7 @@ namespace Player
 		public void TakeHit(Vector3 velocity)
 		{
 			if (stunDuration <= 0 || _rolling) return;
+			RumblePulse(stunFreq[0],stunFreq[1], stunFreq[2]);
 			StartCoroutine(Stun(velocity));
 		}
 

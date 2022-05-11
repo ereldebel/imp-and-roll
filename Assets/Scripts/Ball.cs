@@ -27,6 +27,7 @@ public class Ball : MonoBehaviour
 	private GameObject _thrower = null;
 	private float _checkSphereRadius;
 	private bool _held = false;
+	private ParticleSystem _myParticles;
 
 	#endregion
 
@@ -35,6 +36,7 @@ public class Ball : MonoBehaviour
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody>();
+		_myParticles = GetComponent<ParticleSystem>();
 		_transform = transform;
 		OnValidate();
 	}
@@ -49,8 +51,9 @@ public class Ball : MonoBehaviour
 	{
 		if (!Thrown) return;
 		if (collision.gameObject == _thrower) return;
+		if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player")) Landed();
 		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
-		Thrown = false;
+		
 	}
 
 	#endregion
@@ -72,6 +75,7 @@ public class Ball : MonoBehaviour
 		Release(posChange);
 		_rigidbody.velocity = velocity;
 		Thrown = true;
+		_myParticles.Play();
 		_thrower = thrower;
 	}
 
@@ -87,5 +91,10 @@ public class Ball : MonoBehaviour
 		_held = false;
 	}
 
+	private void Landed()
+	{
+		Thrown = false;
+		_myParticles.Stop();
+	}
 	#endregion
 }
