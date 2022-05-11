@@ -69,10 +69,12 @@ namespace Player
 		[SerializeField] private float knockBackDuration = 0.5f;
 		[SerializeField] private float knockBackRelativeSpeed = 0.5f;
 		[SerializeField] private float stunDuration = 1;
+		[SerializeField] private float stunDurationIncrease = 0.2f;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 		[SerializeField] private float throwOriginEpsilon = 0.1f;
 		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
-		[SerializeField] private float[] stunFreq = {0.3f, 0.5f, 0.3f}; // LowFreq,HighFreq,RumbleDuration
+		[Tooltip("LowFreq, HighFreq, RumbleDuration")]
+		[SerializeField] private float[] stunRumble = {0.3f, 0.5f, 0.3f};
 
 
 		#endregion
@@ -90,6 +92,7 @@ namespace Player
 		private bool _rolling;
 		private float _stunBar = 1;
 		private Gamepad _myGamepad;
+		private int _timesStunned = 0;
 
 
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
@@ -198,7 +201,7 @@ namespace Player
 		public void TakeHit(Vector3 velocity)
 		{
 			if (stunDuration <= 0 || _rolling) return;
-			RumblePulse(stunFreq[0],stunFreq[1], stunFreq[2]);
+			RumblePulse(stunRumble[0],stunRumble[1], stunRumble[2]);
 			StartCoroutine(Stun(velocity));
 		}
 
@@ -269,10 +272,9 @@ namespace Player
 		{
 			_animator.SetBool(AnimatorRunning, false);
 			_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
-			var currStunDuration = stunDuration;
+			var currStunDuration = stunDuration + stunDurationIncrease*_timesStunned++;
 			if (_stunBar <= 0)
 			{
-				_stunBar = 1;
 				currStunDuration *= 2;
 			}
 

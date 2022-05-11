@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using System;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace UI
 		[SerializeField] private PlayerBrain playerBrain;
 		[SerializeField] private Sprite stunnedFace;
 		[SerializeField] private Material bar;
-
+		[SerializeField] private float[] barMaxMin = {0.3f, 0.5f};
 		private Sprite _regularFace;
 		private Image _image;
 		private static readonly int BarPercentage = Shader.PropertyToID("BorderX");
@@ -34,8 +35,9 @@ namespace UI
 
 		private void StunStarted(float percentage)
 		{
+			print(percentage);
 			_image.sprite = stunnedFace;
-			bar.SetFloat(BarPercentage, percentage);
+			bar.SetFloat(BarPercentage,  Mathf.Lerp(barMaxMin[0],barMaxMin[1],percentage));
 		}
 
 		private void StunEnded()

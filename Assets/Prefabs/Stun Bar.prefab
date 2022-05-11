@@ -167,3 +167,6 @@ MonoBehaviour:
   playerBrain: {fileID: 0}
   stunnedFace: {fileID: 0}
   bar: {fileID: 2100000, guid: a4bfa37a79b46f1409d09035160ae9d3, type: 2}
+  barMaxMin:
+  - 0
+  - 0.875

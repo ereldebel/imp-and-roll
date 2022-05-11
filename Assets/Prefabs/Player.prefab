@@ -242,10 +242,11 @@ MonoBehaviour:
   knockBackDuration: 0.5
   knockBackRelativeSpeed: 0.5
   stunDuration: 1
+  stunDurationIncrease: 0.2
   movementRelativeSpeedWhileCharging: 0.5
   throwOriginEpsilon: 0.3
   stunBarPercentagePerHit: 0.2
-  stunFreq:
+  stunRumble:
   - 0.3
   - 0.5
   - 0.3
