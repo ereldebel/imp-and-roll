@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: otherPlayer
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2423699286866871239, guid: 182cb924edd81cc468e0c67fed9e3d7b, type: 3}
+      propertyPath: throwOriginEpsilon
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3231730942035179633, guid: 182cb924edd81cc468e0c67fed9e3d7b, type: 3}
       propertyPath: m_Name
       value: Red Player AI
@@ -6250,12 +6254,20 @@ PrefabInstance:
       value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 2543116477350477694, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543116477350477694, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
       propertyPath: m_TagString
       value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 7840715013838877195, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
       propertyPath: m_Interpolate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388167452162292303, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
+      propertyPath: decreaseDur
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
@@ -6509,7 +6521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5851243975382083767, guid: 5182d529ca1388347913065381b912e7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5182d529ca1388347913065381b912e7, type: 3}

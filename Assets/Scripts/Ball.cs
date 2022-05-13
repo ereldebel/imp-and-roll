@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Player;
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -9,13 +11,20 @@ public class Ball : MonoBehaviour
 	public float Mass => _rigidbody.mass;
 	public float Radius { get; private set; }
 	public bool Thrown { get; private set; } = false;
-
+	private float _minSize => sizeRange[0];
+	private float _maxSize => sizeRange[1];
+	private float IncreaseTimePercent => Mathf.Clamp(Time.time-_curIncreaseStartTime ,0 , increaseDur)/increaseDur;
+	private float DecreaseTimePercent => Mathf.Clamp(Time.time-_curDecreaseStartTime ,0 , decreaseDur)/decreaseDur;
 	#endregion
 
 	#region Serialized Fields
 
 	[Tooltip("The distance of the ball from the ground that the ball is already considered grounded.")] [SerializeField]
 	private float groundedDistance = 0.1f;
+
+	[SerializeField] private Vector2 sizeRange = new Vector2(0.5f, 1);
+	[SerializeField] private float increaseDur = 0.5f;
+	[SerializeField] private float decreaseDur = 1;
 
 	#endregion
 
@@ -28,6 +37,8 @@ public class Ball : MonoBehaviour
 	private float _checkSphereRadius;
 	private bool _held = false;
 	private ParticleSystem _myParticles;
+	private float _curIncreaseStartTime = -1;
+	private float _curDecreaseStartTime = -1;
 
 	#endregion
 
@@ -37,6 +48,7 @@ public class Ball : MonoBehaviour
 	{
 		_rigidbody = GetComponent<Rigidbody>();
 		_myParticles = GetComponent<ParticleSystem>();
+		
 		_transform = transform;
 		OnValidate();
 	}
@@ -56,9 +68,23 @@ public class Ball : MonoBehaviour
 		
 	}
 
+	private void FixedUpdate()
+	{
+		ChangeSize(Mathf.Lerp(_maxSize, _minSize, DecreaseTimePercent));
+		// print(_increaseSize
+		// 	? Mathf.Lerp(_minSize, _maxSize, IncreaseTimePercent)
+		// 	: Mathf.Lerp(_maxSize, _minSize, IncreaseTimePercent));
+	}
+
 	#endregion
 
 	#region Public Methods
+
+	public void IncreaseSize(float time)
+	{
+		_curIncreaseStartTime = time;
+	}
+	
 
 	public void Pickup(Transform newParent)
 	{
@@ -73,6 +99,7 @@ public class Ball : MonoBehaviour
 	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
 	{
 		Release(posChange);
+		DecreaseSize(Time.time);
 		_rigidbody.velocity = velocity;
 		Thrown = true;
 		_myParticles.Play();
@@ -86,6 +113,7 @@ public class Ball : MonoBehaviour
 	private void Release(Vector3 posChange)
 	{
 		_transform.position += posChange;
+		ChangeSize(Mathf.Lerp(_minSize, _maxSize, IncreaseTimePercent));
 		gameObject.SetActive(true);
 		_transform.SetParent(null);
 		_held = false;
@@ -95,6 +123,14 @@ public class Ball : MonoBehaviour
 	{
 		Thrown = false;
 		_myParticles.Stop();
+	}
+	private void DecreaseSize(float time)
+	{
+		_curDecreaseStartTime = time;
+	}
+	private void ChangeSize(float size)
+	{
+		_transform.localScale = new Vector3(size, size, size); //Bug potential - if parent isnt (1,1,1) scale, this could work unexpectedly.
 	}
 	#endregion
 }

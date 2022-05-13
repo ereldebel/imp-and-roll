@@ -231,20 +231,16 @@ MonoBehaviour:
   speed: 5
   dodgeRollSpeed: 10
   rollDuration: 0.5833333
-  pickupDistance: 0.25
-  ballMask:
-    serializedVersion: 2
-    m_Bits: 64
   maxThrowForce: 25
   throwYForce: 0.15
   minThrowChargeTime: 0
   maxThrowChargeTime: 1
+  movementRelativeSpeedWhileCharging: 0.5
+  throwOriginEpsilon: 0.3
   knockBackDuration: 0.5
   knockBackRelativeSpeed: 0.5
   stunDuration: 1
   stunDurationIncrease: 0.2
-  movementRelativeSpeedWhileCharging: 0.5
-  throwOriginEpsilon: 0.3
   stunBarPercentagePerHit: 0.2
   stunRumble:
   - 0.3
