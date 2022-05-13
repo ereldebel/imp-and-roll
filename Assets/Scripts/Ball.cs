@@ -1,44 +1,44 @@
-﻿using System;
-using Player;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
 	#region Public Properties
 
-	public Vector3 Position => transform.position;
-	public bool Grounded => Physics.CheckSphere(transform.position, _checkSphereRadius);
 	public float Mass => _rigidbody.mass;
 	public float Radius { get; private set; }
 	public bool Thrown { get; private set; } = false;
-	private float _minSize => sizeRange[0];
-	private float _maxSize => sizeRange[1];
-	private float IncreaseTimePercent => Mathf.Clamp(Time.time-_curIncreaseStartTime ,0 , increaseDur)/increaseDur;
-	private float DecreaseTimePercent => Mathf.Clamp(Time.time-_curDecreaseStartTime ,0 , decreaseDur)/decreaseDur;
+
+	#endregion
+
+	#region Private Properties
+
+	private float MinSize => sizeRange[0];
+	private float MaxSize => sizeRange[1];
+	private float GrowTimePercent => Mathf.Clamp(Time.time - _curGrowStartTime, 0, growDur) / growDur;
+	private float ShrinkTimePercent => Mathf.Clamp(Time.time - _curShrinkStartTime, 0, shrinkDur) / shrinkDur;
+
 	#endregion
 
 	#region Serialized Fields
 
-	[Tooltip("The distance of the ball from the ground that the ball is already considered grounded.")] [SerializeField]
-	private float groundedDistance = 0.1f;
-
 	[SerializeField] private Vector2 sizeRange = new Vector2(0.5f, 1);
-	[SerializeField] private float increaseDur = 0.5f;
-	[SerializeField] private float decreaseDur = 1;
+	[SerializeField] private float growDur = 0.5f;
+	[SerializeField] private float shrinkDur = 1;
 
 	#endregion
 
 	#region Private Fields
 
-	private Rigidbody _rigidbody;
 	private Transform _transform;
+	private Rigidbody _rigidbody;
+	private Collider _collider;
+	private ParticleSystem _myParticles;
+	private TrailRenderer _trailRenderer;
 
 	private GameObject _thrower = null;
-	private float _checkSphereRadius;
 	private bool _held = false;
-	private ParticleSystem _myParticles;
-	private float _curIncreaseStartTime = -1;
-	private float _curDecreaseStartTime = -1;
+	private float _curGrowStartTime = -1;
+	private float _curShrinkStartTime = -1;
 
 	#endregion
 
@@ -46,45 +46,43 @@ public class Ball : MonoBehaviour
 
 	private void Awake()
 	{
-		_rigidbody = GetComponent<Rigidbody>();
-		_myParticles = GetComponent<ParticleSystem>();
-		
 		_transform = transform;
+		_rigidbody = GetComponent<Rigidbody>();
+		_collider = GetComponent<Collider>();
+		_myParticles = GetComponent<ParticleSystem>();
+		_trailRenderer = GetComponent<TrailRenderer>();
 		OnValidate();
 	}
 
 	private void OnValidate()
 	{
 		Radius = GetComponent<SphereCollider>().radius;
-		_checkSphereRadius = Radius + groundedDistance;
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (!Thrown) return;
 		if (collision.gameObject == _thrower) return;
-		if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player")) Landed();
+		if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
+			Landed();
 		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
-		
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
-		ChangeSize(Mathf.Lerp(_maxSize, _minSize, DecreaseTimePercent));
-		// print(_increaseSize
-		// 	? Mathf.Lerp(_minSize, _maxSize, IncreaseTimePercent)
-		// 	: Mathf.Lerp(_maxSize, _minSize, IncreaseTimePercent));
+		ChangeSize(_curGrowStartTime >= 0
+			? Mathf.Lerp(MinSize, MaxSize, GrowTimePercent)
+			: Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
 	}
 
 	#endregion
 
 	#region Public Methods
 
-	public void IncreaseSize(float time)
+	public void Grow(float time)
 	{
-		_curIncreaseStartTime = time;
+		_curGrowStartTime = time;
 	}
-	
 
 	public void Pickup(Transform newParent)
 	{
@@ -93,16 +91,20 @@ public class Ball : MonoBehaviour
 		_held = true;
 		_transform.SetParent(newParent);
 		_transform.localPosition = Vector3.zero;
-		gameObject.SetActive(false);
+		// gameObject.SetActive(false);
+		_rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+		_rigidbody.isKinematic = true;
+		_collider.enabled = false;
 	}
 
 	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
 	{
 		Release(posChange);
-		DecreaseSize(Time.time);
+		Shrink(Time.time);
 		_rigidbody.velocity = velocity;
 		Thrown = true;
 		_myParticles.Play();
+		_trailRenderer.enabled = true;
 		_thrower = thrower;
 	}
 
@@ -113,8 +115,10 @@ public class Ball : MonoBehaviour
 	private void Release(Vector3 posChange)
 	{
 		_transform.position += posChange;
-		ChangeSize(Mathf.Lerp(_minSize, _maxSize, IncreaseTimePercent));
-		gameObject.SetActive(true);
+		_curGrowStartTime = -1;
+		_rigidbody.isKinematic = false;
+		_rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+		_collider.enabled = true;
 		_transform.SetParent(null);
 		_held = false;
 	}
@@ -123,14 +127,22 @@ public class Ball : MonoBehaviour
 	{
 		Thrown = false;
 		_myParticles.Stop();
+		_trailRenderer.enabled = false;
 	}
-	private void DecreaseSize(float time)
+
+	private void Shrink(float time)
 	{
-		_curDecreaseStartTime = time;
+		_curShrinkStartTime = time;
 	}
+
 	private void ChangeSize(float size)
 	{
-		_transform.localScale = new Vector3(size, size, size); //Bug potential - if parent isnt (1,1,1) scale, this could work unexpectedly.
+		//TODO: should keep an eye on this transformation - it should work but documentation is worrisome
+		_transform.localScale = Vector3.one;
+		var lossyScale = transform.lossyScale;
+		_transform.localScale = new Vector3(size / lossyScale.x, size / lossyScale.y,
+			size / lossyScale.z);
 	}
+
 	#endregion
 }

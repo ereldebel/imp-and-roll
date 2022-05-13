@@ -6261,10 +6261,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 7840715013838877195, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8388167452162292303, guid: 683e1468bb005a0459124d0ecaa4c582, type: 3}
       propertyPath: decreaseDur
       value: 2

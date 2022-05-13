@@ -17,7 +17,6 @@ namespace Player
 		{
 			set
 			{
-				
 				if (value.sqrMagnitude < 0.7) return;
 				_aimDirection = value.normalized;
 				ChangedAimDirection?.Invoke();
@@ -56,30 +55,38 @@ namespace Player
 		#endregion
 
 		#region Serialized Fields
-		[Header("Player Movement Settings")]
-		[SerializeField] private float speed;
+
+		[Header("Player Movement Settings")] [SerializeField]
+		private float speed;
+
 		[SerializeField] private float dodgeRollSpeed;
+
 		[SerializeField] private float rollDuration = 0.25f;
+
 		// [SerializeField] private float pickupDistance; TODO look at these, they are never used, remove if unneeded?
 		// [SerializeField] private LayerMask ballMask;
-		[Header("Ball Throw Settings")]
-		[SerializeField] private float maxThrowForce;
+		[Header("Ball Throw Settings")] [SerializeField]
+		private float maxThrowForce;
+
 		[SerializeField] private float throwYForce;
 		[SerializeField] private float minThrowChargeTime = 0.1f;
 		[SerializeField] private float maxThrowChargeTime = 1;
 		[SerializeField] private float movementRelativeSpeedWhileCharging = 0.5f;
 		[SerializeField] private float throwOriginEpsilon = 0.1f;
-		[Header("Knock Back Settings")]
-		[SerializeField] private float knockBackDuration = 0.5f;
+
+		[Header("Knock Back Settings")] [SerializeField]
+		private float knockBackDuration = 0.5f;
+
 		[SerializeField] private float knockBackRelativeSpeed = 0.5f;
-		[Header("Stun Settings")]
-		[SerializeField] private float stunDuration = 1;
+
+		[Header("Stun Settings")] [SerializeField]
+		private float stunDuration = 1;
+
 		[SerializeField] private float stunDurationIncrease = 0.2f;
 		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
-		[Header("Rumbles Settings")]
-		[Tooltip("LowFreq, HighFreq, RumbleDuration")]
-		[SerializeField] private float[] stunRumble = {0.3f, 0.5f, 0.3f};
 
+		[Header("Rumbles Settings")] [Tooltip("LowFreq, HighFreq, RumbleDuration")] [SerializeField]
+		private float[] stunRumble = {0.3f, 0.5f, 0.3f};
 
 		#endregion
 
@@ -161,26 +168,30 @@ namespace Player
 		private void RumblePulse(float lowFreq, float highFreq, float rumbleDur) // Call this
 		{
 			if (_myGamepad == null) return;
-			StartRumble(lowFreq,highFreq);
+			StartRumble(lowFreq, highFreq);
 			Invoke(nameof(StopRumble), rumbleDur);
 		}
+
 		private void StartRumble(float lowFreq, float highFreq)
 		{
-			_myGamepad?.SetMotorSpeeds(lowFreq,highFreq);
-			
+			_myGamepad?.SetMotorSpeeds(lowFreq, highFreq);
 		}
+
 		private void StopRumble()
 		{
-			_myGamepad?.SetMotorSpeeds(0,0);
-			
+			_myGamepad?.SetMotorSpeeds(0, 0);
 		}
+
 		private Gamepad GetGamepad()
 		{
 			var playerInput = GetComponent<PlayerInput>(); // This checks if its a player or an AI
-			return playerInput ? Gamepad.all.FirstOrDefault(g => playerInput.devices.Any(d => d.deviceId == g.deviceId)) : null;
+			return playerInput
+				? Gamepad.all.FirstOrDefault(g => playerInput.devices.Any(d => d.deviceId == g.deviceId))
+				: null;
 		}
 
 		#endregion
+
 		#endregion
 
 		#region Public Methods
@@ -190,7 +201,7 @@ namespace Player
 			if (_ball == null) return;
 			_chargeStartTime = Time.time;
 			AimingStick = MovementStick.normalized;
-			_ball.IncreaseSize(_chargeStartTime);
+			_ball.Grow(_chargeStartTime);
 			StartedChargingThrow?.Invoke(_ball);
 		}
 
@@ -206,7 +217,7 @@ namespace Player
 		public void TakeHit(Vector3 velocity)
 		{
 			if (stunDuration <= 0 || _rolling) return;
-			RumblePulse(stunRumble[0],stunRumble[1], stunRumble[2]);
+			RumblePulse(stunRumble[0], stunRumble[1], stunRumble[2]);
 			StartCoroutine(Stun(velocity));
 		}
 
@@ -277,7 +288,7 @@ namespace Player
 		{
 			_animator.SetBool(AnimatorRunning, false);
 			_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
-			var currStunDuration = stunDuration + stunDurationIncrease*_timesStunned++;
+			var currStunDuration = stunDuration + stunDurationIncrease * _timesStunned++;
 			if (_stunBar <= 0)
 			{
 				currStunDuration *= 2;
