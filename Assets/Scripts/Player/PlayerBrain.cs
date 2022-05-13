@@ -17,7 +17,21 @@ namespace Player
 		{
 			set
 			{
-				if (value.sqrMagnitude < 0.7) return;
+				var oldSqrMagnitude = _aimDirection.sqrMagnitude;
+				var newSqrMagnitude = value.sqrMagnitude;
+				if (_chargeStartTime >= 0 && newSqrMagnitude < oldSqrMagnitude && newSqrMagnitude < 0.1)
+				{
+					ThrowBall();
+					return;
+				}
+
+				if (_chargeStartTime < 0 && newSqrMagnitude > oldSqrMagnitude && newSqrMagnitude > 0.1)
+				{
+					ChargeThrow();
+					return;
+				}
+
+				if (newSqrMagnitude < 0.7) return;
 				_aimDirection = value.normalized;
 				ChangedAimDirection?.Invoke();
 			}
