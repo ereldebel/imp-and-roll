@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1189386908854717527}
   - component: {fileID: 5085160740069576546}
   - component: {fileID: 3525636514363418516}
+  - component: {fileID: 917019455109400325}
   - component: {fileID: 4320430827449331697}
   - component: {fileID: 932001333787194856}
   - component: {fileID: 8896554067578677268}
@@ -229,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  dodgeRollSpeed: 10
+  dodgeRollSpeed: 11
   rollDuration: 0.5833333
   maxThrowForce: 25
   throwYForce: 0.15
@@ -242,10 +243,26 @@ MonoBehaviour:
   stunDuration: 1
   stunDurationIncrease: 0.2
   stunBarPercentagePerHit: 0.2
+--- !u!114 &917019455109400325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437818291732569122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700f549671bf493d8ec341f26b563e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   stunRumble:
-  - 0.3
-  - 0.5
-  - 0.3
+    lowFreq: 0.3
+    highFreq: 0.5
+    duration: 0.3
+  aimRumble:
+    lowFreq: 0.1
+    highFreq: 0.2
+    duration: 0.1
 --- !u!114 &4320430827449331697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +308,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfSteps: 20
   timeStepInterval: 0.01
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!120 &5905099638005712058
 LineRenderer:
   m_ObjectHideFlags: 0

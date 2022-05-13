@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -58,6 +57,7 @@ namespace Player
 
 		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 		public bool HasBall => _ball != null;
+		public Rumble Rumble { get; private set; }
 
 		#endregion;
 
@@ -99,9 +99,6 @@ namespace Player
 		[SerializeField] private float stunDurationIncrease = 0.2f;
 		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
 
-		[Header("Rumbles Settings")] [Tooltip("LowFreq, HighFreq, RumbleDuration")] [SerializeField]
-		private float[] stunRumble = {0.3f, 0.5f, 0.3f};
-
 		#endregion
 
 		#region Private Fields
@@ -109,6 +106,7 @@ namespace Player
 		private SpriteRenderer _spriteRenderer;
 		private CharacterController _controller;
 		private Animator _animator;
+
 		private float _colliderRadius;
 		private Vector3 _diffFromColliderCenterToBottom;
 		private float _chargeStartTime = -1;
@@ -116,7 +114,6 @@ namespace Player
 		private bool _knockedOut;
 		private bool _rolling;
 		private float _stunBar = 1;
-		private Gamepad _myGamepad;
 		private int _timesStunned = 0;
 
 
@@ -147,8 +144,8 @@ namespace Player
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
+			Rumble = GetComponent<Rumble>();
 			_spriteRenderer.flipX = transform.position.x < 0;
-			_myGamepad = GetGamepad();
 			OnValidate();
 		}
 
@@ -177,35 +174,6 @@ namespace Player
 			PickupBall(collision);
 		}
 
-		#region Gamepad Functions
-
-		private void RumblePulse(float lowFreq, float highFreq, float rumbleDur) // Call this
-		{
-			if (_myGamepad == null) return;
-			StartRumble(lowFreq, highFreq);
-			Invoke(nameof(StopRumble), rumbleDur);
-		}
-
-		private void StartRumble(float lowFreq, float highFreq)
-		{
-			_myGamepad?.SetMotorSpeeds(lowFreq, highFreq);
-		}
-
-		private void StopRumble()
-		{
-			_myGamepad?.SetMotorSpeeds(0, 0);
-		}
-
-		private Gamepad GetGamepad()
-		{
-			var playerInput = GetComponent<PlayerInput>(); // This checks if its a player or an AI
-			return playerInput
-				? Gamepad.all.FirstOrDefault(g => playerInput.devices.Any(d => d.deviceId == g.deviceId))
-				: null;
-		}
-
-		#endregion
-
 		#endregion
 
 		#region Public Methods
@@ -231,14 +199,14 @@ namespace Player
 		public void TakeHit(Vector3 velocity)
 		{
 			if (stunDuration <= 0 || _rolling) return;
-			RumblePulse(stunRumble[0], stunRumble[1], stunRumble[2]);
+			Rumble?.Stun();
 			StartCoroutine(Stun(velocity));
 		}
 
 		public void DodgeRoll()
 		{
 			if (MovementStick == Vector2.zero || _chargeStartTime > 0 || _knockedOut || _rolling) return;
-			StartCoroutine(DodgeRoll(vector2_to_vector3XZ(MovementStick)));
+			StartCoroutine(DodgeRoll(Vector2ToVector3XZ(MovementStick)));
 		}
 
 		#endregion
@@ -275,7 +243,7 @@ namespace Player
 			_controller.SimpleMove(velocity);
 		}
 
-		private static Vector3 vector2_to_vector3XZ(Vector2 input)
+		private static Vector3 Vector2ToVector3XZ(Vector2 input)
 		{
 			return new Vector3(input.x, 0, input.y);
 		}

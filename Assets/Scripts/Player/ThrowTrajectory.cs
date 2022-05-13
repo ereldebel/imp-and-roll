@@ -7,6 +7,7 @@ namespace Player
 	{
 		[SerializeField] private int numOfSteps;
 		[SerializeField] private float timeStepInterval;
+		[SerializeField] private LayerMask playerLayerMask;
 
 		private PlayerBrain _brain;
 		private LineRenderer _lineRenderer;
@@ -14,6 +15,7 @@ namespace Player
 		private Quaternion _rotation;
 
 		private bool _charged;
+		private int _maxSteps;
 		private Vector3[] _trajectoryPoints;
 
 		private void Awake()
@@ -22,6 +24,9 @@ namespace Player
 			_lineRenderer = GetComponent<LineRenderer>();
 			_brain.StartedChargingThrow += Enable;
 			_brain.BallThrown += Disable;
+
+			var maxDist = Mathf.Sqrt(Mathf.Pow(GameManager.ArenaLength, 2) + Mathf.Pow(GameManager.ArenaWidth, 2));
+			_maxSteps = Mathf.CeilToInt(maxDist / timeStepInterval);
 			OnValidate();
 			enabled = false;
 		}
@@ -41,12 +46,12 @@ namespace Player
 
 		private void Update()
 		{
-			if (_charged) return;
-			if (_brain.ThrowCharge >= 1)
-			{
-				_charged = true;
-				_brain.ChangedAimDirection += DrawTrajectory;
-			}
+			// if (_charged) return;
+			// if (_brain.ThrowCharge >= 1)
+			// {
+			// 	_charged = true;
+			// 	_brain.ChangedAimDirection += DrawTrajectory;
+			// }
 
 			DrawTrajectory();
 		}
@@ -71,12 +76,19 @@ namespace Player
 		private void DrawTrajectory()
 		{
 			var throwVelocity = _brain.ThrowVelocity * (timeStepInterval / _ball.Mass);
-			var gravity = 0.5f * Physics.gravity.y;
-			for (var timeStep = 0; timeStep < numOfSteps; ++timeStep)
+			var gravity = 0.5f * Physics.gravity;
+			var c = new Collider[1];
+			var rumbles = false;
+			for (var timeStep = 0; timeStep < _maxSteps; ++timeStep)
 			{
 				var posAtTime = _brain.ThrowOrigin + throwVelocity * timeStep;
-				posAtTime.y += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
-				_trajectoryPoints[timeStep] = _rotation * posAtTime;
+				posAtTime += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
+				if (timeStep < numOfSteps)
+					_trajectoryPoints[timeStep] = _rotation * posAtTime;
+				if (rumbles || 0 >=
+				    Physics.OverlapSphereNonAlloc(transform.position + posAtTime, 0.5f, c, playerLayerMask)) continue;
+				_brain.Rumble?.AimRumblePulse();
+				rumbles = true;
 			}
 
 			_lineRenderer.SetPositions(_trajectoryPoints);
