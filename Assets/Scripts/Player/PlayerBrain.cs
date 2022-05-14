@@ -124,6 +124,7 @@ namespace Player
 		private static readonly int AnimatorX = Animator.StringToHash("X Direction");
 		private static readonly int AnimatorZ = Animator.StringToHash("Z Direction");
 		private static readonly int AnimatorDodge = Animator.StringToHash("Dodge");
+		private static readonly int AnimatorStunned = Animator.StringToHash("Stunned");
 
 		#endregion
 
@@ -182,7 +183,6 @@ namespace Player
 		{
 			if (_ball == null) return;
 			_chargeStartTime = Time.time;
-			AimingStick = MovementStick.normalized;
 			_ball.Grow(_chargeStartTime);
 			StartedChargingThrow?.Invoke(_ball);
 		}
@@ -248,6 +248,8 @@ namespace Player
 			return new Vector3(input.x, 0, input.y);
 		}
 
+		private void AnimatorEndStun() => _knockedOut = false;
+
 		#endregion
 
 		#region Private Coroutines
@@ -269,27 +271,26 @@ namespace Player
 		private IEnumerator Stun(Vector3 knockBackDir)
 		{
 			_animator.SetBool(AnimatorRunning, false);
+			_animator.SetBool(AnimatorStunned, true);
+			_animator.SetFloat(AnimatorX, 1);
+			_animator.SetFloat(AnimatorZ, -1);
+			_spriteRenderer.flipX = knockBackDir.x > 0;
 			_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
-			var currStunDuration = stunDuration + stunDurationIncrease * _timesStunned++;
+			var currStunDuration = stunDuration + stunDurationIncrease * _timesStunned++; // TODO: should stop when bar is depleted.
 			if (_stunBar <= 0)
-			{
 				currStunDuration *= 2;
-			}
-
 			StunStarted?.Invoke(_stunBar);
-			var color = _spriteRenderer.color;
-			_spriteRenderer.color = Color.gray;
 			_knockedOut = true;
 			knockBackDir.y = 0;
-			for (var i = 0; i < knockBackDuration * 50; i++)
+			var numIterations = knockBackDuration / Time.fixedDeltaTime;
+			for (var i = 0; i < numIterations; ++i)
 			{
 				_controller.SimpleMove(-knockBackDir * knockBackRelativeSpeed);
 				yield return new WaitForFixedUpdate();
 			}
 
 			yield return new WaitForSeconds(currStunDuration - knockBackDuration);
-			_knockedOut = false;
-			_spriteRenderer.color = color;
+			_animator.SetBool(AnimatorStunned, false);
 			StunEnded?.Invoke();
 		}
 
