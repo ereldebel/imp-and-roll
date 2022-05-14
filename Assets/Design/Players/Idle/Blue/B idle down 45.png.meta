@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -7521586162367536187
     second: B idle down 45 _3
+  - first:
+      213: -7193469772647608273
+    second: B idle down 45_0
+  - first:
+      213: -2531904702874034517
+    second: B idle down 45_1
+  - first:
+      213: -1191767275917581963
+    second: B idle down 45_2
+  - first:
+      213: -7013300188267353650
+    second: B idle down 45_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: B idle down 45 _0
+      name: B idle down 45_0
       rect:
         serializedVersion: 2
-        x: 81
-        y: 51
-        width: 282
-        height: 582
+        x: 0
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 557836c7601340a40800000000000000
-      internalID: 5333441762639972181
+      spriteID: f2054daba59ab2c90800000000000000
+      internalID: -7193469772647608273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B idle down 45 _1
+      name: B idle down 45_1
       rect:
         serializedVersion: 2
-        x: 532
-        y: 53
-        width: 278
-        height: 578
+        x: 444
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2fdc7d6500b63f00800000000000000
-      internalID: 1096257096669519661
+      spriteID: bae5d0c561edcdcd0800000000000000
+      internalID: -2531904702874034517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B idle down 45 _2
+      name: B idle down 45_2
       rect:
         serializedVersion: 2
-        x: 989
-        y: 53
-        width: 275
-        height: 580
+        x: 888
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93e1043a348b99fe0800000000000000
-      internalID: -1181710826566836679
+      spriteID: 5716fff0afdf57fe0800000000000000
+      internalID: -1191767275917581963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B idle down 45 _3
+      name: B idle down 45_3
       rect:
         serializedVersion: 2
-        x: 1436
-        y: 53
-        width: 278
-        height: 578
+        x: 1332
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c3e6948c35fd9790800000000000000
-      internalID: -7521586162367536187
+      spriteID: ec9e42703a0cbae90800000000000000
+      internalID: -7013300188267353650
       vertices: []
       indices: 
       edges: []

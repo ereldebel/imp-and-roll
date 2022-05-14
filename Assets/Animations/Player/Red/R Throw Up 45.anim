@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: B Idle Up
+  m_Name: R Throw Up 45
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -9181715426975609023, guid: e3a654199620c9449847993cfac6c914, type: 3}
+      value: {fileID: -3959526734521809735, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
     - time: 0.083333336
-      value: {fileID: -1081357800363746196, guid: e3a654199620c9449847993cfac6c914, type: 3}
+      value: {fileID: 6146651513969993191, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
     - time: 0.16666667
-      value: {fileID: 886424782578769076, guid: e3a654199620c9449847993cfac6c914, type: 3}
+      value: {fileID: 6077102349263212136, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
     - time: 0.25
-      value: {fileID: 36633781549618059, guid: e3a654199620c9449847993cfac6c914, type: 3}
+      value: {fileID: 7273439109234772343, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -9181715426975609023, guid: e3a654199620c9449847993cfac6c914, type: 3}
-    - {fileID: -1081357800363746196, guid: e3a654199620c9449847993cfac6c914, type: 3}
-    - {fileID: 886424782578769076, guid: e3a654199620c9449847993cfac6c914, type: 3}
-    - {fileID: 36633781549618059, guid: e3a654199620c9449847993cfac6c914, type: 3}
+    - {fileID: -3959526734521809735, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
+    - {fileID: 6146651513969993191, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
+    - {fileID: 6077102349263212136, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
+    - {fileID: 7273439109234772343, guid: c411e589c0dc91c43a58808417ba0a26, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -74,4 +74,25 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: AnimatorChangeBallPosition
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.083333336
+    functionName: AnimatorChangeBallPosition
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.16666667
+    functionName: AnimatorThrowBall
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

@@ -49,7 +49,9 @@ namespace Player
 		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
 
 		public Vector3 ThrowOrigin =>
-			new Vector3(_aimDirection.x, 0, _aimDirection.y) *
+			new Vector3(_aimDirection.x,
+				_ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][ballPositionsSide.Length - 1].y,
+				_aimDirection.y) *
 			(_colliderRadius + _ball.Radius + speed * Time.fixedDeltaTime + throwOriginEpsilon);
 
 		public Vector3 ThrowVelocity =>
@@ -58,6 +60,7 @@ namespace Player
 		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 		public bool HasBall => _ball != null;
 		public Rumble Rumble { get; private set; }
+		public bool Flipped => transform.rotation == _faceRight;
 
 		#endregion;
 
@@ -99,19 +102,16 @@ namespace Player
 		[SerializeField] private float stunDurationIncrease = 0.2f;
 		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
 
-		[Header("Throw Animation")][SerializeField]
+		[Header("Throw Animation")] [SerializeField]
 		private Vector3[] ballPositionsDown45 = new Vector3[7];
-		[SerializeField]
-		private Vector3[] ballPositionsSide = new Vector3[7];
-		[SerializeField]
-		private Vector3[] ballPositionsUp45 = new Vector3[7];
-		private List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
+
+		[SerializeField] private Vector3[] ballPositionsSide = new Vector3[7];
+		[SerializeField] private Vector3[] ballPositionsUp45 = new Vector3[7];
 
 		#endregion
 
 		#region Private Fields
 
-		private SpriteRenderer _spriteRenderer;
 		private CharacterController _controller;
 		private Animator _animator;
 
@@ -121,11 +121,16 @@ namespace Player
 		private Vector2 _aimDirection;
 		private bool _knockedOut;
 		private bool _rolling;
+		private bool _calledThrow;
 		private float _stunBar = 1;
 		private int _timesStunned = 0;
+		private Quaternion _faceLeft;
+		private Quaternion _faceRight;
+		
+		private readonly List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
+		private int _ballThrowPositionIndex = 0;
 
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
-		private int _ballThrowPositionIndex = 0;
 
 		private static readonly int AnimatorRunning = Animator.StringToHash("Running");
 		private static readonly int AnimatorX = Animator.StringToHash("X Direction");
@@ -150,11 +155,9 @@ namespace Player
 
 		private void Awake()
 		{
-			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
 			Rumble = GetComponent<Rumble>();
-			_spriteRenderer.flipX = transform.position.x < 0;
 			OnValidate();
 		}
 
@@ -168,6 +171,8 @@ namespace Player
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
 			_ballPositionsByDirection.Add(ballPositionsUp45);
+			_faceLeft = transform.rotation;
+			_faceRight = Quaternion.AngleAxis(180, transform.up) * _faceLeft;
 		}
 
 		private void FixedUpdate()
@@ -190,19 +195,21 @@ namespace Player
 
 		#region Public Methods
 
-		public void ChargeThrow()
+		public bool ChargeThrow()
 		{
-			if (_ball == null || _knockedOut || _rolling) return;
+			if (_knockedOut || _rolling || _chargeStartTime >= 0 || _calledThrow || _ball == null) return false;
 			_chargeStartTime = Time.time;
 			_animator.SetBool(AnimatorThrowing, true);
 			_ball.Grow(_chargeStartTime);
 			StartedChargingThrow?.Invoke(_ball);
+			return true;
 		}
 
 		public void ThrowBall()
 		{
-			if (_ball == null) return;
+			if (_knockedOut || _rolling || _chargeStartTime < 0 || _calledThrow || _ball == null) return;
 			_animator.SetBool(AnimatorThrowing, false);
+			_calledThrow = true;
 		}
 
 		public void TakeHit(Vector3 velocity)
@@ -214,7 +221,7 @@ namespace Player
 
 		public void DodgeRoll()
 		{
-			if (MovementStick == Vector2.zero || _chargeStartTime > 0 || _knockedOut || _rolling) return;
+			if (MovementStick == Vector2.zero || _chargeStartTime >= 0 || _knockedOut || _rolling) return;
 			StartCoroutine(DodgeRoll(Vector2ToVector3XZ(MovementStick)));
 		}
 
@@ -248,7 +255,7 @@ namespace Player
 			var velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
 			if (_chargeStartTime >= 0)
 				velocity *= movementRelativeSpeedWhileCharging;
-			_spriteRenderer.flipX = velocity.x > 0;
+			transform.rotation = velocity.x > 0 ? _faceRight : _faceLeft;
 			_controller.SimpleMove(velocity);
 		}
 
@@ -261,18 +268,22 @@ namespace Player
 
 		private void AnimatorThrowBall()
 		{
+			_ballThrowPositionIndex = 0;
 			_chargeStartTime = -1;
 			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
-			BallThrown?.Invoke();
-			_ballThrowPositionIndex = 0;
 			_ball = null;
+			_calledThrow = false;
+			BallThrown?.Invoke();
 		}
 
-		private void AnimatorChangeBallPosition()
+		private void AnimatorChangeBallPosition() => ChangeBallPosition(_ballThrowPositionIndex++);
+
+
+		private void AnimatorThrowChargeBallPosition() => ChangeBallPosition(2);
+
+		private void ChangeBallPosition(int index)
 		{
-			var ballPos = _ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][_ballThrowPositionIndex++];
-			if (_spriteRenderer.flipX)
-				ballPos.x = -ballPos.x;
+			var ballPos = _ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][index];
 			_ball.transform.localPosition = ballPos;
 		}
 
@@ -300,7 +311,7 @@ namespace Player
 			_animator.SetBool(AnimatorStunned, true);
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
-			_spriteRenderer.flipX = knockBackDir.x > 0;
+			transform.rotation = knockBackDir.x > 0 ? _faceRight : _faceLeft;
 			if (_stunBar > 0)
 			{
 				_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);

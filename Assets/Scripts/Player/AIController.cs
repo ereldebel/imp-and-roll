@@ -40,10 +40,7 @@ namespace Player
 			else if ((_rightSide && ballIsOnBorderRight) || (!_rightSide && !ballIsOnBorderRight))
 			{
 				if (_brain.HasBall)
-				{
-					_throwing = true;
-					_brain.ChargeThrow();
-				}
+					_throwing = _brain.ChargeThrow();
 				else
 					_brain.MovementStick = DirectionTo(_ball.position).normalized;
 			}

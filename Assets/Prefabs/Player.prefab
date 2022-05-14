@@ -212,8 +212,8 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6e6ad36e-4200-4325-9c0d-f6bd785258db
     m_ActionName: Player/Dodge Roll[/XInputControllerWindows/buttonEast,/Keyboard/space]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -233,37 +233,34 @@ MonoBehaviour:
   dodgeRollSpeed: 11
   rollDuration: 0.5833333
   maxThrowForce: 25
-  throwYForce: 0.15
+  throwYForce: -0.05
   minThrowChargeTime: 0
   maxThrowChargeTime: 1
   movementRelativeSpeedWhileCharging: 0.5
-  throwOriginEpsilon: 0.3
+  throwOriginEpsilon: 0
   knockBackDuration: 0.5
   knockBackRelativeSpeed: 0.5
   stunDuration: 1
   stunDurationIncrease: 0.2
   stunBarPercentagePerHit: 0.2
   ballPositionsDown45:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: -0.47, z: 0}
+  - {x: 0.11, y: 0.3, z: 0}
+  - {x: 0.54, y: 0.63, z: 0}
+  - {x: 0.63, y: 0.57, z: 0}
+  - {x: 0.27, y: 0.88, z: 0}
   ballPositionsSide:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -0.3, y: -0.36, z: 0}
+  - {x: -0.09, y: 0.35, z: 0}
+  - {x: 0.55, y: 0.62, z: 0}
+  - {x: 0.63, y: 0.63, z: 0}
+  - {x: 0.57, y: 0.78, z: 0}
   ballPositionsUp45:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -0.68, y: -0.39, z: 0}
+  - {x: -0.74, y: 0.26, z: 0}
+  - {x: -0.19, y: 0.78, z: 0}
+  - {x: 0, y: 0.68, z: 0}
+  - {x: -0.42, y: 0.93, z: 0}
 --- !u!114 &917019455109400325
 MonoBehaviour:
   m_ObjectHideFlags: 0

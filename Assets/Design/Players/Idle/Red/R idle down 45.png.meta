@@ -130,10 +130,10 @@ TextureImporter:
       name: R idle down 45_0
       rect:
         serializedVersion: 2
-        x: 81
-        y: 51
-        width: 282
-        height: 582
+        x: 0
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,10 +151,10 @@ TextureImporter:
       name: R idle down 45_1
       rect:
         serializedVersion: 2
-        x: 532
-        y: 53
-        width: 278
-        height: 578
+        x: 444
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +172,10 @@ TextureImporter:
       name: R idle down 45_2
       rect:
         serializedVersion: 2
-        x: 989
-        y: 53
-        width: 275
-        height: 580
+        x: 888
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +193,10 @@ TextureImporter:
       name: R idle down 45_3
       rect:
         serializedVersion: 2
-        x: 1436
-        y: 53
-        width: 278
-        height: 578
+        x: 1332
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

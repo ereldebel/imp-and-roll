@@ -130,10 +130,10 @@ TextureImporter:
       name: B idle down_0
       rect:
         serializedVersion: 2
-        x: 77
-        y: 78
-        width: 297
-        height: 548
+        x: 0
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,10 +151,10 @@ TextureImporter:
       name: B idle down_1
       rect:
         serializedVersion: 2
-        x: 508
-        y: 75
-        width: 299
-        height: 550
+        x: 444
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +172,10 @@ TextureImporter:
       name: B idle down_2
       rect:
         serializedVersion: 2
-        x: 975
-        y: 72
-        width: 297
-        height: 555
+        x: 888
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +193,10 @@ TextureImporter:
       name: B idle down_3
       rect:
         serializedVersion: 2
-        x: 1420
-        y: 75
-        width: 299
-        height: 550
+        x: 1332
+        y: 0
+        width: 444
+        height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

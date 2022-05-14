@@ -23,6 +23,8 @@ AnimationClip:
       value: {fileID: 5289040262330925532, guid: bdea6bb56c923494394b59e01360f64d, type: 3}
     - time: 0.083333336
       value: {fileID: -7758247654426142484, guid: bdea6bb56c923494394b59e01360f64d, type: 3}
+    - time: 0.16666667
+      value: {fileID: 1525507595991732016, guid: 7d971e602d319684c93684d7241a7027, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,12 +46,13 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 5289040262330925532, guid: bdea6bb56c923494394b59e01360f64d, type: 3}
     - {fileID: -7758247654426142484, guid: bdea6bb56c923494394b59e01360f64d, type: 3}
+    - {fileID: 1525507595991732016, guid: 7d971e602d319684c93684d7241a7027, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.16666667
+    m_StopTime: 0.25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -77,6 +80,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.083333336
+    functionName: AnimatorChangeBallPosition
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.16666667
     functionName: AnimatorChangeBallPosition
     data: 
     objectReferenceParameter: {fileID: 0}

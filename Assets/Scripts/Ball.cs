@@ -5,7 +5,7 @@ public class Ball : MonoBehaviour
 	#region Public Properties
 
 	public float Mass => _rigidbody.mass;
-	public float Radius { get; private set; }
+	public float Radius => _collider.radius;
 	public bool Thrown { get; private set; } = false;
 
 	#endregion
@@ -31,7 +31,7 @@ public class Ball : MonoBehaviour
 
 	private Transform _transform;
 	private Rigidbody _rigidbody;
-	private Collider _collider;
+	private SphereCollider _collider;
 	private ParticleSystem _myParticles;
 	private TrailRenderer _trailRenderer;
 
@@ -48,15 +48,9 @@ public class Ball : MonoBehaviour
 	{
 		_transform = transform;
 		_rigidbody = GetComponent<Rigidbody>();
-		_collider = GetComponent<Collider>();
+		_collider = GetComponent<SphereCollider>();
 		_myParticles = GetComponent<ParticleSystem>();
 		_trailRenderer = GetComponent<TrailRenderer>();
-		OnValidate();
-	}
-
-	private void OnValidate()
-	{
-		Radius = GetComponent<SphereCollider>().radius;
 	}
 
 	private void OnCollisionEnter(Collision collision)

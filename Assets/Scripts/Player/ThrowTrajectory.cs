@@ -17,6 +17,7 @@ namespace Player
 		private bool _charged;
 		private int _maxSteps;
 		private Vector3[] _trajectoryPoints;
+		private Quaternion _flip;
 
 		private void Awake()
 		{
@@ -35,6 +36,7 @@ namespace Player
 		{
 			_rotation = Quaternion.Inverse(transform.rotation);
 			_trajectoryPoints = new Vector3[numOfSteps];
+			_flip = Quaternion.AngleAxis(180, transform.up);
 			GetComponent<LineRenderer>().positionCount = numOfSteps;
 		}
 
@@ -79,14 +81,20 @@ namespace Player
 			var gravity = 0.5f * Physics.gravity;
 			var c = new Collider[1];
 			var rumbles = false;
+			var origin = _brain.ThrowOrigin;
+			if (_brain.Flipped)
+			{
+				throwVelocity = _flip * throwVelocity;
+				origin = _flip * origin;
+			}
 			for (var timeStep = 0; timeStep < _maxSteps; ++timeStep)
 			{
-				var posAtTime = _brain.ThrowOrigin + throwVelocity * timeStep;
+				var posAtTime = origin + throwVelocity * timeStep;
 				posAtTime += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
 				if (timeStep < numOfSteps)
 					_trajectoryPoints[timeStep] = _rotation * posAtTime;
 				if (rumbles || 0 >=
-				    Physics.OverlapSphereNonAlloc(transform.position + posAtTime, 0.5f, c, playerLayerMask)) continue;
+				    Physics.OverlapSphereNonAlloc(transform.position + posAtTime, _ball.Radius, c, playerLayerMask)) continue;
 				_brain.Rumble?.AimRumblePulse();
 				rumbles = true;
 			}
