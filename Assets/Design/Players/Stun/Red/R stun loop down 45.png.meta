@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: b16cb4b3e823c024282f7a76b23d786d
+guid: 1dc41fa5b4caa4d438fb428bda38cdb2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 596761879124580998
-    second: B throw side_0
+      213: -655724881605900530
+    second: R stun loop down 45_0
   - first:
-      213: -5039757366864457770
-    second: B throw side_1
+      213: 3877373566267907798
+    second: R stun loop down 45_1
   - first:
-      213: -2426121174301312334
-    second: B throw side_2
+      213: 4304499658997455534
+    second: R stun loop down 45_2
   - first:
-      213: 8102013364067268332
-    second: B throw side_3
+      213: -6199044099081191694
+    second: R stun loop down 45_3
   - first:
-      213: 7152012421487675833
-    second: B throw side_4
+      213: -8994846523053319951
+    second: R stun loop down 45_4
   - first:
-      213: -4424282287486686458
-    second: B throw side_5
-  - first:
-      213: 6243392395750052050
-    second: B throw side_6
-  - first:
-      213: 8548617745767314325
-    second: B throw side_7
+      213: -6608396291844963149
+    second: R stun loop down 45_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -139,12 +133,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: B throw side_0
+      name: R stun loop down 45_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -153,19 +147,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68a17bc64cf184800800000000000000
-      internalID: 596761879124580998
+      spriteID: e07ce71c1b566e6f0800000000000000
+      internalID: -655724881605900530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B throw side_1
+      name: R stun loop down 45_1
       rect:
         serializedVersion: 2
-        x: 472
+        x: 714
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -174,19 +168,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6dfc2e9606f2f0ab0800000000000000
-      internalID: -5039757366864457770
+      spriteID: 6de53ee17b23fc530800000000000000
+      internalID: 3877373566267907798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B throw side_2
+      name: R stun loop down 45_2
       rect:
         serializedVersion: 2
-        x: 944
+        x: 1428
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -195,19 +189,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ba77b765afa45ed0800000000000000
-      internalID: -2426121174301312334
+      spriteID: eaa555632a7acbb30800000000000000
+      internalID: 4304499658997455534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B throw side_3
+      name: R stun loop down 45_3
       rect:
         serializedVersion: 2
-        x: 1416
+        x: 2142
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -216,19 +210,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce672b27a32207070800000000000000
-      internalID: 8102013364067268332
+      spriteID: 2feb84f5c3298f9a0800000000000000
+      internalID: -6199044099081191694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B throw side_4
+      name: R stun loop down 45_4
       rect:
         serializedVersion: 2
-        x: 1888
+        x: 2856
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -237,19 +231,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b944f3876d014360800000000000000
-      internalID: 7152012421487675833
+      spriteID: 1f8df387eb2eb2380800000000000000
+      internalID: -8994846523053319951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B throw side_5
+      name: R stun loop down 45_5
       rect:
         serializedVersion: 2
-        x: 2360
+        x: 3570
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -258,50 +252,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60bad4c43bac992c0800000000000000
-      internalID: -4424282287486686458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B throw side_6
-      rect:
-        serializedVersion: 2
-        x: 2832
-        y: 0
-        width: 472
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d09e061e4cf4a650800000000000000
-      internalID: 6243392395750052050
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B throw side_7
-      rect:
-        serializedVersion: 2
-        x: 3304
-        y: 0
-        width: 472
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 593bf091c8ac2a670800000000000000
-      internalID: 8548617745767314325
+      spriteID: 3b48299d5924a44a0800000000000000
+      internalID: -6608396291844963149
       vertices: []
       indices: 
       edges: []
@@ -309,7 +261,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a319ff65342bc8944856a098ec893b37
+    spriteID: f3d37d595c2d96949a9ebf16d73d9981
     internalID: 0
     vertices: []
     indices: 

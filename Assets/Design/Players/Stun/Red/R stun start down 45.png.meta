@@ -1,31 +1,16 @@
 fileFormatVersion: 2
-guid: b16cb4b3e823c024282f7a76b23d786d
+guid: b1510a2c28ccc8746a10b41d57e85195
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 596761879124580998
-    second: B throw side_0
+      213: -2096862703354117820
+    second: R stun start down 45_0
   - first:
-      213: -5039757366864457770
-    second: B throw side_1
+      213: 4262452672958108706
+    second: R stun start down 45_1
   - first:
-      213: -2426121174301312334
-    second: B throw side_2
-  - first:
-      213: 8102013364067268332
-    second: B throw side_3
-  - first:
-      213: 7152012421487675833
-    second: B throw side_4
-  - first:
-      213: -4424282287486686458
-    second: B throw side_5
-  - first:
-      213: 6243392395750052050
-    second: B throw side_6
-  - first:
-      213: 8548617745767314325
-    second: B throw side_7
+      213: 8687453544277173439
+    second: R stun start down 45_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -139,12 +124,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: B throw side_0
+      name: R stun start down 45_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -153,19 +138,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68a17bc64cf184800800000000000000
-      internalID: 596761879124580998
+      spriteID: 44100df1b7276e2e0800000000000000
+      internalID: -2096862703354117820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B throw side_1
+      name: R stun start down 45_1
       rect:
         serializedVersion: 2
-        x: 472
+        x: 714
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -174,19 +159,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6dfc2e9606f2f0ab0800000000000000
-      internalID: -5039757366864457770
+      spriteID: 22415936f16472b30800000000000000
+      internalID: 4262452672958108706
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: B throw side_2
+      name: R stun start down 45_2
       rect:
         serializedVersion: 2
-        x: 944
+        x: 1428
         y: 0
-        width: 472
+        width: 714
         height: 746
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -195,113 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ba77b765afa45ed0800000000000000
-      internalID: -2426121174301312334
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B throw side_3
-      rect:
-        serializedVersion: 2
-        x: 1416
-        y: 0
-        width: 472
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce672b27a32207070800000000000000
-      internalID: 8102013364067268332
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B throw side_4
-      rect:
-        serializedVersion: 2
-        x: 1888
-        y: 0
-        width: 472
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b944f3876d014360800000000000000
-      internalID: 7152012421487675833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B throw side_5
-      rect:
-        serializedVersion: 2
-        x: 2360
-        y: 0
-        width: 472
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 60bad4c43bac992c0800000000000000
-      internalID: -4424282287486686458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B throw side_6
-      rect:
-        serializedVersion: 2
-        x: 2832
-        y: 0
-        width: 472
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d09e061e4cf4a650800000000000000
-      internalID: 6243392395750052050
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B throw side_7
-      rect:
-        serializedVersion: 2
-        x: 3304
-        y: 0
-        width: 472
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 593bf091c8ac2a670800000000000000
-      internalID: 8548617745767314325
+      spriteID: fb4695d68f8009870800000000000000
+      internalID: 8687453544277173439
       vertices: []
       indices: 
       edges: []
@@ -309,7 +189,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a319ff65342bc8944856a098ec893b37
+    spriteID: db8f3fb05cfe6a04d9f3a66a2bb78d04
     internalID: 0
     vertices: []
     indices: 
