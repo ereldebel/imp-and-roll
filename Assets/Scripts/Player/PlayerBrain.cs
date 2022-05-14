@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -99,6 +99,14 @@ namespace Player
 		[SerializeField] private float stunDurationIncrease = 0.2f;
 		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
 
+		[Header("Throw Animation")][SerializeField]
+		private Vector3[] ballPositionsDown45 = new Vector3[7];
+		[SerializeField]
+		private Vector3[] ballPositionsSide = new Vector3[7];
+		[SerializeField]
+		private Vector3[] ballPositionsUp45 = new Vector3[7];
+		private List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
+
 		#endregion
 
 		#region Private Fields
@@ -116,15 +124,15 @@ namespace Player
 		private float _stunBar = 1;
 		private int _timesStunned = 0;
 
-
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
+		private int _ballThrowPositionIndex = 0;
 
-		private static readonly Collider[] TempColliders = new Collider[5];
 		private static readonly int AnimatorRunning = Animator.StringToHash("Running");
 		private static readonly int AnimatorX = Animator.StringToHash("X Direction");
 		private static readonly int AnimatorZ = Animator.StringToHash("Z Direction");
 		private static readonly int AnimatorDodge = Animator.StringToHash("Dodge");
 		private static readonly int AnimatorStunned = Animator.StringToHash("Stunned");
+		private static readonly int AnimatorThrowing = Animator.StringToHash("Throwing");
 
 		#endregion
 
@@ -157,6 +165,9 @@ namespace Player
 			_colliderRadius = scale.x * GetComponent<CapsuleCollider>().radius;
 			_diffFromColliderCenterToBottom =
 				t.rotation * (0.5f * scale.y * GetComponent<CapsuleCollider>().height * Vector3.down);
+			_ballPositionsByDirection.Add(ballPositionsDown45);
+			_ballPositionsByDirection.Add(ballPositionsSide);
+			_ballPositionsByDirection.Add(ballPositionsUp45);
 		}
 
 		private void FixedUpdate()
@@ -181,8 +192,9 @@ namespace Player
 
 		public void ChargeThrow()
 		{
-			if (_ball == null) return;
+			if (_ball == null || _knockedOut || _rolling) return;
 			_chargeStartTime = Time.time;
+			_animator.SetBool(AnimatorThrowing, true);
 			_ball.Grow(_chargeStartTime);
 			StartedChargingThrow?.Invoke(_ball);
 		}
@@ -190,10 +202,7 @@ namespace Player
 		public void ThrowBall()
 		{
 			if (_ball == null) return;
-			_chargeStartTime = -1;
-			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
-			_ball = null;
-			BallThrown?.Invoke();
+			_animator.SetBool(AnimatorThrowing, false);
 		}
 
 		public void TakeHit(Vector3 velocity)
@@ -250,6 +259,23 @@ namespace Player
 
 		private void AnimatorEndStun() => _knockedOut = false;
 
+		private void AnimatorThrowBall()
+		{
+			_chargeStartTime = -1;
+			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
+			BallThrown?.Invoke();
+			_ballThrowPositionIndex = 0;
+			_ball = null;
+		}
+
+		private void AnimatorChangeBallPosition()
+		{
+			var ballPos = _ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][_ballThrowPositionIndex++];
+			if (_spriteRenderer.flipX)
+				ballPos.x = -ballPos.x;
+			_ball.transform.localPosition = ballPos;
+		}
+
 		#endregion
 
 		#region Private Coroutines
@@ -275,8 +301,13 @@ namespace Player
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
 			_spriteRenderer.flipX = knockBackDir.x > 0;
-			_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
-			var currStunDuration = stunDuration + stunDurationIncrease * _timesStunned++; // TODO: should stop when bar is depleted.
+			if (_stunBar > 0)
+			{
+				_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
+				++_timesStunned;
+			}
+
+			var currStunDuration = stunDuration + stunDurationIncrease * _timesStunned;
 			if (_stunBar <= 0)
 				currStunDuration *= 2;
 			StunStarted?.Invoke(_stunBar);
