@@ -187,6 +187,56 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Start Menu",
+            "id": "861d27b9-c7b0-4f52-8abb-d355f1966be8",
+            "actions": [
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "178b9fad-0fa0-4b14-af33-4b7a54c96231",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cfa658d3-ccf9-4a5e-832a-c1155e58f44f",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6739a3df-2862-420b-b119-141c43a30a50",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e74e51d-31d5-451b-9d00-2e6a218317ff",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

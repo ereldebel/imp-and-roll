@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Blue Player Info
   m_EditorClassIdentifier: 
   LocationOpeningScene: {x: 2.5, y: 6, z: -7}
-  LocationGameScene: {x: 0, y: 0, z: 0}
+  LocationGameScene: {x: 7, y: 0.5, z: 0}
   Animator: {fileID: 932001333787194856, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}

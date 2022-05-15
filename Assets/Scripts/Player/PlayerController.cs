@@ -46,6 +46,12 @@ namespace Player
 			if (context.started)
 				_myBrain.DodgeRoll();
 		}
+		public void OnStart(InputAction.CallbackContext context)
+		{
+			if (context.started)
+				_myBrain.PlayerReady();
+		}
+
 
 		private Vector2 ScreenToWorld2D(Vector2 screenPos)
 		{

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Player
 {
@@ -25,11 +26,14 @@ namespace Player
 			_lineRenderer = GetComponent<LineRenderer>();
 			_brain.StartedChargingThrow += Enable;
 			_brain.BallThrown += Disable;
-
-			var maxDist = Mathf.Sqrt(Mathf.Pow(GameManager.ArenaLength, 2) + Mathf.Pow(GameManager.ArenaWidth, 2));
-			_maxSteps = Mathf.CeilToInt(maxDist / timeStepInterval);
 			OnValidate();
 			enabled = false;
+		}
+
+		private void Start()
+		{
+			var maxDist = Mathf.Sqrt(Mathf.Pow(GameManager.ArenaLength, 2) + Mathf.Pow(GameManager.ArenaWidth, 2));
+			_maxSteps = Mathf.CeilToInt(maxDist / timeStepInterval);
 		}
 
 		private void OnValidate()

@@ -349,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3231730942035179633, guid: 182cb924edd81cc468e0c67fed9e3d7b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3231730942035179634, guid: 182cb924edd81cc468e0c67fed9e3d7b, type: 3}
       propertyPath: m_FlipX
@@ -902,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4437818291732569122, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5085160740069576546, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
       propertyPath: m_DefaultControlScheme

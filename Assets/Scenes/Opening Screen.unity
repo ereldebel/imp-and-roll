@@ -373,7 +373,7 @@ MonoBehaviour:
   _playerInfos:
   - {fileID: 11400000, guid: d86f6a93996603e4ba4cf9e2d321485c, type: 2}
   - {fileID: 11400000, guid: 4f9203fa987161c4cba920f02c892eb3, type: 2}
-  aiBrain: {fileID: 0}
+  redController: {fileID: 22100000, guid: 69b8471dfd0b7a24aa9204d29ac01a41, type: 2}
 --- !u!4 &1475655016
 Transform:
   m_ObjectHideFlags: 0
