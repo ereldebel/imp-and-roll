@@ -69,6 +69,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32394e32182564547bc0ee8644888de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPlayer: {fileID: 0}
-  border: {fileID: 0}
   throwLoad: 0.8

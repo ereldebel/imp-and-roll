@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private Ball ball;
 	[SerializeField] private GameObject arena;
-
+	[SerializeField] private Transform playerOne;
+	[SerializeField] private Transform divisionBorder;
 	#endregion
 
 	#region Public Properties
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
 	public static Transform BallTransform => _shared.ball.transform;
 	public static float ArenaLength => _shared._arenaDimensions[0];
 	public static float ArenaWidth => _shared._arenaDimensions[1];
+	public static Transform PlayerOne => _shared.playerOne;
+	public static Transform DivisionBorder => _shared.divisionBorder;
 
 	#endregion
 
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
 		_shared = this;
 		var scale = arena.transform.localScale;
 		_arenaDimensions = new Vector2(scale.x * PlaneWidth, scale.y * PlaneWidth);
+		_shared.playerOne = GameObject.FindGameObjectWithTag("Player 1").transform;
 	}
 
 	#endregion

@@ -7,5 +7,4 @@ using UnityEngine;
 public class PlayerInfo : ScriptableObject
 {
     public Vector3 LocationOpeningScene, LocationGameScene;
-    public Animator Animator;
 }

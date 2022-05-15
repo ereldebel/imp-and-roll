@@ -214,8 +214,8 @@ MonoBehaviour:
     m_ActionName: Player/Dodge Roll[/XInputControllerWindows/buttonEast,/Keyboard/space]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 92b71bde-21d5-4dfa-ac4a-8c310f8ea217
-    m_ActionName: Start Menu/Start[/Keyboard/anyKey]
+    m_ActionId: 178b9fad-0fa0-4b14-af33-4b7a54c96231
+    m_ActionName: Start Menu/Start[/Keyboard/enter,/Keyboard/space,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
