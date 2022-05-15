@@ -226,6 +226,10 @@ namespace Player
 			StartCoroutine(DodgeRoll(Vector2ToVector3XZ(MovementStick)));
 		}
 
+		public void PlayerReady()
+		{
+			CrossSceneManager.Shared.PlayerReady(gameObject);
+		}
 		#endregion
 
 		#region Private Methods
