@@ -18,7 +18,6 @@ namespace Player
 		{
 			_rightSide = transform.position.x > 0;
 			_brain = GetComponent<PlayerBrain>();
-			_border = GameManager.DivisionBorder;
 			if (otherPlayer == null)
 				otherPlayer = CrossSceneManager.Players[0].transform;
 		}
@@ -26,6 +25,8 @@ namespace Player
 		private void Start()
 		{
 			_ball = GameManager.BallTransform;
+			_border = GameManager.DivisionBorder;
+
 		}
 
 		private void Update()

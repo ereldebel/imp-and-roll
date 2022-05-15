@@ -48,6 +48,12 @@ public class CrossSceneManager : MonoBehaviour
         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
 
+    public void PlayerWon(bool rightLost)
+    {
+
+        SceneManager.LoadScene(rightLost ? "P2 won":"P1 won");
+        Invoke(nameof(StartGameTwoPlayers),3.5f);
+    }
     public void PlayerReady(GameObject player)
     {
         for (int i = 0; i < _players.Count; i++)
@@ -93,7 +99,7 @@ public class CrossSceneManager : MonoBehaviour
 
     private void CreateBot()
     {
-        _players.Add(Instantiate(_players[0],_playerInfos[1].LocationOpeningScene,quaternion.identity));
+        var player = Instantiate(_players[0], _playerInfos[1].LocationOpeningScene, quaternion.identity);
         _players[1].AddComponent<AIController>();
         MakePlayerRed(_players[1]);
     }
@@ -102,7 +108,7 @@ public class CrossSceneManager : MonoBehaviour
     {
         _numPlayers = 0;
         Shared = this;
-
+        DontDestroyOnLoad(Shared);
     }
 
     private IEnumerator OnePlayerReady()

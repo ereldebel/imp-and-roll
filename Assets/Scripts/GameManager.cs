@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
 	{
 		var player = rightLost ? "left player" : "right player";
 		print($"{player} won!");
-		SceneManager.LoadScene(0);
+		// SceneManager.LoadScene(0);
+		CrossSceneManager.Shared.PlayerWon(rightLost);
 	}
 
 	#endregion
