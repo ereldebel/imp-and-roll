@@ -238,8 +238,8 @@ MonoBehaviour:
   maxThrowChargeTime: 1
   movementRelativeSpeedWhileCharging: 0.5
   throwOriginEpsilon: 0
-  knockBackDuration: 0.5
-  knockBackRelativeSpeed: 0.5
+  knockBackDuration: 0.15
+  knockBackRelativeSpeed: 0.15
   stunDuration: 1
   stunDurationIncrease: 0.2
   stunBarPercentagePerHit: 0.2
