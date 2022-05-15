@@ -7,6 +7,11 @@ namespace Environment
 {
 	public class Sparks : MonoBehaviour
 	{
+		[SerializeField] private float minRelativeSpeed;
+		[SerializeField] private float maxRelativeSpeed;
+		[SerializeField] private float minSparkRate = 3.5f;
+		[SerializeField] private float maxSparkRate = 10;
+		
 		private ParticleSystem.MainModule _main;
 		private ParticleSystem.EmissionModule _emission;
 
@@ -14,9 +19,9 @@ namespace Environment
 
 		private void Awake()
 		{
-			var particleSystem = GetComponent<ParticleSystem>();
-			_main = particleSystem.main;
-			_emission = particleSystem.emission;
+			var particles = GetComponent<ParticleSystem>();
+			_main = particles.main;
+			_emission = particles.emission;
 		}
 
 		private void OnEnable()
@@ -36,7 +41,7 @@ namespace Environment
 			while (_change)
 			{
 				yield return new WaitForSeconds(Random.Range(5, 10));
-				var nextSpeed = 0.75f + Random.value;
+				var nextSpeed = Random.Range(minRelativeSpeed, maxRelativeSpeed);
 				while (_change && Math.Abs(_main.simulationSpeed - nextSpeed) > 0.01)
 				{
 					_main.simulationSpeed = Mathf.Lerp(_main.simulationSpeed, nextSpeed, 0.01f);
@@ -50,7 +55,7 @@ namespace Environment
 			while (_change)
 			{
 				yield return new WaitForSeconds(Random.Range(5, 10));
-				var nextMultiplier = Random.Range(3.5f, 10);
+				var nextMultiplier = Random.Range(minSparkRate,maxSparkRate);
 				while (_change && Math.Abs(_emission.rateOverTimeMultiplier - nextMultiplier) > 0.01)
 				{
 					_emission.rateOverTimeMultiplier =

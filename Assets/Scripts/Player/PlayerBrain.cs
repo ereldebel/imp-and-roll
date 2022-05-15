@@ -158,7 +158,11 @@ namespace Player
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
 			Rumble = GetComponent<Rumble>();
+			_ballPositionsByDirection.Add(ballPositionsDown45);
+			_ballPositionsByDirection.Add(ballPositionsSide);
+			_ballPositionsByDirection.Add(ballPositionsUp45);
 			OnValidate();
+			transform.rotation = transform.position.x > 0 ? _faceLeft : _faceRight;
 		}
 
 		private void OnValidate()
@@ -168,9 +172,6 @@ namespace Player
 			_colliderRadius = scale.x * GetComponent<CapsuleCollider>().radius;
 			_diffFromColliderCenterToBottom =
 				t.rotation * (0.5f * scale.y * GetComponent<CapsuleCollider>().height * Vector3.down);
-			_ballPositionsByDirection.Add(ballPositionsDown45);
-			_ballPositionsByDirection.Add(ballPositionsSide);
-			_ballPositionsByDirection.Add(ballPositionsUp45);
 			_faceLeft = transform.rotation;
 			_faceRight = Quaternion.AngleAxis(180, transform.up) * _faceLeft;
 		}
