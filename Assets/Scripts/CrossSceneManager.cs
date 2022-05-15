@@ -30,7 +30,6 @@ public class CrossSceneManager : MonoBehaviour
 
     private void SetUpPlayerForStartScene(GameObject player, int playerID)
     {
-        print(playerID);
         player.GetComponent<CharacterController>().enabled = false;
         player.transform.position = _playerInfos[playerID].LocationOpeningScene;
         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Start Menu");// To keep Playability without entry scene
