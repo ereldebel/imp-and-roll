@@ -6,9 +6,9 @@ namespace Player
 	public class AIController : MonoBehaviour
 	{
 		[SerializeField] private Transform otherPlayer;
-		[SerializeField] private Transform border;
 		[SerializeField] private float throwLoad = 0.8f;
 
+		private Transform _border;
 		private Transform _ball;
 		private PlayerBrain _brain;
 		private bool _rightSide;
@@ -18,6 +18,9 @@ namespace Player
 		{
 			_rightSide = transform.position.x > 0;
 			_brain = GetComponent<PlayerBrain>();
+			_border = GameManager.DivisionBorder;
+			if (otherPlayer == null)
+				otherPlayer = CrossSceneManager.Players[0].transform;
 		}
 
 		private void Start()
@@ -27,7 +30,7 @@ namespace Player
 
 		private void Update()
 		{
-			var ballIsOnBorderRight = _ball.position.x > border.position.x;
+			var ballIsOnBorderRight = _ball.position.x > _border.position.x;
 			if (_throwing)
 			{
 				_brain.AimingStick = DirectionTo(otherPlayer.position);
@@ -48,7 +51,7 @@ namespace Player
 			{
 				var midOfPlayerPartX = GameManager.ArenaLength / 4;
 				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
-				midOfPlayerPartX += border.position.x / 2;
+				midOfPlayerPartX += _border.position.x / 2;
 				var movementDirection = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));
 				_brain.MovementStick =
 					movementDirection.sqrMagnitude > 0.5f ? movementDirection.normalized : Vector2.zero;
@@ -57,6 +60,7 @@ namespace Player
 			}
 		}
 
+		
 		private Vector2 DirectionTo(Vector3 destination)
 		{
 			var pos = transform.position;

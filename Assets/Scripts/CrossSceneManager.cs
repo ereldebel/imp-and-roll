@@ -10,12 +10,14 @@ using UnityEngine.SceneManagement;
 
 public class CrossSceneManager : MonoBehaviour
 { 
-    [SerializeField] private  PlayerInfo[] _playerInfos ;
+    [SerializeField] private PlayerInfo[] _playerInfos ;
     [SerializeField] private AnimatorOverrideController redController;
     [SerializeField] private float waitTime = 2;
     private List<GameObject> _players = new List<GameObject>();
     private List<bool> _playerReadyStatus = new List<bool>();
     private int _numPlayers = 0;
+
+    public static List<GameObject> Players => Shared._players;
     public static CrossSceneManager Shared { get; private set; }
 
     public void AddPlayer(PlayerInput input)
