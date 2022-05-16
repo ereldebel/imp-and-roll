@@ -47,7 +47,7 @@ public class CrossSceneManager : MonoBehaviour
 		SceneManager.LoadSceneAsync(rightLost ? "P2 won" : "P1 won");
 		StartCoroutine(ResetTimer(3.5f));
 	}
-
+	
 	private IEnumerator ResetTimer(float time)
 	{
 		yield return new WaitForSeconds(time);
@@ -125,7 +125,6 @@ public class CrossSceneManager : MonoBehaviour
 	{
 		for (var i = waitTime; i > 0; i--)
 		{
-			print(i);
 			yield return new WaitForSeconds(1);
 			if (_numPlayers != 1)
 				StartGameTwoPlayers();
