@@ -1,5 +1,5 @@
+using ArenaDivision;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject arena;
 	[SerializeField] private Transform divisionBorder;
 	[SerializeField] private GameObject hands;
+	[SerializeField] private Monster monster;
 
 	#endregion
 
@@ -45,11 +46,14 @@ public class GameManager : MonoBehaviour
 
 	public static void GameStarted()
 	{
+		_shared.monster.enabled = true;
+		_shared.monster.ResetPosition();
 		_shared.hands.SetActive(true);
 	}
 	
 	public static void GameOver(bool rightLost)
 	{
+		_shared.monster.enabled = false;
 		var player = rightLost ? "left player" : "right player";
 		print($"{player} won!");
 		CrossSceneManager.Shared.PlayerWon(rightLost);

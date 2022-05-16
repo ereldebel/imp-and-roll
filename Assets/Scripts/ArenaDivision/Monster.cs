@@ -24,10 +24,10 @@ namespace ArenaDivision
 		private SpriteRenderer _spriteRenderer;
 		private LineRenderer _lineRenderer;
 		private Collider _collider;
+		private Animator _animator;
 
 		private Transform _ball;
 		private float _halfOfArenaWidth;
-		private float _chainLength;
 		private float _fixedBaseSpeed;
 		private float _fixedBaseYSpeed;
 		private float _startTime;
@@ -36,6 +36,8 @@ namespace ArenaDivision
 		private Vector3 _startingPosition;
 
 		private static readonly Collider[] TempColliders = new Collider[3];
+		private static readonly int AnimatorX = Animator.StringToHash("X");
+		private static readonly int AnimatorZ = Animator.StringToHash("Z");
 
 		#endregion
 
@@ -46,6 +48,7 @@ namespace ArenaDivision
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_lineRenderer = GetComponent<LineRenderer>();
 			_collider = GetComponent<Collider>();
+			_animator = GetComponent<Animator>();
 			_lineRenderer.positionCount = 2;
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
@@ -62,20 +65,8 @@ namespace ArenaDivision
 
 		private void OnValidate()
 		{
-			_chainLength = maxHeight + chainRemainder;
 			_fixedBaseSpeed = baseSpeed * Time.fixedDeltaTime;
 			_fixedBaseYSpeed = baseYSpeed * Time.fixedDeltaTime;
-		}
-
-		private void OnBecameVisible()
-		{
-			transform.position = _startingPosition;
-			enabled = true;
-		}
-
-		private void OnBecameInvisible()
-		{
-			enabled = false;
 		}
 
 		private void Update()
@@ -98,6 +89,12 @@ namespace ArenaDivision
 		{
 			GameManager.GameOver(transform.position.x > divider.position.x);
 		}
+
+		#endregion
+
+		#region Public Methods
+
+		public void ResetPosition() => transform.position = _startingPosition;
 
 		#endregion
 
@@ -125,6 +122,18 @@ namespace ArenaDivision
 			if (Mathf.Abs(pos.x - dividerPos.x) < maxXDistFromMonster || movingTowardsDivider) return;
 			dividerPos.x += xMovement;
 			divider.position = dividerPos;
+		}
+
+		private void UpdateAnimator(Vector3 direction)
+		{
+			var z = Mathf.Round(direction.z);
+			var x = Mathf.Round(direction.x);
+			if (x == 0 && z == 0) return;
+			_animator.SetFloat(AnimatorZ, z);
+			if (z > 0)
+				_animator.SetFloat(AnimatorX, direction.x > 0 ? 1 : -1);
+			else
+				_animator.SetFloat(AnimatorX, x);
 		}
 
 		private void UpdateSpectralChain()

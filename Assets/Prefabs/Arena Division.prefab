@@ -253,7 +253,7 @@ Transform:
   m_GameObject: {fileID: 5851243975382083767}
   m_LocalRotation: {x: 0.440722, y: -0.0015667367, z: 0.0007692325, w: 0.89764196}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5851243974137138929}
   m_Father: {fileID: 5851243974550147855}
@@ -335,12 +335,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69971ea9c8938f74785edd99e0beea82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 1
+  sightRadius: 0.1
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 72
   baseSpeed: 1
-  baseYSpeed: 0.5
+  baseYSpeed: 2
   maxHeight: 5
   chainRemainder: 0.01
   maxXDistFromMonster: 1

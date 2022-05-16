@@ -213,6 +213,10 @@ PrefabInstance:
       propertyPath: _playerBrain
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7083746240840554957, guid: dff10b080088ecb44b426731d08f27e0, type: 3}
+      propertyPath: playerNumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9142641371849795119, guid: dff10b080088ecb44b426731d08f27e0, type: 3}
       propertyPath: m_Name
       value: Red Stun Bar
@@ -305,10 +309,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 951797240356921817, guid: dff10b080088ecb44b426731d08f27e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1745994740641970807, guid: dff10b080088ecb44b426731d08f27e0, type: 3}
-      propertyPath: m_Maskable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2655230214120666326, guid: dff10b080088ecb44b426731d08f27e0, type: 3}

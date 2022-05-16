@@ -957,6 +957,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 442050005}
     - target: {fileID: 6793810490810583996, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 5851243974263786945}
+    - target: {fileID: 6793810490810583996, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: divisionBorder
       value: 
       objectReference: {fileID: 442050005}
@@ -1364,6 +1368,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5182d529ca1388347913065381b912e7, type: 3}
+--- !u!1 &5851243974263786941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5851243975382083767, guid: 5182d529ca1388347913065381b912e7, type: 3}
+  m_PrefabInstance: {fileID: 5851243974263786940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5851243974263786942
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851243974263786941}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16f7cbb7fa7ba3341b82db387c82a198, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5851243974263786945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5851243975382083761, guid: 5182d529ca1388347913065381b912e7, type: 3}
+  m_PrefabInstance: {fileID: 5851243974263786940}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851243974263786941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69971ea9c8938f74785edd99e0beea82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8084092959413577733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1386,6 +1425,10 @@ PrefabInstance:
     - target: {fileID: 1332768741218388523, guid: ed59a11a42e40f64ba03dd71cf2ece20, type: 3}
       propertyPath: playerBrain
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1351753300860667474, guid: ed59a11a42e40f64ba03dd71cf2ece20, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7497212724538952758, guid: ed59a11a42e40f64ba03dd71cf2ece20, type: 3}
       propertyPath: m_Material
