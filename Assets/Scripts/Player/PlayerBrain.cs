@@ -165,6 +165,8 @@ namespace Player
 			OnValidate();
 			_left = transform.position.x > 0;
 			transform.rotation = _left ? _faceLeft : _faceRight;
+			GameManager.GameIsOver += DestroyBall;
+
 		}
 
 		private void OnValidate()
@@ -192,6 +194,11 @@ namespace Player
 		private void OnCollisionStay(Collision collision)
 		{
 			PickupBall(collision);
+		}
+
+		private void OnDestroy()
+		{
+			GameManager.GameIsOver -= DestroyBall;
 		}
 
 		#endregion
@@ -247,6 +254,12 @@ namespace Player
 				_ball.Pickup(transform);
 		}
 
+		private void DestroyBall()
+		{
+			if (_ball == null) return;
+			Destroy(_ball.gameObject);
+			_ball = null;
+		}
 		private void ProcessMovementInput()
 		{
 			if (_knockedOut || _rolling) return;

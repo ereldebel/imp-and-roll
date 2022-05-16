@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -40,12 +41,19 @@ public class GameManager : MonoBehaviour
 
 	#endregion
 
+	#region events
+	public static event Action GameIsOver;
+
+	
+
+	#endregion
 	#region Public Methods
 
 	public static void GameOver(bool rightLost)
 	{
 		var player = rightLost ? "left player" : "right player";
 		print($"{player} won!");
+		GameIsOver?.Invoke();
 		CrossSceneManager.Shared.PlayerWon(rightLost);
 	}
 

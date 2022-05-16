@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class Ball : MonoBehaviour
 			? Mathf.Lerp(MinSize, MaxSize, GrowTimePercent)
 			: Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
 	}
+	
 
 	#endregion
 
@@ -137,6 +139,5 @@ public class Ball : MonoBehaviour
 		_transform.localScale = new Vector3(size / lossyScale.x, size / lossyScale.y,
 			size / lossyScale.z);
 	}
-
 	#endregion
 }
