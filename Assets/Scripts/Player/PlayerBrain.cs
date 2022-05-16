@@ -60,7 +60,7 @@ namespace Player
 		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 		public bool HasBall => _ball != null;
 		public Rumble Rumble { get; private set; }
-		public bool Flipped => transform.rotation == _faceRight;
+		public bool Flipped => _left == (transform.rotation == _faceRight);
 
 		#endregion;
 
@@ -126,6 +126,7 @@ namespace Player
 		private int _timesStunned = 0;
 		private Quaternion _faceLeft;
 		private Quaternion _faceRight;
+		private bool _left;
 		
 		private readonly List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
 		private int _ballThrowPositionIndex = 0;
@@ -162,7 +163,8 @@ namespace Player
 			_ballPositionsByDirection.Add(ballPositionsSide);
 			_ballPositionsByDirection.Add(ballPositionsUp45);
 			OnValidate();
-			transform.rotation = transform.position.x > 0 ? _faceLeft : _faceRight;
+			_left = transform.position.x > 0;
+			transform.rotation = _left ? _faceLeft : _faceRight;
 		}
 
 		private void OnValidate()
