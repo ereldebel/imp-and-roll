@@ -6,15 +6,15 @@ namespace ArenaDivision
 	{
 		#region Serialized Fields
 
-		[SerializeField] private float sightRadius = 1;
-		[SerializeField] private LayerMask targetLayerMask;
+		[SerializeField] private float dangerZoneRadius = 1;
 		[SerializeField] private float baseSpeed = 1;
-		[SerializeField] private float baseYSpeed = 0.5f;
+		[SerializeField] private float baseYSpeed = 2;
 		[SerializeField] private float maxHeight = 5;
 		[SerializeField] private float maxXDistFromMonster = 1;
 		[SerializeField] private Transform divider;
 		[SerializeField] private bool constantSpeeds;
 		[SerializeField] private float timeToSpeedUp = 60;
+		[SerializeField] private float colliderEnableDistance=1;
 
 		#endregion;
 
@@ -25,15 +25,12 @@ namespace ArenaDivision
 		private Animator _animator;
 
 		private Transform _ball;
-		private float _halfOfArenaWidth;
 		private float _fixedBaseSpeed;
 		private float _fixedBaseYSpeed;
 		private float _startTime;
 		private float _speed = 1;
 		private float _ySpeed = 0.5f;
-		private Vector3 _startingPosition;
 
-		private static readonly Collider[] TempColliders = new Collider[3];
 		private static readonly int AnimatorX = Animator.StringToHash("X");
 		private static readonly int AnimatorZ = Animator.StringToHash("Z");
 
@@ -49,14 +46,12 @@ namespace ArenaDivision
 			_lineRenderer.positionCount = 2;
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
-			_startingPosition = transform.position;
 			OnValidate();
 		}
 
 		private void Start()
 		{
 			_ball = GameManager.BallTransform;
-			_halfOfArenaWidth = GameManager.ArenaWidth / 2;
 		}
 
 		private void OnValidate()
@@ -88,12 +83,6 @@ namespace ArenaDivision
 
 		#endregion
 
-		#region Public Methods
-
-		public void ResetPosition() => transform.position = _startingPosition;
-
-		#endregion
-
 		#region Private Methods
 
 		private void Move()
@@ -101,11 +90,12 @@ namespace ArenaDivision
 			var pos = transform.position;
 			var ballPos = _ball.position;
 			var dividerPos = divider.position;
-			var chasingCloseTarget = GetClosestTarget(pos, ballPos, out var closestTargetDir);
-			_collider.enabled = closestTargetDir.sqrMagnitude < 1;
+			var closestTargetDir = ballPos - pos;
+			var rightAboveTarget = closestTargetDir.sqrMagnitude < Mathf.Pow(dangerZoneRadius, 2);
+			_collider.enabled = closestTargetDir.sqrMagnitude < colliderEnableDistance;
 			var ballDist = ballPos.x - pos.x;
 			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _speed : 0;
-			var yMovement = chasingCloseTarget
+			var yMovement = rightAboveTarget
 				? closestTargetDir.y * _ySpeed
 				: Mathf.Min(maxHeight - pos.y, 2 * _ySpeed);
 			var zMovement = closestTargetDir.z * _speed;
@@ -139,27 +129,6 @@ namespace ArenaDivision
 			var closestDividerPoint = divider.position;
 			closestDividerPoint.z = transform.position.z;
 			_lineRenderer.SetPosition(1, transform.InverseTransformPoint(closestDividerPoint));
-		}
-
-		private bool GetClosestTarget(Vector3 pos, Vector3 defaultObjPos, out Vector3 closestTargetDir)
-		{
-			var playersSeen =
-				Physics.OverlapBoxNonAlloc(Vector3.right * pos.x,
-					new Vector3(sightRadius, maxHeight, _halfOfArenaWidth), TempColliders, Quaternion.identity,
-					targetLayerMask.value);
-			var closestPos = defaultObjPos;
-			var closestDist = Vector3.Distance(pos, defaultObjPos);
-			for (var i = 0; i < playersSeen; ++i)
-			{
-				var otherPos = TempColliders[i].transform.position;
-				var dist = Vector3.Distance(pos, otherPos);
-				if (closestDist <= dist) continue;
-				closestPos = otherPos;
-				closestDist = dist;
-			}
-
-			closestTargetDir = closestPos - pos;
-			return playersSeen > 0;
 		}
 
 		#endregion
