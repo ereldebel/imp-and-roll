@@ -49,9 +49,9 @@ namespace Environment
 		{
 			_objectToFollow = target switch
 			{
-				Target.RightPlayer => CrossSceneManager.Players[0].transform,
-				Target.LeftPlayer => CrossSceneManager.Players[1].transform,
-				Target.Ball => GameManager.BallTransform,
+				Target.RightPlayer => GameManager.Players[0].transform,
+				Target.LeftPlayer => GameManager.Players[1].transform,
+				Target.Ball => ArenaManager.BallTransform,
 				_ => _objectToFollow
 			};
 		}

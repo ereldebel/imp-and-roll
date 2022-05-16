@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6793810490810583987}
   - component: {fileID: 6793810490810583996}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Arena Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

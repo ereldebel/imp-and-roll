@@ -165,7 +165,7 @@ namespace Player
 			OnValidate();
 			_left = transform.position.x > 0;
 			transform.rotation = _left ? _faceLeft : _faceRight;
-			GameManager.GameIsOver += DestroyBall;
+			ArenaManager.GameIsOver += DestroyBall;
 
 		}
 
@@ -198,7 +198,7 @@ namespace Player
 
 		private void OnDestroy()
 		{
-			GameManager.GameIsOver -= DestroyBall;
+			ArenaManager.GameIsOver -= DestroyBall;
 		}
 
 		#endregion
@@ -237,7 +237,7 @@ namespace Player
 
 		public void PlayerReady()
 		{
-			CrossSceneManager.Shared.PlayerReady(gameObject);
+			GameManager.Shared.PlayerReady(gameObject);
 		}
 		#endregion
 

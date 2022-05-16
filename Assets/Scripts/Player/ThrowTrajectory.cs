@@ -32,7 +32,7 @@ namespace Player
 
 		private void Start()
 		{
-			var maxDist = Mathf.Sqrt(Mathf.Pow(GameManager.ArenaLength, 2) + Mathf.Pow(GameManager.ArenaWidth, 2));
+			var maxDist = Mathf.Sqrt(Mathf.Pow(ArenaManager.ArenaLength, 2) + Mathf.Pow(ArenaManager.ArenaWidth, 2));
 			_maxSteps = Mathf.CeilToInt(maxDist / timeStepInterval);
 		}
 

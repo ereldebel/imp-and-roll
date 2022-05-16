@@ -19,13 +19,13 @@ namespace Player
 			_rightSide = transform.position.x > 0;
 			_brain = GetComponent<PlayerBrain>();
 			if (otherPlayer == null)
-				otherPlayer = CrossSceneManager.Players[0].transform;
+				otherPlayer = GameManager.Players[0].transform;
 		}
 
 		private void OnEnable()
 		{
-			_ball = GameManager.BallTransform;
-			_border = GameManager.DivisionBorder;
+			_ball = ArenaManager.BallTransform;
+			_border = ArenaManager.DivisionBorder;
 		}
 
 		private void Update()
@@ -49,7 +49,7 @@ namespace Player
 			}
 			else
 			{
-				var midOfPlayerPartX = GameManager.ArenaLength / 4;
+				var midOfPlayerPartX = ArenaManager.ArenaLength / 4;
 				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
 				midOfPlayerPartX += _border.position.x / 2;
 				var movementDirection = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));

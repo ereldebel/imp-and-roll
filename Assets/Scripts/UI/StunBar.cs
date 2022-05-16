@@ -19,7 +19,7 @@ namespace UI
 
 		private void Awake()
 		{
-			_playerBrain = CrossSceneManager.Players[playerNumber].GetComponent<PlayerBrain>();
+			_playerBrain = GameManager.Players[playerNumber].GetComponent<PlayerBrain>();
 			bar.SetFloat(BarPercentage, 1);
 			_image = GetComponent<Image>();
 			_regularFace = _image.sprite;

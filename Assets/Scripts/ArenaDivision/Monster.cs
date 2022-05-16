@@ -51,7 +51,7 @@ namespace ArenaDivision
 
 		private void Start()
 		{
-			_ball = GameManager.BallTransform;
+			_ball = ArenaManager.BallTransform;
 		}
 
 		private void OnValidate()
@@ -78,7 +78,7 @@ namespace ArenaDivision
 
 		private void OnTriggerEnter(Collider other)
 		{
-			GameManager.GameOver(transform.position.x > divider.position.x);
+			ArenaManager.GameOver(transform.position.x > divider.position.x);
 		}
 
 		#endregion

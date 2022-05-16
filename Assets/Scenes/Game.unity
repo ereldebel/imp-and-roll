@@ -927,7 +927,7 @@ PrefabInstance:
       objectReference: {fileID: 442050005}
     - target: {fileID: 6793810490810583997, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: m_Name
-      value: Game Manager
+      value: Arena Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
@@ -1314,10 +1314,6 @@ PrefabInstance:
     - target: {fileID: 5851243975382083760, guid: 5182d529ca1388347913065381b912e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5851243975382083762, guid: 5182d529ca1388347913065381b912e7, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5851243975382083767, guid: 5182d529ca1388347913065381b912e7, type: 3}
       propertyPath: m_IsActive
