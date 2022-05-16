@@ -22,7 +22,7 @@ namespace Player
 				otherPlayer = CrossSceneManager.Players[0].transform;
 		}
 
-		private void Start()
+		private void OnEnable()
 		{
 			_ball = GameManager.BallTransform;
 			_border = GameManager.DivisionBorder;

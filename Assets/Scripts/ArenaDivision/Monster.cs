@@ -11,7 +11,6 @@ namespace ArenaDivision
 		[SerializeField] private float baseSpeed = 1;
 		[SerializeField] private float baseYSpeed = 0.5f;
 		[SerializeField] private float maxHeight = 5;
-		[SerializeField] private float chainRemainder = 0.1f;
 		[SerializeField] private float maxXDistFromMonster = 1;
 		[SerializeField] private Transform divider;
 		[SerializeField] private bool constantSpeeds;
@@ -54,7 +53,6 @@ namespace ArenaDivision
 			_startTime = Time.time;
 			_startingPosition = transform.position;
 			OnValidate();
-			enabled = false;
 		}
 
 		private void Start()

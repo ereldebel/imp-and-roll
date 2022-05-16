@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Player;
 using Scriptable_Objects;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,7 @@ public class CrossSceneManager : MonoBehaviour
 	private readonly Dictionary<GameObject, bool> _playerReadyStatus = new Dictionary<GameObject, bool>();
 	private int _numPlayers = 0;
 	private bool _gameStarted = false;
+	private bool _AIPlaying;
 
 	public static List<GameObject> Players => Shared._players;
 	public static CrossSceneManager Shared { get; private set; }
@@ -40,16 +42,15 @@ public class CrossSceneManager : MonoBehaviour
 	public void PlayerWon(bool rightLost)
 	{
 		if (!_gameStarted) return;
+		HaltAI();
 		_gameStarted = false;
-		StartCoroutine(MatchEnd(rightLost ? "P2 won" : "P1 won"));
+		SceneManager.LoadSceneAsync(rightLost ? "P2 won" : "P1 won");
+		StartCoroutine(ResetTimer(3.5f));
 	}
 
-	private IEnumerator MatchEnd(string winScene)
+	private IEnumerator ResetTimer(float time)
 	{
-		var job = SceneManager.LoadSceneAsync(winScene, LoadSceneMode.Additive);
-		yield return new WaitWhile(() => !job.isDone);
-		SceneManager.SetActiveScene(SceneManager.GetSceneByName(winScene));
-		yield return new WaitForSeconds(3.5f);
+		yield return new WaitForSeconds(time);
 		StartGameTwoPlayers();
 		_gameStarted = true;
 	}
@@ -59,7 +60,6 @@ public class CrossSceneManager : MonoBehaviour
 		_playerReadyStatus[player] = !_playerReadyStatus[player];
 		if (_playerReadyStatus.Any(status => !status.Value)) return;
 		if (_gameStarted) return;
-		SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
 		_gameStarted = true;
 		if (_numPlayers > 1)
 			StartGameTwoPlayers();
@@ -67,12 +67,23 @@ public class CrossSceneManager : MonoBehaviour
 			StartCoroutine(OnePlayerReady());
 	}
 
+	public void AwakeAI()
+	{
+		if (_AIPlaying)
+			_players[1].GetComponent<AIController>().enabled = true;
+	}
+	
+	public void HaltAI()
+	{
+		if (_AIPlaying)
+			_players[1].GetComponent<AIController>().enabled = false;
+	}
+
 	private void SetUpPlayerForStartScene(GameObject player, int playerID)
 	{
 		player.GetComponent<CharacterController>().enabled = false;
 		player.transform.position = playerInfos[playerID].locationOpeningScene;
-		player.GetComponent<PlayerInput>()
-			.SwitchCurrentActionMap("Start Menu"); // To keep Playability without entry scene
+		player.GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Start Menu"); // To keep Playability without entry scene
 		if (playerID == 1) MakePlayerRed(player);
 	}
 
@@ -90,11 +101,9 @@ public class CrossSceneManager : MonoBehaviour
 
 	private void StartGameTwoPlayers()
 	{
-		SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-		MainCamera.ToGamePosition();
+		SceneManager.LoadScene("Game");
 		for (var i = 0; i < _players.Count; i++)
 			SetUpPlayerForGameScene(_players[i], i);
-		GameManager.GameStarted();
 	}
 
 	private void StartGameOnePlayer()
@@ -105,6 +114,7 @@ public class CrossSceneManager : MonoBehaviour
 
 	private void CreateAI()
 	{
+		_AIPlaying = true;
 		var player = Instantiate(AIPlayerPrefab, playerInfos[1].locationOpeningScene, AIPlayerPrefab.transform.rotation);
 		DontDestroyOnLoad(player);
 		_players.Add(player);

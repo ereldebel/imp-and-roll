@@ -43,6 +43,10 @@ namespace Environment
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_startingPos = transform.localPosition;
 			_yMinVal = _startingPos.y;
+		}
+
+		private void Start()
+		{
 			_objectToFollow = target switch
 			{
 				Target.RightPlayer => CrossSceneManager.Players[0].transform,
