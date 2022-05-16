@@ -251,7 +251,7 @@ MonoBehaviour:
   maxThrowForce: 25
   throwYForce: -0.05
   minThrowChargeTime: 0
-  maxThrowChargeTime: 1
+  maxThrowChargeTime: 1.2
   movementRelativeSpeedWhileCharging: 0.5
   throwOriginEpsilon: 0
   knockBackDuration: 0.15

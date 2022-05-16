@@ -119,7 +119,7 @@ namespace Player
 		private Vector3 _diffFromColliderCenterToBottom;
 		private float _chargeStartTime = -1;
 		private Vector2 _aimDirection;
-		private bool _knockedOut;
+		private bool _stunned;
 		private bool _rolling;
 		private bool _calledThrow;
 		private float _stunBar = 1;
@@ -127,7 +127,7 @@ namespace Player
 		private Quaternion _faceLeft;
 		private Quaternion _faceRight;
 		private bool _left;
-		
+
 		private readonly List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
 		private int _ballThrowPositionIndex = 0;
 
@@ -165,8 +165,7 @@ namespace Player
 			OnValidate();
 			_left = transform.position.x > 0;
 			transform.rotation = _left ? _faceLeft : _faceRight;
-			ArenaManager.GameIsOver += DestroyBall;
-
+			ArenaManager.GameIsOver += RemoveBall;
 		}
 
 		private void OnValidate()
@@ -183,6 +182,10 @@ namespace Player
 		private void FixedUpdate()
 		{
 			ProcessMovementInput();
+			if (_chargeStartTime < 0) return;
+			_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(_aimDirection.x)));
+			_animator.SetFloat(AnimatorZ, Mathf.Round(_aimDirection.y));
+			transform.rotation = _aimDirection.x > 0 ? _faceRight : _faceLeft;
 		}
 
 
@@ -198,7 +201,7 @@ namespace Player
 
 		private void OnDestroy()
 		{
-			ArenaManager.GameIsOver -= DestroyBall;
+			ArenaManager.GameIsOver -= RemoveBall;
 		}
 
 		#endregion
@@ -207,7 +210,7 @@ namespace Player
 
 		public bool ChargeThrow()
 		{
-			if (_knockedOut || _rolling || _chargeStartTime >= 0 || _calledThrow || _ball == null) return false;
+			if (_stunned || _rolling || _chargeStartTime >= 0 || _calledThrow || !_ball) return false;
 			_chargeStartTime = Time.time;
 			_animator.SetBool(AnimatorThrowing, true);
 			_ball.Grow(_chargeStartTime);
@@ -217,7 +220,7 @@ namespace Player
 
 		public void ThrowBall()
 		{
-			if (_knockedOut || _rolling || _chargeStartTime < 0 || _calledThrow || _ball == null) return;
+			if (_stunned || _rolling || _chargeStartTime < 0 || _calledThrow || !_ball) return;
 			_animator.SetBool(AnimatorThrowing, false);
 			_calledThrow = true;
 		}
@@ -231,7 +234,7 @@ namespace Player
 
 		public void DodgeRoll()
 		{
-			if (MovementStick == Vector2.zero || _chargeStartTime >= 0 || _knockedOut || _rolling) return;
+			if (MovementStick == Vector2.zero || _chargeStartTime >= 0 || _stunned || _rolling) return;
 			StartCoroutine(DodgeRoll(Vector2ToVector3XZ(MovementStick)));
 		}
 
@@ -239,13 +242,14 @@ namespace Player
 		{
 			GameManager.Shared.PlayerReady(gameObject);
 		}
+
 		#endregion
 
 		#region Private Methods
 
 		private void PickupBall(Collision collision)
 		{
-			if (_ball != null || _knockedOut) return;
+			if (_ball != null || _stunned) return;
 			var ball = collision.gameObject.GetComponent<Ball>();
 			if (ball == null) return;
 			if (ball.Thrown) return;
@@ -254,28 +258,38 @@ namespace Player
 				_ball.Pickup(transform);
 		}
 
-		private void DestroyBall()
+		private void RemoveBall()
 		{
-			// if (_ball == null) return;
-			// Destroy(_ball.gameObject);
 			_ball = null;
 		}
+
 		private void ProcessMovementInput()
 		{
-			if (_knockedOut || _rolling) return;
+			if (_rolling || !_controller.enabled) return;
+			if (_stunned)
+			{
+				_controller.SimpleMove(Vector3.zero);
+				return;
+			}
+
 			if (MovementStick.sqrMagnitude <= 0.1)
 			{
 				_animator.SetBool(AnimatorRunning, false);
+				_controller.SimpleMove(Vector3.zero);
 				return;
 			}
 
 			_animator.SetBool(AnimatorRunning, true);
-			_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(MovementStick.x)));
-			_animator.SetFloat(AnimatorZ, Mathf.Round(MovementStick.y));
 			var velocity = speed * new Vector3(MovementStick.x, 0, MovementStick.y);
 			if (_chargeStartTime >= 0)
 				velocity *= movementRelativeSpeedWhileCharging;
-			transform.rotation = velocity.x > 0 ? _faceRight : _faceLeft;
+			else
+			{
+				_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(MovementStick.x)));
+				_animator.SetFloat(AnimatorZ, Mathf.Round(MovementStick.y));
+				transform.rotation = velocity.x > 0 ? _faceRight : _faceLeft;
+			}
+
 			_controller.SimpleMove(velocity);
 		}
 
@@ -284,10 +298,11 @@ namespace Player
 			return new Vector3(input.x, 0, input.y);
 		}
 
-		private void AnimatorEndStun() => _knockedOut = false;
+		private void AnimatorEndStun() => _stunned = false;
 
 		private void AnimatorThrowBall()
 		{
+			if (!_ball) return;
 			_ballThrowPositionIndex = 0;
 			_chargeStartTime = -1;
 			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
@@ -297,12 +312,11 @@ namespace Player
 		}
 
 		private void AnimatorChangeBallPosition() => ChangeBallPosition(_ballThrowPositionIndex++);
-
-
 		private void AnimatorThrowChargeBallPosition() => ChangeBallPosition(2);
 
 		private void ChangeBallPosition(int index)
 		{
+			if (index >= ballPositionsSide.Length || !_ball) return;
 			var ballPos = _ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][index];
 			_ball.transform.localPosition = ballPos;
 		}
@@ -342,7 +356,7 @@ namespace Player
 			if (_stunBar <= 0)
 				currStunDuration *= 2;
 			StunStarted?.Invoke(_stunBar);
-			_knockedOut = true;
+			_stunned = true;
 			knockBackDir.y = 0;
 			var numIterations = knockBackDuration / Time.fixedDeltaTime;
 			for (var i = 0; i < numIterations; ++i)

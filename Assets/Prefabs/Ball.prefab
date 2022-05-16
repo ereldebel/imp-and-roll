@@ -52,9 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f1d25b5aa24744a0e8595de54c2d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundedDistance: 0.01
-  sizeRange: {x: 0.5, y: 1}
-  growDur: 0.8
+  sizeRange: {x: 0.5, y: 1.2}
+  growDur: 0.5
   shrinkDur: 1.5
 --- !u!135 &610008545084971113
 SphereCollider:

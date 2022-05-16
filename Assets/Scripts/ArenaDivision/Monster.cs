@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ArenaDivision
@@ -14,7 +15,7 @@ namespace ArenaDivision
 		[SerializeField] private Transform divider;
 		[SerializeField] private bool constantSpeeds;
 		[SerializeField] private float timeToSpeedUp = 60;
-		[SerializeField] private float colliderEnableDistance=1;
+		[SerializeField] private float colliderEnableDistance = 1;
 
 		#endregion;
 
@@ -47,6 +48,7 @@ namespace ArenaDivision
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
 			OnValidate();
+			enabled = false;
 		}
 
 		private void Start()
@@ -58,6 +60,11 @@ namespace ArenaDivision
 		{
 			_fixedBaseSpeed = baseSpeed * Time.fixedDeltaTime;
 			_fixedBaseYSpeed = baseYSpeed * Time.fixedDeltaTime;
+		}
+
+		private void OnBecameVisible()
+		{
+			enabled = true;
 		}
 
 		private void Update()
@@ -90,20 +97,19 @@ namespace ArenaDivision
 			var pos = transform.position;
 			var ballPos = _ball.position;
 			var dividerPos = divider.position;
-			var closestTargetDir = ballPos - pos;
-			var rightAboveTarget = closestTargetDir.sqrMagnitude < Mathf.Pow(dangerZoneRadius, 2);
-			_collider.enabled = closestTargetDir.sqrMagnitude < colliderEnableDistance;
+			var ballDir = ballPos - pos;
+			UpdateAnimator(ballDir);
+			_collider.enabled = ballDir.sqrMagnitude < colliderEnableDistance;
 			var ballDist = ballPos.x - pos.x;
 			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _speed : 0;
-			var yMovement = rightAboveTarget
-				? closestTargetDir.y * _ySpeed
+			var yMovement = Mathf.Max(Mathf.Abs(ballDir.x), Mathf.Abs(ballDir.z)) < dangerZoneRadius
+				? ballDir.y * _ySpeed
 				: Mathf.Min(maxHeight - pos.y, 2 * _ySpeed);
-			var zMovement = closestTargetDir.z * _speed;
+			var zMovement = ballDir.z * _speed;
 			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) > 0;
 			if (movingTowardsDivider)
 				xMovement *= 2;
 			var movement = new Vector3(xMovement, yMovement, zMovement);
-			UpdateAnimator(movement);
 			pos += movement;
 			transform.position = pos;
 			if (Mathf.Abs(pos.x - dividerPos.x) < maxXDistFromMonster || movingTowardsDivider) return;
@@ -113,6 +119,7 @@ namespace ArenaDivision
 
 		private void UpdateAnimator(Vector3 direction)
 		{
+			direction.y = 0;
 			direction = direction.normalized;
 			var z = Mathf.Round(direction.z);
 			var x = Mathf.Round(direction.x);

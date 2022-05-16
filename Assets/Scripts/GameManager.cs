@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
 		player.transform.position = playerInfos[playerID].locationOpeningScene;
 		player.GetComponent<PlayerInput>()
 			?.SwitchCurrentActionMap("Start Menu"); // To keep Playability without entry scene
-		if (playerID == 1) MakePlayerRed(player);
+		if (playerID == 1)
+			MakePlayerRed(player);
 	}
 
 	private void MakePlayerRed(GameObject player)
@@ -130,8 +131,9 @@ public class GameManager : MonoBehaviour
 		for (var i = waitTime; i > 0; i--)
 		{
 			yield return new WaitForSeconds(1);
-			if (_numPlayers != 1)
-				StartGameTwoPlayers();
+			if (_numPlayers == 1) continue;
+			_gameStarted = false;
+			yield break;
 		}
 
 		StartGameOnePlayer();

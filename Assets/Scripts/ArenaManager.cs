@@ -53,8 +53,8 @@ public class ArenaManager : MonoBehaviour
 	{
 		var player = rightLost ? "left player" : "right player";
 		print($"{player} won!");
-		GameIsOver?.Invoke();
 		GameManager.Shared.PlayerWon(rightLost);
+		GameIsOver?.Invoke();
 	}
 
 	#endregion
