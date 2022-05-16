@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 5851243975382083762}
   - component: {fileID: 5851243975382083761}
   - component: {fileID: 4017327835214303576}
+  - component: {fileID: 199105405002544364}
   m_Layer: 10
   m_Name: Monster
   m_TagString: Untagged
@@ -342,7 +343,6 @@ MonoBehaviour:
   baseSpeed: 1
   baseYSpeed: 2
   maxHeight: 5
-  chainRemainder: 0.01
   maxXDistFromMonster: 1
   divider: {fileID: 5851243974168832105}
   constantSpeeds: 0
@@ -445,3 +445,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!95 &199105405002544364
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851243975382083767}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16f7cbb7fa7ba3341b82db387c82a198, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

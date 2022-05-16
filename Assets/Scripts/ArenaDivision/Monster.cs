@@ -20,7 +20,6 @@ namespace ArenaDivision
 
 		#region Private Fields
 
-		private SpriteRenderer _spriteRenderer;
 		private LineRenderer _lineRenderer;
 		private Collider _collider;
 		private Animator _animator;
@@ -44,7 +43,6 @@ namespace ArenaDivision
 
 		private void Awake()
 		{
-			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_lineRenderer = GetComponent<LineRenderer>();
 			_collider = GetComponent<Collider>();
 			_animator = GetComponent<Animator>();
@@ -105,7 +103,6 @@ namespace ArenaDivision
 			var dividerPos = divider.position;
 			var chasingCloseTarget = GetClosestTarget(pos, ballPos, out var closestTargetDir);
 			_collider.enabled = closestTargetDir.sqrMagnitude < 1;
-			_spriteRenderer.flipX = closestTargetDir.x > dividerPos.x;
 			var ballDist = ballPos.x - pos.x;
 			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _speed : 0;
 			var yMovement = chasingCloseTarget
@@ -115,7 +112,9 @@ namespace ArenaDivision
 			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) > 0;
 			if (movingTowardsDivider)
 				xMovement *= 2;
-			pos += new Vector3(xMovement, yMovement, zMovement);
+			var movement = new Vector3(xMovement, yMovement, zMovement);
+			UpdateAnimator(movement);
+			pos += movement;
 			transform.position = pos;
 			if (Mathf.Abs(pos.x - dividerPos.x) < maxXDistFromMonster || movingTowardsDivider) return;
 			dividerPos.x += xMovement;
@@ -124,6 +123,7 @@ namespace ArenaDivision
 
 		private void UpdateAnimator(Vector3 direction)
 		{
+			direction = direction.normalized;
 			var z = Mathf.Round(direction.z);
 			var x = Mathf.Round(direction.x);
 			if (x == 0 && z == 0) return;
