@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Scriptable_Objects;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,6 +15,7 @@ public class CrossSceneManager : MonoBehaviour
 	private readonly List<GameObject> _players = new List<GameObject>();
 	private readonly Dictionary<GameObject, bool> _playerReadyStatus = new Dictionary<GameObject, bool>();
 	private int _numPlayers = 0;
+	private bool _gameStarted = false;
 
 	public static List<GameObject> Players => Shared._players;
 	public static CrossSceneManager Shared { get; private set; }
@@ -39,6 +39,8 @@ public class CrossSceneManager : MonoBehaviour
 	
 	public void PlayerWon(bool rightLost)
 	{
+		if (!_gameStarted) return;
+		_gameStarted = false;
 		StartCoroutine(MatchEnd(rightLost ? "P2 won" : "P1 won"));
 	}
 
@@ -49,13 +51,16 @@ public class CrossSceneManager : MonoBehaviour
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(winScene));
 		yield return new WaitForSeconds(3.5f);
 		StartGameTwoPlayers();
+		_gameStarted = true;
 	}
 
 	public void PlayerReady(GameObject player)
 	{
 		_playerReadyStatus[player] = !_playerReadyStatus[player];
 		if (_playerReadyStatus.Any(status => !status.Value)) return;
+		if (_gameStarted) return;
 		SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
+		_gameStarted = true;
 		if (_numPlayers > 1)
 			StartGameTwoPlayers();
 		else
@@ -89,6 +94,7 @@ public class CrossSceneManager : MonoBehaviour
 		MainCamera.ToGamePosition();
 		for (var i = 0; i < _players.Count; i++)
 			SetUpPlayerForGameScene(_players[i], i);
+		GameManager.GameStarted();
 	}
 
 	private void StartGameOnePlayer()
@@ -111,7 +117,8 @@ public class CrossSceneManager : MonoBehaviour
 		{
 			print(i);
 			yield return new WaitForSeconds(1);
-			if (_numPlayers != 1) yield break;
+			if (_numPlayers != 1)
+				StartGameTwoPlayers();
 		}
 
 		StartGameOnePlayer();

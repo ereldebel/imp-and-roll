@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274678698290988668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 0}
+  m_LocalPosition: {x: 0, y: -6, z: -0.02}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,7 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yMaxVal: 0.5
   followX: 1
-  objectToFollow: {fileID: 0}
+  followHeight: 0
+  target: 0
   type: 1
   positionFix: 0
 --- !u!95 &4892581943313963664

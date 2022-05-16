@@ -16,6 +16,7 @@ namespace ArenaDivision
 		[SerializeField] private Transform divider;
 		[SerializeField] private bool constantSpeeds;
 		[SerializeField] private float timeToSpeedUp = 60;
+
 		#endregion;
 
 		#region Private Fields
@@ -32,6 +33,7 @@ namespace ArenaDivision
 		private float _startTime;
 		private float _speed = 1;
 		private float _ySpeed = 0.5f;
+		private Vector3 _startingPosition;
 
 		private static readonly Collider[] TempColliders = new Collider[3];
 
@@ -47,6 +49,7 @@ namespace ArenaDivision
 			_lineRenderer.positionCount = 2;
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
+			_startingPosition = transform.position;
 			OnValidate();
 			enabled = false;
 		}
@@ -66,14 +69,21 @@ namespace ArenaDivision
 
 		private void OnBecameVisible()
 		{
+			transform.position = _startingPosition;
 			enabled = true;
+		}
+
+		private void OnBecameInvisible()
+		{
+			enabled = false;
 		}
 
 		private void Update()
 		{
 			if (constantSpeeds) return;
 			// ReSharper disable once PossibleLossOfFraction
-			var speedMultiplier = ((int) ((Time.time - _startTime) / timeToSpeedUp) + 1) * 0.6f;// TODO keep looking at values
+			var speedMultiplier =
+				((int) ((Time.time - _startTime) / timeToSpeedUp) + 1) * 0.6f; // TODO keep looking at values
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
 		}

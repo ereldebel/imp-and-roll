@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,11 +8,13 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Ball ball;
 	[SerializeField] private GameObject arena;
 	[SerializeField] private Transform divisionBorder;
+	[SerializeField] private GameObject hands;
+
 	#endregion
 
 	#region Public Properties
 
-	public static Transform BallTransform => _shared.ball.transform;
+	public static Transform BallTransform => _shared.ball ? _shared.ball.transform : _shared.transform;
 	public static float ArenaLength => _shared._arenaDimensions[0];
 	public static float ArenaWidth => _shared._arenaDimensions[1];
 	public static Transform DivisionBorder => _shared.divisionBorder;
@@ -40,6 +43,11 @@ public class GameManager : MonoBehaviour
 
 	#region Public Methods
 
+	public static void GameStarted()
+	{
+		_shared.hands.SetActive(true);
+	}
+	
 	public static void GameOver(bool rightLost)
 	{
 		var player = rightLost ? "left player" : "right player";
