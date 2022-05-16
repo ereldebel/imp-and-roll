@@ -1,121 +1,119 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Player;
+using Scriptable_Objects;
 using Unity.Mathematics;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CrossSceneManager : MonoBehaviour
-{ 
-    [SerializeField] private PlayerInfo[] _playerInfos ;
-    [SerializeField] private AnimatorOverrideController redController;
-    [SerializeField] private float waitTime = 2;
-    private List<GameObject> _players = new List<GameObject>();
-    private List<bool> _playerReadyStatus = new List<bool>();
-    private int _numPlayers = 0;
+{
+	[SerializeField] private PlayerInfo[] playerInfos = new PlayerInfo[2];
+	[SerializeField] private AnimatorOverrideController redController;
+	[SerializeField] private float waitTime = 2;
+	[SerializeField] private GameObject AIPlayerPrefab;
+	private readonly List<GameObject> _players = new List<GameObject>();
+	private readonly Dictionary<GameObject, bool> _playerReadyStatus = new Dictionary<GameObject, bool>();
+	private int _numPlayers = 0;
 
-    public static List<GameObject> Players => Shared._players;
-    public static CrossSceneManager Shared { get; private set; }
+	public static List<GameObject> Players => Shared._players;
+	public static CrossSceneManager Shared { get; private set; }
 
-    public void AddPlayer(PlayerInput input)
-    {
-        var player = input.gameObject;
-        DontDestroyOnLoad(player);
-        _players.Add(player);
-        _playerReadyStatus.Add(false);
-        SetUpPlayerForStartScene(player, _numPlayers);
-        _numPlayers++;
-    }
+	private void Awake()
+	{
+		_numPlayers = 0;
+		Shared = this;
+		DontDestroyOnLoad(Shared);
+	}
+	
+	public void AddPlayer(PlayerInput input)
+	{
+		var player = input.gameObject;
+		DontDestroyOnLoad(player);
+		_players.Add(player);
+		_playerReadyStatus.Add(player, false);
+		SetUpPlayerForStartScene(player, _numPlayers);
+		_numPlayers++;
+	}
+	
+	public void PlayerWon(bool rightLost)
+	{
+		StartCoroutine(MatchEnd(rightLost ? "P2 won" : "P1 won"));
+	}
 
-    private void SetUpPlayerForStartScene(GameObject player, int playerID)
-    {
-        player.GetComponent<CharacterController>().enabled = false;
-        player.transform.position = _playerInfos[playerID].LocationOpeningScene;
-        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Start Menu");// To keep Playability without entry scene
-        if (playerID == 1) MakePlayerRed(player);
-    }
-    private void MakePlayerRed(GameObject player)
-    {
-        player.GetComponent<Animator>().runtimeAnimatorController = redController;
-    }
-    private void SetUpPlayerForGameScene(GameObject player, int playerID)
-    {
-        player.GetComponent<CharacterController>().enabled = true;
-        player.transform.position = _playerInfos[playerID].LocationGameScene;
-        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-    }
+	private IEnumerator MatchEnd(string winScene)
+	{
+		var job = SceneManager.LoadSceneAsync(winScene, LoadSceneMode.Additive);
+		yield return new WaitWhile(() => !job.isDone);
+		SceneManager.SetActiveScene(SceneManager.GetSceneByName(winScene));
+		yield return new WaitForSeconds(3.5f);
+		StartGameTwoPlayers();
+	}
 
-    public void PlayerWon(bool rightLost)
-    {
+	public void PlayerReady(GameObject player)
+	{
+		_playerReadyStatus[player] = !_playerReadyStatus[player];
+		if (_playerReadyStatus.Any(status => !status.Value)) return;
+		SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
+		if (_numPlayers > 1)
+			StartGameTwoPlayers();
+		else
+			StartCoroutine(OnePlayerReady());
+	}
 
-        SceneManager.LoadScene(rightLost ? "P2 won":"P1 won");
-        Invoke(nameof(StartGameTwoPlayers),3.5f);
-    }
-    public void PlayerReady(GameObject player)
-    {
-        for (int i = 0; i < _players.Count; i++)
-        {
-            if (_players[i] == player)
-            {
-                _playerReadyStatus[i] = !_playerReadyStatus[i];
-            }
-        }
+	private void SetUpPlayerForStartScene(GameObject player, int playerID)
+	{
+		player.GetComponent<CharacterController>().enabled = false;
+		player.transform.position = playerInfos[playerID].locationOpeningScene;
+		player.GetComponent<PlayerInput>()
+			.SwitchCurrentActionMap("Start Menu"); // To keep Playability without entry scene
+		if (playerID == 1) MakePlayerRed(player);
+	}
 
-        var allReady = true;
-        foreach (var status in _playerReadyStatus.Where(status => !status))
-        {
-            allReady = false;
-        }
+	private void MakePlayerRed(GameObject player)
+	{
+		player.GetComponent<Animator>().runtimeAnimatorController = redController;
+	}
 
-        if (!allReady) return;
-        if (_numPlayers > 1)
-        {
-            StartGameTwoPlayers();   
-        }
-        else
-        {
-            StartCoroutine(OnePlayerReady());
-        }
+	private void SetUpPlayerForGameScene(GameObject player, int playerID)
+	{
+		player.GetComponent<CharacterController>().enabled = true;
+		player.transform.position = playerInfos[playerID].locationGameScene;
+		player.GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player");
+	}
 
-    }
+	private void StartGameTwoPlayers()
+	{
+		SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+		MainCamera.ToGamePosition();
+		for (var i = 0; i < _players.Count; i++)
+			SetUpPlayerForGameScene(_players[i], i);
+	}
 
-    private void StartGameTwoPlayers()
-    {
-        SceneManager.LoadScene("Game");
-        for (int i = 0; i < _players.Count; i++)
-        {
-            _players[i].transform.position = _playerInfos[i].LocationGameScene;
-            SetUpPlayerForGameScene(_players[i], i);
-        }
-    }
-    private void StartGameOnePlayer()
-    {
-        CreateBot();
-        StartGameTwoPlayers();
-    }
+	private void StartGameOnePlayer()
+	{
+		CreateAI();
+		StartGameTwoPlayers();
+	}
 
-    private void CreateBot()
-    {
-        var player = Instantiate(_players[0], _playerInfos[1].LocationOpeningScene, quaternion.identity);
-        _players[1].AddComponent<AIController>();
-        MakePlayerRed(_players[1]);
-    }
-    // Start is called before the first frame update
-    private void Start()
-    {
-        _numPlayers = 0;
-        Shared = this;
-        DontDestroyOnLoad(Shared);
-    }
+	private void CreateAI()
+	{
+		var player = Instantiate(AIPlayerPrefab, playerInfos[1].locationOpeningScene, AIPlayerPrefab.transform.rotation);
+		DontDestroyOnLoad(player);
+		_players.Add(player);
+		MakePlayerRed(player);
+	}
 
-    private IEnumerator OnePlayerReady()
-    {
-        yield return new WaitForSeconds(waitTime);
-        if (_numPlayers != 1) yield break;
-        StartGameOnePlayer();
-    }
+	private IEnumerator OnePlayerReady()
+	{
+		for (var i = waitTime; i > 0; i--)
+		{
+			print(i);
+			yield return new WaitForSeconds(1);
+			if (_numPlayers != 1) yield break;
+		}
 
+		StartGameOnePlayer();
+	}
 }

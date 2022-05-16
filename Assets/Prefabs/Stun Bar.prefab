@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b816efb613d4f2c9d7a85262c1db5e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBrain: {fileID: 0}
+  playerNumber: 0
   stunnedFace: {fileID: 0}
   bar: {fileID: 2100000, guid: a4bfa37a79b46f1409d09035160ae9d3, type: 2}
   barMaxMin:

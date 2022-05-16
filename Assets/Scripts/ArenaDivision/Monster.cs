@@ -48,6 +48,7 @@ namespace ArenaDivision
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
 			OnValidate();
+			enabled = false;
 		}
 
 		private void Start()
@@ -61,6 +62,11 @@ namespace ArenaDivision
 			_chainLength = maxHeight + chainRemainder;
 			_fixedBaseSpeed = baseSpeed * Time.fixedDeltaTime;
 			_fixedBaseYSpeed = baseYSpeed * Time.fixedDeltaTime;
+		}
+
+		private void OnBecameVisible()
+		{
+			enabled = true;
 		}
 
 		private void Update()

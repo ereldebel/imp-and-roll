@@ -26,7 +26,6 @@ namespace Player
 		{
 			_ball = GameManager.BallTransform;
 			_border = GameManager.DivisionBorder;
-
 		}
 
 		private void Update()

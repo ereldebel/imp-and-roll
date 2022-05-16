@@ -11,12 +11,13 @@ namespace Environment
 		[SerializeField] private bool followX;
 		[SerializeField] private bool followHeight;
 
-		[SerializeField] private GameObject objectToFollow;
+		[SerializeField] private Target target;
 		[SerializeField] private HandType type;
 		[SerializeField] private float positionFix;
 
 		#endregion
 
+		private Transform _objectToFollow;
 		private SpriteRenderer _spriteRenderer;
 		private Vector3 _startingPos;
 		private float _yMinVal;
@@ -30,25 +31,39 @@ namespace Environment
 			Right = 3
 		}
 
+		private enum Target
+		{
+			RightPlayer,
+			LeftPlayer,
+			Ball
+		}
+
 		private void Awake()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_startingPos = transform.localPosition;
 			_yMinVal = _startingPos.y;
+			_objectToFollow = target switch
+			{
+				Target.RightPlayer => CrossSceneManager.Players[0].transform,
+				Target.LeftPlayer => CrossSceneManager.Players[1].transform,
+				Target.Ball => GameManager.BallTransform,
+				_ => _objectToFollow
+			};
 		}
 
 		private void Update()
 		{
-			if (_spriteRenderer.enabled && !objectToFollow.activeSelf)
+			if (_spriteRenderer.enabled && !_objectToFollow.gameObject.activeSelf)
 				_spriteRenderer.enabled = false;
-			if (!_spriteRenderer.enabled && objectToFollow.activeSelf)
+			if (!_spriteRenderer.enabled && _objectToFollow.gameObject.activeSelf)
 				_spriteRenderer.enabled = true;
 		}
 
 		private void FixedUpdate()
 		{
 			var pos = _startingPos;
-			var objectPos = objectToFollow.transform.position;
+			var objectPos = _objectToFollow.position;
 			var currMaxY = followHeight ? yMaxVal + objectPos.y : yMaxVal;
 			if (followX)
 			{

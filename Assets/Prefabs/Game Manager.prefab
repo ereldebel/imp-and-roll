@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6793810490810583987}
   - component: {fileID: 6793810490810583996}
-  - component: {fileID: 6793810490810583986}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -46,51 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   arena: {fileID: 0}
-  border: {fileID: 0}
-  arenaMaterialBorderXValueName: BorderX
-  borderRelativeWidth: 0.01
-  borderChangeSpeed: 0.02
---- !u!114 &6793810490810583986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6793810490810583997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 2
-  m_MaxPlayerCount: -1
-  m_AllowJoining: 1
-  m_JoinBehavior: 0
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: 
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 4437818291732569122, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+  divisionBorder: {fileID: 0}
