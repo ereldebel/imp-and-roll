@@ -256,8 +256,8 @@ namespace Player
 
 		private void DestroyBall()
 		{
-			if (_ball == null) return;
-			Destroy(_ball.gameObject);
+			// if (_ball == null) return;
+			// Destroy(_ball.gameObject);
 			_ball = null;
 		}
 		private void ProcessMovementInput()
