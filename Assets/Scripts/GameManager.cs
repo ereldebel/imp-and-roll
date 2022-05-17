@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,14 @@ public class GameManager : MonoBehaviour
 	private bool _gameStarted = false;
 	private bool _AIPlaying;
 	private static readonly int PlayerAnimatorX = Animator.StringToHash("X Direction");
+	private Dictionary<int, Action> _scenesEvents = new Dictionary<int, Action>();
 
 	public static List<GameObject> Players => Shared._players;
 	public static GameManager Shared { get; private set; }
+	
+	
+	public event Action Scene1IsOver;
+
 
 	private void Awake()
 	{
@@ -47,6 +53,7 @@ public class GameManager : MonoBehaviour
 		_gameStarted = false;
 		SceneManager.LoadSceneAsync(rightLost ? "P2 won" : "P1 won");
 		StartCoroutine(ResetTimer(3.5f));
+		StartCoroutine(SceneEnded(1));
 	}
 
 	private IEnumerator ResetTimer(float time)
@@ -137,5 +144,13 @@ public class GameManager : MonoBehaviour
 		}
 
 		StartGameOnePlayer();
+	}
+
+	private IEnumerator SceneEnded(int SceneID)
+	{
+		yield return 0;
+		// Action cur = Shared._scenesEvents[SceneID]; Tried doing an int, Action Dict to make it a bit future proof, failed
+		// Shared._scenesEvents[SceneID]?.Invoke();
+		Scene1IsOver?.Invoke();
 	}
 }

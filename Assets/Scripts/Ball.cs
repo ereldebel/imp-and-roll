@@ -48,7 +48,7 @@ public class Ball : MonoBehaviour
 	private void Awake()
 	{
 		_transform = transform;
-		ArenaManager.GameIsOver += DestroyThis;
+		GameManager.Shared.Scene1IsOver += DestroyThis;
 
 		_rigidbody = GetComponent<Rigidbody>();
 		_collider = GetComponent<SphereCollider>();
@@ -74,7 +74,7 @@ public class Ball : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		ArenaManager.GameIsOver -= DestroyThis;
+		GameManager.Shared.Scene1IsOver -= DestroyThis;
 	}
 
 	#endregion
