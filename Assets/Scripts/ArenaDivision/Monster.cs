@@ -15,6 +15,7 @@ namespace ArenaDivision
 		[SerializeField] private Transform divider;
 		[SerializeField] private bool constantSpeeds;
 		[SerializeField] private float timeToSpeedUp = 60;
+		[SerializeField] private float speedUpMultiplier = 3;
 		[SerializeField] private float colliderEnableDistance = 1;
 
 		#endregion;
@@ -71,8 +72,7 @@ namespace ArenaDivision
 		{
 			if (constantSpeeds) return;
 			// ReSharper disable once PossibleLossOfFraction
-			var speedMultiplier =
-				((int) ((Time.time - _startTime) / timeToSpeedUp) + 1) * 0.6f; // TODO keep looking at values
+			var speedMultiplier = (int)((Time.time - _startTime) / timeToSpeedUp)*speedUpMultiplier + 1; // TODO keep looking at values
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
 		}
