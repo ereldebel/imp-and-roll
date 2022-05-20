@@ -25,6 +25,7 @@ public class Ball : MonoBehaviour
 	[SerializeField] private Vector2 sizeRange = new Vector2(0.5f, 1);
 	[SerializeField] private float growDur = 0.5f;
 	[SerializeField] private float shrinkDur = 1;
+	[SerializeField] private float groundSlowFactor = 2;
 
 	#endregion
 
@@ -63,6 +64,14 @@ public class Ball : MonoBehaviour
 		if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
 			Landed();
 		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
+	}
+
+	private void OnCollisionStay(Collision other)
+	{
+		if (other.gameObject.CompareTag("Floor"))
+		{
+			_rigidbody.velocity /= groundSlowFactor;
+		}
 	}
 
 	private void Update()

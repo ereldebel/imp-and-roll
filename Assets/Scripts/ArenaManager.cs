@@ -42,7 +42,6 @@ public class ArenaManager : MonoBehaviour
 	#endregion
 
 	#region events
-	public static event Action GameIsOver;
 
 	
 
@@ -54,7 +53,6 @@ public class ArenaManager : MonoBehaviour
 		var player = rightLost ? "left player" : "right player";
 		print($"{player} won!");
 		GameManager.Shared.PlayerWon(rightLost);
-		GameIsOver?.Invoke();
 	}
 
 	#endregion

@@ -165,7 +165,8 @@ namespace Player
 			OnValidate();
 			_left = transform.position.x > 0;
 			transform.rotation = _left ? _faceLeft : _faceRight;
-			ArenaManager.GameIsOver += RemoveBall;
+			GameManager.Shared.Scene1IsOver += PostRoundReset;
+
 		}
 
 		private void OnValidate()
@@ -201,7 +202,7 @@ namespace Player
 
 		private void OnDestroy()
 		{
-			ArenaManager.GameIsOver -= RemoveBall;
+			GameManager.Shared.Scene1IsOver -= PostRoundReset;
 		}
 
 		#endregion
@@ -313,6 +314,11 @@ namespace Player
 
 		private void AnimatorChangeBallPosition() => ChangeBallPosition(_ballThrowPositionIndex++);
 		private void AnimatorThrowChargeBallPosition() => ChangeBallPosition(2);
+
+		private void PostRoundReset()
+		{
+			_timesStunned = 0;
+		}
 
 		private void ChangeBallPosition(int index)
 		{
