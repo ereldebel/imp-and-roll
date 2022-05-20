@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 namespace Player
@@ -10,13 +11,17 @@ namespace Player
 	{
 		#region Public Properties
 
-		public Vector2 MovementStick { get; set; }
+		public Vector2 MovementStick
+		{
+			get => _movementDirection;
+			set => _movementDirection = InvertJoysticks ? -value : value;
+		}
 
 		public Vector2 AimingStick
 		{
 			set
 			{
-				var oldSqrMagnitude = _aimDirection.sqrMagnitude;
+				var oldSqrMagnitude = AimDirection.sqrMagnitude;
 				var newSqrMagnitude = value.sqrMagnitude;
 				if (_chargeStartTime >= 0 && newSqrMagnitude < oldSqrMagnitude && newSqrMagnitude < 0.1)
 				{
@@ -31,7 +36,7 @@ namespace Player
 				}
 
 				if (newSqrMagnitude < 0.7) return;
-				_aimDirection = value.normalized;
+				AimDirection = value.normalized;
 				ChangedAimDirection?.Invoke();
 			}
 		}
@@ -41,23 +46,24 @@ namespace Player
 			set
 			{
 				var pos = transform.position;
-				_aimDirection = (value - new Vector2(pos.x, pos.z)).normalized;
+				AimDirection = (value - new Vector2(pos.x, pos.z)).normalized;
 				ChangedAimDirection?.Invoke();
 			}
 		}
 
+		public bool InvertJoysticks { private get; set; }
+
 		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
 
 		public Vector3 ThrowOrigin =>
-			new Vector3(_aimDirection.x,
+			new Vector3(AimDirection.x,
 				_ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][ballPositionsSide.Length - 1].y,
-				_aimDirection.y) *
+				AimDirection.y) *
 			(_colliderRadius + _ball.Radius + speed * Time.fixedDeltaTime + throwOriginEpsilon);
 
 		public Vector3 ThrowVelocity =>
-			maxThrowForce * ThrowCharge * new Vector3(_aimDirection.x, throwYForce, _aimDirection.y);
+			maxThrowForce * ThrowCharge * new Vector3(AimDirection.x, throwYForce, AimDirection.y);
 
-		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 		public bool HasBall => _ball != null;
 		public Rumble Rumble { get; private set; }
 		public bool Flipped => _left == (transform.rotation == _faceRight);
@@ -66,8 +72,13 @@ namespace Player
 
 		#region Private Properties
 
-		private Vector3 ColliderBottom => transform.position + _diffFromColliderCenterToBottom;
-		private Vector3 ColliderTop => transform.position - _diffFromColliderCenterToBottom;
+		private float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
+
+		private Vector2 AimDirection
+		{
+			set => _aimDirection = InvertJoysticks ? -value : value;
+			get => _aimDirection;
+		}
 
 		#endregion
 
@@ -116,8 +127,8 @@ namespace Player
 		private Animator _animator;
 
 		private float _colliderRadius;
-		private Vector3 _diffFromColliderCenterToBottom;
 		private float _chargeStartTime = -1;
+		private Vector2 _movementDirection;
 		private Vector2 _aimDirection;
 		private bool _stunned;
 		private bool _rolling;
@@ -166,7 +177,6 @@ namespace Player
 			_left = transform.position.x > 0;
 			transform.rotation = _left ? _faceLeft : _faceRight;
 			GameManager.Shared.Scene1IsOver += PostRoundReset;
-
 		}
 
 		private void OnValidate()
@@ -174,8 +184,6 @@ namespace Player
 			var t = transform;
 			var scale = t.localScale;
 			_colliderRadius = scale.x * GetComponent<CapsuleCollider>().radius;
-			_diffFromColliderCenterToBottom =
-				t.rotation * (0.5f * scale.y * GetComponent<CapsuleCollider>().height * Vector3.down);
 			_faceLeft = transform.rotation;
 			_faceRight = Quaternion.AngleAxis(180, transform.up) * _faceLeft;
 		}
@@ -184,9 +192,9 @@ namespace Player
 		{
 			ProcessMovementInput();
 			if (_chargeStartTime < 0) return;
-			_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(_aimDirection.x)));
-			_animator.SetFloat(AnimatorZ, Mathf.Round(_aimDirection.y));
-			transform.rotation = _aimDirection.x > 0 ? _faceRight : _faceLeft;
+			_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(AimDirection.x)));
+			_animator.SetFloat(AnimatorZ, Mathf.Round(AimDirection.y));
+			transform.rotation = AimDirection.x > 0 ? _faceRight : _faceLeft;
 		}
 
 

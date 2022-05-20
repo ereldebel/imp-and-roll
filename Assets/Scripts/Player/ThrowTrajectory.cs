@@ -1,4 +1,5 @@
 ﻿using System;
+using Managers;
 using UnityEngine;
 
 namespace Player
@@ -32,7 +33,7 @@ namespace Player
 
 		private void Start()
 		{
-			var maxDist = Mathf.Sqrt(Mathf.Pow(ArenaManager.ArenaLength, 2) + Mathf.Pow(ArenaManager.ArenaWidth, 2));
+			var maxDist = Mathf.Sqrt(Mathf.Pow(MatchManager.ArenaLength, 2) + Mathf.Pow(MatchManager.ArenaWidth, 2));
 			_maxSteps = Mathf.CeilToInt(maxDist / timeStepInterval);
 		}
 

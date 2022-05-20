@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 
 namespace Environment
@@ -51,7 +52,7 @@ namespace Environment
 			{
 				Target.RightPlayer => GameManager.Players[0].transform,
 				Target.LeftPlayer => GameManager.Players[1].transform,
-				Target.Ball => ArenaManager.BallTransform,
+				Target.Ball => MatchManager.BallTransform,
 				_ => _objectToFollow
 			};
 		}

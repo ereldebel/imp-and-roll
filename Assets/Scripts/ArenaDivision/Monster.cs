@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 
 namespace ArenaDivision
@@ -54,7 +55,7 @@ namespace ArenaDivision
 
 		private void Start()
 		{
-			_ball = ArenaManager.BallTransform;
+			_ball = MatchManager.BallTransform;
 		}
 
 		private void OnValidate()
@@ -85,7 +86,7 @@ namespace ArenaDivision
 
 		private void OnTriggerEnter(Collider other)
 		{
-			ArenaManager.GameOver(transform.position.x > divider.position.x);
+			MatchManager.GameOver(transform.position.x > divider.position.x);
 		}
 
 		#endregion

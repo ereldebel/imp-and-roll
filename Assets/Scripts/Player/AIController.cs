@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 
 namespace Player
@@ -24,8 +25,8 @@ namespace Player
 
 		private void OnEnable()
 		{
-			_ball = ArenaManager.BallTransform;
-			_border = ArenaManager.DivisionBorder;
+			_ball = MatchManager.BallTransform;
+			_border = MatchManager.DivisionBorder;
 		}
 
 		private void Update()
@@ -49,7 +50,7 @@ namespace Player
 			}
 			else
 			{
-				var midOfPlayerPartX = ArenaManager.ArenaLength / 4;
+				var midOfPlayerPartX = MatchManager.ArenaLength / 4;
 				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
 				midOfPlayerPartX += _border.position.x / 2;
 				var movementDirection = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));
