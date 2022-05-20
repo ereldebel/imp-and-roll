@@ -27,6 +27,7 @@ namespace Player
 			_lineRenderer = GetComponent<LineRenderer>();
 			_brain.StartedChargingThrow += Enable;
 			_brain.BallThrown += Disable;
+			MatchManager.MatchEnded += Disable;
 			OnValidate();
 			enabled = false;
 		}
@@ -49,6 +50,7 @@ namespace Player
 		{
 			_brain.StartedChargingThrow -= Enable;
 			_brain.BallThrown -= Disable;
+			MatchManager.MatchEnded -= Disable;
 		}
 
 		private void Update()

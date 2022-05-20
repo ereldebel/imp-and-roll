@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Collectibles.GlobalPowerUps;
@@ -21,7 +22,7 @@ namespace Managers
 		public static float ArenaLength => _shared._arenaDimensions[0];
 		public static float ArenaWidth => _shared._arenaDimensions[1];
 		public static Transform DivisionBorder => _shared.divisionBorder;
-		public static IReadOnlyList<Transform> CollectibleCollection => _shared._collectibleCollection;
+		public static IEnumerable<Transform> CollectibleCollection => _shared._collectibleCollection;
 
 		#endregion
 
@@ -31,9 +32,17 @@ namespace Managers
 
 		private const float PlaneWidth = 10;
 		private Vector2 _arenaDimensions;
-	
-		private List<Transform> _collectibleCollection = new List<Transform>();
-		private readonly List<IGlobalPowerUp> _globalPowerUps = new List<IGlobalPowerUp>();
+
+		private readonly List<Transform> _collectibleCollection = new List<Transform>();
+
+		private readonly Dictionary<IGlobalPowerUp, Coroutine> _globalPowerUps =
+			new Dictionary<IGlobalPowerUp, Coroutine>();
+
+		#endregion
+
+		#region Public C# Events
+
+		public static event Action MatchEnded;
 
 		#endregion
 
@@ -49,16 +58,26 @@ namespace Managers
 
 		private void Update()
 		{
-			foreach (var globalPowerUp in _globalPowerUps)
+			foreach (var globalPowerUp in _globalPowerUps.Keys)
 				globalPowerUp.OnUpdate();
 		}
 
+		private void OnDestroy()
+		{
+			foreach (var globalPowerUp in _globalPowerUps)
+			{
+				StopCoroutine(globalPowerUp.Value);
+				globalPowerUp.Key.End();
+			}
+		}
+
 		#endregion
-	
+
 		#region Public Methods
 
 		public static void GameOver(bool rightLost)
 		{
+			MatchEnded?.Invoke();
 			var player = rightLost ? "left player" : "right player";
 			print($"{player} won!");
 			GameManager.Shared.PlayerWon(rightLost);
@@ -66,14 +85,14 @@ namespace Managers
 
 		public static void AddGlobalPowerUp(IGlobalPowerUp powerUp)
 		{
-			_shared.StartCoroutine(PowerUpLifeSpan(powerUp));
+			_shared._globalPowerUps.Add(powerUp, _shared.StartCoroutine(PowerUpLifeSpan(powerUp)));
 		}
 
 		public static void AddToCollectibleCollection(Transform collectibleTransform)
 		{
 			_shared._collectibleCollection.Add(collectibleTransform);
 		}
-	
+
 		public static void RemoveFromCollectibleCollection(Transform collectibleTransform)
 		{
 			_shared._collectibleCollection.Remove(collectibleTransform);
@@ -85,7 +104,6 @@ namespace Managers
 
 		private static IEnumerator PowerUpLifeSpan(IGlobalPowerUp powerUp)
 		{
-			_shared._globalPowerUps.Add(powerUp);
 			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
 			powerUp.End();
 			_shared._globalPowerUps.Remove(powerUp);
