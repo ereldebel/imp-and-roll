@@ -24,14 +24,14 @@ namespace Collectibles
 
 		[SerializeField] private float homingBallAttractionRate = 1;
 
-		[Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
-		private float[] powerUpWeights = new float[3];
+		// [Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
+		// private float[] powerUpWeights = new float[3];
 
 		[Space(5)] [Tooltip("if positive overrides all durations to this duration")] [SerializeField]
 		private float uniformDuration = -1;
 
 
-		private Random _random = new Random();
+		// private Random _random = new Random();
 
 		private void OnValidate()
 		{
