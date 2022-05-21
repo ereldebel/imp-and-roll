@@ -150,7 +150,7 @@ namespace Player
 
 		//PowerUps:
 		private readonly Dictionary<IBallPowerUp, Coroutine> _ballPowerUps = new Dictionary<IBallPowerUp, Coroutine>();
-		
+
 		#endregion
 
 		#region Private Static Fields
@@ -231,6 +231,7 @@ namespace Player
 			_animator.SetBool(AnimatorThrowing, false);
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
+			RemoveAllPowerUps();
 		}
 
 		#endregion
@@ -241,6 +242,7 @@ namespace Player
 		{
 			_ballPowerUps.Add(powerUp, StartCoroutine(PowerUpLifeSpan(powerUp)));
 		}
+
 		private IEnumerator PowerUpLifeSpan(IBallPowerUp powerUp)
 		{
 			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
@@ -251,6 +253,7 @@ namespace Player
 		public void Lost()
 		{
 			_animator.SetBool(AnimatorDead, true);
+			RemoveAllPowerUps();
 		}
 
 		public bool ChargeThrow()
@@ -297,6 +300,15 @@ namespace Player
 
 		#region Private Methods
 
+		private void RemoveAllPowerUps()
+		{
+			foreach (var ballPowerUp in _ballPowerUps)
+			{
+				StopCoroutine(ballPowerUp.Value);
+				ballPowerUp.Key.End();
+			}
+		}
+		
 		private void PickupBall(Collision collision)
 		{
 			if (_ball != null || _stunned) return;

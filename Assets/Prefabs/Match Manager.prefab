@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6793810490810583987}
   - component: {fileID: 6793810490810583996}
   m_Layer: 0
-  m_Name: Arena Manager
+  m_Name: Match Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,3 +46,6 @@ MonoBehaviour:
   ball: {fileID: 0}
   arena: {fileID: 0}
   divisionBorder: {fileID: 0}
+  powerUpPrefab: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
+  timeBetweenPowerUpSpawns: 7
+  minPowerUpDistFromPlayers: 2

@@ -35,33 +35,41 @@ namespace Player
 			if (_throwing)
 			{
 				_brain.AimingStick = DirectionTo(otherPlayer.position);
-				if (_brain.ThrowChargeTime > throwLoad)
-				{
-					_brain.ThrowBall();
-					_throwing = false;
-				}
+				if (!(_brain.ThrowChargeTime > throwLoad)) return;
+				_brain.ThrowBall();
+				_throwing = false;
 			}
-			else if ((_rightSide && ballIsOnBorderRight) || (!_rightSide && !ballIsOnBorderRight))
+			else if (_rightSide == ballIsOnBorderRight)
 			{
 				if (_brain.HasBall)
 					_throwing = _brain.ChargeThrow();
 				else
-					_brain.MovementStick = DirectionTo(_ball.position).normalized;
+					MoveInDirection(DirectionTo(_ball.position));
 			}
 			else
 			{
+				foreach (var collectible in MatchManager.CollectibleCollection)
+				{
+					var collectibleIsOnBorderRight = collectible.position.x > _border.position.x;
+					if (_rightSide != collectibleIsOnBorderRight) continue;
+					MoveInDirection(DirectionTo(collectible.position));
+					return;
+				}
 				var midOfPlayerPartX = MatchManager.ArenaLength / 4;
 				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
 				midOfPlayerPartX += _border.position.x / 2;
 				var movementDirection = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));
-				_brain.MovementStick =
-					movementDirection.sqrMagnitude > 0.5f ? movementDirection.normalized : Vector2.zero;
-				if (movementDirection.sqrMagnitude > 100)
-					_brain.DodgeRoll();
+				MoveInDirection(movementDirection.sqrMagnitude > 0.5f ? movementDirection : Vector2.zero);
 			}
 		}
 
-		
+		private void MoveInDirection(Vector2 movementDirection)
+		{
+			_brain.MovementStick = movementDirection.normalized;
+			if (movementDirection.sqrMagnitude > 100)
+				_brain.DodgeRoll();
+		}
+
 		private Vector2 DirectionTo(Vector3 destination)
 		{
 			var pos = transform.position;

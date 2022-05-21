@@ -1,5 +1,4 @@
-﻿using System;
-using Collectibles.PowerUp.BallPowerUps;
+﻿using Collectibles.PowerUp.BallPowerUps;
 using Collectibles.PowerUp.GlobalPowerUps;
 using Managers;
 using Player;
@@ -10,7 +9,8 @@ namespace Collectibles
 	[RequireComponent(typeof(Collider))]
 	public class Collectible : MonoBehaviour
 	{
-		[SerializeField] private CollectibleType collectibleType;
+		public CollectibleType collectibleType;
+		
 		[SerializeField] private CollectibleFactory collectibleFactory;
 
 		private ICollectible _collectible;

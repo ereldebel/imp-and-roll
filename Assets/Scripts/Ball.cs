@@ -125,7 +125,7 @@ public class Ball : MonoBehaviour
 		_rigidbody.velocity = velocity;
 		_rigidbody.AddTorque(velocity);
 		Thrown = true;
-		_myParticles.Play();
+		// _myParticles.Play();
 		_trailRenderer.enabled = true;
 		_thrower = thrower;
 	}

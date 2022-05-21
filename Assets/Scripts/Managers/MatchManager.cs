@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Collectibles;
 using Collectibles.PowerUp.GlobalPowerUps;
 using Player;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -14,6 +17,9 @@ namespace Managers
 		[SerializeField] private Ball ball;
 		[SerializeField] private GameObject arena;
 		[SerializeField] private Transform divisionBorder;
+		[SerializeField] private GameObject powerUpPrefab;
+		[SerializeField] private float timeBetweenPowerUpSpawns;
+		[SerializeField] private float minPowerUpDistFromPlayers;
 
 		#endregion
 
@@ -55,6 +61,7 @@ namespace Managers
 			var scale = arena.transform.localScale;
 			_arenaDimensions = new Vector2(scale.x * PlaneWidth, scale.y * PlaneWidth);
 			GameManager.Shared.AwakeAI();
+			StartCoroutine(SpawnCollectible());
 		}
 
 		private void Update()
@@ -105,7 +112,64 @@ namespace Managers
 
 		#endregion
 
+		#region Private Methods
+
+		private Vector3 RandomXZVector(Vector2 min, Vector2 max, float padding)
+		{
+			Vector3 output;
+			var i = 0;
+			do
+			{
+				var x = Random.Range(min.x + padding, max.x - padding);
+				var z = Random.Range(min.y + padding, max.y - padding);
+				output = new Vector3(x, 0, z);
+				if (i++ < 10) break;
+			} while (GameManager.Players.Any(player =>
+				         Vector3.Distance(player.transform.position, output) < minPowerUpDistFromPlayers));
+
+			return output;
+		}
+
+		#endregion
+
 		#region Private Coroutines
+
+		private IEnumerator SpawnCollectible()
+		{
+			var prefabCollectible = powerUpPrefab.GetComponent<Collectible>();
+			var halfOfArenaWidth = ArenaWidth / 2;
+			var halfOfArenaLength = ArenaLength / 2;
+			var allPowerUps = Enum.GetValues(typeof(CollectibleType));
+			var random = new System.Random();
+			var numOfSpawns = 0;
+			var numOfLeftSpawns = 0;
+			var spawnOnRight = random.Next(2) == 0;
+			while (enabled)
+			{
+				yield return new WaitForSeconds(timeBetweenPowerUpSpawns);
+				prefabCollectible.collectibleType =
+					(CollectibleType) allPowerUps.GetValue(random.Next(allPowerUps.Length));
+				++numOfSpawns;
+				float minX, maxX;
+				if (spawnOnRight)
+				{
+					minX = divisionBorder.position.x;
+					maxX = halfOfArenaLength;
+				}
+				else
+				{
+					minX = -halfOfArenaLength;
+					maxX = divisionBorder.position.x;
+					++numOfLeftSpawns;
+				}
+
+				var minVector = new Vector2(minX, -halfOfArenaWidth);
+				var maxVector = new Vector2(maxX, halfOfArenaWidth);
+				var spawnPoint = RandomXZVector(minVector, maxVector, 0.1f);
+				Instantiate(prefabCollectible, spawnPoint, Quaternion.identity);
+				spawnOnRight = random.Next(numOfSpawns) < numOfLeftSpawns;
+			}
+		}
 
 		private static IEnumerator PowerUpLifeSpan(IGlobalPowerUp powerUp)
 		{

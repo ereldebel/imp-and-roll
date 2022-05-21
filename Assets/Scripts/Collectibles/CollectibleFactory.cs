@@ -2,6 +2,7 @@
 using Collectibles.PowerUp.BallPowerUps;
 using Collectibles.PowerUp.GlobalPowerUps;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Collectibles
 {
@@ -14,15 +15,23 @@ namespace Collectibles
 
 		[Header("Attract Collectibles")] [SerializeField]
 		private float attractCollectiblesDuration = 10;
+
 		[SerializeField] private float attractCollectiblesBaseAttractionSpeed = 0.1f;
 		[SerializeField] private float attractCollectiblesAttractionRadius = 10;
 
 		[Header("Homing Ball Collectibles")] [SerializeField]
 		private float homingBallDuration = 10;
+
 		[SerializeField] private float homingBallAttractionRate = 1;
 
-		[Space(2)] [Tooltip("if positive overrides all durations to this duration")] [SerializeField]
+		[Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
+		private float[] powerUpWeights = new float[3];
+
+		[Space(5)] [Tooltip("if positive overrides all durations to this duration")] [SerializeField]
 		private float uniformDuration = -1;
+
+
+		private Random _random = new Random();
 
 		private void OnValidate()
 		{
@@ -31,6 +40,34 @@ namespace Collectibles
 			attractCollectiblesDuration = uniformDuration;
 			homingBallDuration = uniformDuration;
 		}
+
+		// public ICollectible GetRandomWeightedPowerUp()
+		// {
+		// 	// Get the total sum of all the weights.
+		// 	int weightSum = 0f;
+		// 	for (int i = 0; i < powerUpWeights.Length; ++i)
+		// 	{
+		// 		weightSum += weights[i];
+		// 	}
+		//
+		// 	// Step through all the possibilities, one by one, checking to see if each one is selected.
+		// 	int index = 0;
+		// 	int lastIndex = elementCount - 1;
+		// 	while (index < lastIndex)
+		// 	{
+		// 		// Do a probability check with a likelihood of weights[index] / weightSum.
+		// 		if (Random.Range(0, weightSum) < weights[index])
+		// 		{
+		// 			return index;
+		// 		}
+		//
+		// 		// Remove the last item from the sum of total untested weights and try again.
+		// 		weightSum -= weights[index++];
+		// 	}
+		//
+		// 	// No other item was selected, so return very last index.
+		// 	return index;
+		// }
 
 		public ICollectible Create(CollectibleType collectibleType)
 		{
