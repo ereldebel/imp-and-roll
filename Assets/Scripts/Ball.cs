@@ -106,6 +106,7 @@ public class Ball : MonoBehaviour
 		// gameObject.SetActive(false);
 		_rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
 		_rigidbody.isKinematic = true;
+		_rigidbody.angularVelocity = Vector3.zero;
 		_collider.enabled = false;
 	}
 
@@ -114,6 +115,7 @@ public class Ball : MonoBehaviour
 		Release(posChange);
 		Shrink(Time.time);
 		_rigidbody.velocity = velocity;
+		_rigidbody.AddTorque(velocity);
 		Thrown = true;
 		_myParticles.Play();
 		_trailRenderer.enabled = true;
@@ -160,5 +162,6 @@ public class Ball : MonoBehaviour
 	{
 		Destroy(gameObject);
 	}
+
 	#endregion
 }

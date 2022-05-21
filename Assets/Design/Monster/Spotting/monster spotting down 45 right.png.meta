@@ -1,7 +1,16 @@
 fileFormatVersion: 2
-guid: c94b3ae15cf5c384bbd68b5fde1a3fa4
+guid: 6b5438d59ae2e2d4ba35010664a04a23
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2930841090892820816
+    second: monster spotting down 45 right_0
+  - first:
+      213: -5787743108182004385
+    second: monster spotting down 45 right_1
+  - first:
+      213: 8119289507126554725
+    second: monster spotting down 45 right_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +50,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,11 +122,74 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: monster spotting down 45 right_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0be073c5e8f8357d0800000000000000
+      internalID: -2930841090892820816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster spotting down 45 right_1
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5da891de4ecdafa0800000000000000
+      internalID: -5787743108182004385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster spotting down 45 right_2
+      rect:
+        serializedVersion: 2
+        x: 2748
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 560b5d4f9c28da070800000000000000
+      internalID: 8119289507126554725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 0bd4d64e83556a64b92cb705ba919c03
     internalID: 0
     vertices: []
     indices: 
