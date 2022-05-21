@@ -1,30 +1,25 @@
 ﻿using Managers;
 using UnityEngine;
 
-namespace Collectibles.GlobalPowerUps
+namespace Collectibles.PowerUp.GlobalPowerUps
 {
-	public class AttractCollectibles : IGlobalPowerUp
+	public class AttractCollectibles : PowerUp, IGlobalPowerUp
 	{
 		private Transform _attractingPlayer;
-		private readonly float _duration;
 		private readonly float _baseAttractionSpeed;
 		private readonly float _attractionSqrRadius;
+		private const CollectibleType PowerUpType = CollectibleType.AttractCollectibles;
 
-		public AttractCollectibles(float duration, float baseAttractionSpeed, float attractionRadius)
+		public AttractCollectibles(float duration, float baseAttractionSpeed, float attractionRadius) : base(duration, PowerUpType)
 		{
-			_duration = duration;
 			_baseAttractionSpeed = baseAttractionSpeed;
 			_attractionSqrRadius = Mathf.Pow(attractionRadius,2);
 		}
 
-		public void Collect(GameObject collector)
+		public override void Collect(GameObject collector)
 		{
+			base.Collect(collector);
 			_attractingPlayer = collector.transform;
-		}
-
-		public float StartAndGetDuration()
-		{
-			return _duration;
 		}
 
 		public void OnUpdate()

@@ -1,6 +1,8 @@
 ﻿using System;
-using Collectibles.GlobalPowerUps;
+using Collectibles.PowerUp.BallPowerUps;
+using Collectibles.PowerUp.GlobalPowerUps;
 using Managers;
+using Player;
 using UnityEngine;
 
 namespace Collectibles
@@ -32,8 +34,8 @@ namespace Collectibles
 			_collectible.Collect(other.gameObject);
 			if (_collectible is IGlobalPowerUp globalPowerUp)
 				MatchManager.AddGlobalPowerUp(globalPowerUp);
-			// if (_collectible is IBallPowerUp ballPowerUp)
-			// 	other.GetComponent<PlayerBrain>()?.AddBallPowerUp(ballPowerUp);
+			if (_collectible is IBallPowerUp ballPowerUp)
+				other.GetComponent<PlayerBrain>()?.AddBallPowerUp(ballPowerUp);
 			Destroy(gameObject);
 		}
 	}

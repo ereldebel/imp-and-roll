@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Collectibles.PowerUp.BallPowerUps;
 using Managers;
 using UnityEngine;
 
@@ -91,8 +92,6 @@ namespace Player
 
 		[SerializeField] private float rollDuration = 0.25f;
 
-		// [SerializeField] private float pickupDistance; TODO look at these, they are never used, remove if unneeded?
-		// [SerializeField] private LayerMask ballMask;
 		[Header("Ball Throw Settings")] [SerializeField]
 		private float maxThrowForce;
 
@@ -110,7 +109,7 @@ namespace Player
 		[Header("Stun Settings")] [SerializeField]
 		private float stunDuration = 1;
 
-		[SerializeField] private float stunDurationIncrease = 0.2f;
+		[SerializeField] private float maxStunDurationIncrease = 1;
 		[SerializeField] private float stunBarPercentagePerHit = 0.2f;
 
 		[Header("Throw Animation")] [SerializeField]
@@ -123,26 +122,38 @@ namespace Player
 
 		#region Private Fields
 
+		//Components:
 		private CharacterController _controller;
 		private Animator _animator;
 
-		private float _colliderRadius;
-		private float _chargeStartTime = -1;
+		//Input:
 		private Vector2 _movementDirection;
 		private Vector2 _aimDirection;
-		private bool _stunned;
-		private bool _rolling;
-		private bool _calledThrow;
-		private float _stunBar = 1;
-		private int _timesStunned = 0;
+
+		//Rotation:
 		private Quaternion _faceLeft;
 		private Quaternion _faceRight;
 		private bool _left;
 
+		//State:
+		private bool _stunned;
+		private float _stunBar = 1;
+		private bool _rolling;
+		private bool _calledThrow;
+		private float _chargeStartTime = -1;
+		private float _colliderRadius;
+
+		//Ball and ball Animation:
+		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
 		private readonly List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
 		private int _ballThrowPositionIndex = 0;
 
-		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
+		//PowerUps:
+		private readonly Dictionary<IBallPowerUp, Coroutine> _ballPowerUps = new Dictionary<IBallPowerUp, Coroutine>();
+		
+		#endregion
+
+		#region Private Static Fields
 
 		private static readonly int AnimatorRunning = Animator.StringToHash("Running");
 		private static readonly int AnimatorX = Animator.StringToHash("X Direction");
@@ -184,8 +195,8 @@ namespace Player
 			var t = transform;
 			var scale = t.localScale;
 			_colliderRadius = scale.x * GetComponent<CapsuleCollider>().radius;
-			_faceLeft = transform.rotation;
-			_faceRight = Quaternion.AngleAxis(180, transform.up) * _faceLeft;
+			_faceLeft = t.rotation;
+			_faceRight = Quaternion.AngleAxis(180, t.up) * _faceLeft;
 		}
 
 		private void FixedUpdate()
@@ -197,7 +208,6 @@ namespace Player
 			transform.rotation = AimDirection.x > 0 ? _faceRight : _faceLeft;
 		}
 
-
 		private void OnCollisionEnter(Collision collision)
 		{
 			PickupBall(collision);
@@ -207,31 +217,42 @@ namespace Player
 		{
 			PickupBall(collision);
 		}
-		
+
 		public void Reset()
 		{
 			_rolling = false;
 			_stunned = false;
 			_ball = null;
-			_timesStunned = 0;
-			_animator.SetBool(AnimatorDead,false);
-			_animator.SetBool(AnimatorRunning,false);
-			_animator.SetBool(AnimatorDodge,false);
-			_animator.SetBool(AnimatorStunned,false);
-			_animator.SetBool(AnimatorThrowing,false);
-			_animator.SetFloat(AnimatorX,1);
-			_animator.SetFloat(AnimatorZ,-1);
+			_stunBar = 1;
+			_animator.SetBool(AnimatorDead, false);
+			_animator.SetBool(AnimatorRunning, false);
+			_animator.SetBool(AnimatorDodge, false);
+			_animator.SetBool(AnimatorStunned, false);
+			_animator.SetBool(AnimatorThrowing, false);
+			_animator.SetFloat(AnimatorX, 1);
+			_animator.SetFloat(AnimatorZ, -1);
 		}
 
 		#endregion
 
 		#region Public Methods
 
+		public void AddBallPowerUp(IBallPowerUp powerUp)
+		{
+			_ballPowerUps.Add(powerUp, StartCoroutine(PowerUpLifeSpan(powerUp)));
+		}
+		private IEnumerator PowerUpLifeSpan(IBallPowerUp powerUp)
+		{
+			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
+			powerUp.End();
+			_ballPowerUps.Remove(powerUp);
+		}
+
 		public void Lost()
 		{
-			_animator.SetBool(AnimatorDead,true);
+			_animator.SetBool(AnimatorDead, true);
 		}
-		
+
 		public bool ChargeThrow()
 		{
 			if (_stunned || _rolling || _chargeStartTime >= 0 || _calledThrow || !_ball) return false;
@@ -258,8 +279,13 @@ namespace Player
 
 		public void DodgeRoll()
 		{
-			if (MovementStick == Vector2.zero || _chargeStartTime >= 0 || _stunned || _rolling) return;
-			StartCoroutine(DodgeRoll(Vector2ToVector3XZ(MovementStick)));
+			if (_chargeStartTime >= 0 || _stunned || _rolling) return;
+			var movementDir = MovementStick;
+			if (MovementStick == Vector2.zero)
+				StartCoroutine(DodgeRoll(new Vector3(_animator.GetFloat(AnimatorX), 0,
+					(Flipped ? -1 : 1) * _animator.GetFloat(AnimatorZ))));
+			else
+				StartCoroutine(DodgeRoll(new Vector3(movementDir.x, 0, movementDir.y)));
 		}
 
 		public void PlayerReady()
@@ -312,11 +338,6 @@ namespace Player
 			_controller.SimpleMove(velocity);
 		}
 
-		private static Vector3 Vector2ToVector3XZ(Vector2 input)
-		{
-			return new Vector3(input.x, 0, input.y);
-		}
-
 		private void AnimatorEndStun() => _stunned = false;
 
 		private void AnimatorThrowBall()
@@ -324,7 +345,7 @@ namespace Player
 			if (!_ball) return;
 			_ballThrowPositionIndex = 0;
 			_chargeStartTime = -1;
-			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
+			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject, _ballPowerUps.Keys);
 			_ball = null;
 			_calledThrow = false;
 			BallThrown?.Invoke();
@@ -366,14 +387,8 @@ namespace Player
 			_animator.SetFloat(AnimatorZ, -1);
 			transform.rotation = knockBackDir.x > 0 ? _faceRight : _faceLeft;
 			if (_stunBar > 0)
-			{
 				_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
-				++_timesStunned;
-			}
-
-			var currStunDuration = stunDuration + stunDurationIncrease * _timesStunned;
-			if (_stunBar <= 0)
-				currStunDuration *= 2;
+			var currStunDuration = stunDuration + maxStunDurationIncrease * (1 - _stunBar);
 			StunStarted?.Invoke(_stunBar);
 			_stunned = true;
 			knockBackDir.y = 0;

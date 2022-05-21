@@ -1,4 +1,5 @@
 using Managers;
+using Player;
 using UnityEngine;
 
 namespace ArenaDivision
@@ -85,8 +86,11 @@ namespace ArenaDivision
 
 		private void OnTriggerEnter(Collider other)
 		{
-			other.gameObject.SetActive(false);
+			var otherObject = other.gameObject;
+			if (otherObject.CompareTag("Player") && !otherObject.GetComponent<PlayerBrain>().HasBall) return;
+			otherObject.SetActive(false);
 			MatchManager.GameOver(transform.position.x > divider.position.x);
+			enabled = false; //TODO: maybe there is an animation now?
 		}
 
 		#endregion

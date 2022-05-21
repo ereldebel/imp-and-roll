@@ -257,7 +257,7 @@ MonoBehaviour:
   knockBackDuration: 0.15
   knockBackRelativeSpeed: 0.15
   stunDuration: 1
-  stunDurationIncrease: 0.2
+  maxStunDurationIncrease: 1
   stunBarPercentagePerHit: 0.2
   ballPositionsDown45:
   - {x: 0, y: -0.47, z: 0}

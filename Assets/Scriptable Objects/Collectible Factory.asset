@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa04fed8f844774b640dd651065507a, type: 3}
   m_Name: Collectible Factory
   m_EditorClassIdentifier: 
-  invertControlsDuration: 10
-  attractCollectiblesDuration: 10
+  invertControlsDuration: 8
+  attractCollectiblesDuration: 8
   attractCollectiblesBaseAttractionSpeed: 0.1
   attractCollectiblesAttractionRadius: 10
+  homingBallDuration: 8
+  homingBallAttractionRate: 0.5
+  uniformDuration: -1

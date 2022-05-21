@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 612359272554252324}
   - component: {fileID: 612359272554252325}
   m_Layer: 11
-  m_Name: Invert Controls PowerUp
+  m_Name: PowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

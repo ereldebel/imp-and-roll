@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Collectibles.GlobalPowerUps;
+using Collectibles.PowerUp.GlobalPowerUps;
 using Player;
 using UnityEngine;
 
@@ -85,7 +85,7 @@ namespace Managers
 			MatchEnded?.Invoke();
 			var player = leftWon ? "left player" : "right player";
 			print($"{player} won!");
-			_shared.StartCoroutine(EndMatchWithDelay(leftWon,3));
+			_shared.StartCoroutine(EndMatchWithDelay(leftWon, 3));
 		}
 
 		public static void AddGlobalPowerUp(IGlobalPowerUp powerUp)
@@ -113,7 +113,7 @@ namespace Managers
 			powerUp.End();
 			_shared._globalPowerUps.Remove(powerUp);
 		}
-		
+
 		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
 		{
 			yield return new WaitForSeconds(delay);

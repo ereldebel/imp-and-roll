@@ -6,6 +6,7 @@ namespace Collectibles
 	public enum CollectibleType
 	{
 		InvertControls,
-		AttractCollectibles
+		AttractCollectibles,
+		HomingBall
 	}
 }

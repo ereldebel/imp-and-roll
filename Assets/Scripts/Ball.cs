@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Collectibles.PowerUp.BallPowerUps;
 using Managers;
 using UnityEngine;
 
@@ -42,6 +44,7 @@ public class Ball : MonoBehaviour
 	private bool _held = false;
 	private float _curGrowStartTime = -1;
 	private float _curShrinkStartTime = -1;
+	private ICollection<IBallPowerUp> _powerUps;
 
 	#endregion
 
@@ -63,14 +66,16 @@ public class Ball : MonoBehaviour
 		if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
 			Landed();
 		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
+		if (_powerUps == null) return;
+		foreach (var powerUp in _powerUps)
+			powerUp.OnHit();
+		_powerUps = null;
 	}
 
 	private void OnCollisionStay(Collision other)
 	{
 		if (other.gameObject.CompareTag("Floor"))
-		{
 			_rigidbody.velocity /= groundSlowFactor;
-		}
 	}
 
 	private void Update()
@@ -78,6 +83,13 @@ public class Ball : MonoBehaviour
 		ChangeSize(_curGrowStartTime >= 0
 			? Mathf.Lerp(MinSize, MaxSize, GrowTimePercent)
 			: Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
+	}
+
+	private void LateUpdate()
+	{
+		if (_powerUps == null) return;
+		foreach (var powerUp in _powerUps)
+			powerUp.OnLateUpdate();
 	}
 
 	#endregion
@@ -103,8 +115,11 @@ public class Ball : MonoBehaviour
 		_collider.enabled = false;
 	}
 
-	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
+	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower, ICollection<IBallPowerUp> powerUps)
 	{
+		foreach (var powerUp in powerUps)
+			powerUp.OnThrow(this);
+		_powerUps = powerUps;
 		Release(posChange);
 		Shrink(Time.time);
 		_rigidbody.velocity = velocity;
@@ -146,7 +161,7 @@ public class Ball : MonoBehaviour
 	{
 		//TODO: should keep an eye on this transformation - it should work but documentation is worrisome
 		_transform.localScale = Vector3.one;
-		var lossyScale = transform.lossyScale;
+		var lossyScale = _transform.lossyScale;
 		_transform.localScale = new Vector3(size / lossyScale.x, size / lossyScale.y,
 			size / lossyScale.z);
 	}
