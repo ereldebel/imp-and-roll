@@ -177,7 +177,6 @@ namespace Player
 			OnValidate();
 			_left = transform.position.x > 0;
 			transform.rotation = _left ? _faceLeft : _faceRight;
-			GameManager.Shared.Scene1IsOver += PostRoundReset;
 		}
 
 		private void OnValidate()
@@ -208,10 +207,20 @@ namespace Player
 		{
 			PickupBall(collision);
 		}
-
-		private void OnDestroy()
+		
+		public void Reset()
 		{
-			GameManager.Shared.Scene1IsOver -= PostRoundReset;
+			_rolling = false;
+			_stunned = false;
+			_ball = null;
+			_timesStunned = 0;
+			_animator.SetBool(AnimatorDead,false);
+			_animator.SetBool(AnimatorRunning,false);
+			_animator.SetBool(AnimatorDodge,false);
+			_animator.SetBool(AnimatorStunned,false);
+			_animator.SetBool(AnimatorThrowing,false);
+			_animator.SetFloat(AnimatorX,1);
+			_animator.SetFloat(AnimatorZ,-1);
 		}
 
 		#endregion
@@ -273,11 +282,6 @@ namespace Player
 				_ball.Pickup(transform);
 		}
 
-		private void RemoveBall()
-		{
-			_ball = null;
-		}
-
 		private void ProcessMovementInput()
 		{
 			if (_rolling || !_controller.enabled) return;
@@ -328,18 +332,6 @@ namespace Player
 
 		private void AnimatorChangeBallPosition() => ChangeBallPosition(_ballThrowPositionIndex++);
 		private void AnimatorThrowChargeBallPosition() => ChangeBallPosition(2);
-
-		private void PostRoundReset()
-		{
-			_timesStunned = 0;
-			_animator.SetBool(AnimatorDead,false);
-			_animator.SetBool(AnimatorRunning,false);
-			_animator.SetBool(AnimatorDodge,false);
-			_animator.SetBool(AnimatorStunned,false);
-			_animator.SetBool(AnimatorThrowing,false);
-			_animator.SetFloat(AnimatorX,1);
-			_animator.SetFloat(AnimatorZ,-1);
-		}
 
 		private void ChangeBallPosition(int index)
 		{

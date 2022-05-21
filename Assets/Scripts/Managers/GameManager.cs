@@ -39,12 +39,6 @@ namespace Managers
 
 		#endregion
 
-		#region Public C# Events
-
-		public event Action Scene1IsOver;
-
-		#endregion
-
 		#region Function Events
 
 		private void Awake()
@@ -108,7 +102,6 @@ namespace Managers
 		private IEnumerator ResetTimer(float time)
 		{
 			yield return new WaitForSeconds(time);
-			Scene1IsOver?.Invoke();
 			StartGameTwoPlayers();
 			_gameStarted = true;
 		}
@@ -136,8 +129,9 @@ namespace Managers
 
 		private void SetUpPlayerForGameScene(GameObject player, int playerID)
 		{
-			player.GetComponent<CharacterController>().enabled = true;
+			player.GetComponent<PlayerBrain>().Reset();
 			player.transform.position = playerInfos[playerID].locationGameScene;
+			player.GetComponent<CharacterController>().enabled = true;
 			player.GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player");
 		}
 

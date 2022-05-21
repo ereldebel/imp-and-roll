@@ -50,8 +50,6 @@ public class Ball : MonoBehaviour
 	private void Awake()
 	{
 		_transform = transform;
-		GameManager.Shared.Scene1IsOver += DestroyThis;
-
 		_rigidbody = GetComponent<Rigidbody>();
 		_collider = GetComponent<SphereCollider>();
 		_myParticles = GetComponent<ParticleSystem>();
@@ -80,11 +78,6 @@ public class Ball : MonoBehaviour
 		ChangeSize(_curGrowStartTime >= 0
 			? Mathf.Lerp(MinSize, MaxSize, GrowTimePercent)
 			: Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
-	}
-
-	private void OnDestroy()
-	{
-		GameManager.Shared.Scene1IsOver -= DestroyThis;
 	}
 
 	#endregion
@@ -156,11 +149,6 @@ public class Ball : MonoBehaviour
 		var lossyScale = transform.lossyScale;
 		_transform.localScale = new Vector3(size / lossyScale.x, size / lossyScale.y,
 			size / lossyScale.z);
-	}
-
-	private void DestroyThis()
-	{
-		Destroy(gameObject);
 	}
 
 	#endregion

@@ -65,6 +65,8 @@ namespace Managers
 
 		private void OnDestroy()
 		{
+			if (ball)
+				Destroy(ball.gameObject);
 			foreach (var globalPowerUp in _globalPowerUps)
 			{
 				StopCoroutine(globalPowerUp.Value);
