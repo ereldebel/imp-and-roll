@@ -1,0 +1,588 @@
+fileFormatVersion: 2
+guid: 27847079126b4894d953483537e6a7df
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4544440126440110616
+    second: red death_0
+  - first:
+      213: 8257051173545906291
+    second: red death_1
+  - first:
+      213: -4293907843251679798
+    second: red death_2
+  - first:
+      213: 1997068036286607251
+    second: red death_3
+  - first:
+      213: -4823897544188323976
+    second: red death_4
+  - first:
+      213: -8810033835652081277
+    second: red death_5
+  - first:
+      213: 5746428905433029994
+    second: red death_6
+  - first:
+      213: -2866609533607036548
+    second: red death_7
+  - first:
+      213: -8883809059823613810
+    second: red death_8
+  - first:
+      213: -862551018497234961
+    second: red death_9
+  - first:
+      213: -8782128330500364025
+    second: red death_10
+  - first:
+      213: 2685759563251468881
+    second: red death_11
+  - first:
+      213: -6908880108487676951
+    second: red death_12
+  - first:
+      213: 5271033494547461650
+    second: red death_13
+  - first:
+      213: -6807043703391663441
+    second: red death_14
+  - first:
+      213: 7463165002668850126
+    second: red death_15
+  - first:
+      213: -4801014477768174697
+    second: red death_16
+  - first:
+      213: -3362965362306827007
+    second: red death_17
+  - first:
+      213: 3283626338165315852
+    second: red death_18
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: red death_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a7e7fa738111f30800000000000000
+      internalID: 4544440126440110616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_1
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3701d6b6b40f69270800000000000000
+      internalID: 8257051173545906291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_2
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acd48b01199f864c0800000000000000
+      internalID: -4293907843251679798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_3
+      rect:
+        serializedVersion: 2
+        x: 2781
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39f662f4cc207bb10800000000000000
+      internalID: 1997068036286607251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_4
+      rect:
+        serializedVersion: 2
+        x: 3708
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87796cdddb21e0db0800000000000000
+      internalID: -4823897544188323976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_5
+      rect:
+        serializedVersion: 2
+        x: 4635
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38919ce67e87cb580800000000000000
+      internalID: -8810033835652081277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_6
+      rect:
+        serializedVersion: 2
+        x: 5562
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6d5f53c4aa6fbf40800000000000000
+      internalID: 5746428905433029994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_7
+      rect:
+        serializedVersion: 2
+        x: 6489
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c79ba9f21d1c738d0800000000000000
+      internalID: -2866609533607036548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_8
+      rect:
+        serializedVersion: 2
+        x: 7416
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8801d08abe56b480800000000000000
+      internalID: -8883809059823613810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_9
+      rect:
+        serializedVersion: 2
+        x: 8343
+        y: 1782
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe722dd2b6a9704f0800000000000000
+      internalID: -862551018497234961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 709a1a820dc9f1680800000000000000
+      internalID: -8782128330500364025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_11
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15a46bfc71cb54520800000000000000
+      internalID: 2685759563251468881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_12
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eb64d9652abe10a0800000000000000
+      internalID: -6908880108487676951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_13
+      rect:
+        serializedVersion: 2
+        x: 2781
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 216ffa14909762940800000000000000
+      internalID: 5271033494547461650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_14
+      rect:
+        serializedVersion: 2
+        x: 3708
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faac7c821d58881a0800000000000000
+      internalID: -6807043703391663441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_15
+      rect:
+        serializedVersion: 2
+        x: 4635
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecb3434470d729760800000000000000
+      internalID: 7463165002668850126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_16
+      rect:
+        serializedVersion: 2
+        x: 5562
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 793de13f4ce5f5db0800000000000000
+      internalID: -4801014477768174697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_17
+      rect:
+        serializedVersion: 2
+        x: 6489
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d32cb12d85451d0800000000000000
+      internalID: -3362965362306827007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red death_18
+      rect:
+        serializedVersion: 2
+        x: 7416
+        y: 0
+        width: 927
+        height: 1782
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3479237}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c09d575d1c8c19d20800000000000000
+      internalID: 3283626338165315852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

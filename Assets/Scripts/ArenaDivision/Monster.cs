@@ -1,4 +1,3 @@
-using System;
 using Managers;
 using UnityEngine;
 
@@ -86,6 +85,7 @@ namespace ArenaDivision
 
 		private void OnTriggerEnter(Collider other)
 		{
+			other.gameObject.SetActive(false);
 			MatchManager.GameOver(transform.position.x > divider.position.x);
 		}
 

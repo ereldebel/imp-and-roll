@@ -150,6 +150,7 @@ namespace Player
 		private static readonly int AnimatorDodge = Animator.StringToHash("Dodge");
 		private static readonly int AnimatorStunned = Animator.StringToHash("Stunned");
 		private static readonly int AnimatorThrowing = Animator.StringToHash("Throwing");
+		private static readonly int AnimatorDead = Animator.StringToHash("Dead");
 
 		#endregion
 
@@ -217,6 +218,11 @@ namespace Player
 
 		#region Public Methods
 
+		public void Lost()
+		{
+			_animator.SetBool(AnimatorDead,true);
+		}
+		
 		public bool ChargeThrow()
 		{
 			if (_stunned || _rolling || _chargeStartTime >= 0 || _calledThrow || !_ball) return false;
@@ -326,6 +332,13 @@ namespace Player
 		private void PostRoundReset()
 		{
 			_timesStunned = 0;
+			_animator.SetBool(AnimatorDead,false);
+			_animator.SetBool(AnimatorRunning,false);
+			_animator.SetBool(AnimatorDodge,false);
+			_animator.SetBool(AnimatorStunned,false);
+			_animator.SetBool(AnimatorThrowing,false);
+			_animator.SetFloat(AnimatorX,1);
+			_animator.SetFloat(AnimatorZ,-1);
 		}
 
 		private void ChangeBallPosition(int index)

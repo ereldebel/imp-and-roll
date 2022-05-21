@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Collectibles.GlobalPowerUps;
+using Player;
 using UnityEngine;
 
 namespace Managers
@@ -75,12 +76,14 @@ namespace Managers
 
 		#region Public Methods
 
-		public static void GameOver(bool rightLost)
+		public static void GameOver(bool leftWon)
 		{
+			var losingPlayerIndex = leftWon ? 0 : 1; // assumes the right player is player 0.
+			GameManager.Players[losingPlayerIndex].GetComponent<PlayerBrain>()?.Lost();
 			MatchEnded?.Invoke();
-			var player = rightLost ? "left player" : "right player";
+			var player = leftWon ? "left player" : "right player";
 			print($"{player} won!");
-			GameManager.Shared.PlayerWon(rightLost);
+			_shared.StartCoroutine(EndMatchWithDelay(leftWon,3));
 		}
 
 		public static void AddGlobalPowerUp(IGlobalPowerUp powerUp)
@@ -107,6 +110,12 @@ namespace Managers
 			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
 			powerUp.End();
 			_shared._globalPowerUps.Remove(powerUp);
+		}
+		
+		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
+		{
+			yield return new WaitForSeconds(delay);
+			GameManager.Shared.PlayerWon(leftWon);
 		}
 
 		#endregion

@@ -75,7 +75,6 @@ namespace Managers
 			_gameStarted = false;
 			SceneManager.LoadSceneAsync(rightLost ? "P2 won" : "P1 won");
 			StartCoroutine(ResetTimer(3.5f));
-			StartCoroutine(SceneEnded(1));
 		}
 
 		public void PlayerReady(GameObject player)
@@ -109,6 +108,7 @@ namespace Managers
 		private IEnumerator ResetTimer(float time)
 		{
 			yield return new WaitForSeconds(time);
+			Scene1IsOver?.Invoke();
 			StartGameTwoPlayers();
 			_gameStarted = true;
 		}
@@ -179,14 +179,6 @@ namespace Managers
 			}
 
 			StartGameOnePlayer();
-		}
-
-		private IEnumerator SceneEnded(int SceneID)
-		{
-			yield return 0;
-			// Action cur = _shared._scenesEvents[SceneID]; Tried doing an int, Action Dict to make it a bit future proof, failed
-			// _shared._scenesEvents[SceneID]?.Invoke();
-			Scene1IsOver?.Invoke();
 		}
 
 		#endregion
