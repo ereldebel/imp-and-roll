@@ -33,6 +33,8 @@ namespace ArenaDivision
 		private float _startTime;
 		private float _speed = 1;
 		private float _ySpeed = 0.5f;
+		private bool _gotEye = false;
+		private Vector3 _originalPosition;
 
 		private static readonly int AnimatorX = Animator.StringToHash("X");
 		private static readonly int AnimatorZ = Animator.StringToHash("Z");
@@ -49,6 +51,7 @@ namespace ArenaDivision
 			_lineRenderer.positionCount = 2;
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
+			_originalPosition = transform.position;
 			OnValidate();
 			enabled = false;
 		}
@@ -73,14 +76,18 @@ namespace ArenaDivision
 		{
 			if (constantSpeeds) return;
 			// ReSharper disable once PossibleLossOfFraction
-			var speedMultiplier = (int)((Time.time - _startTime) / timeToSpeedUp)*speedUpMultiplier + 1; // TODO keep looking at values
+			var speedMultiplier =
+				(int) ((Time.time - _startTime) / timeToSpeedUp) * speedUpMultiplier + 1; // TODO keep looking at values
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
 		}
 
 		private void FixedUpdate()
 		{
-			Move();
+			if (_gotEye)
+				Move(_originalPosition);
+			else
+				Move(_ball.position);
 			UpdateSpectralChain();
 		}
 
@@ -90,27 +97,26 @@ namespace ArenaDivision
 			if (otherObject.CompareTag("Player") && !otherObject.GetComponent<PlayerBrain>().HasBall) return;
 			otherObject.SetActive(false);
 			MatchManager.GameOver(transform.position.x > divider.position.x);
-			enabled = false; //TODO: maybe there is an animation now?
+			_gotEye = true;
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private void Move()
+		private void Move(Vector3 targetPos)
 		{
 			var pos = transform.position;
-			var ballPos = _ball.position;
 			var dividerPos = divider.position;
-			var ballDir = ballPos - pos;
-			UpdateAnimator(ballDir);
-			_collider.enabled = ballDir.sqrMagnitude < colliderEnableDistance;
-			var ballDist = ballPos.x - pos.x;
-			var xMovement = Mathf.Abs(ballDist) > 0.01f ? Mathf.Sign(ballDist) * _speed : 0;
-			var yMovement = Mathf.Max(Mathf.Abs(ballDir.x), Mathf.Abs(ballDir.z)) < dangerZoneRadius
-				? ballDir.y * _ySpeed
+			var targetDir = targetPos - pos;
+			UpdateAnimator(targetDir);
+			_collider.enabled = targetDir.sqrMagnitude < colliderEnableDistance;
+			var targetXDist = targetDir.x - pos.x;
+			var xMovement = Mathf.Abs(targetXDist) > 0.01f ? Mathf.Sign(targetXDist) * _speed : 0;
+			var yMovement = Mathf.Max(Mathf.Abs(targetDir.x), Mathf.Abs(targetDir.z)) < dangerZoneRadius
+				? targetDir.y * _ySpeed
 				: Mathf.Min(maxHeight - pos.y, 2 * _ySpeed);
-			var zMovement = ballDir.z * _speed;
+			var zMovement = targetDir.z * _speed;
 			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) > 0;
 			if (movingTowardsDivider)
 				xMovement *= 2;
