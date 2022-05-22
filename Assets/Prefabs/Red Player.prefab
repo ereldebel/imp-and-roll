@@ -216,6 +216,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 178b9fad-0fa0-4b14-af33-4b7a54c96231
     m_ActionName: Start Menu/Start[/Keyboard/enter,/Keyboard/space,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ad0a7fb0-f277-4f7e-a584-3868553305dc
+    m_ActionName: Player Tutorial Area/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7035921-7668-49a9-8b47-79b79d595d58
+    m_ActionName: Player Tutorial Area/Aim[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a0441ab-08ce-4c96-ba2d-ed09b39938d5
+    m_ActionName: Player Tutorial Area/Throw[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5f0b87c4-5700-4dcd-aa11-83e7b1b3a3ff
+    m_ActionName: Player Tutorial Area/Dodge Roll[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a5fb549a-b537-480f-a511-111b6410e7da
+    m_ActionName: Player Tutorial Area/Start[/Keyboard/enter,/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
@@ -245,7 +265,7 @@ MonoBehaviour:
   knockBackDuration: 0.5
   knockBackRelativeSpeed: 0.5
   stunDuration: 1
-  stunDurationIncrease: 0.2
+  maxStunDurationIncrease: 1
   stunBarPercentagePerHit: 0.2
   ballPositionsDown45:
   - {x: 0, y: -0.47, z: 0}
