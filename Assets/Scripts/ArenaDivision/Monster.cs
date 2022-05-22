@@ -95,7 +95,7 @@ namespace ArenaDivision
 		{
 			var otherObject = other.gameObject;
 			if (otherObject.CompareTag("Player") && !otherObject.GetComponent<PlayerBrain>().HasBall) return;
-			otherObject.SetActive(false);
+			_ball.gameObject.SetActive(false);
 			MatchManager.GameOver(transform.position.x > divider.position.x);
 			_gotEye = true;
 		}
