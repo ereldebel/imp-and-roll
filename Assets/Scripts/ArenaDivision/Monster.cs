@@ -111,7 +111,7 @@ namespace ArenaDivision
 			var targetDir = targetPos - pos;
 			UpdateAnimator(targetDir);
 			_collider.enabled = targetDir.sqrMagnitude < colliderEnableDistance;
-			var targetXDist = targetDir.x - pos.x;
+			var targetXDist = targetPos.x - pos.x;
 			var xMovement = Mathf.Abs(targetXDist) > 0.01f ? Mathf.Sign(targetXDist) * _speed : 0;
 			var yMovement = Mathf.Max(Mathf.Abs(targetDir.x), Mathf.Abs(targetDir.z)) < dangerZoneRadius
 				? targetDir.y * _ySpeed
