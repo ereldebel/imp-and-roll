@@ -146,7 +146,7 @@ namespace Player
 		//Ball and ball Animation:
 		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
 		private readonly List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
-		private int _ballThrowPositionIndex = 0;
+		private int _ballThrowPositionIndex;
 
 		//PowerUps:
 		private readonly Dictionary<IBallPowerUp, Coroutine> _ballPowerUps = new Dictionary<IBallPowerUp, Coroutine>();
@@ -254,10 +254,7 @@ namespace Player
 
 		public void GameOver(bool won)
 		{
-		    if (won)
-		        _animator.SetBool(AnimatorWon, true);
-		    else
-			    _animator.SetBool(AnimatorLost, true);
+			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
 			RemoveAllPowerUps();
 		}
 

@@ -9,7 +9,7 @@ namespace Collectibles.PowerUp
 		private readonly float _duration;
 		private GameObject _target;
 
-		public static event Action<GameObject, CollectibleType> PowerUpActivated;
+		public static event Action<GameObject, CollectibleType, float> PowerUpActivated;
 
 		protected PowerUp(float duration, CollectibleType type)
 		{
@@ -24,7 +24,7 @@ namespace Collectibles.PowerUp
 
 		public virtual float StartAndGetDuration()
 		{
-			PowerUpActivated?.Invoke(_target, _type);
+			PowerUpActivated?.Invoke(_target, _type, _duration);
 			return _duration;
 		}
 	}
