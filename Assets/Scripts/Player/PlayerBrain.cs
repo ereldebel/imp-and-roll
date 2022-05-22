@@ -161,7 +161,8 @@ namespace Player
 		private static readonly int AnimatorDodge = Animator.StringToHash("Dodge");
 		private static readonly int AnimatorStunned = Animator.StringToHash("Stunned");
 		private static readonly int AnimatorThrowing = Animator.StringToHash("Throwing");
-		private static readonly int AnimatorDead = Animator.StringToHash("Dead");
+		private static readonly int AnimatorLost = Animator.StringToHash("Lost");
+		private static readonly int AnimatorWon = Animator.StringToHash("Won");
 
 		#endregion
 
@@ -224,7 +225,8 @@ namespace Player
 			_stunned = false;
 			_ball = null;
 			_stunBar = 1;
-			_animator.SetBool(AnimatorDead, false);
+			_animator.SetBool(AnimatorWon, false);
+			_animator.SetBool(AnimatorLost, false);
 			_animator.SetBool(AnimatorRunning, false);
 			_animator.SetBool(AnimatorDodge, false);
 			_animator.SetBool(AnimatorStunned, false);
@@ -250,9 +252,12 @@ namespace Player
 			_ballPowerUps.Remove(powerUp);
 		}
 
-		public void Lost()
+		public void GameOver(bool won)
 		{
-			_animator.SetBool(AnimatorDead, true);
+		    if (won)
+		        _animator.SetBool(AnimatorWon, true);
+		    else
+			    _animator.SetBool(AnimatorLost, true);
 			RemoveAllPowerUps();
 		}
 

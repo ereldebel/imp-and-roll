@@ -87,8 +87,9 @@ namespace Managers
 
 		public static void GameOver(bool leftWon)
 		{
-			var losingPlayerIndex = leftWon ? 0 : 1; // assumes the right player is player 0.
-			GameManager.Players[losingPlayerIndex].GetComponent<PlayerBrain>()?.Lost();
+			var winningPlayerIndex = leftWon ? 1 : 0; // assumes the right player is player 0.
+			GameManager.Players[winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(true);
+			GameManager.Players[1 - winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(false);
 			MatchEnded?.Invoke();
 			var player = leftWon ? "left player" : "right player";
 			print($"{player} won!");
