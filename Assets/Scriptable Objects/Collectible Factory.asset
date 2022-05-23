@@ -19,6 +19,6 @@ MonoBehaviour:
   attractCollectiblesAttractionRadius: 10
   attractCollectiblesIcon: {fileID: 21300000, guid: 7cca433190f836a4eb9a6b87f21581bf, type: 3}
   homingBallDuration: 8
-  homingBallAttractionRate: 0.5
+  homingBallAttractionRate: 0.4
   homingBallIcon: {fileID: 21300000, guid: 822038d23aa426044b9725f69711584f, type: 3}
   uniformDuration: -1
