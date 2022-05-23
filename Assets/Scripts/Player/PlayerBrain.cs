@@ -163,6 +163,7 @@ namespace Player
 		private static readonly int AnimatorThrowing = Animator.StringToHash("Throwing");
 		private static readonly int AnimatorLost = Animator.StringToHash("Lost");
 		private static readonly int AnimatorWon = Animator.StringToHash("Won");
+		private static readonly int AnimatorHasBall = Animator.StringToHash("Has Ball");
 
 		#endregion
 
@@ -265,7 +266,7 @@ namespace Player
 			if (_stunned || _rolling || _chargeStartTime >= 0 || _calledThrow || !_ball) return false;
 			_chargeStartTime = Time.time;
 			_animator.SetBool(AnimatorThrowing, true);
-			_ball.Grow(_chargeStartTime);
+			_ball.StartCharging();
 			StartedChargingThrow?.Invoke(_ball);
 			return true;
 		}
@@ -320,6 +321,7 @@ namespace Player
 			if (ball == null) return;
 			if (ball.Thrown) return;
 			_ball = ball;
+			_animator.SetBool(AnimatorHasBall, true);
 			if (gameObject.activeSelf)
 				_ball.Pickup(transform);
 		}
@@ -363,6 +365,7 @@ namespace Player
 			_chargeStartTime = -1;
 			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject, _ballPowerUps.Keys);
 			_ball = null;
+			_animator.SetBool(AnimatorHasBall, false);
 			_calledThrow = false;
 			BallThrown?.Invoke();
 		}

@@ -39,6 +39,7 @@ namespace Managers
 
 		private const float PlaneWidth = 10;
 		private Vector2 _arenaDimensions;
+		private Coroutine _spawner;
 
 		private readonly List<Transform> _collectibleCollection = new List<Transform>();
 
@@ -61,7 +62,7 @@ namespace Managers
 			var scale = arena.transform.localScale;
 			_arenaDimensions = new Vector2(scale.x * PlaneWidth, scale.y * PlaneWidth);
 			GameManager.Shared.AwakeAI();
-			StartCoroutine(SpawnCollectible());
+			_spawner = StartCoroutine(SpawnCollectible());
 		}
 
 		private void Update()
@@ -87,6 +88,7 @@ namespace Managers
 
 		public static void GameOver(bool leftWon)
 		{
+			_shared.StopCoroutine(_shared._spawner);
 			var winningPlayerIndex = leftWon ? 1 : 0; // assumes the right player is player 0.
 			GameManager.Players[winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(true);
 			GameManager.Players[1 - winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(false);

@@ -57,6 +57,7 @@ public class Ball : MonoBehaviour
 		_collider = GetComponent<SphereCollider>();
 		_myParticles = GetComponent<ParticleSystem>();
 		_trailRenderer = GetComponent<TrailRenderer>();
+		_myParticles.Stop();
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -96,9 +97,10 @@ public class Ball : MonoBehaviour
 
 	#region Public Methods
 
-	public void Grow(float time)
+	public void StartCharging()
 	{
-		_curGrowStartTime = time;
+		Grow();
+		gameObject.SetActive(true);
 	}
 
 	public void Pickup(Transform newParent)
@@ -108,11 +110,12 @@ public class Ball : MonoBehaviour
 		_held = true;
 		_transform.SetParent(newParent);
 		_transform.localPosition = Vector3.zero;
-		// gameObject.SetActive(false);
 		_rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
 		_rigidbody.isKinematic = true;
 		_rigidbody.angularVelocity = Vector3.zero;
 		_collider.enabled = false;
+		_trailRenderer.enabled = false;
+		gameObject.SetActive(false);
 	}
 
 	public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower, ICollection<IBallPowerUp> powerUps)
@@ -121,11 +124,10 @@ public class Ball : MonoBehaviour
 			powerUp.OnThrow(this);
 		_powerUps = powerUps;
 		Release(posChange);
-		Shrink(Time.time);
+		Shrink();
 		_rigidbody.velocity = velocity;
 		_rigidbody.AddTorque(velocity);
 		Thrown = true;
-		// _myParticles.Play();
 		_trailRenderer.enabled = true;
 		_thrower = thrower;
 	}
@@ -141,6 +143,7 @@ public class Ball : MonoBehaviour
 		_rigidbody.isKinematic = false;
 		_rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
 		_collider.enabled = true;
+		_trailRenderer.enabled = true;
 		_transform.SetParent(null);
 		_held = false;
 	}
@@ -148,13 +151,17 @@ public class Ball : MonoBehaviour
 	private void Landed()
 	{
 		Thrown = false;
-		_myParticles.Stop();
 		_trailRenderer.enabled = false;
 	}
 
-	private void Shrink(float time)
+	private void Grow()
 	{
-		_curShrinkStartTime = time;
+		_curGrowStartTime = Time.time;
+	}
+	
+	private void Shrink()
+	{
+		_curShrinkStartTime = Time.time;
 	}
 
 	private void ChangeSize(float size)
