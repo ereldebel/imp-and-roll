@@ -211,6 +211,22 @@ namespace Player
 			transform.rotation = AimDirection.x > 0 ? _faceRight : _faceLeft;
 		}
 
+		private void OnTriggerEnter(Collider other)
+		{
+			if (other.CompareTag("Teleporter"))
+			{
+				PlayerReady();
+			}
+		}
+
+		private void OnTriggerExit(Collider other)
+		{
+			if (other.CompareTag("Teleporter"))
+			{
+				PlayerReady();
+			}
+		}
+
 		private void OnCollisionEnter(Collision collision)
 		{
 			PickupBall(collision);
