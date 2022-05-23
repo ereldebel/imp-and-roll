@@ -223,7 +223,9 @@ namespace Player
 		{
 			_rolling = false;
 			_stunned = false;
+			_calledThrow = false;
 			_ball = null;
+			_chargeStartTime = -1;
 			_stunBar = 1;
 			_animator.SetBool(AnimatorWon, false);
 			_animator.SetBool(AnimatorLost, false);

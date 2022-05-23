@@ -135,9 +135,21 @@ namespace Managers
 
 		#region Private Coroutines
 
+		private static IEnumerator PowerUpLifeSpan(IGlobalPowerUp powerUp)
+		{
+			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
+			powerUp.End();
+			_shared._globalPowerUps.Remove(powerUp);
+		}
+
+		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
+		{
+			yield return new WaitForSeconds(delay);
+			GameManager.Shared.PlayerWon(leftWon);
+		}
+
 		private IEnumerator SpawnCollectible()
 		{
-			var prefabCollectible = powerUpPrefab.GetComponent<Collectible>();
 			var halfOfArenaWidth = ArenaWidth / 2;
 			var halfOfArenaLength = ArenaLength / 2;
 			var allPowerUps = Enum.GetValues(typeof(CollectibleType));
@@ -148,8 +160,6 @@ namespace Managers
 			while (enabled)
 			{
 				yield return new WaitForSeconds(timeBetweenPowerUpSpawns);
-				prefabCollectible.collectibleType =
-					(CollectibleType) allPowerUps.GetValue(random.Next(allPowerUps.Length));
 				++numOfSpawns;
 				float minX, maxX;
 				if (spawnOnRight)
@@ -167,22 +177,12 @@ namespace Managers
 				var minVector = new Vector2(minX, -halfOfArenaWidth);
 				var maxVector = new Vector2(maxX, halfOfArenaWidth);
 				var spawnPoint = RandomXZVector(minVector, maxVector, 0.1f);
-				Instantiate(prefabCollectible, spawnPoint, Quaternion.identity);
+				var newPowerUp = Instantiate(powerUpPrefab, spawnPoint, powerUpPrefab.transform.rotation);
+				var next = (CollectibleType) allPowerUps.GetValue(random.Next(allPowerUps.Length));
+				newPowerUp.GetComponent<Collectible>().CollectibleType = next;
+				print(next);
 				spawnOnRight = random.Next(numOfSpawns) < numOfLeftSpawns;
 			}
-		}
-
-		private static IEnumerator PowerUpLifeSpan(IGlobalPowerUp powerUp)
-		{
-			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
-			powerUp.End();
-			_shared._globalPowerUps.Remove(powerUp);
-		}
-
-		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
-		{
-			yield return new WaitForSeconds(delay);
-			GameManager.Shared.PlayerWon(leftWon);
 		}
 
 		#endregion

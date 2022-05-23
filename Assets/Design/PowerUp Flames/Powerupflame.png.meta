@@ -1,28 +1,25 @@
 fileFormatVersion: 2
-guid: 3c9a4d90e9118a740a16a7f04303dab4
+guid: 385e6ffc1969fcb469cd19a851138532
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7303367078742973859
-    second: blue dodge down ball_0
+      213: 5370456629882166082
+    second: Powerupflame_0
   - first:
-      213: 3668652943095281911
-    second: blue dodge down ball_1
+      213: -6951730418700278294
+    second: Powerupflame_1
   - first:
-      213: 4416820247081868454
-    second: blue dodge down ball_2
+      213: 1171899338463767407
+    second: Powerupflame_2
   - first:
-      213: -4823406976268920182
-    second: blue dodge down ball_3
+      213: -5552702112505432723
+    second: Powerupflame_3
   - first:
-      213: -2465432468641863230
-    second: blue dodge down ball_4
+      213: -622050552274633305
+    second: Powerupflame_4
   - first:
-      213: -5953197063052274281
-    second: blue dodge down ball_5
-  - first:
-      213: 5491423046751511158
-    second: blue dodge down ball_6
+      213: 911475618113317744
+    second: Powerupflame_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -136,13 +133,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue dodge down ball_0
+      name: Powerupflame_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 655
-        height: 746
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3add1c8c9a5ca5560800000000000000
-      internalID: 7303367078742973859
+      spriteID: 24b94c9d9d1b78a40800000000000000
+      internalID: 5370456629882166082
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue dodge down ball_1
+      name: Powerupflame_1
       rect:
         serializedVersion: 2
-        x: 655
+        x: 512
         y: 0
-        width: 655
-        height: 746
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f8b2651a6ca9e230800000000000000
-      internalID: 3668652943095281911
+      spriteID: ae5a71b140e768f90800000000000000
+      internalID: -6951730418700278294
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue dodge down ball_2
+      name: Powerupflame_2
       rect:
         serializedVersion: 2
-        x: 1310
+        x: 1024
         y: 0
-        width: 655
-        height: 746
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ac51180d92bb4d30800000000000000
-      internalID: 4416820247081868454
+      spriteID: f6be5a54d3c634010800000000000000
+      internalID: 1171899338463767407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue dodge down ball_3
+      name: Powerupflame_3
       rect:
         serializedVersion: 2
-        x: 1965
+        x: 1536
         y: 0
-        width: 655
-        height: 746
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +210,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8a995c19e0df0db0800000000000000
-      internalID: -4823406976268920182
+      spriteID: d657d8029d6d0f2b0800000000000000
+      internalID: -5552702112505432723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue dodge down ball_4
+      name: Powerupflame_4
       rect:
         serializedVersion: 2
-        x: 2620
+        x: 2048
         y: 0
-        width: 655
-        height: 746
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,20 +231,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c923e07b3609cdd0800000000000000
-      internalID: -2465432468641863230
+      spriteID: 7adb55781580e57f0800000000000000
+      internalID: -622050552274633305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue dodge down ball_5
+      name: Powerupflame_5
       rect:
         serializedVersion: 2
-        x: 3275
+        x: 2560
         y: 0
-        width: 655
-        height: 746
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,29 +252,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 795ded200def16da0800000000000000
-      internalID: -5953197063052274281
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blue dodge down ball_6
-      rect:
-        serializedVersion: 2
-        x: 3930
-        y: 0
-        width: 655
-        height: 746
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 672640d8a24753c40800000000000000
-      internalID: 5491423046751511158
+      spriteID: 07be217de3636ac00800000000000000
+      internalID: 911475618113317744
       vertices: []
       indices: 
       edges: []
@@ -285,7 +261,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1d17d753fd90a8a439cf939bce1d1483
+    spriteID: 85f86ac385b81184b87f9a45d45c5bc8
     internalID: 0
     vertices: []
     indices: 

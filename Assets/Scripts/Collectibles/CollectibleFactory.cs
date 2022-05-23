@@ -13,21 +13,25 @@ namespace Collectibles
 		[Header("Invert Controls")] [SerializeField]
 		private float invertControlsDuration = 10;
 
+		[SerializeField] private Sprite invertControlsIcon;
+
 		[Header("Attract Collectibles")] [SerializeField]
 		private float attractCollectiblesDuration = 10;
 
 		[SerializeField] private float attractCollectiblesBaseAttractionSpeed = 0.1f;
 		[SerializeField] private float attractCollectiblesAttractionRadius = 10;
+		[SerializeField] private Sprite attractCollectiblesIcon;
 
 		[Header("Homing Ball Collectibles")] [SerializeField]
 		private float homingBallDuration = 10;
 
 		[SerializeField] private float homingBallAttractionRate = 1;
+		[SerializeField] private Sprite homingBallIcon;
 
 		// [Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
 		// private float[] powerUpWeights = new float[3];
 
-		[Space(5)] [Tooltip("if positive overrides all durations to this duration")] [SerializeField]
+		[Space(10)] [Tooltip("if positive overrides all durations to this duration")] [SerializeField]
 		private float uniformDuration = -1;
 
 
@@ -77,6 +81,17 @@ namespace Collectibles
 				CollectibleType.AttractCollectibles => new AttractCollectibles(attractCollectiblesDuration,
 					attractCollectiblesBaseAttractionSpeed, attractCollectiblesAttractionRadius),
 				CollectibleType.HomingBall => new HomingBall(homingBallDuration, homingBallAttractionRate),
+				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
+			};
+		}
+
+		public Sprite Icon(CollectibleType collectibleType)
+		{
+			return collectibleType switch
+			{
+				CollectibleType.InvertControls => invertControlsIcon,
+				CollectibleType.AttractCollectibles => attractCollectiblesIcon,
+				CollectibleType.HomingBall => homingBallIcon,
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
 			};
 		}
