@@ -52,6 +52,12 @@ namespace Player
 				_myBrain.PlayerReady();
 		}
 
+		public void OnTaunt(InputAction.CallbackContext context)
+		{
+			if (context.started)
+				_myBrain.Taunt();
+		}
+
 
 		private Vector2 ScreenToWorld2D(Vector2 screenPos)
 		{

@@ -164,6 +164,7 @@ namespace Player
 		private static readonly int AnimatorLost = Animator.StringToHash("Lost");
 		private static readonly int AnimatorWon = Animator.StringToHash("Won");
 		private static readonly int AnimatorHasBall = Animator.StringToHash("Has Ball");
+		private static readonly int AnimatorTaunt = Animator.StringToHash("Taunt");
 
 		#endregion
 
@@ -243,6 +244,11 @@ namespace Player
 
 		#region Public Methods
 
+		public void Taunt()
+		{
+			_animator.SetTrigger(AnimatorTaunt);
+		}
+
 		public void AddBallPowerUp(IBallPowerUp powerUp)
 		{
 			_ballPowerUps.Add(powerUp, StartCoroutine(PowerUpLifeSpan(powerUp)));
@@ -290,8 +296,8 @@ namespace Player
 			if (_chargeStartTime >= 0 || _stunned || _rolling) return;
 			var movementDir = MovementStick;
 			if (MovementStick == Vector2.zero)
-				StartCoroutine(DodgeRoll(new Vector3(_animator.GetFloat(AnimatorX), 0,
-					(Flipped ? -1 : 1) * _animator.GetFloat(AnimatorZ))));
+				StartCoroutine(DodgeRoll(new Vector3((Flipped ? -1 : 1) * _animator.GetFloat(AnimatorX), 0,
+					_animator.GetFloat(AnimatorZ))));
 			else
 				StartCoroutine(DodgeRoll(new Vector3(movementDir.x, 0, movementDir.y)));
 		}
@@ -313,7 +319,7 @@ namespace Player
 				ballPowerUp.Key.End();
 			}
 		}
-		
+
 		private void PickupBall(Collision collision)
 		{
 			if (_ball != null || _stunned) return;

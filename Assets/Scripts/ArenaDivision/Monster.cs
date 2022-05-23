@@ -77,6 +77,8 @@ namespace ArenaDivision
 
 		private void Update()
 		{
+			if (_gotEye && Vector3.Distance(transform.position, _originalPosition) < 0.1f)
+				enabled = false;
 			if (constantSpeeds) return;
 			// ReSharper disable once PossibleLossOfFraction
 			var speedMultiplier =
