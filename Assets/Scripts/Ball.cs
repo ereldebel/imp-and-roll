@@ -37,7 +37,6 @@ public class Ball : MonoBehaviour
 	private Transform _transform;
 	private Rigidbody _rigidbody;
 	private SphereCollider _collider;
-	private ParticleSystem _myParticles;
 	private TrailRenderer _trailRenderer;
 
 	private GameObject _thrower = null;
@@ -55,9 +54,7 @@ public class Ball : MonoBehaviour
 		_transform = transform;
 		_rigidbody = GetComponent<Rigidbody>();
 		_collider = GetComponent<SphereCollider>();
-		_myParticles = GetComponent<ParticleSystem>();
 		_trailRenderer = GetComponent<TrailRenderer>();
-		_myParticles.Stop();
 	}
 
 	private void OnCollisionEnter(Collision collision)
