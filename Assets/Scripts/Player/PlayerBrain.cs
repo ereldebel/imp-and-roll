@@ -230,6 +230,7 @@ namespace Player
 			_chargeStartTime = -1;
 			_stunBar = 1;
 			_animator.SetBool(AnimatorWon, false);
+			_animator.SetBool(AnimatorHasBall, false);
 			_animator.SetBool(AnimatorLost, false);
 			_animator.SetBool(AnimatorRunning, false);
 			_animator.SetBool(AnimatorDodge, false);
