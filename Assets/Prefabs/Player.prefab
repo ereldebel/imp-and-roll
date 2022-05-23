@@ -308,6 +308,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a5fb549a-b537-480f-a511-111b6410e7da
     m_ActionName: Player Tutorial Area/Start[/Keyboard/enter,/Keyboard/space,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eb244a0d-f41f-417c-8007-36da653c8fb5
+    m_ActionName: Player/Taunt[/Keyboard/e,/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Collectible Factory
   m_EditorClassIdentifier: 
   invertControlsDuration: 8
+  invertControlsIcon: {fileID: 21300000, guid: bb8f369cd1cc2934f8614bedaad296b7, type: 3}
   attractCollectiblesDuration: 8
   attractCollectiblesBaseAttractionSpeed: 0.1
   attractCollectiblesAttractionRadius: 10
+  attractCollectiblesIcon: {fileID: 21300000, guid: 7cca433190f836a4eb9a6b87f21581bf, type: 3}
   homingBallDuration: 8
   homingBallAttractionRate: 0.5
+  homingBallIcon: {fileID: 21300000, guid: 822038d23aa426044b9725f69711584f, type: 3}
   uniformDuration: -1
