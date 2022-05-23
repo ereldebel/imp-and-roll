@@ -9,6 +9,7 @@ namespace ArenaDivision
 		#region Serialized Fields
 
 		[SerializeField] private float dangerZoneRadius = 1;
+		[SerializeField] private float alarmZoneRadius = 2;
 		[SerializeField] private float baseSpeed = 1;
 		[SerializeField] private float baseYSpeed = 2;
 		[SerializeField] private float maxHeight = 5;
@@ -37,7 +38,9 @@ namespace ArenaDivision
 		private Vector3 _originalPosition;
 
 		private static readonly int AnimatorX = Animator.StringToHash("X");
+		private static readonly int AnimatorSpotX = Animator.StringToHash("Spot X");
 		private static readonly int AnimatorZ = Animator.StringToHash("Z");
+		private static readonly int AnimatorDangerLevel = Animator.StringToHash("Danger Level");
 
 		#endregion
 
@@ -84,10 +87,7 @@ namespace ArenaDivision
 
 		private void FixedUpdate()
 		{
-			if (_gotEye)
-				Move(_originalPosition);
-			else
-				Move(_ball.position);
+			Move(_gotEye ? _originalPosition : _ball.position);
 			UpdateSpectralChain();
 		}
 
@@ -109,11 +109,12 @@ namespace ArenaDivision
 			var pos = transform.position;
 			var dividerPos = divider.position;
 			var targetDir = targetPos - pos;
-			UpdateAnimator(targetDir);
+			var infNorm = Mathf.Max(Mathf.Abs(targetDir.x), Mathf.Abs(targetDir.z));
+			var dangerous = infNorm < dangerZoneRadius;
+			UpdateAnimator(targetDir, dangerous ? 2 : (infNorm < alarmZoneRadius ? 1 : 0));
 			_collider.enabled = targetDir.sqrMagnitude < colliderEnableDistance;
-			var targetXDist = targetPos.x - pos.x;
-			var xMovement = Mathf.Abs(targetXDist) > 0.01f ? Mathf.Sign(targetXDist) * _speed : 0;
-			var yMovement = Mathf.Max(Mathf.Abs(targetDir.x), Mathf.Abs(targetDir.z)) < dangerZoneRadius
+			var xMovement = Mathf.Abs(targetDir.x) > 0.01f ? Mathf.Sign(targetDir.x) * _speed : 0;
+			var yMovement = dangerous
 				? targetDir.y * _ySpeed
 				: Mathf.Min(maxHeight - pos.y, 2 * _ySpeed);
 			var zMovement = targetDir.z * _speed;
@@ -128,18 +129,19 @@ namespace ArenaDivision
 			divider.position = dividerPos;
 		}
 
-		private void UpdateAnimator(Vector3 direction)
+		private void UpdateAnimator(Vector3 direction, int dangerLevel)
 		{
+			_animator.SetInteger(AnimatorDangerLevel, _gotEye ? 0 : dangerLevel);
+			if (direction.x == 0 && direction.z == 0) return;
 			direction.y = 0;
 			direction = direction.normalized;
 			var z = Mathf.Round(direction.z);
 			var x = Mathf.Round(direction.x);
-			if (x == 0 && z == 0) return;
-			_animator.SetFloat(AnimatorZ, z);
-			if (z > 0)
-				_animator.SetFloat(AnimatorX, direction.x > 0 ? 1 : -1);
-			else
-				_animator.SetFloat(AnimatorX, x);
+			var nonZeroX = direction.x > 0 ? 1 : -1;
+			var nonZeroZ = direction.z > 0 ? 1 : -1;
+			_animator.SetFloat(AnimatorZ, x == 0 ? nonZeroZ : z);
+			_animator.SetFloat(AnimatorSpotX, nonZeroX);
+			_animator.SetFloat(AnimatorX, z == 0 ? nonZeroX : x);
 		}
 
 		private void UpdateSpectralChain()
