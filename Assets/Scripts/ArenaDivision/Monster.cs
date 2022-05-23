@@ -81,8 +81,8 @@ namespace ArenaDivision
 				enabled = false;
 			if (constantSpeeds) return;
 			// ReSharper disable once PossibleLossOfFraction
-			var speedMultiplier =
-				(int) ((Time.time - _startTime) / timeToSpeedUp) * speedUpMultiplier + 1; // TODO keep looking at values
+			var speedMultiplier = Mathf.Log10(1+(int) ((Time.time - _startTime) / timeToSpeedUp)) 
+				* speedUpMultiplier + 1; // TODO keep looking at values
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
 		}

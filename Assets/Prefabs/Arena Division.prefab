@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dangerZoneRadius: 1
+  alarmZoneRadius: 2
   baseSpeed: 1
   baseYSpeed: 2
   maxHeight: 5
@@ -361,7 +362,7 @@ MonoBehaviour:
   divider: {fileID: 5851243974168832105}
   constantSpeeds: 0
   timeToSpeedUp: 30
-  speedUpMultiplier: 3
+  speedUpMultiplier: 5
   colliderEnableDistance: 1
 --- !u!120 &4017327835214303576
 LineRenderer:

@@ -1006,6 +1006,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754911801}
   m_CullTransparentMesh: 1
+--- !u!1 &2125111085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2125111087}
+  - component: {fileID: 2125111086}
+  m_Layer: 0
+  m_Name: PowerUpUIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2125111086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125111085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b2209ff8370cc4e8ae0a7b25f08844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUps: 000000000100000002000000
+  icons:
+  - {fileID: 21300000, guid: 65980b2789be33b4f920c0a64f7b606c, type: 3}
+  - {fileID: 21300000, guid: b8d3d417aaa282c4280ae17521df72ec, type: 3}
+  - {fileID: 21300000, guid: f349aeabc592deb4d99b53cab16a5a8e, type: 3}
+  redPlayerIcons: []
+  bluePlayerIcons: []
+--- !u!4 &2125111087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125111085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2844435, y: 11.776301, z: -11.174068}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &576757197771022181
 PrefabInstance:
   m_ObjectHideFlags: 0
