@@ -4,7 +4,7 @@
 	{
 		void OnThrow(Ball ball);
 		void OnLateUpdate();
-		void OnHit();
+		bool OnHit();
 		void End();
 	}
 }

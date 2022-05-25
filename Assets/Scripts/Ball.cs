@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Collectibles;
 using Collectibles.PowerUp.BallPowerUps;
 using Managers;
 using UnityEngine;
@@ -63,10 +65,11 @@ public class Ball : MonoBehaviour
 		if (collision.gameObject == _thrower) return;
 		if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
 			Landed();
-		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity);
+		bool ignoreRoll = false;
 		if (_powerUps == null) return;
 		foreach (var powerUp in _powerUps)
 			powerUp.OnHit();
+		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, ignoreRoll);
 		_powerUps = null;
 	}
 

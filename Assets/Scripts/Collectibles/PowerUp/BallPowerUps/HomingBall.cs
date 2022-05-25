@@ -39,12 +39,18 @@ namespace Collectibles.PowerUp.BallPowerUps
 					Mathf.Pow(diffNorm + 1, _attractionRate));
 		}
 
-		public void OnHit()
+		public bool OnHit()
 		{
+			return false;
 		}
 
 		public void End()
 		{
+		}
+
+		public CollectibleType GetMyType()
+		{
+			return PowerUpType;
 		}
 	}
 }
