@@ -28,6 +28,10 @@ namespace Collectibles
 		[SerializeField] private float homingBallAttractionRate = 1;
 		[SerializeField] private Sprite homingBallIcon;
 
+		[Header("Attract Collectibles")] [SerializeField]
+		private float superThrowDuration = 10;
+
+		[SerializeField] private Sprite superThrowIcon;
 		// [Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
 		// private float[] powerUpWeights = new float[3];
 
@@ -43,6 +47,7 @@ namespace Collectibles
 			invertControlsDuration = uniformDuration;
 			attractCollectiblesDuration = uniformDuration;
 			homingBallDuration = uniformDuration;
+			superThrowDuration = uniformDuration;
 		}
 
 		// public ICollectible GetRandomWeightedPowerUp()
@@ -81,7 +86,9 @@ namespace Collectibles
 				CollectibleType.AttractCollectibles => new AttractCollectibles(attractCollectiblesDuration,
 					attractCollectiblesBaseAttractionSpeed, attractCollectiblesAttractionRadius),
 				CollectibleType.HomingBall => new HomingBall(homingBallDuration, homingBallAttractionRate),
-				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
+				CollectibleType.SuperThrow => new SuperThrows(superThrowDuration),
+				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
+				
 			};
 		}
 
@@ -92,6 +99,7 @@ namespace Collectibles
 				CollectibleType.InvertControls => invertControlsIcon,
 				CollectibleType.AttractCollectibles => attractCollectiblesIcon,
 				CollectibleType.HomingBall => homingBallIcon,
+				CollectibleType.SuperThrow => superThrowIcon,
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
 			};
 		}
