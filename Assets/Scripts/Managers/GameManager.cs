@@ -17,7 +17,7 @@ namespace Managers
 		[SerializeField] private AnimatorOverrideController redController;
 		[SerializeField] private float waitTime = 2;
 		[SerializeField] private GameObject AIPlayerPrefab;
-
+		public GameObject pressStartCanvas;
 		#endregion
 
 		#region Private Fields
@@ -54,6 +54,9 @@ namespace Managers
 
 		public void AddPlayer(PlayerInput input)
 		{
+			if (pressStartCanvas.activeSelf)
+				pressStartCanvas.SetActive(false);
+			
 			var player = input.gameObject;
 			DontDestroyOnLoad(player);
 			_players.Add(player);
@@ -114,10 +117,10 @@ namespace Managers
 
 		private void SetUpPlayerForStartScene(GameObject player, int playerID)
 		{
-			player.GetComponent<CharacterController>().enabled = false;
+			player.GetComponent<CharacterController>().enabled = true;
 			player.transform.position = playerInfos[playerID].locationOpeningScene;
 			player.GetComponent<PlayerInput>()
-				?.SwitchCurrentActionMap("Start Menu"); // To keep Playability without entry scene
+				?.SwitchCurrentActionMap("Player Tutorial Area"); // To keep Playability without entry scene
 			if (playerID == 1)
 				MakePlayerRed(player);
 		}
