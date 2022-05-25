@@ -66,9 +66,10 @@ public class Ball : MonoBehaviour
 		if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
 			Landed();
 		bool ignoreRoll = false;
-		// if (_powerUps == null) return;
-		foreach (var powerUp in _powerUps)
-			ignoreRoll = powerUp.OnHit();
+		if (_powerUps != null){
+			foreach (var powerUp in _powerUps)
+				ignoreRoll = powerUp.OnHit();
+		}
 		collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, ignoreRoll);
 		_powerUps = null;
 	}
