@@ -144,8 +144,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: Monster attack 45 down right_1
       rect:
         serializedVersion: 2
-        x: 1374
+        x: 1742
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Monster attack 45 down right_2
       rect:
         serializedVersion: 2
-        x: 2748
+        x: 3484
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: Monster attack 45 down right_3
       rect:
         serializedVersion: 2
-        x: 4122
+        x: 5226
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: Monster attack 45 down right_4
       rect:
         serializedVersion: 2
-        x: 5496
+        x: 6968
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +247,10 @@ TextureImporter:
       name: Monster attack 45 down right_5
       rect:
         serializedVersion: 2
-        x: 6870
+        x: 8710
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +268,10 @@ TextureImporter:
       name: Monster attack 45 down right_6
       rect:
         serializedVersion: 2
-        x: 8244
+        x: 10452
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: Monster attack 45 down right_7
       rect:
         serializedVersion: 2
-        x: 9618
+        x: 12194
         y: 0
-        width: 1374
-        height: 1440
+        width: 1742
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

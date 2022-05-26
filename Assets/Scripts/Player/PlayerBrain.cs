@@ -301,9 +301,9 @@ namespace Player
 			_calledThrow = true;
 		}
 
-		public void TakeHit(Vector3 velocity)
+		public void TakeHit(Vector3 velocity, bool ignoreRoll)
 		{
-			if (stunDuration <= 0 || _rolling) return;
+			if (stunDuration <= 0 || (!ignoreRoll && _rolling)) return;
 			Rumble?.Stun();
 			StartCoroutine(Stun(velocity));
 		}

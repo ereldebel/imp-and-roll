@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -127,7 +127,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 1, z: 14}
-  m_Children: []
+  m_Children:
+  - {fileID: 2989117139962008559}
   m_Father: {fileID: 5851243974550147855}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -316,7 +317,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1292420410993561518, guid: 640cd0931c367cf46939fa25621f830c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -481,3 +482,61 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &4723559734215789555
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5851243974168832105}
+    m_Modifications:
+    - target: {fileID: 2782141269092019856, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_Name
+      value: Arena Divider Spikes
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782141269092019856, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.07849294
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+--- !u!4 &2989117139962008559 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7563248837283993628, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+  m_PrefabInstance: {fileID: 4723559734215789555}
+  m_PrefabAsset: {fileID: 0}
