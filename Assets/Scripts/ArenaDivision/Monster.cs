@@ -37,9 +37,10 @@ namespace ArenaDivision
 		private bool _gotEye = false;
 		private Vector3 _originalPosition;
 
+		private static readonly int AnimatorZ = Animator.StringToHash("Z");
 		private static readonly int AnimatorX = Animator.StringToHash("X");
 		private static readonly int AnimatorSpotX = Animator.StringToHash("Spot X");
-		private static readonly int AnimatorZ = Animator.StringToHash("Z");
+		private static readonly int AnimatorAttackX = Animator.StringToHash("Attack X");
 		private static readonly int AnimatorDangerLevel = Animator.StringToHash("Danger Level");
 
 		#endregion
@@ -142,8 +143,9 @@ namespace ArenaDivision
 			var nonZeroX = direction.x > 0 ? 1 : -1;
 			var nonZeroZ = direction.z > 0 ? 1 : -1;
 			_animator.SetFloat(AnimatorZ, x == 0 ? nonZeroZ : z);
-			_animator.SetFloat(AnimatorSpotX, nonZeroX);
 			_animator.SetFloat(AnimatorX, z == 0 ? nonZeroX : x);
+			_animator.SetFloat(AnimatorSpotX, nonZeroX);
+			_animator.SetFloat(AnimatorAttackX, z >= 0 ? nonZeroX : x);
 		}
 
 		private void UpdateSpectralChain()
