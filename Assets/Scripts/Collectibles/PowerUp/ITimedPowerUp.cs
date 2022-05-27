@@ -1,6 +1,6 @@
 ﻿namespace Collectibles.PowerUp
 {
-	public interface IPowerUp: ICollectible
+	public interface ITimedPowerUp: ICollectible
 	{
 		float StartAndGetDuration();
 	}

@@ -13,7 +13,7 @@ namespace Player
 
 		private PlayerBrain _brain;
 		private LineRenderer _lineRenderer;
-		private Ball _ball;
+		private Ball.Ball _ball;
 		private Quaternion _rotation;
 
 		private bool _charged;
@@ -65,7 +65,7 @@ namespace Player
 			DrawTrajectory();
 		}
 
-		private void Enable(Ball ball)
+		private void Enable(Ball.Ball ball)
 		{
 			enabled = true;
 			_lineRenderer.enabled = true;

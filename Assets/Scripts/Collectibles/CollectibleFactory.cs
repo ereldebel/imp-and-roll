@@ -17,31 +17,24 @@ namespace Collectibles
 		[SerializeField] private Sprite attractCollectiblesIcon;
 
 		[Header("Homing Ball Collectibles")] [SerializeField]
-		private float homingBallDuration = 10;
+		private float homingBallAttractionRate = 1;
 
-		[SerializeField] private float homingBallAttractionRate = 1;
+		[SerializeField] private Mesh homingBallMesh;
+		[SerializeField] private Material homingBallMaterial;
 		[SerializeField] private Sprite homingBallIcon;
 
 		[Header("Attract Collectibles")] [SerializeField]
-		private float superThrowDuration = 10;
+		private float superThrowSpeedBoost = 1.1f;
 
+		[SerializeField] private Mesh superThrowMesh;
+		[SerializeField] private Material superThrowMaterial;
 		[SerializeField] private Sprite superThrowIcon;
+
 		// [Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
 		// private float[] powerUpWeights = new float[3];
 
-		[Space(10)] [Tooltip("if positive overrides all durations to this duration")] [SerializeField]
-		private float uniformDuration = -1;
-
 
 		// private Random _random = new Random();
-
-		private void OnValidate()
-		{
-			if (uniformDuration <= 0) return;
-			attractCollectiblesDuration = uniformDuration;
-			homingBallDuration = uniformDuration;
-			superThrowDuration = uniformDuration;
-		}
 
 		// public ICollectible GetRandomWeightedPowerUp()
 		// {
@@ -77,10 +70,10 @@ namespace Collectibles
 			{
 				CollectibleType.AttractCollectibles => new AttractCollectibles(attractCollectiblesDuration,
 					attractCollectiblesBaseAttractionSpeed, attractCollectiblesAttractionRadius),
-				CollectibleType.HomingBall => new HomingBall(homingBallDuration, homingBallAttractionRate),
-				CollectibleType.SuperThrow => new SuperThrows(superThrowDuration),
+				CollectibleType.HomingBall => new HomingBall(homingBallAttractionRate, homingBallMesh,
+					homingBallMaterial),
+				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterial),
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
-				
 			};
 		}
 

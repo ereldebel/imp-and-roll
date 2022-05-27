@@ -144,12 +144,12 @@ namespace Player
 		private float _colliderRadius;
 
 		//Ball and ball Animation:
-		private Ball _ball; //if not null than it is held by the player and is a child of the game object.
+		private Ball.Ball _ball; //if not null than it is held by the player and is a child of the game object.
 		private readonly List<Vector3[]> _ballPositionsByDirection = new List<Vector3[]>();
 		private int _ballThrowPositionIndex;
 
 		//PowerUps:
-		private readonly Dictionary<IBallPowerUp, Coroutine> _ballPowerUps = new Dictionary<IBallPowerUp, Coroutine>();
+		private IBallPowerUp _ballPowerUp;
 
 		#endregion
 
@@ -170,7 +170,7 @@ namespace Player
 
 		#region Public C# Events
 
-		public event Action<Ball> StartedChargingThrow;
+		public event Action<Ball.Ball> StartedChargingThrow;
 		public event Action ChangedAimDirection;
 		public event Action BallThrown;
 		public event Action<float> StunStarted;
@@ -214,17 +214,13 @@ namespace Player
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.CompareTag("Teleporter"))
-			{
 				PlayerReady();
-			}
 		}
 
 		private void OnTriggerExit(Collider other)
 		{
 			if (other.CompareTag("Teleporter"))
-			{
 				PlayerReady();
-			}
 		}
 
 		private void OnCollisionEnter(Collision collision)
@@ -254,34 +250,30 @@ namespace Player
 			_animator.SetBool(AnimatorThrowing, false);
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
-			RemoveAllPowerUps();
+			SetBallPowerUp(null);
 		}
 
 		#endregion
 
 		#region Public Methods
 
+		public void SetBallPowerUp(IBallPowerUp ballPowerUp)
+		{
+			_ballPowerUp?.OnRemove();
+			if (ballPowerUp == null) return;
+			ballPowerUp.OnApply();
+			_ballPowerUp = ballPowerUp;
+		}
+		
 		public void Taunt()
 		{
 			_animator.SetTrigger(AnimatorTaunt);
 		}
 
-		public void AddBallPowerUp(IBallPowerUp powerUp)
-		{
-			_ballPowerUps.Add(powerUp, StartCoroutine(PowerUpLifeSpan(powerUp)));
-		}
-
-		private IEnumerator PowerUpLifeSpan(IBallPowerUp powerUp)
-		{
-			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
-			powerUp.End();
-			_ballPowerUps.Remove(powerUp);
-		}
-
 		public void GameOver(bool won)
 		{
 			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
-			RemoveAllPowerUps();
+			SetBallPowerUp(null);
 		}
 
 		public bool ChargeThrow()
@@ -289,7 +281,7 @@ namespace Player
 			if (_stunned || _rolling || _chargeStartTime >= 0 || _calledThrow || !_ball) return false;
 			_chargeStartTime = Time.time;
 			_animator.SetBool(AnimatorThrowing, true);
-			_ball.StartCharging();
+			_ball.StartCharging(_ballPowerUp);
 			StartedChargingThrow?.Invoke(_ball);
 			return true;
 		}
@@ -301,9 +293,9 @@ namespace Player
 			_calledThrow = true;
 		}
 
-		public void TakeHit(Vector3 velocity, bool ignoreRoll)
+		public void TakeHit(Vector3 velocity, bool catchableWithRoll)
 		{
-			if (stunDuration <= 0 || (!ignoreRoll && _rolling)) return;
+			if (stunDuration <= 0 || (!catchableWithRoll && _rolling)) return;
 			Rumble?.Stun();
 			StartCoroutine(Stun(velocity));
 		}
@@ -313,7 +305,7 @@ namespace Player
 			if (_chargeStartTime >= 0 || _stunned || _rolling) return;
 			var movementDir = MovementStick;
 			if (MovementStick == Vector2.zero)
-				StartCoroutine(DodgeRoll(new Vector3((Flipped ? -1 : 1) * _animator.GetFloat(AnimatorX), 0,
+				StartCoroutine(DodgeRoll(new Vector3((Flipped ? 1 : -1) * _animator.GetFloat(AnimatorX), 0,
 					_animator.GetFloat(AnimatorZ))));
 			else
 				StartCoroutine(DodgeRoll(new Vector3(movementDir.x, 0, movementDir.y)));
@@ -328,19 +320,10 @@ namespace Player
 
 		#region Private Methods
 
-		private void RemoveAllPowerUps()
-		{
-			foreach (var ballPowerUp in _ballPowerUps)
-			{
-				StopCoroutine(ballPowerUp.Value);
-				ballPowerUp.Key.End();
-			}
-		}
-
 		private void PickupBall(Collision collision)
 		{
 			if (_ball != null || _stunned) return;
-			var ball = collision.gameObject.GetComponent<Ball>();
+			var ball = collision.gameObject.GetComponent<Ball.Ball>();
 			if (ball == null) return;
 			if (ball.Thrown) return;
 			_ball = ball;
@@ -386,7 +369,7 @@ namespace Player
 			if (!_ball) return;
 			_ballThrowPositionIndex = 0;
 			_chargeStartTime = -1;
-			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject, _ballPowerUps.Keys);
+			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
 			_ball = null;
 			_animator.SetBool(AnimatorHasBall, false);
 			_calledThrow = false;

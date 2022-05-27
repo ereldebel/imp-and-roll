@@ -3,17 +3,18 @@ using UnityEngine;
 
 namespace Collectibles.PowerUp.GlobalPowerUps
 {
-	public class AttractCollectibles : PowerUp, IGlobalPowerUp
+	public class AttractCollectibles : TimedPowerUp, IGlobalPowerUp
 	{
 		private Transform _attractingPlayer;
 		private readonly float _baseAttractionSpeed;
 		private readonly float _attractionSqrRadius;
 		private const CollectibleType PowerUpType = CollectibleType.AttractCollectibles;
 
-		public AttractCollectibles(float duration, float baseAttractionSpeed, float attractionRadius) : base(duration, PowerUpType)
+		public AttractCollectibles(float duration, float baseAttractionSpeed, float attractionRadius) : base(duration,
+			PowerUpType)
 		{
 			_baseAttractionSpeed = baseAttractionSpeed;
-			_attractionSqrRadius = Mathf.Pow(attractionRadius,2);
+			_attractionSqrRadius = Mathf.Pow(attractionRadius, 2);
 		}
 
 		public override void Collect(GameObject collector)

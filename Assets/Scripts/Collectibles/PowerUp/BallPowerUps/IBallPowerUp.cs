@@ -1,10 +1,8 @@
-﻿namespace Collectibles.PowerUp.BallPowerUps
+﻿using Ball;
+
+namespace Collectibles.PowerUp.BallPowerUps
 {
-	public interface IBallPowerUp: IPowerUp
+	public interface IBallPowerUp : IBallStrategy, ICollectible
 	{
-		void OnThrow(Ball ball);
-		void OnLateUpdate();
-		bool OnHit();
-		void End();
 	}
 }

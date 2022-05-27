@@ -44,7 +44,7 @@ namespace Collectibles
 					MatchManager.AddGlobalPowerUp(globalPowerUp);
 					break;
 				case IBallPowerUp ballPowerUp:
-					other.GetComponent<PlayerBrain>()?.AddBallPowerUp(ballPowerUp);
+					other.GetComponent<PlayerBrain>()?.SetBallPowerUp(ballPowerUp);
 					break;
 			}
 

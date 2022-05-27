@@ -14,7 +14,7 @@ namespace Managers
 	{
 		#region Serialized Fields
 
-		[SerializeField] private Ball ball;
+		[SerializeField] private Ball.Ball ball;
 		[SerializeField] private GameObject arena;
 		[SerializeField] private Transform divisionBorder;
 		[SerializeField] private GameObject powerUpPrefab;

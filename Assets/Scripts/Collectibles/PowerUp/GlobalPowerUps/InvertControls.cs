@@ -5,7 +5,7 @@
 //
 // namespace Collectibles.PowerUp.GlobalPowerUps
 // {
-// 	public class InvertControls : PowerUp, IGlobalPowerUp
+// 	public class InvertControls : TimedPowerUp, IGlobalPowerUp
 // 	{
 // 		private PlayerBrain _invertedPlayerBrain;
 //

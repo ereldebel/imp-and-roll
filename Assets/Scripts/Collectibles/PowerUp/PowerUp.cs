@@ -3,17 +3,16 @@ using UnityEngine;
 
 namespace Collectibles.PowerUp
 {
-	public abstract class PowerUp : IPowerUp
+	public abstract class PowerUp
 	{
 		private readonly CollectibleType _type;
-		private readonly float _duration;
 		private GameObject _target;
 
-		public static event Action<GameObject, CollectibleType, float> PowerUpActivated;
+		public static event Action<GameObject, CollectibleType> PowerUpActivated;
+		public static event Action<GameObject, CollectibleType> PowerUpDeactivated;
 
-		protected PowerUp(float duration, CollectibleType type)
+		protected PowerUp(CollectibleType type)
 		{
-			_duration = duration;
 			_type = type;
 		}
 
@@ -22,10 +21,14 @@ namespace Collectibles.PowerUp
 			_target = target;
 		}
 
-		public virtual float StartAndGetDuration()
+		protected void Start()
 		{
-			PowerUpActivated?.Invoke(_target, _type, _duration);
-			return _duration;
+			PowerUpActivated?.Invoke(_target, _type);
+		}
+		
+		protected void End()
+		{
+			PowerUpDeactivated?.Invoke(_target, _type);
 		}
 	}
 }

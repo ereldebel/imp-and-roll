@@ -1,6 +1,6 @@
 ﻿namespace Collectibles.PowerUp.GlobalPowerUps
 {
-	public interface IGlobalPowerUp: IPowerUp
+	public interface IGlobalPowerUp : ITimedPowerUp
 	{
 		void OnUpdate();
 		void End();
