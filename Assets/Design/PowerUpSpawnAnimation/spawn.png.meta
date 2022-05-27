@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 51e3e9a8ca6263d44a01402fbec70b3d
+guid: 186bca3f46bf32a4fa237fd14ec1880f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6914375644310906596
-    second: monster attack 45 up left_0
+      213: -4848329244456854130
+    second: spawn_0
   - first:
-      213: 8834154426501695779
-    second: monster attack 45 up left_1
+      213: -1546701259444747284
+    second: spawn_1
   - first:
-      213: -633318450417190907
-    second: monster attack 45 up left_2
+      213: -8325665057775586849
+    second: spawn_2
   - first:
-      213: 6724560774121217213
-    second: monster attack 45 up left_3
+      213: 4891953085760553096
+    second: spawn_3
   - first:
-      213: 7960838480776539053
-    second: monster attack 45 up left_4
+      213: 3006056497211588362
+    second: spawn_4
   - first:
-      213: -1945537598510813015
-    second: monster attack 45 up left_5
-  - first:
-      213: 9194865029313296365
-    second: monster attack 45 up left_6
-  - first:
-      213: 5479031870539371725
-    second: monster attack 45 up left_7
+      213: 854458973308361122
+    second: spawn_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -92,7 +86,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -104,7 +98,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,7 +110,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,7 +122,7 @@ TextureImporter:
     maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,13 +133,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: monster attack 45 up left_0
+      name: spawn_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1742
-        height: 1873
+        width: 2409
+        height: 1926
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e6a3cab30cc4ff50800000000000000
-      internalID: 6914375644310906596
+      spriteID: e8dd20e5d3647bcb0800000000000000
+      internalID: -4848329244456854130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster attack 45 up left_1
+      name: spawn_1
       rect:
         serializedVersion: 2
-        x: 1742
+        x: 2409
         y: 0
-        width: 1742
-        height: 1873
+        width: 2409
+        height: 1926
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 329049245a8399a70800000000000000
-      internalID: 8834154426501695779
+      spriteID: ce385293663098ae0800000000000000
+      internalID: -1546701259444747284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster attack 45 up left_2
+      name: spawn_2
       rect:
         serializedVersion: 2
-        x: 3484
+        x: 4818
         y: 0
-        width: 1742
-        height: 1873
+        width: 2409
+        height: 1926
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 508be2d89300637f0800000000000000
-      internalID: -633318450417190907
+      spriteID: fd17760cdbb457c80800000000000000
+      internalID: -8325665057775586849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster attack 45 up left_3
+      name: spawn_3
       rect:
         serializedVersion: 2
-        x: 5226
+        x: 7227
         y: 0
-        width: 1742
-        height: 1873
+        width: 2409
+        height: 1926
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,20 +210,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbc55045560725d50800000000000000
-      internalID: 6724560774121217213
+      spriteID: 88042aea965b3e340800000000000000
+      internalID: 4891953085760553096
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster attack 45 up left_4
+      name: spawn_4
       rect:
         serializedVersion: 2
-        x: 6968
+        x: 9636
         y: 0
-        width: 1742
-        height: 1873
+        width: 2409
+        height: 1926
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +231,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dab22f08b649a7e60800000000000000
-      internalID: 7960838480776539053
+      spriteID: a0f3d0b1578a7b920800000000000000
+      internalID: 3006056497211588362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: monster attack 45 up left_5
+      name: spawn_5
       rect:
         serializedVersion: 2
-        x: 8710
+        x: 12045
         y: 0
-        width: 1742
-        height: 1873
+        width: 2409
+        height: 1926
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,50 +252,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a0b89facdf0005e0800000000000000
-      internalID: -1945537598510813015
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: monster attack 45 up left_6
-      rect:
-        serializedVersion: 2
-        x: 10452
-        y: 0
-        width: 1742
-        height: 1873
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de771e51709ba9f70800000000000000
-      internalID: 9194865029313296365
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: monster attack 45 up left_7
-      rect:
-        serializedVersion: 2
-        x: 12194
-        y: 0
-        width: 1742
-        height: 1873
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc41b84057e690c40800000000000000
-      internalID: 5479031870539371725
+      spriteID: 2a9903bb8e5abdb00800000000000000
+      internalID: 854458973308361122
       vertices: []
       indices: 
       edges: []
@@ -309,7 +261,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c585096d2d5fdee46b762ac7f3f2ac60
+    spriteID: 719b33ee54e1e1744bd93bf314972d23
     internalID: 0
     vertices: []
     indices: 

@@ -136,6 +136,7 @@ namespace Managers
 			player.transform.position = playerInfos[playerID].locationGameScene;
 			player.GetComponent<CharacterController>().enabled = true;
 			player.GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player");
+			player.GetComponent<PlayerController>()?.OnMatchStart();
 		}
 
 		private void StartGameTwoPlayers()

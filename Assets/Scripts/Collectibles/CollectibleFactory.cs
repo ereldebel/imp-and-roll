@@ -2,7 +2,6 @@
 using Collectibles.PowerUp.BallPowerUps;
 using Collectibles.PowerUp.GlobalPowerUps;
 using UnityEngine;
-using Random = System.Random;
 
 namespace Collectibles
 {
@@ -10,11 +9,6 @@ namespace Collectibles
 	[CreateAssetMenu(fileName = "CollectibleFactory", menuName = "Create Collectible Factory")]
 	public class CollectibleFactory : ScriptableObject
 	{
-		[Header("Invert Controls")] [SerializeField]
-		private float invertControlsDuration = 10;
-
-		[SerializeField] private Sprite invertControlsIcon;
-
 		[Header("Attract Collectibles")] [SerializeField]
 		private float attractCollectiblesDuration = 10;
 
@@ -44,7 +38,6 @@ namespace Collectibles
 		private void OnValidate()
 		{
 			if (uniformDuration <= 0) return;
-			invertControlsDuration = uniformDuration;
 			attractCollectiblesDuration = uniformDuration;
 			homingBallDuration = uniformDuration;
 			superThrowDuration = uniformDuration;
@@ -82,7 +75,6 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.InvertControls => new InvertControls(invertControlsDuration),
 				CollectibleType.AttractCollectibles => new AttractCollectibles(attractCollectiblesDuration,
 					attractCollectiblesBaseAttractionSpeed, attractCollectiblesAttractionRadius),
 				CollectibleType.HomingBall => new HomingBall(homingBallDuration, homingBallAttractionRate),
@@ -96,7 +88,6 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.InvertControls => invertControlsIcon,
 				CollectibleType.AttractCollectibles => attractCollectiblesIcon,
 				CollectibleType.HomingBall => homingBallIcon,
 				CollectibleType.SuperThrow => superThrowIcon,

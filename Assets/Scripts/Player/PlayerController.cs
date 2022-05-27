@@ -11,12 +11,20 @@ namespace Player
 		private PlayerInput _playerInput;
 		private Camera _camera;
 		private Plane _plane = new Plane(Vector3.up, 0);
+		private bool _usingMouse;
 
 		private void Awake()
 		{
 			_myBrain = GetComponent<PlayerBrain>();
 			_playerInput = GetComponent<PlayerInput>();
 			_camera = Camera.main;
+		}
+
+		public void OnMatchStart()
+		{
+			if (_playerInput.currentControlScheme != "Keyboard") return;
+			_usingMouse = true;
+			_plane = new Plane(Vector3.up, -1);
 		}
 
 		public void OnMovement(InputAction.CallbackContext context)
@@ -26,7 +34,7 @@ namespace Player
 
 		public void OnAim(InputAction.CallbackContext context)
 		{
-			if (_playerInput.currentControlScheme == "Keyboard")
+			if (_usingMouse)
 				_myBrain.MousePos = ScreenToWorld2D(context.ReadValue<Vector2>());
 			else
 				_myBrain.AimingStick = context.ReadValue<Vector2>();
