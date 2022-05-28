@@ -67,15 +67,17 @@ namespace Player
 
 		public Vector3 ThrowVelocity =>
 			maxThrowForce * ThrowCharge * new Vector3(AimDirection.x, throwYForce, AimDirection.y);
+		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
+
 
 		public bool HasBall => _ball != null;
-
+		public Rumble Rumble { get; private set; }
 		public bool Flipped => _left == (transform.rotation == _faceRight);
-		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
 		#endregion;
 
 		#region Private Properties
+
 
 		private Vector2 AimDirection
 		{
@@ -90,7 +92,7 @@ namespace Player
 		[Header("Player Movement Settings")] [SerializeField]
 		private float speed;
 
-		[Range(0, 1)] [SerializeField] private float friction;
+		[SerializeField] private float friction;
 
 		[SerializeField] private float dodgeRollSpeed;
 
@@ -156,9 +158,10 @@ namespace Player
 		private IBallPowerUp _ballPowerUp;
 		private IPlayerPowerUp _playerPowerUp;
 		private Rumble _rumble;
-
+		
 		//Movement
 		private Vector3 _velocity = Vector3.zero;
+		
 
 		#endregion
 
@@ -193,7 +196,7 @@ namespace Player
 		{
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
-			_rumble = GetComponent<Rumble>();
+			Rumble = GetComponent<Rumble>();
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
 			_ballPositionsByDirection.Add(ballPositionsUp45);
@@ -333,17 +336,12 @@ namespace Player
 			_calledThrow = true;
 		}
 
-		public void TakeHit(Vector3 velocity, bool uncatchableWithRoll)
+		public void TakeHit(Vector3 velocity, bool catchableWithRoll)
 		{
-			if (stunDuration <= 0 || (!uncatchableWithRoll && _rolling)) return;
+			if (stunDuration <= 0 || (!catchableWithRoll && _rolling)) return;
 			if (_rumble)
 				_rumble.Stun(_stunBar);
 			StartCoroutine(Stun(velocity));
-		}
-
-		public void ApplyKnockBack(Vector3 velocity)
-		{
-			StartCoroutine(KnockBack(velocity));
 		}
 
 		public void DodgeRoll()
@@ -386,14 +384,14 @@ namespace Player
 				_controller.SimpleMove(Vector3.zero);
 				return;
 			}
-
-			if (Math.Abs(friction - 1) == 0 && MovementStick.sqrMagnitude <= 0.1)
+			
+			if (Math.Abs(friction - 1) == 0 &&MovementStick.sqrMagnitude <= 0.1)
 			{
 				_animator.SetBool(AnimatorRunning, false);
 				_controller.SimpleMove(Vector3.zero);
 				return;
 			}
-
+			
 
 			_animator.SetBool(AnimatorRunning, true);
 			_velocity = Vector3.Lerp(_velocity, new Vector3(MovementStick.x, 0, MovementStick.y), friction);
@@ -404,9 +402,7 @@ namespace Player
 				if (MovementStick.sqrMagnitude <= 0.1)
 				{
 					_animator.SetBool(AnimatorRunning, false);
-				}
-				else
-				{
+				}else{
 					_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(MovementStick.x)));
 					_animator.SetFloat(AnimatorZ, Mathf.Round(MovementStick.y));
 					transform.rotation = _velocity.x > 0 ? _faceRight : _faceLeft;
@@ -470,14 +466,6 @@ namespace Player
 			var currStunDuration = stunDuration + maxStunDurationIncrease * (1 - _stunBar);
 			StunStarted?.Invoke(_stunBar);
 			_stunned = true;
-			yield return KnockBack(knockBackDir);
-			yield return new WaitForSeconds(currStunDuration - knockBackDuration);
-			_animator.SetBool(AnimatorStunned, false);
-			StunEnded?.Invoke();
-		}
-
-		private IEnumerator KnockBack(Vector3 knockBackDir)
-		{
 			knockBackDir.y = 0;
 			var numIterations = knockBackDuration / Time.fixedDeltaTime;
 			for (var i = 0; i < numIterations; ++i)
@@ -485,6 +473,10 @@ namespace Player
 				_controller.SimpleMove(-knockBackDir * knockBackRelativeSpeed);
 				yield return new WaitForFixedUpdate();
 			}
+
+			yield return new WaitForSeconds(currStunDuration - knockBackDuration);
+			_animator.SetBool(AnimatorStunned, false);
+			StunEnded?.Invoke();
 		}
 
 		#endregion
