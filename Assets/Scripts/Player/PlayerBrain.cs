@@ -6,6 +6,7 @@ using Collectibles.PowerUp.BallPowerUps;
 using Collectibles.PowerUp.GlobalPowerUps;
 using Managers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -297,7 +298,7 @@ namespace Player
 		{
 			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
 			SetPowerUp(null);
-			
+			GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player Tutorial Area");
 		}
 
 		public bool ChargeThrow()

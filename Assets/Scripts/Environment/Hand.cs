@@ -22,7 +22,7 @@ namespace Environment
 		private SpriteRenderer _spriteRenderer;
 		private Vector3 _startingPos;
 		private float _yMinVal;
-		private readonly float[] _borderValues = {7, -8, -11.5f, 11.5f};
+		private readonly float[] _borderValues = {7, -8, -10, 10};
 
 		private enum HandType
 		{
@@ -68,21 +68,25 @@ namespace Environment
 		private void FixedUpdate()
 		{
 			var pos = _startingPos;
-			var objectPos = _objectToFollow.position;
-			var currMaxY = followHeight ? yMaxVal + objectPos.y : yMaxVal;
+			var targetPos = _objectToFollow.position;
+			var currMaxY = followHeight ? yMaxVal + targetPos.y : yMaxVal;
 			if (followX)
 			{
-				pos.x = objectPos.x + positionFix;
-				var t = Math.Abs(_borderValues[(int) type] - objectPos.z);
-				if (t < 5)
-					pos.y = Mathf.Lerp(currMaxY, _yMinVal, t / 5);
+				var t = Math.Abs(_borderValues[(int) type] - targetPos.z);
+				if (t >= 5) return;
+				pos.x = targetPos.x + positionFix;
+				pos.y = Mathf.Lerp(currMaxY, _yMinVal, t / 5);
 			}
 			else
 			{
-				pos.z = objectPos.z + positionFix;
-				var t = Math.Abs(_borderValues[(int) type] - objectPos.x);
-				if (t < 3)
-					pos += transform.rotation * Vector3.up * Mathf.Lerp(currMaxY, _yMinVal, t / 3);
+				var t = Math.Abs(_borderValues[(int) type] - targetPos.x);
+				if (type == HandType.Left) print(t);
+				if (t >= 3) return;
+				pos.z = targetPos.z + positionFix;
+				pos.y = 0;
+				var up = transform.rotation * Vector3.up;
+				pos += up * Mathf.Lerp(currMaxY, _yMinVal, t / 3) / Mathf.Abs(up.y);
+				if (type == HandType.Left) print(pos);
 			}
 
 			transform.localPosition = pos;
