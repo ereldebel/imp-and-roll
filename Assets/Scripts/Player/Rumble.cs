@@ -51,7 +51,7 @@ namespace Player
 				stunRumble.duration + (1 - stunBar) * maxStunRumbleDurationAddition);
 		}
 
-		public void RumblePulse(float lowFreq, float highFreq, float rumbleDur)
+		private void RumblePulse(float lowFreq, float highFreq, float rumbleDur)
 		{
 			StartRumble(lowFreq, highFreq);
 			Invoke(nameof(StopRumble), rumbleDur);

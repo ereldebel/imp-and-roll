@@ -67,10 +67,10 @@ namespace Ball
 		{
 			if (!Thrown) return;
 			if (collision.gameObject == _thrower) return;
-			if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
-				Landed();
-			var catchableWithRoll = _ballStrategy.OnHit();
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, catchableWithRoll);
+			_thrower = null;
+			if (!collision.gameObject.CompareTag("Floor") && !collision.gameObject.CompareTag("Player")) return;
+			Landed();
+			_ballStrategy.OnHit(collision);
 			_ballStrategy = _defaultBallStrategy;
 		}
 

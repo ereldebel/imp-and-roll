@@ -328,12 +328,17 @@ namespace Player
 			_calledThrow = true;
 		}
 
-		public void TakeHit(Vector3 velocity, bool catchableWithRoll)
+		public void TakeHit(Vector3 velocity, bool uncatchableWithRoll)
 		{
-			if (stunDuration <= 0 || (!catchableWithRoll && _rolling)) return;
+			if (stunDuration <= 0 || (!uncatchableWithRoll && _rolling)) return;
 			if (_rumble)
 				_rumble.Stun(_stunBar);
 			StartCoroutine(Stun(velocity));
+		}
+
+		public void ApplyKnockBack(Vector3 velocity)
+		{
+			StartCoroutine(KnockBack(velocity));
 		}
 
 		public void DodgeRoll()
@@ -452,6 +457,14 @@ namespace Player
 			var currStunDuration = stunDuration + maxStunDurationIncrease * (1 - _stunBar);
 			StunStarted?.Invoke(_stunBar);
 			_stunned = true;
+			yield return KnockBack(knockBackDir);
+			yield return new WaitForSeconds(currStunDuration - knockBackDuration);
+			_animator.SetBool(AnimatorStunned, false);
+			StunEnded?.Invoke();
+		}
+
+		private IEnumerator KnockBack(Vector3 knockBackDir)
+		{
 			knockBackDir.y = 0;
 			var numIterations = knockBackDuration / Time.fixedDeltaTime;
 			for (var i = 0; i < numIterations; ++i)
@@ -459,10 +472,6 @@ namespace Player
 				_controller.SimpleMove(-knockBackDir * knockBackRelativeSpeed);
 				yield return new WaitForFixedUpdate();
 			}
-
-			yield return new WaitForSeconds(currStunDuration - knockBackDuration);
-			_animator.SetBool(AnimatorStunned, false);
-			StunEnded?.Invoke();
 		}
 
 		#endregion

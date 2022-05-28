@@ -31,9 +31,9 @@ namespace Ball
 		{
 		}
 
-		public bool OnHit()
+		public void OnHit(Collision collision)
 		{
-			return false;
+			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, false);
 		}
 	}
 }

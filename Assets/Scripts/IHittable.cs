@@ -2,5 +2,5 @@
 
 public interface IHittable
 {
-	void TakeHit(Vector3 velocity, bool catchableWithRoll);
+	void TakeHit(Vector3 velocity, bool uncatchableWithRoll);
 }

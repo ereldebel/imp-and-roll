@@ -43,10 +43,10 @@ namespace Collectibles.PowerUp.BallPowerUps
 		{
 		}
 
-		public bool OnHit()
+		public void OnHit(Collision collision)
 		{
 			_ball.Shrink();
-			return true;
+			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, true);
 		}
 	}
 }

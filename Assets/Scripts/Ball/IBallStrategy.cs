@@ -1,10 +1,12 @@
-﻿namespace Ball
+﻿using UnityEngine;
+
+namespace Ball
 {
 	public interface IBallStrategy
 	{
 		void OnCharge(Ball ball);
 		void OnThrow();
 		void OnLateUpdate();
-		bool OnHit();
+		void OnHit(Collision collision);
 	}
 }

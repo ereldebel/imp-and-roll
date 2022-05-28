@@ -7,6 +7,7 @@ namespace Collectibles
 	{
 		AttractCollectibles,
 		HomingBall,
-		SuperThrow
+		SuperThrow,
+		ExplodingBall
 	}
 }

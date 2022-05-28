@@ -53,9 +53,9 @@ namespace Collectibles.PowerUp.BallPowerUps
 					Mathf.Pow(diffNorm + 1, _attractionRate));
 		}
 
-		public bool OnHit()
+		public void OnHit(Collision collision)
 		{
-			return false;
+			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, false);
 		}
 	}
 }
