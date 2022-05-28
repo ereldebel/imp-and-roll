@@ -1,12 +1,13 @@
-﻿namespace Ball
+﻿using UnityEngine;
+
+namespace Ball
 {
-	public interface IBallStrategy
+	public interface IBallStrategy : IRemovable
 	{
-		void OnApply();
+		bool IsUncatchableWithRoll();
 		void OnCharge(Ball ball);
 		void OnThrow();
 		void OnLateUpdate();
-		bool OnHit();
-		void OnRemove();
+		void OnHit(Collision collision);
 	}
 }

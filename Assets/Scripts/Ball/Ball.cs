@@ -28,6 +28,8 @@ namespace Ball
 		[SerializeField] private float growDur = 0.5f;
 		[SerializeField] private float shrinkDur = 1;
 		[SerializeField] private float groundSlowFactor = 2;
+		
+		[SerializeField] private MeshFilter outlineMeshFilter;
 
 		#endregion
 
@@ -67,11 +69,10 @@ namespace Ball
 		{
 			if (!Thrown) return;
 			if (collision.gameObject == _thrower) return;
-			if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Player"))
-				Landed();
-			var catchableWithRoll = _ballStrategy.OnHit();
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, catchableWithRoll);
+			if (!collision.gameObject.CompareTag("Floor") && !collision.gameObject.tag.Contains("Player")) return;
+			_ballStrategy.OnHit(collision);
 			_ballStrategy = _defaultBallStrategy;
+			Landed();
 		}
 
 		private void OnCollisionStay(Collision other)
@@ -82,9 +83,18 @@ namespace Ball
 
 		private void Update()
 		{
-			ChangeSize(_curGrowStartTime >= 0
-				? Mathf.Lerp(MinSize, MaxSize, GrowTimePercent)
-				: Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
+			if (_curGrowStartTime >= 0)
+			{
+				ChangeSize(Mathf.Lerp(MinSize, MaxSize, GrowTimePercent));
+				if (_curShrinkStartTime >= 0)
+					_curShrinkStartTime = -1;
+			}
+			else if (_curShrinkStartTime >= 0)
+			{
+				ChangeSize(Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
+				if (ShrinkTimePercent == 0)
+					_curShrinkStartTime = -1;
+			}
 		}
 
 		private void LateUpdate()
@@ -95,11 +105,11 @@ namespace Ball
 		#endregion
 
 		#region Public Methods
-
 		public void SetMesh(Mesh mesh)
 		{
-			if (mesh)
-				_meshFilter.mesh = mesh;
+			if (!mesh) return;
+			_meshFilter.mesh = mesh;
+			outlineMeshFilter.mesh = mesh;
 		}
 
 		public void SetMaterial(Material material)
@@ -113,14 +123,13 @@ namespace Ball
 			if (powerUp != null)
 				_ballStrategy = powerUp;
 			_ballStrategy.OnCharge(this);
-			Grow();
 			gameObject.SetActive(true);
 		}
 
-		public void Pickup(Transform newParent)
+		public bool Pickup(Transform newParent, bool isRolling)
 		{
-			if (_held || Thrown)
-				return;
+			if (_held || Thrown || (_ballStrategy.IsUncatchableWithRoll() && isRolling))
+				return false;
 			_held = true;
 			_transform.SetParent(newParent);
 			_transform.localPosition = Vector3.zero;
@@ -130,18 +139,29 @@ namespace Ball
 			_collider.enabled = false;
 			_trailRenderer.enabled = false;
 			gameObject.SetActive(false);
+			return true;
 		}
 
 		public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
 		{
 			_ballStrategy.OnThrow();
 			Release(posChange);
-			Shrink();
 			_rigidbody.velocity = velocity;
 			_rigidbody.AddTorque(velocity);
 			Thrown = true;
 			_trailRenderer.enabled = true;
 			_thrower = thrower;
+		}
+
+
+		public void Grow()
+		{
+			_curGrowStartTime = Time.time;
+		}
+
+		public void Shrink()
+		{
+			_curShrinkStartTime = Time.time;
 		}
 
 		#endregion
@@ -162,18 +182,9 @@ namespace Ball
 
 		private void Landed()
 		{
+			_thrower = null;
 			Thrown = false;
 			_trailRenderer.enabled = false;
-		}
-
-		private void Grow()
-		{
-			_curGrowStartTime = Time.time;
-		}
-
-		private void Shrink()
-		{
-			_curShrinkStartTime = Time.time;
 		}
 
 		private void ChangeSize(float size)

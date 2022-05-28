@@ -1,17 +1,16 @@
 ﻿using Managers;
 using UnityEngine;
 
-namespace Collectibles.PowerUp.GlobalPowerUps
+namespace Collectibles.PowerUp.PlayerPowerUps
 {
-	public class AttractCollectibles : TimedPowerUp, IGlobalPowerUp
+	public class CollectibleMagnet : PowerUp, IPlayerPowerUp
 	{
 		private Transform _attractingPlayer;
 		private readonly float _baseAttractionSpeed;
 		private readonly float _attractionSqrRadius;
-		private const CollectibleType PowerUpType = CollectibleType.AttractCollectibles;
+		private const CollectibleType PowerUpType = CollectibleType.CollectibleMagnet;
 
-		public AttractCollectibles(float duration, float baseAttractionSpeed, float attractionRadius) : base(duration,
-			PowerUpType)
+		public CollectibleMagnet(float baseAttractionSpeed, float attractionRadius) : base(PowerUpType)
 		{
 			_baseAttractionSpeed = baseAttractionSpeed;
 			_attractionSqrRadius = Mathf.Pow(attractionRadius, 2);
@@ -33,10 +32,6 @@ namespace Collectibles.PowerUp.GlobalPowerUps
 				if (sqrNorm >= _attractionSqrRadius) break;
 				collectible.position += diff * (_baseAttractionSpeed / sqrNorm);
 			}
-		}
-
-		public void End()
-		{
 		}
 	}
 }

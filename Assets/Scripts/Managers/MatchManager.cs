@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Collectibles;
-using Collectibles.PowerUp.GlobalPowerUps;
 using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -28,6 +27,7 @@ namespace Managers
 		public static Transform BallTransform => _shared.ball ? _shared.ball.transform : _shared.transform;
 		public static float ArenaLength => _shared._arenaDimensions[0];
 		public static float ArenaWidth => _shared._arenaDimensions[1];
+		public static float MaxDistance => _shared._diagonal;
 		public static Transform DivisionBorder => _shared.divisionBorder;
 		public static IEnumerable<Transform> CollectibleCollection => _shared._collectibleCollection;
 
@@ -40,11 +40,9 @@ namespace Managers
 		private const float PlaneWidth = 10;
 		private Vector2 _arenaDimensions;
 		private Coroutine _spawner;
+		private float _diagonal;
 
 		private readonly List<Transform> _collectibleCollection = new List<Transform>();
-
-		private readonly Dictionary<IGlobalPowerUp, Coroutine> _globalPowerUps =
-			new Dictionary<IGlobalPowerUp, Coroutine>();
 
 		#endregion
 
@@ -63,23 +61,13 @@ namespace Managers
 			_arenaDimensions = new Vector2(scale.x * PlaneWidth, scale.y * PlaneWidth);
 			GameManager.Shared.AwakeAI();
 			_spawner = StartCoroutine(SpawnCollectible());
-		}
-
-		private void Update()
-		{
-			foreach (var globalPowerUp in _globalPowerUps.Keys)
-				globalPowerUp.OnUpdate();
+			_diagonal = Mathf.Sqrt(Mathf.Pow(_arenaDimensions.x, 2) + Mathf.Pow(_arenaDimensions.y, 2));
 		}
 
 		private void OnDestroy()
 		{
 			if (ball)
 				Destroy(ball.gameObject);
-			foreach (var globalPowerUp in _globalPowerUps)
-			{
-				StopCoroutine(globalPowerUp.Value);
-				globalPowerUp.Key.End();
-			}
 		}
 
 		#endregion
@@ -96,11 +84,6 @@ namespace Managers
 			var player = leftWon ? "left player" : "right player";
 			print($"{player} won!");
 			_shared.StartCoroutine(EndMatchWithDelay(leftWon, 3));
-		}
-
-		public static void AddGlobalPowerUp(IGlobalPowerUp powerUp)
-		{
-			_shared._globalPowerUps.Add(powerUp, _shared.StartCoroutine(PowerUpLifeSpan(powerUp)));
 		}
 
 		public static void AddToCollectibleCollection(Transform collectibleTransform)
@@ -126,7 +109,7 @@ namespace Managers
 				var x = Random.Range(min.x + padding, max.x - padding);
 				var z = Random.Range(min.y + padding, max.y - padding);
 				output = new Vector3(x, 0, z);
-				if (i++ < 10) break;
+				if (i++ < 30) break;
 			} while (GameManager.Players.Any(player =>
 				         Vector3.Distance(player.transform.position, output) < minPowerUpDistFromPlayers));
 
@@ -136,13 +119,6 @@ namespace Managers
 		#endregion
 
 		#region Private Coroutines
-
-		private static IEnumerator PowerUpLifeSpan(IGlobalPowerUp powerUp)
-		{
-			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
-			powerUp.End();
-			_shared._globalPowerUps.Remove(powerUp);
-		}
 
 		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
 		{
@@ -179,6 +155,7 @@ namespace Managers
 				var minVector = new Vector2(minX, -halfOfArenaWidth);
 				var maxVector = new Vector2(maxX, halfOfArenaWidth);
 				var spawnPoint = RandomXZVector(minVector, maxVector, 0.1f);
+				spawnPoint.y = powerUpPrefab.transform.position.y;
 				var newPowerUp = Instantiate(powerUpPrefab, spawnPoint, powerUpPrefab.transform.rotation);
 				var next = (CollectibleType) allPowerUps.GetValue(random.Next(allPowerUps.Length));
 				newPowerUp.GetComponent<Collectible>().CollectibleType = next;

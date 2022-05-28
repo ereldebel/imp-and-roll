@@ -5,8 +5,9 @@ namespace Collectibles
 	[Serializable]
 	public enum CollectibleType
 	{
-		AttractCollectibles,
+		CollectibleMagnet,
 		HomingBall,
-		SuperThrow
+		SuperThrow,
+		ExplodingBall
 	}
 }

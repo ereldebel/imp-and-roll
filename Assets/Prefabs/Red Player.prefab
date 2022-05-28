@@ -236,6 +236,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a5fb549a-b537-480f-a511-111b6410e7da
     m_ActionName: Player Tutorial Area/Start[/Keyboard/enter,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eb244a0d-f41f-417c-8007-36da653c8fb5
+    m_ActionName: Player/Taunt[/Keyboard/e,/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
@@ -254,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  friction: 0
   dodgeRollSpeed: 11
   rollDuration: 0.5833333
   maxThrowForce: 25
@@ -301,6 +306,8 @@ MonoBehaviour:
     lowFreq: 0.3
     highFreq: 0.5
     duration: 0.3
+  maxStunLowFreqRumbleAddition: 0.3
+  maxStunRumbleDurationAddition: 0.5
   aimRumble:
     lowFreq: 0.1
     highFreq: 0.2
@@ -350,9 +357,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfSteps: 20
   timeStepInterval: 0.01
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!120 &6165145603107572458
 LineRenderer:
   m_ObjectHideFlags: 0

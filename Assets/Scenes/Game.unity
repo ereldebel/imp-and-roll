@@ -1235,14 +1235,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5653225861557408539, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
-      propertyPath: yMaxVal
-      value: 17.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5653225861557408539, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
-      propertyPath: positionFix
-      value: -3.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5653225861557408539, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 0}

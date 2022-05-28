@@ -1,6 +1,6 @@
 ﻿using System;
 using Collectibles.PowerUp.BallPowerUps;
-using Collectibles.PowerUp.GlobalPowerUps;
+using Collectibles.PowerUp.PlayerPowerUps;
 using UnityEngine;
 
 namespace Collectibles
@@ -9,26 +9,40 @@ namespace Collectibles
 	[CreateAssetMenu(fileName = "CollectibleFactory", menuName = "Create Collectible Factory")]
 	public class CollectibleFactory : ScriptableObject
 	{
-		[Header("Attract Collectibles")] [SerializeField]
-		private float attractCollectiblesDuration = 10;
+		[Header("Collectible Magnet")] [SerializeField]
+		private float baseAttractionSpeed = 0.1f;
 
-		[SerializeField] private float attractCollectiblesBaseAttractionSpeed = 0.1f;
-		[SerializeField] private float attractCollectiblesAttractionRadius = 10;
-		[SerializeField] private Sprite attractCollectiblesIcon;
+		[SerializeField] private float attractionRadius = 10;
+		[SerializeField] private Sprite collectibleMagnetSprite;
+		[SerializeField] private Sprite collectibleMagnetIcon;
 
 		[Header("Homing Ball Collectibles")] [SerializeField]
-		private float homingBallAttractionRate = 1;
+		private float homingRate = 1;
 
 		[SerializeField] private Mesh homingBallMesh;
 		[SerializeField] private Material homingBallMaterial;
+		[SerializeField] private Sprite homingBallSprite;
 		[SerializeField] private Sprite homingBallIcon;
 
-		[Header("Attract Collectibles")] [SerializeField]
+		[Header("Super Throw")] [SerializeField]
 		private float superThrowSpeedBoost = 1.1f;
 
 		[SerializeField] private Mesh superThrowMesh;
 		[SerializeField] private Material superThrowMaterial;
+		[SerializeField] private Sprite superThrowSprite;
 		[SerializeField] private Sprite superThrowIcon;
+
+		[Header("Exploding Ball")] [SerializeField]
+		public float explosionStunRadius;
+
+		[SerializeField] private float explosionKnockBackOuterRingWidth;
+		[SerializeField] private float knockBackVelocityMultiplier;
+		[SerializeField] private LayerMask playerLayerMask;
+		[SerializeField] private GameObject explosionPrefab;
+		[SerializeField] private Mesh explodingBallMesh;
+		[SerializeField] private Material explodingBallMaterial;
+		[SerializeField] private Sprite explodingBallSprite;
+		[SerializeField] private Sprite explodingBallIcon;
 
 		// [Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
 		// private float[] powerUpWeights = new float[3];
@@ -68,12 +82,28 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.AttractCollectibles => new AttractCollectibles(attractCollectiblesDuration,
-					attractCollectiblesBaseAttractionSpeed, attractCollectiblesAttractionRadius),
-				CollectibleType.HomingBall => new HomingBall(homingBallAttractionRate, homingBallMesh,
+				CollectibleType.CollectibleMagnet => new CollectibleMagnet(baseAttractionSpeed,
+					attractionRadius),
+				CollectibleType.HomingBall => new HomingBall(homingRate, homingBallMesh,
 					homingBallMaterial),
 				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterial),
+				CollectibleType.ExplodingBall => new ExplodingBall(
+					explosionStunRadius + explosionKnockBackOuterRingWidth, explosionStunRadius,
+					knockBackVelocityMultiplier, playerLayerMask, explosionPrefab, explodingBallMesh,
+					explodingBallMaterial),
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
+			};
+		}
+
+		public Sprite Sprite(CollectibleType collectibleType)
+		{
+			return collectibleType switch
+			{
+				CollectibleType.CollectibleMagnet => collectibleMagnetSprite,
+				CollectibleType.HomingBall => homingBallSprite,
+				CollectibleType.SuperThrow => superThrowSprite,
+				CollectibleType.ExplodingBall => explodingBallSprite,
+				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
 			};
 		}
 
@@ -81,9 +111,10 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.AttractCollectibles => attractCollectiblesIcon,
+				CollectibleType.CollectibleMagnet => collectibleMagnetIcon,
 				CollectibleType.HomingBall => homingBallIcon,
 				CollectibleType.SuperThrow => superThrowIcon,
+				CollectibleType.ExplodingBall => explodingBallIcon,
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
 			};
 		}

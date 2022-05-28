@@ -1,6 +1,4 @@
-﻿using Collectibles.PowerUp.BallPowerUps;
-using Collectibles.PowerUp.GlobalPowerUps;
-using Managers;
+﻿using Managers;
 using Player;
 using UnityEngine;
 
@@ -17,7 +15,7 @@ namespace Collectibles
 			set
 			{
 				_collectible = collectibleFactory.Create(value);
-				GetComponent<SpriteRenderer>().sprite = collectibleFactory.Icon(value);
+				GetComponent<SpriteRenderer>().sprite = collectibleFactory.Sprite(value);
 			}
 		}
 
@@ -38,16 +36,8 @@ namespace Collectibles
 		private void OnTriggerEnter(Collider other)
 		{
 			_collectible.Collect(other.gameObject);
-			switch (_collectible)
-			{
-				case IGlobalPowerUp globalPowerUp:
-					MatchManager.AddGlobalPowerUp(globalPowerUp);
-					break;
-				case IBallPowerUp ballPowerUp:
-					other.GetComponent<PlayerBrain>()?.SetBallPowerUp(ballPowerUp);
-					break;
-			}
-
+			if (_collectible is PowerUp.PowerUp powerUp)
+				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
 			Destroy(gameObject);
 		}
 	}
