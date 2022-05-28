@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using UnityEngine;
 
 namespace Player
@@ -9,7 +8,6 @@ namespace Player
 	{
 		[SerializeField] private int numOfSteps;
 		[SerializeField] private float timeStepInterval;
-		[SerializeField] private LayerMask playerLayerMask;
 
 		private PlayerBrain _brain;
 		private LineRenderer _lineRenderer;
@@ -55,14 +53,11 @@ namespace Player
 
 		private void Update()
 		{
-			// if (_charged) return;
-			// if (_brain.ThrowCharge >= 1)
-			// {
-			// 	_charged = true;
-			// 	_brain.ChangedAimDirection += DrawTrajectory;
-			// }
-
+			if (_charged) return;
 			DrawTrajectory();
+			if (_brain.ThrowCharge < 1) return;
+			_charged = true;
+			_brain.ChangedAimDirection += DrawTrajectory;
 		}
 
 		private void Enable(Ball.Ball ball)
@@ -86,8 +81,6 @@ namespace Player
 		{
 			var throwVelocity = _brain.ThrowVelocity * (timeStepInterval / _ball.Mass);
 			var gravity = 0.5f * Physics.gravity;
-			var c = new Collider[1];
-			var rumbles = false;
 			var origin = _brain.ThrowOrigin;
 			if (_brain.Flipped)
 			{
@@ -100,10 +93,6 @@ namespace Player
 				posAtTime += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
 				if (timeStep < numOfSteps)
 					_trajectoryPoints[timeStep] = _rotation * posAtTime;
-				if (rumbles || 0 >=
-				    Physics.OverlapSphereNonAlloc(transform.position + posAtTime, _ball.Radius, c, playerLayerMask)) continue;
-				_brain.Rumble?.AimRumblePulse();
-				rumbles = true;
 			}
 
 			_lineRenderer.SetPositions(_trajectoryPoints);

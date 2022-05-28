@@ -69,14 +69,13 @@ namespace Player
 			maxThrowForce * ThrowCharge * new Vector3(AimDirection.x, throwYForce, AimDirection.y);
 
 		public bool HasBall => _ball != null;
-		public Rumble Rumble { get; private set; }
+
 		public bool Flipped => _left == (transform.rotation == _faceRight);
+		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
 		#endregion;
 
 		#region Private Properties
-
-		private float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
 		private Vector2 AimDirection
 		{
@@ -154,6 +153,7 @@ namespace Player
 		//PowerUps:
 		private IBallPowerUp _ballPowerUp;
 		private IPlayerPowerUp _playerPowerUp;
+		private Rumble _rumble;
 
 		#endregion
 
@@ -188,7 +188,7 @@ namespace Player
 		{
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
-			Rumble = GetComponent<Rumble>();
+			_rumble = GetComponent<Rumble>();
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
 			_ballPositionsByDirection.Add(ballPositionsUp45);
@@ -218,6 +218,14 @@ namespace Player
 		private void Update()
 		{
 			_playerPowerUp?.OnUpdate();
+			var playerLayerMask = 1 << gameObject.layer;
+			var aimDir = new Vector3(AimDirection.x, 0, AimDirection.y);
+			if (_chargeStartTime < 0 ||
+			    !Physics.Raycast(transform.position + aimDir * (_colliderRadius + _ball.Radius), aimDir,
+				    MatchManager.MaxDistance, playerLayerMask)) return;
+
+			if (_rumble)
+				_rumble.AimRumblePulse();
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -288,7 +296,7 @@ namespace Player
 			_chargeStartTime = -1;
 			ChargeThrow();
 		}
-		
+
 		public void Taunt()
 		{
 			_animator.SetTrigger(AnimatorTaunt);
@@ -297,6 +305,8 @@ namespace Player
 		public void GameOver(bool won)
 		{
 			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
+			_chargeStartTime = -1;
+			_ball = null;
 			SetPowerUp(null);
 			GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player Tutorial Area");
 		}
@@ -321,7 +331,8 @@ namespace Player
 		public void TakeHit(Vector3 velocity, bool catchableWithRoll)
 		{
 			if (stunDuration <= 0 || (!catchableWithRoll && _rolling)) return;
-			Rumble?.Stun();
+			if (_rumble)
+				_rumble.Stun(_stunBar);
 			StartCoroutine(Stun(velocity));
 		}
 

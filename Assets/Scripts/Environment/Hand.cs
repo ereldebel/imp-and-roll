@@ -23,6 +23,7 @@ namespace Environment
 		private Vector3 _startingPos;
 		private float _yMinVal;
 		private readonly float[] _borderValues = {7, -8, -10, 10};
+		private Vector3 _up;
 
 		private enum HandType
 		{
@@ -44,6 +45,8 @@ namespace Environment
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			_startingPos = transform.localPosition;
 			_yMinVal = _startingPos.y;
+			_up = transform.rotation * Vector3.up;
+			_up /= Mathf.Abs(_up.y);
 		}
 
 		private void Start()
@@ -83,8 +86,7 @@ namespace Environment
 				if (t >= 3) return;
 				pos.z = targetPos.z + positionFix;
 				pos.y = 0;
-				var up = transform.rotation * Vector3.up;
-				pos += up * Mathf.Lerp(currMaxY, _yMinVal, t / 3) / Mathf.Abs(up.y);
+				pos += _up * Mathf.Lerp(currMaxY, _yMinVal, t / 3);
 			}
 
 			transform.localPosition = pos;
