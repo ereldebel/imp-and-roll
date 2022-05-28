@@ -40,5 +40,9 @@ namespace Ball
 		{
 			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 		}
+
+		public void OnRemove()
+		{
+		}
 	}
 }

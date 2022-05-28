@@ -1,6 +1,6 @@
-﻿namespace Collectibles.PowerUp.GlobalPowerUps
+﻿namespace Collectibles.PowerUp.PlayerPowerUps
 {
-	public interface IPlayerPowerUp : ICollectible
+	public interface IPlayerPowerUp : ICollectible, IRemovable
 	{
 		void OnUpdate();
 	}

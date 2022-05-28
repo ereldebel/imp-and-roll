@@ -23,8 +23,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public override void Collect(GameObject collector)
 		{
+			base.Collect(collector);
 			var targetObject = GameManager.Shared.GetOpposingPlayer(collector);
-			base.Collect(targetObject);
 			_target = targetObject.GetComponent<Transform>();
 		}
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Collectibles.PowerUp;
 using Collectibles.PowerUp.BallPowerUps;
-using Collectibles.PowerUp.GlobalPowerUps;
+using Collectibles.PowerUp.PlayerPowerUps;
 using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -281,6 +281,8 @@ namespace Player
 
 		public void SetPowerUp(PowerUp powerUp)
 		{
+			_ballPowerUp?.OnRemove();
+			_playerPowerUp?.OnRemove();
 			switch (powerUp)
 			{
 				case IPlayerPowerUp playerPowerUp:
@@ -423,6 +425,8 @@ namespace Player
 			_ballThrowPositionIndex = 0;
 			_chargeStartTime = -1;
 			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
+			if (_ballPowerUp != null)
+				SetPowerUp(null);
 			_ball = null;
 			_animator.SetBool(AnimatorHasBall, false);
 			_calledThrow = false;

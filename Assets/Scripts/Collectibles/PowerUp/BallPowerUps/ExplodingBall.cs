@@ -1,4 +1,5 @@
 ﻿using Player;
+using UnityEditor.SceneTemplate;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps
@@ -9,6 +10,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly float _explosionStunSqrRadius;
 		private readonly float _knockBackVelocityMultiplier;
 		private readonly LayerMask _playerLayerMask;
+		private readonly GameObject _explosionPrefab;
 		private readonly Mesh _mesh;
 		private readonly Material _material;
 		private Ball.Ball _ball;
@@ -19,15 +21,16 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private static readonly Collider[] Hits = new Collider[4];
 
 		public ExplodingBall(float explosionKnockBackRadius, float explosionStunRadius,
-			float knockBackVelocityMultiplier, LayerMask playerLayerMask, Mesh mesh, Material material) :
-			base(PowerUpType)
+			float knockBackVelocityMultiplier, LayerMask playerLayerMask, GameObject explosionPrefab, Mesh mesh,
+			Material material) : base(PowerUpType)
 		{
 			_explosionSqrKnockBackRadius = Mathf.Pow(explosionKnockBackRadius, 2);
 			_explosionStunSqrRadius = Mathf.Pow(explosionStunRadius, 2);
 			_knockBackVelocityMultiplier = knockBackVelocityMultiplier;
+			_explosionPrefab = explosionPrefab;
+			_playerLayerMask = playerLayerMask;
 			_mesh = mesh;
 			_material = material;
-			_playerLayerMask = playerLayerMask;
 		}
 
 		public override void Collect(GameObject collector)
@@ -60,16 +63,18 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public void OnHit(Collision collision)
 		{
-			
-			var numOfHits = Physics.OverlapSphereNonAlloc(_ball.transform.position, _explosionSqrKnockBackRadius, Hits,
+			var explosionPos = _ball.transform.position;
+			Object.Instantiate(_explosionPrefab, explosionPos, _explosionPrefab.transform.rotation);
+			var numOfHits = Physics.OverlapSphereNonAlloc(explosionPos, _explosionSqrKnockBackRadius, Hits,
 				_playerLayerMask.value);
 			for (var i = 0; i < numOfHits; ++i)
 			{
 				var player = Hits[i].GetComponent<PlayerBrain>();
-				var playerDir = Hits[i].transform.position - _ball.transform.position;
+				if (!player) continue;
+				var playerDir = explosionPos - Hits[i].transform.position;
 				var playerSqrDist = playerDir.sqrMagnitude;
 				var relativeVelocity =
-					playerDir * (_explosionStunSqrRadius * _knockBackVelocityMultiplier / playerSqrDist);
+					playerDir * (_explosionStunSqrRadius * _knockBackVelocityMultiplier / (playerSqrDist + 0.1f) + 2);
 				var tookHit = false;
 				if (playerSqrDist <= _explosionStunSqrRadius && Hits[i].gameObject != _thrower)
 					tookHit = player.TakeHit(relativeVelocity, IsUncatchableWithRoll());

@@ -1,5 +1,4 @@
-﻿using Collectibles.PowerUp.GlobalPowerUps;
-using Managers;
+﻿using Managers;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.PlayerPowerUps

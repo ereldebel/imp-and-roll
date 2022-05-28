@@ -109,7 +109,7 @@ namespace Managers
 				var x = Random.Range(min.x + padding, max.x - padding);
 				var z = Random.Range(min.y + padding, max.y - padding);
 				output = new Vector3(x, 0, z);
-				if (i++ < 10) break;
+				if (i++ < 30) break;
 			} while (GameManager.Players.Any(player =>
 				         Vector3.Distance(player.transform.position, output) < minPowerUpDistFromPlayers));
 
@@ -155,9 +155,10 @@ namespace Managers
 				var minVector = new Vector2(minX, -halfOfArenaWidth);
 				var maxVector = new Vector2(maxX, halfOfArenaWidth);
 				var spawnPoint = RandomXZVector(minVector, maxVector, 0.1f);
+				spawnPoint.y = powerUpPrefab.transform.position.y;
 				var newPowerUp = Instantiate(powerUpPrefab, spawnPoint, powerUpPrefab.transform.rotation);
 				var next = (CollectibleType) allPowerUps.GetValue(random.Next(allPowerUps.Length));
-				newPowerUp.GetComponent<Collectible>().CollectibleType = next;
+				newPowerUp.GetComponent<Collectible>().CollectibleType = CollectibleType.ExplodingBall;
 				print(next);
 				spawnOnRight = random.Next(numOfSpawns) < numOfLeftSpawns;
 			}

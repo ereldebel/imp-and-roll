@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Collectibles.PowerUp
 {
-	public abstract class PowerUp
+	public abstract class PowerUp : IRemovable
 	{
 		private readonly CollectibleType _type;
 		private GameObject _target;
@@ -22,7 +22,7 @@ namespace Collectibles.PowerUp
 			PowerUpActivated?.Invoke(_target, _type);
 		}
 
-		~PowerUp()
+		public virtual void OnRemove()
 		{
 			PowerUpDeactivated?.Invoke(_target, _type);
 		}

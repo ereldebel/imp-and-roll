@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  friction: 0
   dodgeRollSpeed: 11
   rollDuration: 0.5833333
   maxThrowForce: 25
@@ -305,6 +306,8 @@ MonoBehaviour:
     lowFreq: 0.3
     highFreq: 0.5
     duration: 0.3
+  maxStunLowFreqRumbleAddition: 0.3
+  maxStunRumbleDurationAddition: 0.5
   aimRumble:
     lowFreq: 0.1
     highFreq: 0.2

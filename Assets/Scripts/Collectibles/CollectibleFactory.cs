@@ -33,11 +33,12 @@ namespace Collectibles
 		[SerializeField] private Sprite superThrowIcon;
 
 		[Header("Exploding Ball")] [SerializeField]
-		private float explosionStunRadius;
+		public float explosionStunRadius;
 
 		[SerializeField] private float explosionKnockBackOuterRingWidth;
 		[SerializeField] private float knockBackVelocityMultiplier;
 		[SerializeField] private LayerMask playerLayerMask;
+		[SerializeField] private GameObject explosionPrefab;
 		[SerializeField] private Mesh explodingBallMesh;
 		[SerializeField] private Material explodingBallMaterial;
 		[SerializeField] private Sprite explodingBallSprite;
@@ -88,7 +89,8 @@ namespace Collectibles
 				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterial),
 				CollectibleType.ExplodingBall => new ExplodingBall(
 					explosionStunRadius + explosionKnockBackOuterRingWidth, explosionStunRadius,
-					knockBackVelocityMultiplier, playerLayerMask, explodingBallMesh, explodingBallMaterial),
+					knockBackVelocityMultiplier, playerLayerMask, explosionPrefab, explodingBallMesh,
+					explodingBallMaterial),
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
 			};
 		}

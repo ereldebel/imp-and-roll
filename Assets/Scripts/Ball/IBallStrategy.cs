@@ -2,7 +2,7 @@
 
 namespace Ball
 {
-	public interface IBallStrategy
+	public interface IBallStrategy : IRemovable
 	{
 		bool IsUncatchableWithRoll();
 		void OnCharge(Ball ball);
