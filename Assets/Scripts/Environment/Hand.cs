@@ -80,13 +80,11 @@ namespace Environment
 			else
 			{
 				var t = Math.Abs(_borderValues[(int) type] - targetPos.x);
-				if (type == HandType.Left) print(t);
 				if (t >= 3) return;
 				pos.z = targetPos.z + positionFix;
 				pos.y = 0;
 				var up = transform.rotation * Vector3.up;
 				pos += up * Mathf.Lerp(currMaxY, _yMinVal, t / 3) / Mathf.Abs(up.y);
-				if (type == HandType.Left) print(pos);
 			}
 
 			transform.localPosition = pos;
