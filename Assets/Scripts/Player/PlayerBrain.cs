@@ -297,6 +297,7 @@ namespace Player
 		{
 			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
 			SetPowerUp(null);
+			
 		}
 
 		public bool ChargeThrow()

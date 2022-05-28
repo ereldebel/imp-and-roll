@@ -7,6 +7,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly float _speedBoostFactor;
 		private readonly Mesh _mesh;
 		private readonly Material _material;
+		private Ball.Ball _ball;
 		
 		private Rigidbody _ballRigidBody;
 
@@ -29,6 +30,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 			ball.SetMesh(_mesh);
 			ball.SetMaterial(_material);
 			_ballRigidBody = ball.GetComponent<Rigidbody>();
+			ball.Grow();
+			_ball = ball;
 		}
 
 		public void OnThrow()
@@ -42,6 +45,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public bool OnHit()
 		{
+			_ball.Shrink();
 			return true;
 		}
 	}

@@ -113,7 +113,6 @@ namespace Ball
 			if (powerUp != null)
 				_ballStrategy = powerUp;
 			_ballStrategy.OnCharge(this);
-			Grow();
 			gameObject.SetActive(true);
 		}
 
@@ -136,12 +135,22 @@ namespace Ball
 		{
 			_ballStrategy.OnThrow();
 			Release(posChange);
-			Shrink();
 			_rigidbody.velocity = velocity;
 			_rigidbody.AddTorque(velocity);
 			Thrown = true;
 			_trailRenderer.enabled = true;
 			_thrower = thrower;
+		}
+		
+		
+		public void Grow()
+		{
+			_curGrowStartTime = Time.time;
+		}
+
+		public void Shrink()
+		{
+			_curShrinkStartTime = Time.time;
 		}
 
 		#endregion
@@ -164,16 +173,6 @@ namespace Ball
 		{
 			Thrown = false;
 			_trailRenderer.enabled = false;
-		}
-
-		private void Grow()
-		{
-			_curGrowStartTime = Time.time;
-		}
-
-		private void Shrink()
-		{
-			_curShrinkStartTime = Time.time;
 		}
 
 		private void ChangeSize(float size)

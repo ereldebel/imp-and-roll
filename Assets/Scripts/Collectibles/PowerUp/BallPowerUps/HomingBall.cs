@@ -8,6 +8,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly float _attractionRate;
 		private readonly Mesh _mesh;
 		private readonly Material _material;
+		private Ball.Ball _ball;
 		
 		private Transform _target;
 		private Rigidbody _ballRigidbody;
@@ -32,10 +33,13 @@ namespace Collectibles.PowerUp.BallPowerUps
 			ball.SetMesh(_mesh);
 			ball.SetMaterial(_material);
 			_ballRigidbody = ball.GetComponent<Rigidbody>();
+			ball.Grow();
+			_ball = ball;
 		}
 
 		public void OnThrow()
 		{
+			_ball.Shrink();
 		}
 
 		public void OnLateUpdate()

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ball
 {
@@ -7,6 +6,7 @@ namespace Ball
 	{
 		private readonly Mesh _mesh;
 		private readonly Material _material;
+		private Ball _ball;
 
 		public DefaultBallStrategy(Mesh mesh,Material material)
 		{
@@ -18,11 +18,13 @@ namespace Ball
 		{
 			ball.SetMesh(_mesh);
 			ball.SetMaterial(_material);
+			ball.Grow();
+			_ball = ball;
 		}
 
 		public void OnThrow()
 		{
-			
+			_ball.Shrink();
 		}
 
 		public void OnLateUpdate()
