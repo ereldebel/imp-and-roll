@@ -6,6 +6,7 @@ using Collectibles.PowerUp.BallPowerUps;
 using Collectibles.PowerUp.GlobalPowerUps;
 using Managers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -155,6 +156,7 @@ namespace Player
 		//PowerUps:
 		private IBallPowerUp _ballPowerUp;
 		private IPlayerPowerUp _playerPowerUp;
+		private Rumble _rumble;
 		
 		//Movement
 		private Vector3 _velocity = Vector3.zero;
@@ -223,6 +225,14 @@ namespace Player
 		private void Update()
 		{
 			_playerPowerUp?.OnUpdate();
+			var playerLayerMask = 1 << gameObject.layer;
+			var aimDir = new Vector3(AimDirection.x, 0, AimDirection.y);
+			if (_chargeStartTime < 0 ||
+			    !Physics.Raycast(transform.position + aimDir * (_colliderRadius + _ball.Radius), aimDir,
+				    MatchManager.MaxDistance, playerLayerMask)) return;
+
+			if (_rumble)
+				_rumble.AimRumblePulse();
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -293,7 +303,7 @@ namespace Player
 			_chargeStartTime = -1;
 			ChargeThrow();
 		}
-		
+
 		public void Taunt()
 		{
 			_animator.SetTrigger(AnimatorTaunt);
@@ -302,8 +312,10 @@ namespace Player
 		public void GameOver(bool won)
 		{
 			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
+			_chargeStartTime = -1;
+			_ball = null;
 			SetPowerUp(null);
-			
+			GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player Tutorial Area");
 		}
 
 		public bool ChargeThrow()
@@ -326,7 +338,8 @@ namespace Player
 		public void TakeHit(Vector3 velocity, bool catchableWithRoll)
 		{
 			if (stunDuration <= 0 || (!catchableWithRoll && _rolling)) return;
-			Rumble?.Stun();
+			if (_rumble)
+				_rumble.Stun(_stunBar);
 			StartCoroutine(Stun(velocity));
 		}
 

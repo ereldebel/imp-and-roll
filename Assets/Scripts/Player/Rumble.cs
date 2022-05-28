@@ -12,6 +12,9 @@ namespace Player
 		[Header("Rumbles Settings")] [Tooltip("LowFreq, HighFreq, RumbleDuration")] [SerializeField]
 		private RumbleValues stunRumble = new RumbleValues(0.3f, 0.5f, 0.3f);
 
+		[SerializeField] private float maxStunLowFreqRumbleAddition = 0.3f;
+		[SerializeField] private float maxStunRumbleDurationAddition = 0.5f;
+
 		[Tooltip("LowFreq, HighFreq")] [SerializeField]
 		private RumbleValues aimRumble = new RumbleValues(0.05f, 0.1f, 0.1f);
 
@@ -42,9 +45,10 @@ namespace Player
 			_aimEndTime = Time.time + aimRumble.duration;
 		}
 
-		public void Stun()
+		public void Stun(float stunBar)
 		{
-			RumblePulse(stunRumble.lowFreq, stunRumble.highFreq, stunRumble.duration);
+			RumblePulse(stunRumble.lowFreq + (1 - stunBar) * maxStunLowFreqRumbleAddition, stunRumble.highFreq,
+				stunRumble.duration + (1 - stunBar) * maxStunRumbleDurationAddition);
 		}
 
 		public void RumblePulse(float lowFreq, float highFreq, float rumbleDur)
@@ -67,7 +71,7 @@ namespace Player
 		private struct RumbleValues
 		{
 			public float lowFreq, highFreq, duration;
-			
+
 			public RumbleValues(float lowFreq, float highFreq, float duration)
 			{
 				this.lowFreq = lowFreq;

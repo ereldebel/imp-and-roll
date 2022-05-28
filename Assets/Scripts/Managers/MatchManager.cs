@@ -27,6 +27,7 @@ namespace Managers
 		public static Transform BallTransform => _shared.ball ? _shared.ball.transform : _shared.transform;
 		public static float ArenaLength => _shared._arenaDimensions[0];
 		public static float ArenaWidth => _shared._arenaDimensions[1];
+		public static float MaxDistance => _shared._diagonal;
 		public static Transform DivisionBorder => _shared.divisionBorder;
 		public static IEnumerable<Transform> CollectibleCollection => _shared._collectibleCollection;
 
@@ -39,6 +40,7 @@ namespace Managers
 		private const float PlaneWidth = 10;
 		private Vector2 _arenaDimensions;
 		private Coroutine _spawner;
+		private float _diagonal;
 
 		private readonly List<Transform> _collectibleCollection = new List<Transform>();
 
@@ -59,6 +61,7 @@ namespace Managers
 			_arenaDimensions = new Vector2(scale.x * PlaneWidth, scale.y * PlaneWidth);
 			GameManager.Shared.AwakeAI();
 			_spawner = StartCoroutine(SpawnCollectible());
+			_diagonal = Mathf.Sqrt(Mathf.Pow(_arenaDimensions.x, 2) + Mathf.Pow(_arenaDimensions.y, 2));
 		}
 
 		private void OnDestroy()
