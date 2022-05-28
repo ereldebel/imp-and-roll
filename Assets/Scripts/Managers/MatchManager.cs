@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Collectibles;
-using Collectibles.PowerUp.GlobalPowerUps;
 using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -43,9 +42,6 @@ namespace Managers
 
 		private readonly List<Transform> _collectibleCollection = new List<Transform>();
 
-		private readonly Dictionary<IGlobalPowerUp, Coroutine> _globalPowerUps =
-			new Dictionary<IGlobalPowerUp, Coroutine>();
-
 		#endregion
 
 		#region Public C# Events
@@ -65,21 +61,10 @@ namespace Managers
 			_spawner = StartCoroutine(SpawnCollectible());
 		}
 
-		private void Update()
-		{
-			foreach (var globalPowerUp in _globalPowerUps.Keys)
-				globalPowerUp.OnUpdate();
-		}
-
 		private void OnDestroy()
 		{
 			if (ball)
 				Destroy(ball.gameObject);
-			foreach (var globalPowerUp in _globalPowerUps)
-			{
-				StopCoroutine(globalPowerUp.Value);
-				globalPowerUp.Key.End();
-			}
 		}
 
 		#endregion
@@ -96,11 +81,6 @@ namespace Managers
 			var player = leftWon ? "left player" : "right player";
 			print($"{player} won!");
 			_shared.StartCoroutine(EndMatchWithDelay(leftWon, 3));
-		}
-
-		public static void AddGlobalPowerUp(IGlobalPowerUp powerUp)
-		{
-			_shared._globalPowerUps.Add(powerUp, _shared.StartCoroutine(PowerUpLifeSpan(powerUp)));
 		}
 
 		public static void AddToCollectibleCollection(Transform collectibleTransform)
@@ -136,13 +116,6 @@ namespace Managers
 		#endregion
 
 		#region Private Coroutines
-
-		private static IEnumerator PowerUpLifeSpan(IGlobalPowerUp powerUp)
-		{
-			yield return new WaitForSeconds(powerUp.StartAndGetDuration());
-			powerUp.End();
-			_shared._globalPowerUps.Remove(powerUp);
-		}
 
 		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
 		{

@@ -27,11 +27,6 @@ namespace Collectibles.PowerUp.BallPowerUps
 			_target = targetObject.GetComponent<Transform>();
 		}
 
-		public void OnApply()
-		{
-			Start();
-		}
-
 		public void OnCharge(Ball.Ball ball)
 		{
 			ball.SetMesh(_mesh);
@@ -57,11 +52,6 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public bool OnHit()
 		{
 			return false;
-		}
-
-		public void OnRemove()
-		{
-			End();
 		}
 	}
 }

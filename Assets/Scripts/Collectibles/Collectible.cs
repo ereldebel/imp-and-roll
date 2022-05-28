@@ -38,16 +38,8 @@ namespace Collectibles
 		private void OnTriggerEnter(Collider other)
 		{
 			_collectible.Collect(other.gameObject);
-			switch (_collectible)
-			{
-				case IGlobalPowerUp globalPowerUp:
-					MatchManager.AddGlobalPowerUp(globalPowerUp);
-					break;
-				case IBallPowerUp ballPowerUp:
-					other.GetComponent<PlayerBrain>()?.SetBallPowerUp(ballPowerUp);
-					break;
-			}
-
+			if (_collectible is PowerUp.PowerUp powerUp)
+				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
 			Destroy(gameObject);
 		}
 	}

@@ -10,9 +10,8 @@ namespace Collectibles
 	public class CollectibleFactory : ScriptableObject
 	{
 		[Header("Attract Collectibles")] [SerializeField]
-		private float attractCollectiblesDuration = 10;
+		private float attractCollectiblesBaseAttractionSpeed = 0.1f;
 
-		[SerializeField] private float attractCollectiblesBaseAttractionSpeed = 0.1f;
 		[SerializeField] private float attractCollectiblesAttractionRadius = 10;
 		[SerializeField] private Sprite attractCollectiblesIcon;
 
@@ -68,8 +67,8 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.AttractCollectibles => new AttractCollectibles(attractCollectiblesDuration,
-					attractCollectiblesBaseAttractionSpeed, attractCollectiblesAttractionRadius),
+				CollectibleType.AttractCollectibles => new AttractCollectibles(attractCollectiblesBaseAttractionSpeed,
+					attractCollectiblesAttractionRadius),
 				CollectibleType.HomingBall => new HomingBall(homingBallAttractionRate, homingBallMesh,
 					homingBallMaterial),
 				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterial),

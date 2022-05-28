@@ -24,11 +24,6 @@ namespace Collectibles.PowerUp.BallPowerUps
 			base.Collect(collector);
 		}
 
-		public void OnApply()
-		{
-			Start();
-		}
-
 		public void OnCharge(Ball.Ball ball)
 		{
 			ball.SetMesh(_mesh);
@@ -48,11 +43,6 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public bool OnHit()
 		{
 			return true;
-		}
-
-		public void OnRemove()
-		{
-			End();
 		}
 	}
 }

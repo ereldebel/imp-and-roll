@@ -19,14 +19,10 @@ namespace Collectibles.PowerUp
 		public virtual void Collect(GameObject target)
 		{
 			_target = target;
-		}
-
-		protected void Start()
-		{
 			PowerUpActivated?.Invoke(_target, _type);
 		}
-		
-		protected void End()
+
+		~PowerUp()
 		{
 			PowerUpDeactivated?.Invoke(_target, _type);
 		}

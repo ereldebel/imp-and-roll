@@ -14,10 +14,6 @@ namespace Ball
 			_material = material;
 		}
 
-		public void OnApply()
-		{
-		}
-
 		public void OnCharge(Ball ball)
 		{
 			ball.SetMesh(_mesh);
@@ -36,10 +32,6 @@ namespace Ball
 		public bool OnHit()
 		{
 			return false;
-		}
-
-		public void OnRemove()
-		{
 		}
 	}
 }

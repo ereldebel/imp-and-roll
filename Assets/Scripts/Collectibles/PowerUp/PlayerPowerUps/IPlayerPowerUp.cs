@@ -1,8 +1,7 @@
 ﻿namespace Collectibles.PowerUp.GlobalPowerUps
 {
-	public interface IGlobalPowerUp : ITimedPowerUp
+	public interface IPlayerPowerUp : ICollectible
 	{
 		void OnUpdate();
-		void End();
 	}
 }

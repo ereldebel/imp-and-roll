@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Collectibles.PowerUp;
 using Collectibles.PowerUp.BallPowerUps;
+using Collectibles.PowerUp.GlobalPowerUps;
 using Managers;
 using UnityEngine;
 
@@ -150,6 +152,7 @@ namespace Player
 
 		//PowerUps:
 		private IBallPowerUp _ballPowerUp;
+		private IPlayerPowerUp _playerPowerUp;
 
 		#endregion
 
@@ -211,6 +214,11 @@ namespace Player
 			transform.rotation = AimDirection.x > 0 ? _faceRight : _faceLeft;
 		}
 
+		private void Update()
+		{
+			_playerPowerUp?.OnUpdate();
+		}
+
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.CompareTag("Teleporter"))
@@ -250,19 +258,34 @@ namespace Player
 			_animator.SetBool(AnimatorThrowing, false);
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
-			SetBallPowerUp(null);
+			SetPowerUp(null);
 		}
 
 		#endregion
 
 		#region Public Methods
 
-		public void SetBallPowerUp(IBallPowerUp ballPowerUp)
+		public void SetPowerUp(PowerUp powerUp)
 		{
-			_ballPowerUp?.OnRemove();
-			if (ballPowerUp == null) return;
-			ballPowerUp.OnApply();
-			_ballPowerUp = ballPowerUp;
+			switch (powerUp)
+			{
+				case IPlayerPowerUp playerPowerUp:
+					_ballPowerUp = null;
+					_playerPowerUp = playerPowerUp;
+					break;
+				case IBallPowerUp ballPowerUp:
+					_playerPowerUp = null;
+					_ballPowerUp = ballPowerUp;
+					break;
+				default:
+					_ballPowerUp = null;
+					_playerPowerUp = null;
+					break;
+			}
+
+			if (_chargeStartTime < 0) return;
+			_chargeStartTime = -1;
+			ChargeThrow();
 		}
 		
 		public void Taunt()
@@ -273,7 +296,7 @@ namespace Player
 		public void GameOver(bool won)
 		{
 			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
-			SetBallPowerUp(null);
+			SetPowerUp(null);
 		}
 
 		public bool ChargeThrow()
