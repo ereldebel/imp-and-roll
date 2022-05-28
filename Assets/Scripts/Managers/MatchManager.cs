@@ -157,7 +157,7 @@ namespace Managers
 				var spawnPoint = RandomXZVector(minVector, maxVector, 0.1f);
 				var newPowerUp = Instantiate(powerUpPrefab, spawnPoint, powerUpPrefab.transform.rotation);
 				var next = (CollectibleType) allPowerUps.GetValue(random.Next(allPowerUps.Length));
-				newPowerUp.GetComponent<Collectible>().CollectibleType = CollectibleType.ExplodingBall;
+				newPowerUp.GetComponent<Collectible>().CollectibleType = next;
 				print(next);
 				spawnOnRight = random.Next(numOfSpawns) < numOfLeftSpawns;
 			}
