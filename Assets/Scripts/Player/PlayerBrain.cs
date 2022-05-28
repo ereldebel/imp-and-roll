@@ -67,6 +67,8 @@ namespace Player
 
 		public Vector3 ThrowVelocity =>
 			maxThrowForce * ThrowCharge * new Vector3(AimDirection.x, throwYForce, AimDirection.y);
+		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
+
 
 		public bool HasBall => _ball != null;
 		public Rumble Rumble { get; private set; }
@@ -76,7 +78,6 @@ namespace Player
 
 		#region Private Properties
 
-		private float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
 		private Vector2 AimDirection
 		{
