@@ -1,16 +1,17 @@
-﻿using Managers;
+﻿using Collectibles.PowerUp.GlobalPowerUps;
+using Managers;
 using UnityEngine;
 
-namespace Collectibles.PowerUp.GlobalPowerUps
+namespace Collectibles.PowerUp.PlayerPowerUps
 {
-	public class AttractCollectibles : PowerUp, IPlayerPowerUp
+	public class CollectibleMagnet : PowerUp, IPlayerPowerUp
 	{
 		private Transform _attractingPlayer;
 		private readonly float _baseAttractionSpeed;
 		private readonly float _attractionSqrRadius;
-		private const CollectibleType PowerUpType = CollectibleType.AttractCollectibles;
+		private const CollectibleType PowerUpType = CollectibleType.CollectibleMagnet;
 
-		public AttractCollectibles(float baseAttractionSpeed, float attractionRadius) : base(PowerUpType)
+		public CollectibleMagnet(float baseAttractionSpeed, float attractionRadius) : base(PowerUpType)
 		{
 			_baseAttractionSpeed = baseAttractionSpeed;
 			_attractionSqrRadius = Mathf.Pow(attractionRadius, 2);

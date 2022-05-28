@@ -20,9 +20,9 @@ namespace Collectibles.PowerUp.BallPowerUps
 			_material = material;
 		}
 
-		public override void Collect(GameObject collector)
+		public bool IsUncatchableWithRoll()
 		{
-			base.Collect(collector);
+			return true;
 		}
 
 		public void OnCharge(Ball.Ball ball)
@@ -46,7 +46,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public void OnHit(Collision collision)
 		{
 			_ball.Shrink();
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, true);
+			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 		}
 	}
 }

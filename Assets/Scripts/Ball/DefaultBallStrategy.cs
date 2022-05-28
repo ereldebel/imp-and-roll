@@ -13,6 +13,11 @@ namespace Ball
 			_mesh = mesh;
 			_material = material;
 		}
+		
+		public bool IsUncatchableWithRoll()
+		{
+			return false;
+		}
 
 		public void OnCharge(Ball ball)
 		{
@@ -33,7 +38,7 @@ namespace Ball
 
 		public void OnHit(Collision collision)
 		{
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, false);
+			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 		}
 	}
 }

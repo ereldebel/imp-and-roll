@@ -67,11 +67,10 @@ namespace Ball
 		{
 			if (!Thrown) return;
 			if (collision.gameObject == _thrower) return;
-			_thrower = null;
-			if (!collision.gameObject.CompareTag("Floor") && !collision.gameObject.CompareTag("Player")) return;
-			Landed();
+			if (!collision.gameObject.CompareTag("Floor") && !collision.gameObject.tag.Contains("Player")) return;
 			_ballStrategy.OnHit(collision);
 			_ballStrategy = _defaultBallStrategy;
+			Landed();
 		}
 
 		private void OnCollisionStay(Collision other)
@@ -82,9 +81,18 @@ namespace Ball
 
 		private void Update()
 		{
-			ChangeSize(_curGrowStartTime >= 0
-				? Mathf.Lerp(MinSize, MaxSize, GrowTimePercent)
-				: Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
+			if (_curGrowStartTime >= 0)
+			{
+				ChangeSize(Mathf.Lerp(MinSize, MaxSize, GrowTimePercent));
+				if (_curShrinkStartTime >= 0)
+					_curShrinkStartTime = -1;
+			}
+			else if (_curShrinkStartTime >= 0)
+			{
+				ChangeSize(Mathf.Lerp(MaxSize, MinSize, ShrinkTimePercent));
+				if (ShrinkTimePercent == 0)
+					_curShrinkStartTime = -1;
+			}
 		}
 
 		private void LateUpdate()
@@ -116,10 +124,10 @@ namespace Ball
 			gameObject.SetActive(true);
 		}
 
-		public void Pickup(Transform newParent)
+		public bool Pickup(Transform newParent, bool isRolling)
 		{
-			if (_held || Thrown)
-				return;
+			if (_held || Thrown || (_ballStrategy.IsUncatchableWithRoll() && isRolling))
+				return false;
 			_held = true;
 			_transform.SetParent(newParent);
 			_transform.localPosition = Vector3.zero;
@@ -129,6 +137,7 @@ namespace Ball
 			_collider.enabled = false;
 			_trailRenderer.enabled = false;
 			gameObject.SetActive(false);
+			return true;
 		}
 
 		public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
@@ -141,8 +150,8 @@ namespace Ball
 			_trailRenderer.enabled = true;
 			_thrower = thrower;
 		}
-		
-		
+
+
 		public void Grow()
 		{
 			_curGrowStartTime = Time.time;
@@ -171,6 +180,7 @@ namespace Ball
 
 		private void Landed()
 		{
+			_thrower = null;
 			Thrown = false;
 			_trailRenderer.enabled = false;
 		}

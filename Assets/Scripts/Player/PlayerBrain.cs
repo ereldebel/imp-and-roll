@@ -333,12 +333,13 @@ namespace Player
 			_calledThrow = true;
 		}
 
-		public void TakeHit(Vector3 velocity, bool uncatchableWithRoll)
+		public bool TakeHit(Vector3 velocity, bool uncatchableWithRoll)
 		{
-			if (stunDuration <= 0 || (!uncatchableWithRoll && _rolling)) return;
+			if (stunDuration <= 0 || (!uncatchableWithRoll && _rolling)) return false;
 			if (_rumble)
 				_rumble.Stun(_stunBar);
 			StartCoroutine(Stun(velocity));
+			return true;
 		}
 
 		public void ApplyKnockBack(Vector3 velocity)
@@ -368,14 +369,12 @@ namespace Player
 
 		private void PickupBall(Collision collision)
 		{
-			if (_ball != null || _stunned) return;
+			if (_ball != null || _stunned || !gameObject.activeSelf) return;
 			var ball = collision.gameObject.GetComponent<Ball.Ball>();
 			if (ball == null) return;
-			if (ball.Thrown) return;
-			_ball = ball;
+			if (!ball.Pickup(transform, _rolling)) return;
 			_animator.SetBool(AnimatorHasBall, true);
-			if (gameObject.activeSelf)
-				_ball.Pickup(transform);
+			_ball = ball;
 		}
 
 		private void ProcessMovementInput()

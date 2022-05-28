@@ -1,6 +1,4 @@
-﻿using Collectibles.PowerUp.BallPowerUps;
-using Collectibles.PowerUp.GlobalPowerUps;
-using Managers;
+﻿using Managers;
 using Player;
 using UnityEngine;
 
@@ -17,7 +15,7 @@ namespace Collectibles
 			set
 			{
 				_collectible = collectibleFactory.Create(value);
-				GetComponent<SpriteRenderer>().sprite = collectibleFactory.Icon(value);
+				GetComponent<SpriteRenderer>().sprite = collectibleFactory.Sprite(value);
 			}
 		}
 

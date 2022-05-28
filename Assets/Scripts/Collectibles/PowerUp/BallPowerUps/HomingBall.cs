@@ -9,7 +9,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly Mesh _mesh;
 		private readonly Material _material;
 		private Ball.Ball _ball;
-		
+
 		private Transform _target;
 		private Rigidbody _ballRigidbody;
 		private const CollectibleType PowerUpType = CollectibleType.HomingBall;
@@ -26,6 +26,11 @@ namespace Collectibles.PowerUp.BallPowerUps
 			var targetObject = GameManager.Shared.GetOpposingPlayer(collector);
 			base.Collect(targetObject);
 			_target = targetObject.GetComponent<Transform>();
+		}
+
+		public bool IsUncatchableWithRoll()
+		{
+			return false;
 		}
 
 		public void OnCharge(Ball.Ball ball)
@@ -55,7 +60,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public void OnHit(Collision collision)
 		{
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, false);
+			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 		}
 	}
 }
