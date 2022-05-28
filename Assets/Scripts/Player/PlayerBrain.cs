@@ -90,7 +90,7 @@ namespace Player
 		[Header("Player Movement Settings")] [SerializeField]
 		private float speed;
 
-		[SerializeField] private float friction;
+		[Range(0, 1)] [SerializeField] private float friction;
 
 		[SerializeField] private float dodgeRollSpeed;
 
@@ -156,10 +156,9 @@ namespace Player
 		private IBallPowerUp _ballPowerUp;
 		private IPlayerPowerUp _playerPowerUp;
 		private Rumble _rumble;
-		
+
 		//Movement
 		private Vector3 _velocity = Vector3.zero;
-		
 
 		#endregion
 
@@ -387,14 +386,14 @@ namespace Player
 				_controller.SimpleMove(Vector3.zero);
 				return;
 			}
-			
-			if (Math.Abs(friction - 1) == 0 &&MovementStick.sqrMagnitude <= 0.1)
+
+			if (Math.Abs(friction - 1) == 0 && MovementStick.sqrMagnitude <= 0.1)
 			{
 				_animator.SetBool(AnimatorRunning, false);
 				_controller.SimpleMove(Vector3.zero);
 				return;
 			}
-			
+
 
 			_animator.SetBool(AnimatorRunning, true);
 			_velocity = Vector3.Lerp(_velocity, new Vector3(MovementStick.x, 0, MovementStick.y), friction);
@@ -405,7 +404,9 @@ namespace Player
 				if (MovementStick.sqrMagnitude <= 0.1)
 				{
 					_animator.SetBool(AnimatorRunning, false);
-				}else{
+				}
+				else
+				{
 					_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(MovementStick.x)));
 					_animator.SetFloat(AnimatorZ, Mathf.Round(MovementStick.y));
 					transform.rotation = _velocity.x > 0 ? _faceRight : _faceLeft;

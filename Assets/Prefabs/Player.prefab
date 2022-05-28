@@ -390,6 +390,8 @@ MonoBehaviour:
     lowFreq: 0.3
     highFreq: 0.5
     duration: 0.3
+  maxStunLowFreqRumbleAddition: 0.3
+  maxStunRumbleDurationAddition: 0.5
   aimRumble:
     lowFreq: 0
     highFreq: 0.01
@@ -439,9 +441,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfSteps: 20
   timeStepInterval: 0.01
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!120 &5905099638005712058
 LineRenderer:
   m_ObjectHideFlags: 0
