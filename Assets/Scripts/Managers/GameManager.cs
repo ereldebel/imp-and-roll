@@ -79,12 +79,12 @@ namespace Managers
 			_playerReadyStatus[player] = !_playerReadyStatus[player];
 			player.GetComponent<Animator>().SetFloat(PlayerAnimatorX, _playerReadyStatus[player] ? 1 : 0);
 			if (_playerReadyStatus.Any(status => !status.Value)) return;
-			if (_gameStarted) return;
-			_gameStarted = true;
+			if (_gameStarted || _numPlayers == 3) return;
 			if (_numPlayers > 1)
-				StartGameTwoPlayers();
+				StartGameMultiplePlayers();
 			else
 				StartCoroutine(OnePlayerReady());
+			_gameStarted = true;
 		}
 
 		public void AwakeAI()
@@ -105,7 +105,7 @@ namespace Managers
 		private IEnumerator ResetTimer(float time)
 		{
 			yield return new WaitForSeconds(time);
-			StartGameTwoPlayers();
+			StartGameMultiplePlayers();
 			_gameStarted = true;
 		}
 
@@ -121,7 +121,7 @@ namespace Managers
 			player.transform.position = playerInfos[playerID].locationOpeningScene;
 			player.GetComponent<PlayerInput>()
 				?.SwitchCurrentActionMap("Player Tutorial Area"); // To keep Playability without entry scene
-			if (playerID == 1)
+			if (playerID % 2 == 1)
 				MakePlayerRed(player);
 		}
 
@@ -139,7 +139,7 @@ namespace Managers
 			player.GetComponent<PlayerController>()?.OnMatchStart();
 		}
 
-		private void StartGameTwoPlayers()
+		private void StartGameMultiplePlayers()
 		{
 			SceneManager.LoadScene("Game");
 			for (var i = 0; i < _players.Count; i++)
@@ -149,7 +149,7 @@ namespace Managers
 		private void StartGameOnePlayer()
 		{
 			CreateAI();
-			StartGameTwoPlayers();
+			StartGameMultiplePlayers();
 		}
 
 		private void CreateAI()
