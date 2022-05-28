@@ -454,6 +454,7 @@ namespace Player
 				yield return new WaitForFixedUpdate();
 			}
 
+			_velocity = rollDir;
 			_rolling = false;
 		}
 
