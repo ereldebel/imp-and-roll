@@ -69,14 +69,13 @@ namespace Player
 			maxThrowForce * ThrowCharge * new Vector3(AimDirection.x, throwYForce, AimDirection.y);
 
 		public bool HasBall => _ball != null;
-		public Rumble Rumble { get; private set; }
+
 		public bool Flipped => _left == (transform.rotation == _faceRight);
+		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
 		#endregion;
 
 		#region Private Properties
-
-		private float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
 		private Vector2 AimDirection
 		{
@@ -195,7 +194,7 @@ namespace Player
 		{
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
-			Rumble = GetComponent<Rumble>();
+			_rumble = GetComponent<Rumble>();
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
 			_ballPositionsByDirection.Add(ballPositionsUp45);
