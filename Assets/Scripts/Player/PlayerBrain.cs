@@ -315,7 +315,7 @@ namespace Player
 			_chargeStartTime = -1;
 			_ball = null;
 			SetPowerUp(null);
-			GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player Tutorial Area");
+			GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Start Menu");
 		}
 
 		public bool ChargeThrow()
@@ -440,6 +440,8 @@ namespace Player
 		{
 			if (index >= ballPositionsSide.Length || !_ball) return;
 			var ballPos = _ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][index];
+			if (transform.rotation == _faceRight)
+				ballPos.z = -ballPos.z;
 			_ball.transform.localPosition = ballPos;
 		}
 
