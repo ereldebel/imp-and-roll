@@ -18,6 +18,7 @@ namespace Managers
 		[SerializeField] private float waitTime = 2;
 		[SerializeField] private GameObject AIPlayerPrefab;
 		public GameObject pressStartCanvas;
+
 		#endregion
 
 		#region Private Fields
@@ -56,7 +57,7 @@ namespace Managers
 		{
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
-			
+
 			var player = input.gameObject;
 			DontDestroyOnLoad(player);
 			_players.Add(player);

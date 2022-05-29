@@ -11,7 +11,7 @@ namespace Environment
 		[SerializeField] private float maxRelativeSpeed;
 		[SerializeField] private float minSparkRate = 3.5f;
 		[SerializeField] private float maxSparkRate = 10;
-		
+
 		private ParticleSystem.MainModule _main;
 		private ParticleSystem.EmissionModule _emission;
 
@@ -55,7 +55,7 @@ namespace Environment
 			while (_change)
 			{
 				yield return new WaitForSeconds(Random.Range(5, 10));
-				var nextMultiplier = Random.Range(minSparkRate,maxSparkRate);
+				var nextMultiplier = Random.Range(minSparkRate, maxSparkRate);
 				while (_change && Math.Abs(_emission.rateOverTimeMultiplier - nextMultiplier) > 0.01)
 				{
 					_emission.rateOverTimeMultiplier =

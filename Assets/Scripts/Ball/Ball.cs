@@ -28,7 +28,7 @@ namespace Ball
 		[SerializeField] private float growDur = 0.5f;
 		[SerializeField] private float shrinkDur = 1;
 		[SerializeField] private float groundSlowFactor = 2;
-		
+
 		[SerializeField] private MeshFilter outlineMeshFilter;
 
 		#endregion
@@ -107,6 +107,7 @@ namespace Ball
 		#endregion
 
 		#region Public Methods
+
 		public void SetMesh(Mesh mesh)
 		{
 			if (!mesh) return;

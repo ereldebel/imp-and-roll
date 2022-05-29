@@ -13,78 +13,7 @@ namespace Player
 	[RequireComponent(typeof(CharacterController))]
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
-		#region Public Properties
-
-		public Vector2 MovementStick
-		{
-			get => _movementDirection;
-			set => _movementDirection = InvertJoysticks ? -value : value;
-		}
-
-		public Vector2 AimingStick
-		{
-			set
-			{
-				var oldSqrMagnitude = AimDirection.sqrMagnitude;
-				var newSqrMagnitude = value.sqrMagnitude;
-				if (_chargeStartTime >= 0 && newSqrMagnitude < oldSqrMagnitude && newSqrMagnitude < 0.1)
-				{
-					ThrowBall();
-					return;
-				}
-
-				if (_chargeStartTime < 0 && newSqrMagnitude > oldSqrMagnitude && newSqrMagnitude > 0.1)
-				{
-					ChargeThrow();
-					return;
-				}
-
-				if (newSqrMagnitude < 0.7) return;
-				AimDirection = value.normalized;
-				ChangedAimDirection?.Invoke();
-			}
-		}
-
-		public Vector2 MousePos
-		{
-			set
-			{
-				var pos = transform.position;
-				AimDirection = (value - new Vector2(pos.x, pos.z)).normalized;
-				ChangedAimDirection?.Invoke();
-			}
-		}
-
-		public bool InvertJoysticks { private get; set; }
-
-		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
-
-		public Vector3 ThrowOrigin =>
-			new Vector3(AimDirection.x,
-				_ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][ballPositionsSide.Length - 1].y,
-				AimDirection.y) *
-			(_colliderRadius + _ball.Radius + speed * Time.fixedDeltaTime + throwOriginEpsilon);
-
-		public Vector3 ThrowVelocity =>
-			maxThrowForce * ThrowCharge * new Vector3(AimDirection.x, throwYForce, AimDirection.y);
-
-		public bool HasBall => _ball != null;
-
-		public bool Flipped => _left == (transform.rotation == _faceRight);
-		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
-
-		#endregion;
-
-		#region Private Properties
-
-		private Vector2 AimDirection
-		{
-			set => _aimDirection = InvertJoysticks ? -value : value;
-			get => _aimDirection;
-		}
-
-		#endregion
-
+		
 		#region Serialized Fields
 
 		[Header("Player Movement Settings")] [SerializeField]
@@ -177,6 +106,66 @@ namespace Player
 		private static readonly int AnimatorTaunt = Animator.StringToHash("Taunt");
 
 		#endregion
+		
+		#region Public Properties
+
+		public Vector2 MovementStick
+		{
+			get => _movementDirection;
+			set => _movementDirection = value;
+		}
+
+		public Vector2 AimingStick
+		{
+			set
+			{
+				var oldSqrMagnitude = _aimDirection.sqrMagnitude;
+				var newSqrMagnitude = value.sqrMagnitude;
+				if (_chargeStartTime >= 0 && newSqrMagnitude < oldSqrMagnitude && newSqrMagnitude < 0.1)
+				{
+					ThrowBall();
+					return;
+				}
+
+				if (_chargeStartTime < 0 && newSqrMagnitude > oldSqrMagnitude && newSqrMagnitude > 0.1)
+				{
+					ChargeThrow();
+					return;
+				}
+
+				if (newSqrMagnitude < 0.7) return;
+				_aimDirection = value.normalized;
+				ChangedAimDirection?.Invoke();
+			}
+		}
+
+		public Vector2 MousePos
+		{
+			set
+			{
+				var pos = transform.position;
+				_aimDirection = (value - new Vector2(pos.x, pos.z)).normalized;
+				ChangedAimDirection?.Invoke();
+			}
+		}
+
+		public float ThrowChargeTime => _chargeStartTime > 0 ? Time.time - _chargeStartTime : 0;
+
+		public Vector3 ThrowOrigin =>
+			new Vector3(_aimDirection.x,
+				_ballPositionsByDirection[(int) _animator.GetFloat(AnimatorZ) + 1][ballPositionsSide.Length - 1].y,
+				_aimDirection.y) *
+			(_colliderRadius + _ball.Radius + speed * Time.fixedDeltaTime + throwOriginEpsilon);
+
+		public Vector3 ThrowVelocity =>
+			maxThrowForce * ThrowCharge * new Vector3(_aimDirection.x, throwYForce, _aimDirection.y);
+
+		public bool HasBall => _ball != null;
+
+		public bool Flipped => _left == (transform.rotation == _faceRight);
+		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
+
+		#endregion;
 
 		#region Public C# Events
 
@@ -216,16 +205,16 @@ namespace Player
 		{
 			ProcessMovementInput();
 			if (_chargeStartTime < 0) return;
-			_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(AimDirection.x)));
-			_animator.SetFloat(AnimatorZ, Mathf.Round(AimDirection.y));
-			transform.rotation = AimDirection.x > 0 ? _faceRight : _faceLeft;
+			_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(_aimDirection.x)));
+			_animator.SetFloat(AnimatorZ, Mathf.Round(_aimDirection.y));
+			transform.rotation = _aimDirection.x > 0 ? _faceRight : _faceLeft;
 		}
 
 		private void Update()
 		{
 			_playerPowerUp?.OnUpdate();
 			var playerLayerMask = 1 << gameObject.layer;
-			var aimDir = new Vector3(AimDirection.x, 0, AimDirection.y);
+			var aimDir = new Vector3(_aimDirection.x, 0, _aimDirection.y);
 			if (_chargeStartTime < 0 ||
 			    !Physics.Raycast(transform.position + aimDir * (_colliderRadius + _ball.Radius), aimDir,
 				    MatchManager.MaxDistance, playerLayerMask)) return;

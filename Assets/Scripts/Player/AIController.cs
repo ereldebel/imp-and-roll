@@ -55,6 +55,7 @@ namespace Player
 					MoveInDirection(DirectionTo(collectible.position));
 					return;
 				}
+
 				var midOfPlayerPartX = MatchManager.ArenaLength / 4;
 				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
 				midOfPlayerPartX += _border.position.x / 2;

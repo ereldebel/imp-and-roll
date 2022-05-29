@@ -32,7 +32,9 @@ namespace Collectibles.PowerUp.BallPowerUps.Effects
 				yield return new WaitForFixedUpdate();
 			}
 
-			for (var opacity = _spriteRenderer.color.a; opacity > 0; opacity -= fadeFixedStepSize,size += secondStageScaleFixedStepSize)
+			for (var opacity = _spriteRenderer.color.a;
+			     opacity > 0;
+			     opacity -= fadeFixedStepSize, size += secondStageScaleFixedStepSize)
 			{
 				var color = _spriteRenderer.color;
 				color.a = opacity;
@@ -40,6 +42,7 @@ namespace Collectibles.PowerUp.BallPowerUps.Effects
 				transform.localScale = new Vector3(size, size, size);
 				yield return new WaitForFixedUpdate();
 			}
+
 			Destroy(gameObject);
 		}
 	}

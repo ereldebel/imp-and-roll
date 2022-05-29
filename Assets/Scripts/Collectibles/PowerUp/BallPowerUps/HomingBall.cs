@@ -60,7 +60,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public void OnHit(Collision collision)
 		{
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
+			collision.gameObject.GetComponent<IHittable>()
+				?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 		}
 	}
 }

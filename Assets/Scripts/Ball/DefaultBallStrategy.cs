@@ -8,12 +8,12 @@ namespace Ball
 		private readonly Material _material;
 		private Ball _ball;
 
-		public DefaultBallStrategy(Mesh mesh,Material material)
+		public DefaultBallStrategy(Mesh mesh, Material material)
 		{
 			_mesh = mesh;
 			_material = material;
 		}
-		
+
 		public bool IsUncatchableWithRoll()
 		{
 			return false;
@@ -38,7 +38,8 @@ namespace Ball
 
 		public void OnHit(Collision collision)
 		{
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
+			collision.gameObject.GetComponent<IHittable>()
+				?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 		}
 
 		public void OnRemove()

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Collectibles.PowerUp.BallPowerUps.Effects;
+﻿using Collectibles.PowerUp.BallPowerUps.Effects;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps
@@ -9,7 +8,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly Mesh _mesh;
 		private readonly Material _material;
 		private Ball.Ball _ball;
-		
+
 		private static GameObject _fireDropper;
 		private static FireDropper _fireDropperScript;
 
@@ -23,6 +22,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 				_fireDropper.SetActive(false);
 				_fireDropperScript = _fireDropper.GetComponent<FireDropper>();
 			}
+
 			_mesh = mesh;
 			_material = material;
 		}

@@ -87,6 +87,7 @@ namespace Player
 				throwVelocity = _flip * throwVelocity;
 				origin = _flip * origin;
 			}
+
 			for (var timeStep = 0; timeStep < _maxSteps; ++timeStep)
 			{
 				var posAtTime = origin + throwVelocity * timeStep;

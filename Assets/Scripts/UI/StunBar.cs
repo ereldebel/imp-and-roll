@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +11,7 @@ namespace UI
 		[SerializeField] private Sprite stunnedFace;
 		[SerializeField] private Material bar;
 		[SerializeField] private float[] barMaxMin = {0.3f, 0.5f};
-		
+
 		private PlayerBrain _playerBrain;
 		private Sprite _regularFace;
 		private Image _image;
@@ -27,7 +26,7 @@ namespace UI
 			_playerBrain.StunStarted += StunStarted;
 			_playerBrain.StunEnded += StunEnded;
 		}
-		
+
 		private void OnDestroy()
 		{
 			bar.SetFloat(BarPercentage, 1);
@@ -38,7 +37,7 @@ namespace UI
 		private void StunStarted(float percentage)
 		{
 			_image.sprite = stunnedFace;
-			bar.SetFloat(BarPercentage,  Mathf.Lerp(barMaxMin[0],barMaxMin[1],percentage));
+			bar.SetFloat(BarPercentage, Mathf.Lerp(barMaxMin[0], barMaxMin[1], percentage));
 		}
 
 		private void StunEnded()

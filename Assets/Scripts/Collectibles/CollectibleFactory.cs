@@ -43,15 +43,16 @@ namespace Collectibles
 		[SerializeField] private Material explodingBallMaterial;
 		[SerializeField] private Sprite explodingBallSprite;
 		[SerializeField] private Sprite explodingBallIcon;
-		
+
 		[Header("Fire Trail")] [SerializeField]
-		public float fireTrailParticleLifeSpan=10;
+		public float fireTrailParticleLifeSpan = 10;
+
 		[SerializeField] private GameObject fireDropperPrefab;
 		[SerializeField] private Mesh fireTrailMesh;
 		[SerializeField] private Material fireTrailMaterial;
 		[SerializeField] private Sprite fireTrailSprite;
 		[SerializeField] private Sprite fireTrailIcon;
-		
+
 		public ICollectible Create(CollectibleType collectibleType)
 		{
 			return collectibleType switch
@@ -65,7 +66,7 @@ namespace Collectibles
 					explosionStunRadius + explosionKnockBackOuterRingWidth, explosionStunRadius,
 					knockBackVelocityMultiplier, playerLayerMask, explosionPrefab, explodingBallMesh,
 					explodingBallMaterial),
-				CollectibleType.FireTrail=>new FireTrail(fireDropperPrefab,fireTrailMesh,fireTrailMaterial),
+				CollectibleType.FireTrail => new FireTrail(fireDropperPrefab, fireTrailMesh, fireTrailMaterial),
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
 			};
 		}

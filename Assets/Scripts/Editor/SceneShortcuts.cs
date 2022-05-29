@@ -19,7 +19,7 @@ namespace Editor
 			EditorSceneManager.OpenScene("Assets/Scenes/Opening Screen.unity");
 			EditorApplication.isPlaying = true;
 		}
-		
+
 		[MenuItem("Scenes/To Game Scene #TAB")]
 		public static void SwitchToGameScene()
 		{
@@ -27,6 +27,7 @@ namespace Editor
 			{
 				EditorApplication.isPlaying = false;
 			}
+
 			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 			EditorSceneManager.OpenScene("Assets/Scenes/Game.unity");
 		}

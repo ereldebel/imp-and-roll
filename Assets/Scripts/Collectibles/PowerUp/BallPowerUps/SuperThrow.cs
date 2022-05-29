@@ -8,7 +8,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly Mesh _mesh;
 		private readonly Material _material;
 		private Ball.Ball _ball;
-		
+
 		private Rigidbody _ballRigidBody;
 
 		private const CollectibleType PowerUpType = CollectibleType.SuperThrow;
@@ -46,7 +46,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public void OnHit(Collision collision)
 		{
 			_ball.Shrink();
-			collision.gameObject.GetComponent<IHittable>()?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
+			collision.gameObject.GetComponent<IHittable>()
+				?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 		}
 	}
 }

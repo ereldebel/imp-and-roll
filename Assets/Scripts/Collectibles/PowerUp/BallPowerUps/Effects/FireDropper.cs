@@ -10,6 +10,7 @@ namespace Collectibles.PowerUp.BallPowerUps.Effects
 		private float _effectTime;
 		private ParticleSystem _particleSystem;
 		private bool _stopped;
+
 		public void Stop()
 		{
 			_particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);

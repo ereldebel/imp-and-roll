@@ -1,5 +1,4 @@
 ﻿using Player;
-using UnityEditor.SceneTemplate;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps
