@@ -471,6 +471,10 @@ PrefabInstance:
       value: Arena Divider Spikes
       objectReference: {fileID: 0}
     - target: {fileID: 2782141269092019856, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782141269092019856, guid: 90f397d917c25c94eb599f9f6033d4e5, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
