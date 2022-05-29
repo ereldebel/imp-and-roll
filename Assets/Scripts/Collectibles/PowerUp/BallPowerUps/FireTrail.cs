@@ -13,7 +13,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private static GameObject _fireDropper;
 		private static FireDropper _fireDropperScript;
 
-		private const CollectibleType PowerUpType = CollectibleType.SuperThrow;
+		private const CollectibleType PowerUpType = CollectibleType.FireTrail;
 
 		public FireTrail(GameObject fireDropperPrefab, Mesh mesh, Material material) : base(PowerUpType)
 		{
