@@ -48,6 +48,7 @@ namespace Ball
 		private float _curShrinkStartTime = -1;
 		private IBallStrategy _ballStrategy;
 		private IBallStrategy _defaultBallStrategy;
+		private GameObject _shadow;
 
 		#endregion
 
@@ -61,6 +62,7 @@ namespace Ball
 			_trailRenderer = GetComponent<TrailRenderer>();
 			_meshRenderer = GetComponent<MeshRenderer>();
 			_meshFilter = GetComponent<MeshFilter>();
+			_shadow = GetComponentInChildren<Shadow>().gameObject;
 			_defaultBallStrategy = new DefaultBallStrategy(_meshFilter.mesh, _meshRenderer.material);
 			_ballStrategy = _defaultBallStrategy;
 		}
@@ -138,6 +140,7 @@ namespace Ball
 			_rigidbody.angularVelocity = Vector3.zero;
 			_collider.enabled = false;
 			_trailRenderer.enabled = false;
+			_shadow.SetActive(false);
 			gameObject.SetActive(false);
 			return true;
 		}
@@ -176,6 +179,7 @@ namespace Ball
 			_rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
 			_collider.enabled = true;
 			_trailRenderer.enabled = true;
+			_shadow.SetActive(true);
 			_transform.SetParent(null);
 			_held = false;
 		}

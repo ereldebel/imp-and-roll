@@ -79,7 +79,7 @@ SpriteRenderer:
   m_Size: {x: 1.4890625, y: 1.0527344}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &612359272554252326
@@ -256,6 +256,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224612267418313154, guid: 39b73994d4a76be4694964604a51a261, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3200642337550909453, guid: 39b73994d4a76be4694964604a51a261, type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5958757411387467864, guid: 39b73994d4a76be4694964604a51a261, type: 3}

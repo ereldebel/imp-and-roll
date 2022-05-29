@@ -64,6 +64,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public void OnHit(Collision collision)
 		{
 			var explosionPos = _ball.transform.position;
+			explosionPos.y = 0;
 			Object.Instantiate(_explosionPrefab, explosionPos, _explosionPrefab.transform.rotation);
 			var numOfHits = Physics.OverlapSphereNonAlloc(explosionPos, _explosionSqrKnockBackRadius, Hits,
 				_playerLayerMask.value);
