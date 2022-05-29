@@ -6,9 +6,9 @@ PhysicMaterial:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ground Physic Material
+  m_Name: Ice Physic Material
   dynamicFriction: 10
   staticFriction: 10
-  bounciness: 0.5
+  bounciness: 0
   frictionCombine: 0
-  bounceCombine: 0
+  bounceCombine: 2
