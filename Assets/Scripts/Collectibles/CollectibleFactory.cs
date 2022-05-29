@@ -43,41 +43,15 @@ namespace Collectibles
 		[SerializeField] private Material explodingBallMaterial;
 		[SerializeField] private Sprite explodingBallSprite;
 		[SerializeField] private Sprite explodingBallIcon;
-
-		// [Space(5)] [Tooltip("random weight of each power up to spawn by their order of appearance")] [SerializeField]
-		// private float[] powerUpWeights = new float[3];
-
-
-		// private Random _random = new Random();
-
-		// public ICollectible GetRandomWeightedPowerUp()
-		// {
-		// 	// Get the total sum of all the weights.
-		// 	int weightSum = 0f;
-		// 	for (int i = 0; i < powerUpWeights.Length; ++i)
-		// 	{
-		// 		weightSum += weights[i];
-		// 	}
-		//
-		// 	// Step through all the possibilities, one by one, checking to see if each one is selected.
-		// 	int index = 0;
-		// 	int lastIndex = elementCount - 1;
-		// 	while (index < lastIndex)
-		// 	{
-		// 		// Do a probability check with a likelihood of weights[index] / weightSum.
-		// 		if (Random.Range(0, weightSum) < weights[index])
-		// 		{
-		// 			return index;
-		// 		}
-		//
-		// 		// Remove the last item from the sum of total untested weights and try again.
-		// 		weightSum -= weights[index++];
-		// 	}
-		//
-		// 	// No other item was selected, so return very last index.
-		// 	return index;
-		// }
-
+		
+		[Header("Fire Trail")] [SerializeField]
+		public float fireTrailParticleLifeSpan=10;
+		[SerializeField] private GameObject fireDropperPrefab;
+		[SerializeField] private Mesh fireTrailMesh;
+		[SerializeField] private Material fireTrailMaterial;
+		[SerializeField] private Sprite fireTrailSprite;
+		[SerializeField] private Sprite fireTrailIcon;
+		
 		public ICollectible Create(CollectibleType collectibleType)
 		{
 			return collectibleType switch
@@ -91,6 +65,7 @@ namespace Collectibles
 					explosionStunRadius + explosionKnockBackOuterRingWidth, explosionStunRadius,
 					knockBackVelocityMultiplier, playerLayerMask, explosionPrefab, explodingBallMesh,
 					explodingBallMaterial),
+				CollectibleType.FireTrail=>new FireTrail(fireDropperPrefab,fireTrailMesh,fireTrailMaterial),
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
 			};
 		}
@@ -103,6 +78,7 @@ namespace Collectibles
 				CollectibleType.HomingBall => homingBallSprite,
 				CollectibleType.SuperThrow => superThrowSprite,
 				CollectibleType.ExplodingBall => explodingBallSprite,
+				CollectibleType.FireTrail => fireTrailSprite,
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
 			};
 		}
@@ -115,6 +91,7 @@ namespace Collectibles
 				CollectibleType.HomingBall => homingBallIcon,
 				CollectibleType.SuperThrow => superThrowIcon,
 				CollectibleType.ExplodingBall => explodingBallIcon,
+				CollectibleType.FireTrail => fireTrailIcon,
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null)
 			};
 		}

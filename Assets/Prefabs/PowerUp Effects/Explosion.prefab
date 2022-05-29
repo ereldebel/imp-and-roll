@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5518070200481610786}
   - component: {fileID: 7197617562135977453}
   - component: {fileID: 663987474023232386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3416932025759561356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}

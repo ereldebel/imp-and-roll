@@ -17,13 +17,13 @@ MonoBehaviour:
   collectibleMagnetSprite: {fileID: 21300000, guid: 4f1b72f03f03c634dbfae01c304a3764, type: 3}
   collectibleMagnetIcon: {fileID: 21300000, guid: e8b78a7990d386845a04fd85b1ab34cb, type: 3}
   homingRate: 1
-  homingBallMesh: {fileID: 0}
-  homingBallMaterial: {fileID: 0}
+  homingBallMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  homingBallMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
   homingBallSprite: {fileID: 21300000, guid: 908db7ecd035d4b4eb980311c1886ad7, type: 3}
   homingBallIcon: {fileID: 21300000, guid: c22b243651b4ae948b55bf0f530fad97, type: 3}
   superThrowSpeedBoost: 1.1
-  superThrowMesh: {fileID: 0}
-  superThrowMaterial: {fileID: 0}
+  superThrowMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  superThrowMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
   superThrowSprite: {fileID: 0}
   superThrowIcon: {fileID: 0}
   explosionStunRadius: 5
@@ -33,7 +33,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   explosionPrefab: {fileID: 7127587449884104206, guid: 5504969b645537d4facf80af835892b1, type: 3}
-  explodingBallMesh: {fileID: 0}
-  explodingBallMaterial: {fileID: 0}
+  explodingBallMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  explodingBallMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
   explodingBallSprite: {fileID: 21300000, guid: f04f3a07277f45349acefbf07fa8aa0b, type: 3}
   explodingBallIcon: {fileID: 21300000, guid: 32d8d46b456b04242bef7e227965d747, type: 3}
+  fireTrailParticleLifeSpan: 10
+  fireDropperPrefab: {fileID: 285930222026714181, guid: 01da4b1f9b909f74eb20a6c139b648c1, type: 3}
+  fireTrailMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  fireTrailMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
+  fireTrailSprite: {fileID: 21300000, guid: 3d3662e29838694489436aa81027d953, type: 3}
+  fireTrailIcon: {fileID: 21300000, guid: 8ae2ab3d9b669e1448c76c523f17971a, type: 3}

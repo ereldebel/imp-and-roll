@@ -29,6 +29,33 @@ TextureImporter:
   - first:
       213: 2877560115837281720
     second: spawnsmoke1_8
+  - first:
+      213: -6522873033629586637
+    second: Spawn Smoke_0
+  - first:
+      213: 2468006783309074441
+    second: Spawn Smoke_1
+  - first:
+      213: 8629424230155412248
+    second: Spawn Smoke_2
+  - first:
+      213: -4725208562485170206
+    second: Spawn Smoke_3
+  - first:
+      213: -6638860342184472979
+    second: Spawn Smoke_4
+  - first:
+      213: -5924879937813170894
+    second: Spawn Smoke_5
+  - first:
+      213: -6538350944426522636
+    second: Spawn Smoke_6
+  - first:
+      213: 6248631918096114599
+    second: Spawn Smoke_7
+  - first:
+      213: -6997088326401471955
+    second: Spawn Smoke_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -142,7 +169,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spawnsmoke1_0
+      name: Spawn Smoke_0
       rect:
         serializedVersion: 2
         x: 0
@@ -156,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8841f9f6cab0f41e0800000000000000
-      internalID: -2211536056780647288
+      spriteID: 33ba88b19891a75a0800000000000000
+      internalID: -6522873033629586637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_1
+      name: Spawn Smoke_1
       rect:
         serializedVersion: 2
         x: 381
@@ -177,14 +204,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b705e849d66511ce0800000000000000
-      internalID: -1436271777510698885
+      spriteID: 9005466e71f104220800000000000000
+      internalID: 2468006783309074441
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_2
+      name: Spawn Smoke_2
       rect:
         serializedVersion: 2
         x: 762
@@ -198,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7dacec62581b37a0800000000000000
-      internalID: -6396492103455822469
+      spriteID: 813ef8edd9fd1c770800000000000000
+      internalID: 8629424230155412248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_3
+      name: Spawn Smoke_3
       rect:
         serializedVersion: 2
         x: 1143
@@ -219,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beb4b71d04d9e3850800000000000000
-      internalID: 6358692625611705323
+      spriteID: 2efef6ff8dfac6eb0800000000000000
+      internalID: -4725208562485170206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_4
+      name: Spawn Smoke_4
       rect:
         serializedVersion: 2
         x: 1524
@@ -240,14 +267,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 247e46dc95e33a270800000000000000
-      internalID: 8260514696946575170
+      spriteID: d6e8aa661b70ed3a0800000000000000
+      internalID: -6638860342184472979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_5
+      name: Spawn Smoke_5
       rect:
         serializedVersion: 2
         x: 0
@@ -261,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70d44dc5c1728f630800000000000000
-      internalID: 3960958875042336007
+      spriteID: 235bec1861996cda0800000000000000
+      internalID: -5924879937813170894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_6
+      name: Spawn Smoke_6
       rect:
         serializedVersion: 2
         x: 381
@@ -282,14 +309,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23560cba717090e10800000000000000
-      internalID: 2164268894175388978
+      spriteID: 4f70e9c257c1345a0800000000000000
+      internalID: -6538350944426522636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_7
+      name: Spawn Smoke_7
       rect:
         serializedVersion: 2
         x: 762
@@ -303,14 +330,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3de37c3fe91a8ab50800000000000000
-      internalID: 6604706557605658323
+      spriteID: 7a369427f9997b650800000000000000
+      internalID: 6248631918096114599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spawnsmoke1_8
+      name: Spawn Smoke_8
       rect:
         serializedVersion: 2
         x: 1143
@@ -324,8 +351,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b5205ceda52fe720800000000000000
-      internalID: 2877560115837281720
+      spriteID: d2acec24d3955ee90800000000000000
+      internalID: -6997088326401471955
       vertices: []
       indices: 
       edges: []

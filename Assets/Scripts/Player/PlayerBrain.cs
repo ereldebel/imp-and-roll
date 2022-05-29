@@ -109,6 +109,7 @@ namespace Player
 		private float knockBackDuration = 0.5f;
 
 		[SerializeField] private float knockBackRelativeSpeed = 0.5f;
+		[SerializeField] private float flameMaxKnockBackVelocity = 2f;
 
 		[Header("Stun Settings")] [SerializeField]
 		private float stunDuration = 1;
@@ -253,6 +254,11 @@ namespace Player
 		private void OnCollisionStay(Collision collision)
 		{
 			PickupBall(collision);
+		}
+
+		private void OnParticleCollision(GameObject other)
+		{
+			TakeHit(other.transform.position - transform.position * flameMaxKnockBackVelocity, true);
 		}
 
 		public void Reset()

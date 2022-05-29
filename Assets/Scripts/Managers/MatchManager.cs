@@ -20,6 +20,9 @@ namespace Managers
 		[SerializeField] private float timeBetweenPowerUpSpawns;
 		[SerializeField] private float minPowerUpDistFromPlayers;
 
+		[Tooltip("Duplicates mean that the powerUp has a higher chance of being picked.")] [SerializeField]
+		private List<CollectibleType> powerUpsInMatch;
+
 		#endregion
 
 		#region Public Properties
@@ -130,7 +133,6 @@ namespace Managers
 		{
 			var halfOfArenaWidth = ArenaWidth / 2;
 			var halfOfArenaLength = ArenaLength / 2;
-			var allPowerUps = Enum.GetValues(typeof(CollectibleType));
 			var random = new System.Random();
 			var numOfSpawns = 0;
 			var numOfLeftSpawns = 0;
@@ -157,7 +159,7 @@ namespace Managers
 				var spawnPoint = RandomXZVector(minVector, maxVector, 0.1f);
 				spawnPoint.y = powerUpPrefab.transform.position.y;
 				var newPowerUp = Instantiate(powerUpPrefab, spawnPoint, powerUpPrefab.transform.rotation);
-				var next = (CollectibleType) allPowerUps.GetValue(random.Next(allPowerUps.Length));
+				var next = powerUpsInMatch[random.Next(powerUpsInMatch.Count)];
 				newPowerUp.GetComponent<Collectible>().CollectibleType = next;
 				print(next);
 				spawnOnRight = random.Next(numOfSpawns) < numOfLeftSpawns;

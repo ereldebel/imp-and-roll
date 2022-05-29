@@ -8,6 +8,7 @@ namespace Collectibles
 		CollectibleMagnet,
 		HomingBall,
 		SuperThrow,
-		ExplodingBall
+		ExplodingBall,
+		FireTrail
 	}
 }

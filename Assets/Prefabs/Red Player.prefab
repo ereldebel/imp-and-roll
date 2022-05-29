@@ -269,6 +269,7 @@ MonoBehaviour:
   throwOriginEpsilon: 0
   knockBackDuration: 0.5
   knockBackRelativeSpeed: 0.5
+  flameMaxKnockBackVelocity: 2
   stunDuration: 1
   maxStunDurationIncrease: 1
   stunBarPercentagePerHit: 0.2
