@@ -21,6 +21,15 @@ EditorBuildSettings:
     path: Assets/Scenes/P2 won.unity
     guid: 634ba2f83367f0c4e8135f229666d12b
   - enabled: 1
-    path: Assets/Scenes/Game Ice.unity
+    path: Assets/Scenes/Icy Arena.unity
     guid: 79e050ea587acd54389702a6f55206ba
+  - enabled: 1
+    path: Assets/Scenes/Game Ice.unity
+    guid: 78b008edf74f04641841ab336b3cf560
+  - enabled: 1
+    path: Assets/Scenes/Game Lava.unity
+    guid: 78333a81050d855409da5582e1a93f59
+  - enabled: 1
+    path: Assets/Scenes/Volcanic Arena.unity
+    guid: 23861c9079697a64c8ea54054fcbfe1c
   m_configObjects: {}

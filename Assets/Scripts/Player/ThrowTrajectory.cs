@@ -15,7 +15,6 @@ namespace Player
 		private Quaternion _rotation;
 
 		private bool _charged;
-		private int _maxSteps;
 		private Vector3[] _trajectoryPoints;
 		private Quaternion _flip;
 
@@ -28,12 +27,6 @@ namespace Player
 			MatchManager.MatchEnded += Disable;
 			OnValidate();
 			enabled = false;
-		}
-
-		private void Start()
-		{
-			var maxDist = Mathf.Sqrt(Mathf.Pow(MatchManager.ArenaLength, 2) + Mathf.Pow(MatchManager.ArenaWidth, 2));
-			_maxSteps = Mathf.CeilToInt(maxDist / timeStepInterval);
 		}
 
 		private void OnValidate()
@@ -88,12 +81,11 @@ namespace Player
 				origin = _flip * origin;
 			}
 
-			for (var timeStep = 0; timeStep < _maxSteps; ++timeStep)
+			for (var timeStep = 0; timeStep < numOfSteps; ++timeStep)
 			{
 				var posAtTime = origin + throwVelocity * timeStep;
 				posAtTime += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
-				if (timeStep < numOfSteps)
-					_trajectoryPoints[timeStep] = _rotation * posAtTime;
+				_trajectoryPoints[timeStep] = _rotation * posAtTime;
 			}
 
 			_lineRenderer.SetPositions(_trajectoryPoints);
