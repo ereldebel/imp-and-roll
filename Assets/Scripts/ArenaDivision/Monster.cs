@@ -36,6 +36,7 @@ namespace ArenaDivision
 		private float _ySpeed = 0.5f;
 		private bool _gotEye = false;
 		private Vector3 _originalPosition;
+		private bool _spinningLeft = true;
 
 		private static readonly int AnimatorZ = Animator.StringToHash("Z");
 		private static readonly int AnimatorX = Animator.StringToHash("X");
@@ -128,10 +129,19 @@ namespace ArenaDivision
 			pos += movement;
 			transform.position = pos;
 			if (Mathf.Abs(pos.x - dividerPos.x) < maxXDistFromMonster || movingTowardsDivider) return;
+			if ((_spinningLeft && pos.x > dividerPos.x) || (!_spinningLeft && pos.x < dividerPos.x))// If the barrier is now pulled to the other direction
+				SpinDivider();
 			dividerPos.x += xMovement;
 			divider.position = dividerPos;
 		}
 
+		private void SpinDivider()
+		{					
+			var dividerLocalScale = divider.localScale;
+			dividerLocalScale.x *= -1;
+			divider.localScale = dividerLocalScale;
+			_spinningLeft = !_spinningLeft;
+		}
 		private void UpdateAnimator(Vector3 direction, int dangerLevel)
 		{
 			_animator.SetInteger(AnimatorDangerLevel, _gotEye ? 0 : dangerLevel);
