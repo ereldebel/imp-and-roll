@@ -6,7 +6,7 @@ namespace Ball
 	{
 		bool IsUncatchableWithRoll();
 		void OnCharge(Ball ball);
-		void OnThrow();
+		void OnThrow(Vector3 velocity);
 		void OnLateUpdate();
 		void OnHit(Collision collision);
 	}
