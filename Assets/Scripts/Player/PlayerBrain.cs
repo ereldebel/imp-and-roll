@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Collectibles.PowerUp;
 using Collectibles.PowerUp.BallPowerUps;
-using Collectibles.PowerUp.PlayerPowerUps;
 using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -84,7 +83,6 @@ namespace Player
 
 		//PowerUps:
 		private IBallPowerUp _ballPowerUp;
-		private IPlayerPowerUp _playerPowerUp;
 		private Rumble _rumble;
 
 		//Movement
@@ -212,7 +210,6 @@ namespace Player
 
 		private void Update()
 		{
-			_playerPowerUp?.OnUpdate();
 			var playerLayerMask = 1 << gameObject.layer;
 			var aimDir = new Vector3(_aimDirection.x, 0, _aimDirection.y);
 			if (_chargeStartTime < 0 ||
@@ -277,23 +274,10 @@ namespace Player
 		public void SetPowerUp(PowerUp powerUp)
 		{
 			_ballPowerUp?.OnRemove();
-			_playerPowerUp?.OnRemove();
-			switch (powerUp)
-			{
-				case IPlayerPowerUp playerPowerUp:
-					_ballPowerUp = null;
-					_playerPowerUp = playerPowerUp;
-					break;
-				case IBallPowerUp ballPowerUp:
-					_playerPowerUp = null;
-					_ballPowerUp = ballPowerUp;
-					break;
-				default:
-					_ballPowerUp = null;
-					_playerPowerUp = null;
-					break;
-			}
-
+			if (powerUp is IBallPowerUp ballPowerUp)
+				_ballPowerUp = ballPowerUp;
+			else
+				_ballPowerUp = null;
 			if (_chargeStartTime < 0) return;
 			_chargeStartTime = -1;
 			ChargeThrow();

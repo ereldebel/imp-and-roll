@@ -1,6 +1,5 @@
 ﻿using System;
 using Collectibles.PowerUp.BallPowerUps;
-using Collectibles.PowerUp.PlayerPowerUps;
 using UnityEngine;
 
 namespace Collectibles
@@ -9,13 +8,6 @@ namespace Collectibles
 	[CreateAssetMenu(fileName = "CollectibleFactory", menuName = "Create Collectible Factory")]
 	public class CollectibleFactory : ScriptableObject
 	{
-		[Header("Collectible Magnet")] [SerializeField]
-		private float baseAttractionSpeed = 0.1f;
-
-		[SerializeField] private float attractionRadius = 10;
-		[SerializeField] private Sprite collectibleMagnetSprite;
-		[SerializeField] private Sprite collectibleMagnetIcon;
-
 		[Header("Homing Ball Collectibles")] [SerializeField]
 		private float homingRate = 1;
 
@@ -57,8 +49,6 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.CollectibleMagnet => new CollectibleMagnet(baseAttractionSpeed,
-					attractionRadius),
 				CollectibleType.HomingBall => new HomingBall(homingRate, homingBallMesh,
 					homingBallMaterial),
 				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterial),
@@ -75,7 +65,6 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.CollectibleMagnet => collectibleMagnetSprite,
 				CollectibleType.HomingBall => homingBallSprite,
 				CollectibleType.SuperThrow => superThrowSprite,
 				CollectibleType.ExplodingBall => explodingBallSprite,
@@ -88,7 +77,6 @@ namespace Collectibles
 		{
 			return collectibleType switch
 			{
-				CollectibleType.CollectibleMagnet => collectibleMagnetIcon,
 				CollectibleType.HomingBall => homingBallIcon,
 				CollectibleType.SuperThrow => superThrowIcon,
 				CollectibleType.ExplodingBall => explodingBallIcon,
