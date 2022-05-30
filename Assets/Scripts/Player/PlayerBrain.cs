@@ -12,7 +12,6 @@ namespace Player
 	[RequireComponent(typeof(CharacterController))]
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
-		
 		#region Serialized Fields
 
 		[Header("Player Movement Settings")] [SerializeField]
@@ -85,8 +84,11 @@ namespace Player
 		private IBallPowerUp _ballPowerUp;
 		private Rumble _rumble;
 
-		//Movement
+		//Movement:
 		private Vector3 _velocity = Vector3.zero;
+
+		//Animations:
+		private int _tauntIndex;
 
 		#endregion
 
@@ -102,9 +104,10 @@ namespace Player
 		private static readonly int AnimatorWon = Animator.StringToHash("Won");
 		private static readonly int AnimatorHasBall = Animator.StringToHash("Has Ball");
 		private static readonly int AnimatorTaunt = Animator.StringToHash("Taunt");
+		private static readonly int AnimatorTauntIndex = Animator.StringToHash("Taunt Index");
 
 		#endregion
-		
+
 		#region Public Properties
 
 		public Vector2 MovementStick
@@ -285,16 +288,21 @@ namespace Player
 
 		public void Taunt()
 		{
+			_tauntIndex = (_tauntIndex + 1) % 3;
+			_animator.SetFloat(AnimatorTauntIndex, _tauntIndex);
 			_animator.SetTrigger(AnimatorTaunt);
 		}
 
 		public void GameOver(bool won)
 		{
-			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
 			_chargeStartTime = -1;
 			_ball = null;
 			SetPowerUp(null);
 			GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Start Menu");
+			transform.rotation = _left ? _faceLeft : _faceRight;
+			_animator.SetFloat(AnimatorX, 1);
+			_animator.SetFloat(AnimatorZ, -1);
+			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
 		}
 
 		public bool ChargeThrow()
