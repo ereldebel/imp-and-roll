@@ -281,9 +281,6 @@ namespace Player
 				_ballPowerUp = ballPowerUp;
 			else
 				_ballPowerUp = null;
-			if (_chargeStartTime < 0) return;
-			_chargeStartTime = -1;
-			ChargeThrow();
 		}
 
 		public void Taunt()

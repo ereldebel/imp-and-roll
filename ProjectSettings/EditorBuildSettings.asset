@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Opening Screen.unity
     guid: 4f5fbd6d880554949b283abcd93115cc
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Scenes/Original Arena.unity
     guid: f46bf04d09ab5b947959870c8f5516b1
   - enabled: 1
     path: Assets/Scenes/P1 won.unity
