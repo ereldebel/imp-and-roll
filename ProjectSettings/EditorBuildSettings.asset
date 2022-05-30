@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/P2 won.unity
     guid: 634ba2f83367f0c4e8135f229666d12b
+  - enabled: 1
+    path: Assets/Scenes/Game Ice.unity
+    guid: 79e050ea587acd54389702a6f55206ba
   m_configObjects: {}

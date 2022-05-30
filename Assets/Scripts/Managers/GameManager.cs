@@ -19,7 +19,13 @@ namespace Managers
 		[SerializeField] private GameObject AIPlayerPrefab;
 		[SerializeField] private GameObject pressStartCanvas;
 		[SerializeField] private GameObject pauseCanvas;
-
+		[SerializeField] private TargetScene chooseTargetScene;
+		private List<string> _sceneNames = new List<string>() {"Game","Game Ice"};
+		private enum TargetScene
+		{
+			Game = 0,
+			GameIce = 1
+		}
 		#endregion
 
 		#region Private Fields
@@ -189,7 +195,7 @@ namespace Managers
 
 		private void StartGameMultiplePlayers()
 		{
-			SceneManager.LoadScene("Game");
+			SceneManager.LoadScene(_sceneNames[(int)chooseTargetScene]);
 			for (var i = 0; i < _players.Count; i++)
 				SetUpPlayerForGameScene(_players[i], i);
 		}
