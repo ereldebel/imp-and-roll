@@ -17,7 +17,8 @@ namespace Managers
 		[SerializeField] private AnimatorOverrideController redController;
 		[SerializeField] private float waitTime = 2;
 		[SerializeField] private GameObject AIPlayerPrefab;
-		public GameObject pressStartCanvas;
+		[SerializeField] private GameObject pressStartCanvas;
+		[SerializeField] private GameObject pauseCanvas;
 
 		#endregion
 
@@ -30,6 +31,11 @@ namespace Managers
 		private bool _AIPlaying;
 		private static readonly int PlayerAnimatorX = Animator.StringToHash("X Direction");
 		private Dictionary<int, Action> _scenesEvents = new Dictionary<int, Action>();
+
+		private float _prevTimeScale;
+		private bool _paused;
+		private PlayerInput _pausedBy;
+		private readonly Dictionary<PlayerInput, string> _playerInputs = new Dictionary<PlayerInput, string>();
 
 		#endregion
 
@@ -44,6 +50,12 @@ namespace Managers
 
 		private void Awake()
 		{
+			if (Shared)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
 			_numPlayers = 0;
 			Shared = this;
 			DontDestroyOnLoad(Shared);
@@ -64,6 +76,7 @@ namespace Managers
 			_playerReadyStatus.Add(player, false);
 			SetUpPlayerForStartScene(player, _numPlayers);
 			_numPlayers++;
+			_playerInputs.Add(input, "");
 		}
 
 		public void PlayerWon(bool rightLost)
@@ -97,6 +110,40 @@ namespace Managers
 		public GameObject GetOpposingPlayer(GameObject callingPlayer)
 		{
 			return _players.Find(player => player != callingPlayer);
+		}
+
+		public void Pause(PlayerInput playerInput)
+		{
+			if (_paused) return;
+			_prevTimeScale = Time.timeScale;
+			Time.timeScale = 0;
+			_paused = true;
+			_pausedBy = playerInput;
+			pauseCanvas.SetActive(true);
+			foreach (var player in _playerInputs.Keys.Where(player => player).ToList())
+			{
+				_playerInputs[player] = playerInput.currentActionMap.name;
+				player.SwitchCurrentActionMap("Game Paused");
+			}
+		}
+
+		public void Resume(PlayerInput playerInput)
+		{
+			if (!_paused || _pausedBy != playerInput) return;
+			Time.timeScale = _prevTimeScale;
+			_paused = false;
+			_pausedBy = null;
+			pauseCanvas.SetActive(false);
+			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
+				playerAndActionMap.Key.SwitchCurrentActionMap(playerAndActionMap.Value);
+		}
+
+		public void Quit(PlayerInput playerInput)
+		{
+			pauseCanvas.SetActive(false);
+			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
+				playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
+			SceneManager.LoadScene("Opening Screen");
 		}
 
 		#endregion

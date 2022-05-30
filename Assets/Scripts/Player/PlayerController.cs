@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -67,6 +68,28 @@ namespace Player
 				_myBrain.Taunt();
 		}
 
+		public void OnDisconnect()
+		{
+			GameManager.Shared.Pause(_playerInput);
+		}
+
+		public void OnPause(InputAction.CallbackContext context)
+		{
+			if (context.started)
+				GameManager.Shared.Pause(_playerInput);
+		}
+
+		public void OnResume(InputAction.CallbackContext context)
+		{
+			if (context.started)
+				GameManager.Shared.Resume(_playerInput);
+		}
+
+		public void OnQuit(InputAction.CallbackContext context)
+		{
+			if (context.started)
+				GameManager.Shared.Quit(_playerInput);
+		}
 
 		private Vector2 ScreenToWorld2D(Vector2 screenPos)
 		{

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 646895662889384994}
   - component: {fileID: 1189386908854717527}
   - component: {fileID: 5085160740069576546}
+  - component: {fileID: 4320430827449331697}
   - component: {fileID: 3525636514363418516}
   - component: {fileID: 917019455109400325}
-  - component: {fileID: 4320430827449331697}
   - component: {fileID: 932001333787194856}
   - component: {fileID: 8896554067578677268}
   - component: {fileID: 5905099638005712058}
@@ -141,7 +141,19 @@ MonoBehaviour:
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4320430827449331697}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnDisconnect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -325,11 +337,71 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: eb244a0d-f41f-417c-8007-36da653c8fb5
     m_ActionName: Player/Taunt[/Keyboard/e,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4320430827449331697}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b793664c-d9a0-40d5-9ab7-78aa44beafdf
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4320430827449331697}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnResume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a59d16cb-0c7e-46d7-a8e2-082173284417
+    m_ActionName: Game Paused/Resume[/DualShock4GamepadHID/start,/DualShock4GamepadHID/buttonEast,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4320430827449331697}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnQuit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 23ca144e-07da-4cce-a008-213ae98c71a3
+    m_ActionName: Game Paused/Quit[/DualShock4GamepadHID/buttonSouth,/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4320430827449331697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437818291732569122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c582f92cd41ff48b6d2679c192485a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3525636514363418516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,18 +470,6 @@ MonoBehaviour:
     lowFreq: 0
     highFreq: 0.01
     duration: 0.05
---- !u!114 &4320430827449331697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4437818291732569122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c582f92cd41ff48b6d2679c192485a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &932001333787194856
 Animator:
   serializedVersion: 3
@@ -595,7 +655,7 @@ Transform:
   m_GameObject: {fileID: 8074561507289323786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.85, y: 1.25, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 4437818291732569120}
   m_RootOrder: 0
