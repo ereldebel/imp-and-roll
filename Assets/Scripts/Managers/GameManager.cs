@@ -20,12 +20,6 @@ namespace Managers
 		[SerializeField] private GameObject pressStartCanvas;
 		[SerializeField] private GameObject pauseCanvas;
 		[SerializeField] private TargetScene chooseTargetScene;
-		private List<string> _sceneNames = new List<string>() {"Game","Game Ice"};
-		private enum TargetScene
-		{
-			Game = 0,
-			GameIce = 1
-		}
 		#endregion
 
 		#region Private Fields
@@ -42,6 +36,14 @@ namespace Managers
 		private bool _paused;
 		private PlayerInput _pausedBy;
 		private readonly Dictionary<PlayerInput, string> _playerInputs = new Dictionary<PlayerInput, string>();
+		
+		private List<string> _sceneNames = new List<string>() {"Original Arena","Icy Arena", "Volcanic Arena"};
+		private enum TargetScene
+		{
+			OriginalArena = 0,
+			IcyArena = 1,
+			VolcanicArena = 2
+		}
 
 		#endregion
 

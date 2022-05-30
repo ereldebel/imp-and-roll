@@ -59,7 +59,6 @@ namespace Player
 		private Animator _animator;
 
 		//Input:
-		private Vector2 _movementDirection;
 		private Vector2 _aimDirection;
 
 		//Rotation:
@@ -110,11 +109,7 @@ namespace Player
 
 		#region Public Properties
 
-		public Vector2 MovementStick
-		{
-			get => _movementDirection;
-			set => _movementDirection = value;
-		}
+		public Vector2 MovementStick { get; set; }
 
 		public Vector2 AimingStick
 		{

@@ -6,6 +6,7 @@ namespace Editor
 {
 	public class SceneShortcuts : MonoBehaviour
 	{
+		private static int _scene;
 		[MenuItem("Scenes/Play-Stop, From Opening Screen &#p")]
 		public static void PlayFromOpening()
 		{
@@ -27,9 +28,25 @@ namespace Editor
 			{
 				EditorApplication.isPlaying = false;
 			}
-
+			
 			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-			EditorSceneManager.OpenScene("Assets/Scenes/Game.unity");
+			switch (_scene)
+			{
+				case 0:
+					EditorSceneManager.OpenScene("Assets/Scenes/Original Arena.unity");
+					break;
+				case 1:
+					EditorSceneManager.OpenScene("Assets/Scenes/Icy Arena.unity");
+					break;
+				case 2:
+					EditorSceneManager.OpenScene("Assets/Scenes/Volcanic Arena.unity");
+					break;
+				case 3:
+					EditorSceneManager.OpenScene("Assets/Scenes/Opening Screen.unity");
+					break;
+			}
+
+			_scene = (_scene + 1) % 4;
 		}
 	}
 }

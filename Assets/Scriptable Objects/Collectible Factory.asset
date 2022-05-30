@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa04fed8f844774b640dd651065507a, type: 3}
   m_Name: Collectible Factory
   m_EditorClassIdentifier: 
-  baseAttractionSpeed: 0.1
-  attractionRadius: 10
-  collectibleMagnetSprite: {fileID: 21300000, guid: 4f1b72f03f03c634dbfae01c304a3764, type: 3}
-  collectibleMagnetIcon: {fileID: 21300000, guid: e8b78a7990d386845a04fd85b1ab34cb, type: 3}
   homingRate: 1
   homingBallMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   homingBallMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
@@ -37,7 +33,7 @@ MonoBehaviour:
   explodingBallMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
   explodingBallSprite: {fileID: 21300000, guid: f04f3a07277f45349acefbf07fa8aa0b, type: 3}
   explodingBallIcon: {fileID: 21300000, guid: 32d8d46b456b04242bef7e227965d747, type: 3}
-  fireTrailParticleLifeSpan: 10
+  fireTrailParticleLifeSpan: 4
   fireDropperPrefab: {fileID: 285930222026714181, guid: 01da4b1f9b909f74eb20a6c139b648c1, type: 3}
   fireTrailMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   fireTrailMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
