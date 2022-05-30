@@ -49,4 +49,4 @@ MonoBehaviour:
   powerUpPrefab: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
   timeBetweenPowerUpSpawns: 7
   minPowerUpDistFromPlayers: 4
-  powerUpsInMatch: 01000000020000000300000004000000
+  powerUpsInMatch: 01000000020000000300000000000000

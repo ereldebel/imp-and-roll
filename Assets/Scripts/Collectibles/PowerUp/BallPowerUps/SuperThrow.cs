@@ -34,7 +34,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			_ball = ball;
 		}
 
-		public void OnThrow()
+		public void OnThrow(Vector3 velocity)
 		{
 			_ballRigidBody.velocity *= _speedBoostFactor;
 		}

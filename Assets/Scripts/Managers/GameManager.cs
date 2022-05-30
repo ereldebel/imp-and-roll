@@ -107,9 +107,9 @@ namespace Managers
 				_players[1].GetComponent<AIController>().enabled = true;
 		}
 
-		public GameObject GetOpposingPlayer(GameObject callingPlayer)
+		public IEnumerable<GameObject> GetOpposingPlayer(GameObject callingPlayer)
 		{
-			return _players.Find(player => player != callingPlayer);
+			return _players.Where(player => player != callingPlayer);
 		}
 
 		public void Pause(PlayerInput playerInput)

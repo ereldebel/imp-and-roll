@@ -40,7 +40,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			_ball = ball;
 		}
 
-		public void OnThrow()
+		public void OnThrow(Vector3 velocity)
 		{
 			_fireDropper.transform.parent = _ball.transform;
 			_fireDropper.transform.position = _ball.transform.position;

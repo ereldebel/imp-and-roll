@@ -37,7 +37,6 @@ namespace UI
 		{
 			if (player != transform.parent.gameObject) return;
 			_activatedPowerUps.Remove(type);
-			print($"removed {type}. {_activatedPowerUps.Count == 0}");
 			if (_activatedPowerUps.Count == 0)
 				_spriteRenderer.sprite = _defaultSprite;
 		}

@@ -37,6 +37,7 @@ namespace ArenaDivision
 		private bool _gotEye = false;
 		private Vector3 _originalPosition;
 		private bool _spinningLeft = true;
+		private Transform _dividerChild;
 
 		private static readonly int AnimatorZ = Animator.StringToHash("Z");
 		private static readonly int AnimatorX = Animator.StringToHash("X");
@@ -57,6 +58,7 @@ namespace ArenaDivision
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
 			_originalPosition = transform.position;
+			_dividerChild = divider.GetChild(0);
 			OnValidate();
 			enabled = false;
 		}
@@ -136,10 +138,11 @@ namespace ArenaDivision
 		}
 
 		private void SpinDivider()
-		{					
-			var dividerLocalScale = divider.localScale;
-			dividerLocalScale.x *= -1;
-			divider.localScale = dividerLocalScale;
+		{
+			
+			var dividerChildLocalScale = _dividerChild.localScale;
+			dividerChildLocalScale.x = -dividerChildLocalScale.x;
+			_dividerChild.localScale = dividerChildLocalScale;
 			_spinningLeft = !_spinningLeft;
 		}
 		private void UpdateAnimator(Vector3 direction, int dangerLevel)

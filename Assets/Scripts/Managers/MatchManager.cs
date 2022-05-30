@@ -161,7 +161,6 @@ namespace Managers
 				var newPowerUp = Instantiate(powerUpPrefab, spawnPoint, powerUpPrefab.transform.rotation);
 				var next = powerUpsInMatch[random.Next(powerUpsInMatch.Count)];
 				newPowerUp.GetComponent<Collectible>().CollectibleType = next;
-				print(next);
 				spawnOnRight = random.Next(numOfSpawns) < numOfLeftSpawns;
 			}
 		}

@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps
@@ -12,6 +13,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		private Transform _target;
 		private Rigidbody _ballRigidbody;
+		private IEnumerable<GameObject> _otherPlayers;
 		private const CollectibleType PowerUpType = CollectibleType.HomingBall;
 
 		public HomingBall(float attractionRate, Mesh mesh, Material material) : base(PowerUpType)
@@ -24,8 +26,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public override void Collect(GameObject collector)
 		{
 			base.Collect(collector);
-			var targetObject = GameManager.Shared.GetOpposingPlayer(collector);
-			_target = targetObject.GetComponent<Transform>();
+			_otherPlayers = GameManager.Shared.GetOpposingPlayer(collector);
 		}
 
 		public bool IsUncatchableWithRoll()
@@ -42,8 +43,19 @@ namespace Collectibles.PowerUp.BallPowerUps
 			_ball = ball;
 		}
 
-		public void OnThrow()
+		public void OnThrow(Vector3 velocity)
 		{
+			_target = null;
+			float bestAngle = 180;
+			foreach (var player in _otherPlayers)
+			{
+				var playerTransform = player.transform;
+				var dirToPlayer = playerTransform.position - _ball.transform.position;
+				var angle = Vector3.Angle(velocity, dirToPlayer);
+				if (angle >= bestAngle && _target) continue;
+				bestAngle = angle;
+				_target = playerTransform;
+			}
 			_ball.Shrink();
 		}
 

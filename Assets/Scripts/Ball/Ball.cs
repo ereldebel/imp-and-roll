@@ -101,7 +101,8 @@ namespace Ball
 
 		private void LateUpdate()
 		{
-			_ballStrategy.OnLateUpdate();
+			if (Thrown)
+				_ballStrategy.OnLateUpdate();
 		}
 
 		#endregion
@@ -148,7 +149,7 @@ namespace Ball
 
 		public void Throw(Vector3 velocity, Vector3 posChange, GameObject thrower)
 		{
-			_ballStrategy.OnThrow();
+			_ballStrategy.OnThrow(velocity);
 			Release(posChange);
 			_rigidbody.velocity = velocity;
 			_rigidbody.AddTorque(velocity);
