@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &140827466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ac69cd184ec6bdc4c8f54975f5950f2c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63196276f925c9746b2a96259f2bc967, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e38ea45bf9a2e5241bb1f09e64d91f7a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e1fd3dec6f565e4699f69f64ad13862, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1334,7 +1334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5851243974550147854, guid: 5182d529ca1388347913065381b912e7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5851243974550147855, guid: 5182d529ca1388347913065381b912e7, type: 3}
       propertyPath: m_RootOrder

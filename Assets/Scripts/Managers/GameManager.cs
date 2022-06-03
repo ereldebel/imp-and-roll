@@ -19,7 +19,6 @@ namespace Managers
 		[SerializeField] private GameObject AIPlayerPrefab;
 		[SerializeField] private GameObject pressStartCanvas;
 		[SerializeField] private GameObject pauseCanvas;
-		[SerializeField] private TargetScene chooseTargetScene;
 		#endregion
 
 		#region Private Fields
@@ -30,19 +29,22 @@ namespace Managers
 		private bool _gameStarted = false;
 		private bool _AIPlaying;
 		private static readonly int PlayerAnimatorX = Animator.StringToHash("X Direction");
-		private Dictionary<int, Action> _scenesEvents = new Dictionary<int, Action>();
 
 		private float _prevTimeScale;
 		private bool _paused;
 		private PlayerInput _pausedBy;
 		private readonly Dictionary<PlayerInput, string> _playerInputs = new Dictionary<PlayerInput, string>();
 		
-		private List<string> _sceneNames = new List<string>() {"Original Arena","Icy Arena", "Volcanic Arena"};
+		private List<string> _sceneNames = new List<string>() {"Opening Scene","Original Arena","Icy Arena", "Volcanic Arena"};
+		private int _curScene = 0;
+
+		private int _blueScore, _redScore;
 		private enum TargetScene
 		{
-			OriginalArena = 0,
-			IcyArena = 1,
-			VolcanicArena = 2
+			OpeningArena = 0,
+			OriginalArena = 1,
+			IcyArena = 2,
+			VolcanicArena = 3
 		}
 
 		#endregion
@@ -92,8 +94,22 @@ namespace Managers
 			if (!_gameStarted) return;
 			HaltAI();
 			_gameStarted = false;
-			SceneManager.LoadSceneAsync(rightLost ? "P2 won" : "P1 won");
-			StartCoroutine(ResetTimer(3.5f));
+			if (rightLost){
+				_redScore++;
+				print("Red Won");
+			}
+			else
+			{
+				_blueScore++;
+				print("Blue Won");
+			}
+
+			if (Mathf.Abs(_redScore-_blueScore)>1 || _curScene==3){
+				SceneManager.LoadSceneAsync(_redScore>_blueScore ? "P2 won" : "P1 won");
+				Invoke(nameof(ResetGameKeepPlayers),2);
+			}
+			else
+				StartCoroutine(ResetTimer(2f));
 		}
 
 		public void PlayerReady(GameObject player)
@@ -103,7 +119,7 @@ namespace Managers
 			if (_playerReadyStatus.Any(status => !status.Value)) return;
 			if (_gameStarted || _numPlayers == 3) return;
 			if (_numPlayers > 1)
-				StartGameMultiplePlayers();
+				StartGameMultiplePlayers(++_curScene);
 			else
 				StartCoroutine(OnePlayerReady());
 			_gameStarted = true;
@@ -151,7 +167,7 @@ namespace Managers
 			pauseCanvas.SetActive(false);
 			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 				playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
-			SceneManager.LoadScene("Opening Screen");
+			SceneManager.LoadScene("Opening Screen");//TODO add a score reset
 		}
 
 		#endregion
@@ -161,7 +177,7 @@ namespace Managers
 		private IEnumerator ResetTimer(float time)
 		{
 			yield return new WaitForSeconds(time);
-			StartGameMultiplePlayers();
+			StartGameMultiplePlayers(++_curScene);
 			_gameStarted = true;
 		}
 
@@ -195,9 +211,9 @@ namespace Managers
 			player.GetComponent<PlayerController>()?.OnMatchStart();
 		}
 
-		private void StartGameMultiplePlayers()
+		private void StartGameMultiplePlayers(int sceneToStart)
 		{
-			SceneManager.LoadScene(_sceneNames[(int)chooseTargetScene]);
+			SceneManager.LoadScene(_sceneNames[sceneToStart]);
 			for (var i = 0; i < _players.Count; i++)
 				SetUpPlayerForGameScene(_players[i], i);
 		}
@@ -205,7 +221,7 @@ namespace Managers
 		private void StartGameOnePlayer()
 		{
 			CreateAI();
-			StartGameMultiplePlayers();
+			StartGameMultiplePlayers(++_curScene);
 		}
 
 		private void CreateAI()
@@ -218,6 +234,16 @@ namespace Managers
 			MakePlayerRed(player);
 		}
 
+		private void ResetGameKeepPlayers()
+		{
+			_redScore = 0;
+			_blueScore = 0;
+			for (int i = 0; i < _players.Count; i++)
+			{
+				SetUpPlayerForGameScene(_players[i],i);
+			}
+			SceneManager.LoadScene(_sceneNames[_curScene = 1]);
+		}
 		#endregion
 
 		#region Private Coroutines
