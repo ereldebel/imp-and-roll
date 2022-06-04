@@ -28,7 +28,6 @@ namespace Managers
 		private int _numPlayers;
 		private bool _gameStarted;
 		private bool _AIPlaying;
-		private static readonly int PlayerAnimatorX = Animator.StringToHash("X Direction");
 
 		private float _prevTimeScale;
 		private bool _paused;
@@ -130,7 +129,6 @@ namespace Managers
 		public void PlayerReady(GameObject player)
 		{
 			_playerReadyStatus[player] = !_playerReadyStatus[player];
-			player.GetComponent<Animator>().SetFloat(PlayerAnimatorX, _playerReadyStatus[player] ? 1 : 0);
 			if (_playerReadyStatus.Any(status => !status.Value)) return;
 			if (_gameStarted || _numPlayers == 3) return;
 			if (_numPlayers > 1)
