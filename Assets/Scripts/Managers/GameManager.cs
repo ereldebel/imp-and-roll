@@ -107,16 +107,9 @@ namespace Managers
 			HaltAI();
 			_gameStarted = false;
 			if (blueLost)
-			{
 				++_redScore;
-				print("Red Won");
-			}
 			else
-			{
 				++_blueScore;
-				print("Blue Won");
-			}
-
 			if (Mathf.Abs(_redScore - _blueScore) > 1 || _curScene == 3)
 			{
 				SceneManager.LoadSceneAsync(_redScore > _blueScore ? "P2 won" : "P1 won");

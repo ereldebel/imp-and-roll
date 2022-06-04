@@ -15,7 +15,6 @@ namespace Collectibles
 		{
 			set
 			{
-				print(value);
 				collectibleType = value;
 				_collectible = collectibleFactory.Create(value);
 				GetComponent<SpriteRenderer>().sprite = collectibleFactory.Sprite(value);

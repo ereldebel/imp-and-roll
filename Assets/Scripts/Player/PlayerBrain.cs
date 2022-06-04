@@ -317,6 +317,7 @@ namespace Player
 			if (_stunned || _rolling || _chargeStartTime < 0 || _calledThrow || !_ball) return;
 			_animator.SetBool(AnimatorThrowing, false);
 			_calledThrow = true;
+			StartCoroutine(ThrowWithDelay(1 / 6f));
 		}
 
 		public bool TakeHit(Vector3 velocity, bool uncatchableWithRoll)
@@ -411,22 +412,6 @@ namespace Player
 			// _particleSystem.Emit(1);
 		}
 
-		private void AnimatorEndStun() => _stunned = false;
-
-		private void AnimatorThrowBall()
-		{
-			if (!_ball) return;
-			_ballThrowPositionIndex = 0;
-			_chargeStartTime = -1;
-			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
-			if (_ballPowerUp != null)
-				SetPowerUp(null);
-			_ball = null;
-			_animator.SetBool(AnimatorHasBall, false);
-			_calledThrow = false;
-			BallThrown?.Invoke();
-		}
-
 		private void AnimatorChangeBallPosition() => ChangeBallPosition(_ballThrowPositionIndex++);
 		private void AnimatorThrowChargeBallPosition() => ChangeBallPosition(2);
 
@@ -442,6 +427,20 @@ namespace Player
 		#endregion
 
 		#region Private Coroutines
+
+		private IEnumerator ThrowWithDelay(float delay)
+		{
+			yield return new WaitForSeconds(delay);
+			_ballThrowPositionIndex = 0;
+			_chargeStartTime = -1;
+			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
+			if (_ballPowerUp != null)
+				SetPowerUp(null);
+			_ball = null;
+			_animator.SetBool(AnimatorHasBall, false);
+			_calledThrow = false;
+			BallThrown?.Invoke();
+		}
 
 		private IEnumerator DodgeRoll(Vector3 rollDir)
 		{
@@ -473,6 +472,8 @@ namespace Player
 			yield return KnockBack(knockBackDir);
 			yield return new WaitForSeconds(currStunDuration - knockBackDuration);
 			_animator.SetBool(AnimatorStunned, false);
+			yield return new WaitForSeconds(5 / 12f);
+			_stunned = false;
 			StunEnded?.Invoke();
 		}
 

@@ -48,5 +48,5 @@ MonoBehaviour:
   divisionBorder: {fileID: 0}
   powerUpPrefab: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
   timeBetweenPowerUpSpawns: 7
-  minPowerUpDistFromPlayers: 4
+  minPowerUpDistFromPlayers: 7
   powerUpsInMatch: 01000000020000000300000000000000

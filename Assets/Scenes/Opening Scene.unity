@@ -376,11 +376,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2703034346827843312, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
       propertyPath: maxSparkRate
-      value: 25
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2703034346827843312, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
       propertyPath: minSparkRate
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2703034346827843312, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
       propertyPath: maxRelativeSpeed
@@ -511,6 +511,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8988732728913236202, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 679786984}
     - target: {fileID: 8988732728913236205, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
       propertyPath: m_Name
       value: Press Start Canvas
@@ -773,6 +777,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2404601893553992206, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
+      propertyPath: m_Name
+      value: Arena Floor
+      objectReference: {fileID: 0}
     - target: {fileID: 2404601894398821233, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
       propertyPath: m_Name
       value: Arena

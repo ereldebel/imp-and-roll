@@ -43,7 +43,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			ball.SetMesh(_mesh);
 			ball.SetMaterials(_materials);
 			_ballTransform.LookAt(_target);
-			_ballTransform.rotation = RotationOffset * _ballTransform.rotation;
+			_ballTransform.rotation = ball.transform.parent.rotation * RotationOffset * _ballTransform.rotation;
 			_ballRigidbody = ball.GetComponent<Rigidbody>();
 			ball.Grow();
 			_ball = ball;

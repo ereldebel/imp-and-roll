@@ -86,8 +86,6 @@ namespace Managers
 			GameManager.Players[winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(true);
 			GameManager.Players[1 - winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(false);
 			MatchEnded?.Invoke();
-			var player = leftWon ? "left player" : "right player";
-			print($"{player} won!");
 			_shared.StartCoroutine(EndMatchWithDelay(leftWon, 3));
 		}
 
