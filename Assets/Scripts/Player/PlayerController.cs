@@ -88,7 +88,7 @@ namespace Player
 		public void OnQuit(InputAction.CallbackContext context)
 		{
 			if (context.started)
-				GameManager.Shared.Quit(_playerInput);
+				GameManager.Shared.Quit();
 		}
 
 		private Vector2 ScreenToWorld2D(Vector2 screenPos)

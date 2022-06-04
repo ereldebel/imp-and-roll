@@ -577,6 +577,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b0a01104-f7a1-4315-9d56-2f1f7b884636",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e62eb7ff-c22c-4a47-a952-a2b0e127f507",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -588,22 +599,22 @@
                 },
                 {
                     "name": "",
-                    "id": "b0a01104-f7a1-4315-9d56-2f1f7b884636",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "f5c179f9-4c3d-4e52-8981-1389ccc30457",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "",
                     "action": "Quit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f5c179f9-4c3d-4e52-8981-1389ccc30457",
-                    "path": "<Keyboard>/enter",
+                    "id": "9ec9b8c6-df73-4ca8-b348-75873f389e40",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Quit",
                     "isComposite": false,
                     "isPartOfComposite": false
