@@ -19,6 +19,7 @@ namespace ArenaDivision
 		[SerializeField] private float timeToSpeedUp = 60;
 		[SerializeField] private float speedUpMultiplier = 3;
 		[SerializeField] private float colliderEnableDistance = 1;
+		[SerializeField] private float turnAroundSpeed = 0.5f;
 
 		#endregion;
 
@@ -126,12 +127,13 @@ namespace ArenaDivision
 			var zMovement = targetDir.z * _speed;
 			var movingTowardsDivider = xMovement * (dividerPos.x - pos.x) > 0;
 			if (movingTowardsDivider)
-				xMovement *= 2;
+				xMovement *= turnAroundSpeed;
 			var movement = new Vector3(xMovement, yMovement, zMovement);
 			pos += movement;
 			transform.position = pos;
 			if (Mathf.Abs(pos.x - dividerPos.x) < maxXDistFromMonster || movingTowardsDivider) return;
-			if ((_spinningLeft && pos.x > dividerPos.x) || (!_spinningLeft && pos.x < dividerPos.x))// If the barrier is now pulled to the other direction
+			if ((_spinningLeft && pos.x > dividerPos.x) ||
+			    (!_spinningLeft && pos.x < dividerPos.x)) // If the barrier is now pulled to the other direction
 				SpinDivider();
 			dividerPos.x += xMovement;
 			divider.position = dividerPos;
@@ -139,12 +141,12 @@ namespace ArenaDivision
 
 		private void SpinDivider()
 		{
-			
 			var dividerChildLocalScale = _dividerChild.localScale;
 			dividerChildLocalScale.x = -dividerChildLocalScale.x;
 			_dividerChild.localScale = dividerChildLocalScale;
 			_spinningLeft = !_spinningLeft;
 		}
+
 		private void UpdateAnimator(Vector3 direction, int dangerLevel)
 		{
 			_animator.SetInteger(AnimatorDangerLevel, _gotEye ? 0 : dangerLevel);

@@ -257,22 +257,18 @@ namespace Managers
 		{
 			_redScore = 0;
 			_blueScore = 0;
-			for (int i = 0; i < _players.Count; i++)
-			{
+			for (var i = 0; i < _players.Count; i++)
 				SetUpPlayerForGameScene(_players[i], i);
-			}
-
 			SceneManager.LoadScene(_sceneNames[_curScene = 1]);
 			_gameStarted = true;
 		}
 
 		private void SetUpPlayersForWinningScene()
 		{
-			for (int i = 0; i < _players.Count; i++)
-			{
+			for (var i = 0; i < _players.Count; i++)
 				SetUpPlayerForWinningScene(_players[i], i);
-			}
 		}
+
 		private void SetUpPlayerForWinningScene(GameObject player, int playerID)
 		{
 			player.transform.position = playerInfos[playerID].locationGameScene;

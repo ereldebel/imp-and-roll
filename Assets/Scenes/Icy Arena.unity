@@ -951,7 +951,7 @@ PrefabInstance:
       objectReference: {fileID: 442050005}
     - target: {fileID: 6793810490810583997, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: m_Name
-      value: Arena Manager
+      value: Match Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}

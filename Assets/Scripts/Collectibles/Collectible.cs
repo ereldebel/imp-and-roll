@@ -15,6 +15,8 @@ namespace Collectibles
 		{
 			set
 			{
+				print(value);
+				collectibleType = value;
 				_collectible = collectibleFactory.Create(value);
 				GetComponent<SpriteRenderer>().sprite = collectibleFactory.Sprite(value);
 			}
@@ -30,18 +32,13 @@ namespace Collectibles
 		{
 			OnValidate();
 			if (GameManager.CurScene != 0)
-			{
 				MatchManager.AddToCollectibleCollection(transform);				
-			}
 		}
 
 		private void OnDisable()
 		{
 			if (GameManager.CurScene!= 0)
-			{
 				MatchManager.RemoveFromCollectibleCollection(transform);
-			}
-			
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -51,6 +48,8 @@ namespace Collectibles
 				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
 			if(GameManager.CurScene != 0)
 				Destroy(gameObject);
+			else
+				OnValidate();
 		}
 	}
 }
