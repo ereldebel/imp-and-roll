@@ -57,6 +57,7 @@ namespace Managers
 		public static GameObject RedPLayer => Shared._players[1];
 		public static int BlueScore => Shared._blueScore;
 		public static int RedScore => Shared._redScore;
+		public static int CurScene => Shared._curScene;
 
 		#endregion
 

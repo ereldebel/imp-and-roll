@@ -214,9 +214,10 @@ namespace Player
 		{
 			var playerLayerMask = 1 << gameObject.layer;
 			var aimDir = new Vector3(_aimDirection.x, 0, _aimDirection.y);
+			var maxDistance = GameManager.CurScene == 0 ? 50 : MatchManager.MaxDistance;
 			if (_chargeStartTime < 0 ||
 			    !Physics.Raycast(transform.position + aimDir * (_colliderRadius + _ball.Radius), aimDir,
-				    MatchManager.MaxDistance, playerLayerMask)) return;
+				    maxDistance, playerLayerMask)) return;
 
 			if (_rumble)
 				_rumble.AimRumblePulse();

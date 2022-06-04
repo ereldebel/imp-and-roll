@@ -457,17 +457,6 @@
                 },
                 {
                     "name": "",
-                    "id": "73aa4263-3278-4387-b88e-2f52a9c71ad8",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Start",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "75b3a6b3-d179-4e7e-abca-9ee8a7127a78",
                     "path": "<Gamepad>/start",
                     "interactions": "",
