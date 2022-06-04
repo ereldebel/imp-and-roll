@@ -38,6 +38,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		{
 			ball.SetMesh(_mesh);
 			ball.SetMaterial(_material);
+			ball.transform.LookAt(_target);
 			_ballRigidbody = ball.GetComponent<Rigidbody>();
 			ball.Grow();
 			_ball = ball;
@@ -56,6 +57,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 				bestAngle = angle;
 				_target = playerTransform;
 			}
+			_ball.transform.LookAt(_target);
 			_ball.Shrink();
 		}
 

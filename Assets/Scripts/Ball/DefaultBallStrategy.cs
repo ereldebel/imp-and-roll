@@ -19,10 +19,15 @@ namespace Ball
 			return false;
 		}
 
-		public void OnCharge(Ball ball)
+		public void Apply(Ball ball)
 		{
 			ball.SetMesh(_mesh);
 			ball.SetMaterial(_material);
+		}
+
+		public void OnCharge(Ball ball)
+		{
+			Apply(ball);
 			ball.Grow();
 			_ball = ball;
 		}

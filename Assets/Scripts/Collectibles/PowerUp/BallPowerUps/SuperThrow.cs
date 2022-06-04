@@ -29,6 +29,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		{
 			ball.SetMesh(_mesh);
 			ball.SetMaterial(_material);
+			ball.transform.rotation=Quaternion.identity;
 			_ballRigidBody = ball.GetComponent<Rigidbody>();
 			ball.Grow();
 			_ball = ball;

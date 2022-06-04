@@ -47,7 +47,7 @@ namespace Ball
 		private float _curGrowStartTime = -1;
 		private float _curShrinkStartTime = -1;
 		private IBallStrategy _ballStrategy;
-		private IBallStrategy _defaultBallStrategy;
+		private DefaultBallStrategy _defaultBallStrategy;
 		private GameObject _shadow;
 
 		#endregion
@@ -74,6 +74,7 @@ namespace Ball
 			if (!collision.gameObject.CompareTag("Floor") && !collision.gameObject.tag.Contains("Player")) return;
 			_ballStrategy.OnHit(collision);
 			_ballStrategy = _defaultBallStrategy;
+			_defaultBallStrategy.Apply(this);
 			Landed();
 		}
 
