@@ -57,6 +57,7 @@ namespace Player
 		//Components:
 		private CharacterController _controller;
 		private Animator _animator;
+		private ParticleSystem _particleSystem;
 
 		//Input:
 		private Vector2 _aimDirection;
@@ -180,6 +181,7 @@ namespace Player
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
 			_rumble = GetComponent<Rumble>();
+			_particleSystem = GetComponentInChildren<ParticleSystem>();
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
 			_ballPositionsByDirection.Add(ballPositionsUp45);
@@ -392,10 +394,17 @@ namespace Player
 					transform.rotation = _velocity.x > 0 ? _faceRight : _faceLeft;
 				}
 			}
-
+			ChangeWalkingParticlesDirection(speed * _velocity);
 			_controller.SimpleMove(speed * _velocity);
 		}
 
+		private void ChangeWalkingParticlesDirection(Vector3 dir)
+		{
+			var ver = _particleSystem.velocityOverLifetime;
+			ver.x = -dir.x;
+			ver.z = -dir.z;
+			// _particleSystem.Emit(1);
+		}
 		private void AnimatorEndStun() => _stunned = false;
 
 		private void AnimatorThrowBall()

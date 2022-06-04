@@ -120,6 +120,7 @@ namespace Managers
 			if (Mathf.Abs(_redScore - _blueScore) > 1 || _curScene == 3)
 			{
 				SceneManager.LoadSceneAsync(_redScore > _blueScore ? "P2 won" : "P1 won");
+				SetUpPlayersForWinningScene();
 				Invoke(nameof(ResetGameKeepPlayers), 2);
 			}
 			else
@@ -262,6 +263,20 @@ namespace Managers
 			}
 
 			SceneManager.LoadScene(_sceneNames[_curScene = 1]);
+			_gameStarted = true;
+		}
+
+		private void SetUpPlayersForWinningScene()
+		{
+			for (int i = 0; i < _players.Count; i++)
+			{
+				SetUpPlayerForWinningScene(_players[i], i);
+			}
+		}
+		private void SetUpPlayerForWinningScene(GameObject player, int playerID)
+		{
+			player.transform.position = playerInfos[playerID].locationGameScene;
+			player.GetComponent<CharacterController>().enabled = false;
 		}
 
 		#endregion
