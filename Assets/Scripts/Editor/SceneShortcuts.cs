@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -7,6 +10,8 @@ namespace Editor
 	public class SceneShortcuts : MonoBehaviour
 	{
 		private static int _scene;
+		private static List<string> _scenes;
+
 		[MenuItem("Scenes/Play-Stop, From Opening Screen &#p")]
 		public static void PlayFromOpening()
 		{
@@ -17,7 +22,7 @@ namespace Editor
 			}
 
 			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-			EditorSceneManager.OpenScene("Assets/Scenes/Opening Screen.unity");
+			EditorSceneManager.OpenScene("Assets/Scenes/Opening Scene.unity");
 			EditorApplication.isPlaying = true;
 		}
 
@@ -28,25 +33,12 @@ namespace Editor
 			{
 				EditorApplication.isPlaying = false;
 			}
-			
-			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-			switch (_scene)
-			{
-				case 0:
-					EditorSceneManager.OpenScene("Assets/Scenes/Original Arena.unity");
-					break;
-				case 1:
-					EditorSceneManager.OpenScene("Assets/Scenes/Icy Arena.unity");
-					break;
-				case 2:
-					EditorSceneManager.OpenScene("Assets/Scenes/Volcanic Arena.unity");
-					break;
-				case 3:
-					EditorSceneManager.OpenScene("Assets/Scenes/Opening Screen.unity");
-					break;
-			}
 
-			_scene = (_scene + 1) % 4;
+			_scenes = new List<string>(Directory.GetFiles("Assets/Scenes")
+				.Where(filename => filename.EndsWith(".unity")));
+			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+			EditorSceneManager.OpenScene(_scenes[_scene]);
+			_scene = (_scene + 1) % _scenes.Count;
 		}
 	}
 }
