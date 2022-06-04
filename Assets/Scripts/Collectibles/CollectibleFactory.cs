@@ -12,7 +12,7 @@ namespace Collectibles
 		private float homingRate = 1;
 
 		[SerializeField] private Mesh homingBallMesh;
-		[SerializeField] private Material homingBallMaterial;
+		[SerializeField] private Material[] homingBallMaterials;
 		[SerializeField] private Sprite homingBallSprite;
 		[SerializeField] private Sprite homingBallIcon;
 
@@ -20,7 +20,7 @@ namespace Collectibles
 		private float superThrowSpeedBoost = 1.1f;
 
 		[SerializeField] private Mesh superThrowMesh;
-		[SerializeField] private Material superThrowMaterial;
+		[SerializeField] private Material[] superThrowMaterials;
 		[SerializeField] private Sprite superThrowSprite;
 		[SerializeField] private Sprite superThrowIcon;
 
@@ -32,7 +32,7 @@ namespace Collectibles
 		[SerializeField] private LayerMask playerLayerMask;
 		[SerializeField] private GameObject explosionPrefab;
 		[SerializeField] private Mesh explodingBallMesh;
-		[SerializeField] private Material explodingBallMaterial;
+		[SerializeField] private Material[] explodingBallMaterials;
 		[SerializeField] private Sprite explodingBallSprite;
 		[SerializeField] private Sprite explodingBallIcon;
 
@@ -41,7 +41,7 @@ namespace Collectibles
 
 		[SerializeField] private GameObject fireDropperPrefab;
 		[SerializeField] private Mesh fireTrailMesh;
-		[SerializeField] private Material fireTrailMaterial;
+		[SerializeField] private Material[] fireTrailMaterials;
 		[SerializeField] private Sprite fireTrailSprite;
 		[SerializeField] private Sprite fireTrailIcon;
 
@@ -50,13 +50,13 @@ namespace Collectibles
 			return collectibleType switch
 			{
 				CollectibleType.HomingBall => new HomingBall(homingRate, homingBallMesh,
-					homingBallMaterial),
-				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterial),
+					homingBallMaterials),
+				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterials),
 				CollectibleType.ExplodingBall => new ExplodingBall(
 					explosionStunRadius + explosionKnockBackOuterRingWidth, explosionStunRadius,
 					knockBackVelocityMultiplier, playerLayerMask, explosionPrefab, explodingBallMesh,
-					explodingBallMaterial),
-				CollectibleType.FireTrail => new FireTrail(fireDropperPrefab, fireTrailMesh, fireTrailMaterial),
+					explodingBallMaterials),
+				CollectibleType.FireTrail => new FireTrail(fireDropperPrefab, fireTrailMesh, fireTrailMaterials),
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
 			};
 		}

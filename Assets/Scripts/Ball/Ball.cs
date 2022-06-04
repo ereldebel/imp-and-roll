@@ -63,7 +63,7 @@ namespace Ball
 			_meshRenderer = GetComponent<MeshRenderer>();
 			_meshFilter = GetComponent<MeshFilter>();
 			_shadow = GetComponentInChildren<Shadow>().gameObject;
-			_defaultBallStrategy = new DefaultBallStrategy(_meshFilter.mesh, _meshRenderer.material);
+			_defaultBallStrategy = new DefaultBallStrategy(_meshFilter.mesh, _meshRenderer.materials);
 			_ballStrategy = _defaultBallStrategy;
 		}
 
@@ -117,10 +117,10 @@ namespace Ball
 			outlineMeshFilter.mesh = mesh;
 		}
 
-		public void SetMaterial(Material material)
+		public void SetMaterials(Material[] materials)
 		{
-			if (material)
-				_meshRenderer.material = material;
+			if (materials.Length > 0)
+				_meshRenderer.materials = materials;
 		}
 
 		public void StartCharging(IBallPowerUp powerUp)

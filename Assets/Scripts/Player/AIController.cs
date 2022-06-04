@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using UnityEngine;
 
@@ -19,8 +20,14 @@ namespace Player
 		{
 			_rightSide = transform.position.x > 0;
 			_brain = GetComponent<PlayerBrain>();
+			MatchManager.MatchStarted += OnEnable;
 			if (otherPlayer == null)
 				otherPlayer = GameManager.Players[0].transform;
+		}
+
+		private void OnDestroy()
+		{
+			MatchManager.MatchStarted -= OnEnable;
 		}
 
 		private void OnEnable()

@@ -11,7 +11,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly LayerMask _playerLayerMask;
 		private readonly GameObject _explosionPrefab;
 		private readonly Mesh _mesh;
-		private readonly Material _material;
+		private readonly Material[] _materials;
 		private Ball.Ball _ball;
 		private GameObject _thrower;
 
@@ -21,7 +21,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public ExplodingBall(float explosionKnockBackRadius, float explosionStunRadius,
 			float knockBackVelocityMultiplier, LayerMask playerLayerMask, GameObject explosionPrefab, Mesh mesh,
-			Material material) : base(PowerUpType)
+			Material[] materials) : base(PowerUpType)
 		{
 			_explosionSqrKnockBackRadius = Mathf.Pow(explosionKnockBackRadius, 2);
 			_explosionStunSqrRadius = Mathf.Pow(explosionStunRadius, 2);
@@ -29,7 +29,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			_explosionPrefab = explosionPrefab;
 			_playerLayerMask = playerLayerMask;
 			_mesh = mesh;
-			_material = material;
+			_materials = materials;
 		}
 
 		public override void Collect(GameObject collector)
@@ -46,8 +46,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public void OnCharge(Ball.Ball ball)
 		{
 			ball.SetMesh(_mesh);
-			ball.SetMaterial(_material);
-			ball.transform.rotation=Quaternion.identity;
+			ball.SetMaterials(_materials);
+			ball.transform.rotation = Quaternion.Euler(90, 0, 0);
 			ball.Grow();
 			_ball = ball;
 		}

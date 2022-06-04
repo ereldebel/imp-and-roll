@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   homingRate: 1
   homingBallMesh: {fileID: 4300000, guid: fe4b344816e71ee44b2928b5c4496d17, type: 2}
-  homingBallMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
+  homingBallMaterials:
+  - {fileID: 2100000, guid: 7c6d9f44389a08744a1db8b80826854f, type: 2}
   homingBallSprite: {fileID: 21300000, guid: 908db7ecd035d4b4eb980311c1886ad7, type: 3}
   homingBallIcon: {fileID: 21300000, guid: c22b243651b4ae948b55bf0f530fad97, type: 3}
   superThrowSpeedBoost: 1.1
   superThrowMesh: {fileID: 4300000, guid: f29f8892b710fac42b383fa90cd65605, type: 2}
-  superThrowMaterial: {fileID: 2100000, guid: 4e8ce8544a4a51a4c8c854b83606ac62, type: 2}
+  superThrowMaterials:
+  - {fileID: 2100000, guid: 4e8ce8544a4a51a4c8c854b83606ac62, type: 2}
   superThrowSprite: {fileID: 21300000, guid: b95a32bfacae23f4ab747f6ff4239e5f, type: 3}
   superThrowIcon: {fileID: 21300000, guid: 8e745225671abc84abf03f22f2a06e00, type: 3}
   explosionStunRadius: 5
@@ -30,12 +32,15 @@ MonoBehaviour:
     m_Bits: 8
   explosionPrefab: {fileID: 7127587449884104206, guid: 5504969b645537d4facf80af835892b1, type: 3}
   explodingBallMesh: {fileID: 4300000, guid: bb77674433af7db48a3a3616b06743b6, type: 2}
-  explodingBallMaterial: {fileID: 2100000, guid: 905c58c16fcea3840b3b95bb9a151b31, type: 2}
+  explodingBallMaterials:
+  - {fileID: 2100000, guid: 905c58c16fcea3840b3b95bb9a151b31, type: 2}
+  - {fileID: 2100000, guid: ce9012311720ae142aeb50da915f7c2b, type: 2}
+  - {fileID: 2100000, guid: 7a3e2064385436640914793c9bebf2f8, type: 2}
   explodingBallSprite: {fileID: 21300000, guid: f04f3a07277f45349acefbf07fa8aa0b, type: 3}
   explodingBallIcon: {fileID: 21300000, guid: 32d8d46b456b04242bef7e227965d747, type: 3}
   fireTrailParticleLifeSpan: 4
   fireDropperPrefab: {fileID: 285930222026714181, guid: 01da4b1f9b909f74eb20a6c139b648c1, type: 3}
   fireTrailMesh: {fileID: 4300000, guid: fe4b344816e71ee44b2928b5c4496d17, type: 2}
-  fireTrailMaterial: {fileID: 2100000, guid: d68a7ebaf5ff0a148a5c73e4ca24e420, type: 2}
+  fireTrailMaterials: []
   fireTrailSprite: {fileID: 21300000, guid: 3d3662e29838694489436aa81027d953, type: 3}
   fireTrailIcon: {fileID: 21300000, guid: 8ae2ab3d9b669e1448c76c523f17971a, type: 3}

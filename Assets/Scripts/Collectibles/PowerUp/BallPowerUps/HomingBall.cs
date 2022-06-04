@@ -8,19 +8,22 @@ namespace Collectibles.PowerUp.BallPowerUps
 	{
 		private readonly float _attractionRate;
 		private readonly Mesh _mesh;
-		private readonly Material _material;
+		private readonly Material[] _materials;
 		private Ball.Ball _ball;
 
 		private Transform _target;
 		private Rigidbody _ballRigidbody;
 		private IEnumerable<GameObject> _otherPlayers;
+
+		private static readonly Quaternion RotationOffset = new Quaternion(0, -0.6f, -0.8f, 0);
+		private Transform _ballTransform;
 		private const CollectibleType PowerUpType = CollectibleType.HomingBall;
 
-		public HomingBall(float attractionRate, Mesh mesh, Material material) : base(PowerUpType)
+		public HomingBall(float attractionRate, Mesh mesh, Material[] materials) : base(PowerUpType)
 		{
 			_attractionRate = -1 / attractionRate;
 			_mesh = mesh;
-			_material = material;
+			_materials = materials;
 		}
 
 		public override void Collect(GameObject collector)
@@ -36,9 +39,11 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public void OnCharge(Ball.Ball ball)
 		{
+			_ballTransform = ball.transform;
 			ball.SetMesh(_mesh);
-			ball.SetMaterial(_material);
-			ball.transform.LookAt(_target);
+			ball.SetMaterials(_materials);
+			_ballTransform.LookAt(_target);
+			_ballTransform.rotation = RotationOffset * _ballTransform.rotation;
 			_ballRigidbody = ball.GetComponent<Rigidbody>();
 			ball.Grow();
 			_ball = ball;
@@ -57,7 +62,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 				bestAngle = angle;
 				_target = playerTransform;
 			}
-			_ball.transform.LookAt(_target);
+
 			_ball.Shrink();
 		}
 
@@ -70,6 +75,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 			_ballRigidbody.velocity =
 				Vector3.Slerp(currVelocity, diff * (currVelocity.magnitude / diffNorm),
 					Mathf.Pow(diffNorm + 1, _attractionRate));
+			_ballTransform.LookAt(_target);
+			_ballTransform.rotation = RotationOffset * _ballTransform.rotation;
 		}
 
 		public void OnHit(Collision collision)

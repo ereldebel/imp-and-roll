@@ -5,13 +5,13 @@ namespace Ball
 	public class DefaultBallStrategy : IBallStrategy
 	{
 		private readonly Mesh _mesh;
-		private readonly Material _material;
+		private readonly Material[] _materials;
 		private Ball _ball;
 
-		public DefaultBallStrategy(Mesh mesh, Material material)
+		public DefaultBallStrategy(Mesh mesh, Material[] materials)
 		{
 			_mesh = mesh;
-			_material = material;
+			_materials = materials;
 		}
 
 		public bool IsUncatchableWithRoll()
@@ -22,7 +22,7 @@ namespace Ball
 		public void Apply(Ball ball)
 		{
 			ball.SetMesh(_mesh);
-			ball.SetMaterial(_material);
+			ball.SetMaterials(_materials);
 		}
 
 		public void OnCharge(Ball ball)

@@ -6,7 +6,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 	public class FireTrail : PowerUp, IBallPowerUp
 	{
 		private readonly Mesh _mesh;
-		private readonly Material _material;
+		private readonly Material[] _materials;
 		private Ball.Ball _ball;
 
 		private static GameObject _fireDropper;
@@ -14,7 +14,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		private const CollectibleType PowerUpType = CollectibleType.FireTrail;
 
-		public FireTrail(GameObject fireDropperPrefab, Mesh mesh, Material material) : base(PowerUpType)
+		public FireTrail(GameObject fireDropperPrefab, Mesh mesh, Material[] materials) : base(PowerUpType)
 		{
 			if (_fireDropper == null)
 			{
@@ -24,7 +24,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			}
 
 			_mesh = mesh;
-			_material = material;
+			_materials = materials;
 		}
 
 		public bool IsUncatchableWithRoll()
@@ -35,7 +35,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public void OnCharge(Ball.Ball ball)
 		{
 			ball.SetMesh(_mesh);
-			ball.SetMaterial(_material);
+			ball.SetMaterials(_materials);
 			ball.Grow();
 			_ball = ball;
 		}

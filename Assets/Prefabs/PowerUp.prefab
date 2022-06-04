@@ -382,8 +382,16 @@ PrefabInstance:
       value: Shadow
       objectReference: {fileID: 0}
     - target: {fileID: 6439035366028996699, guid: 39b73994d4a76be4694964604a51a261, type: 3}
-      propertyPath: modifier
-      value: 2
+      propertyPath: constant
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439035366028996699, guid: 39b73994d4a76be4694964604a51a261, type: 3}
+      propertyPath: staticObj
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439035366028996699, guid: 39b73994d4a76be4694964604a51a261, type: 3}
+      propertyPath: staticOffset.z
+      value: -0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39b73994d4a76be4694964604a51a261, type: 3}
