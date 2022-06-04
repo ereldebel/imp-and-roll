@@ -325,6 +325,8 @@ namespace Player
 			if (stunDuration <= 0 || (!uncatchableWithRoll && _rolling)) return false;
 			if (_rumble)
 				_rumble.Stun(_stunBar);
+			if (_ball)
+				Throw((ThrowVelocity + velocity) / 2);
 			StartCoroutine(Stun(velocity));
 			return true;
 		}
@@ -354,6 +356,19 @@ namespace Player
 		#endregion
 
 		#region Private Methods
+
+		private void Throw(Vector3 throwVelocity)
+		{
+			_ballThrowPositionIndex = 0;
+			_chargeStartTime = -1;
+			_ball.Throw(throwVelocity, ThrowOrigin, gameObject);
+			if (_ballPowerUp != null)
+				SetPowerUp(null);
+			_ball = null;
+			_animator.SetBool(AnimatorHasBall, false);
+			_calledThrow = false;
+			BallThrown?.Invoke();
+		}
 
 		private void PickupBall(Collision collision)
 		{
@@ -431,15 +446,7 @@ namespace Player
 		private IEnumerator ThrowWithDelay(float delay)
 		{
 			yield return new WaitForSeconds(delay);
-			_ballThrowPositionIndex = 0;
-			_chargeStartTime = -1;
-			_ball.Throw(ThrowVelocity, ThrowOrigin, gameObject);
-			if (_ballPowerUp != null)
-				SetPowerUp(null);
-			_ball = null;
-			_animator.SetBool(AnimatorHasBall, false);
-			_calledThrow = false;
-			BallThrown?.Invoke();
+			Throw(ThrowVelocity);
 		}
 
 		private IEnumerator DodgeRoll(Vector3 rollDir)
