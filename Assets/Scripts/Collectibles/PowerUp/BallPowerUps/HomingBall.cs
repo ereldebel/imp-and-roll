@@ -61,6 +61,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public void OnLateUpdate()
 		{
+			if (_target == null) return;
 			var diff = _target.position - _ballRigidbody.position;
 			if (diff == Vector3.zero) return;
 			var diffNorm = diff.magnitude;

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291300e46723f914da94be9fca006c3c, type: 3}
   m_Name: Red Player Info
   m_EditorClassIdentifier: 
-  locationOpeningScene: {x: -2.5, y: 6, z: -27}
+  locationOpeningScene: {x: -5, y: 0.5, z: 0}
   locationGameScene: {x: -7, y: 0.5, z: 0}

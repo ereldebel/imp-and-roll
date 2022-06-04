@@ -1,6 +1,7 @@
 ﻿using Managers;
 using Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Collectibles
 {
@@ -25,20 +26,31 @@ namespace Collectibles
 
 		private void OnValidate() => CollectibleType = collectibleType;
 
-		private void OnEnable()
+		private void Start()
 		{
 			OnValidate();
-			MatchManager.AddToCollectibleCollection(transform);
+			if (GameManager.CurScene != 0)
+			{
+				MatchManager.AddToCollectibleCollection(transform);				
+			}
 		}
 
-		private void OnDisable() => MatchManager.RemoveFromCollectibleCollection(transform);
+		private void OnDisable()
+		{
+			if (GameManager.CurScene!= 0)
+			{
+				MatchManager.RemoveFromCollectibleCollection(transform);
+			}
+			
+		}
 
 		private void OnTriggerEnter(Collider other)
 		{
 			_collectible.Collect(other.gameObject);
 			if (_collectible is PowerUp.PowerUp powerUp)
 				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
-			Destroy(gameObject);
+			if(GameManager.CurScene != 0)
+				Destroy(gameObject);
 		}
 	}
 }
