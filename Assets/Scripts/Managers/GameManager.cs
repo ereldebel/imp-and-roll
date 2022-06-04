@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +18,15 @@ namespace Managers
 		[SerializeField] private GameObject AIPlayerPrefab;
 		[SerializeField] private GameObject pressStartCanvas;
 		[SerializeField] private GameObject pauseCanvas;
+
 		#endregion
 
 		#region Private Fields
 
 		private readonly List<GameObject> _players = new List<GameObject>();
 		private readonly Dictionary<GameObject, bool> _playerReadyStatus = new Dictionary<GameObject, bool>();
-		private int _numPlayers = 0;
-		private bool _gameStarted = false;
+		private int _numPlayers;
+		private bool _gameStarted;
 		private bool _AIPlaying;
 		private static readonly int PlayerAnimatorX = Animator.StringToHash("X Direction");
 
@@ -34,14 +34,15 @@ namespace Managers
 		private bool _paused;
 		private PlayerInput _pausedBy;
 		private readonly Dictionary<PlayerInput, string> _playerInputs = new Dictionary<PlayerInput, string>();
-		
-		private List<string> _sceneNames = new List<string>() {"Opening Scene","Original Arena","Icy Arena", "Volcanic Arena"};
-		private int _curScene = 0;
+
+		private readonly string[] _sceneNames = {"Opening Scene", "Original Arena", "Icy Arena", "Volcanic Arena"};
+		private int _curScene;
 
 		private int _blueScore, _redScore;
+
 		private enum TargetScene
 		{
-			OpeningArena = 0,
+			OpeningScene = 0,
 			OriginalArena = 1,
 			IcyArena = 2,
 			VolcanicArena = 3
@@ -51,8 +52,12 @@ namespace Managers
 
 		#region Public Properties
 
-		public static IReadOnlyList<GameObject> Players => Shared._players;
 		public static GameManager Shared { get; private set; }
+		public static IReadOnlyList<GameObject> Players => Shared._players;
+		public static GameObject BluePLayer => Shared._players[0];
+		public static GameObject RedPLayer => Shared._players[1];
+		public static int BlueScore => Shared._blueScore;
+		public static int RedScore => Shared._redScore;
 
 		#endregion
 
@@ -62,8 +67,15 @@ namespace Managers
 		{
 			if (Shared)
 			{
-				Destroy(gameObject);
-				return;
+				if (SceneManager.GetActiveScene().buildIndex != 0)
+				{
+					Destroy(gameObject);
+					return;
+				}
+
+				foreach (var player in Shared._players)
+					Destroy(player);
+				Destroy(Shared.gameObject);
 			}
 
 			_numPlayers = 0;
@@ -89,24 +101,26 @@ namespace Managers
 			_playerInputs.Add(input, "");
 		}
 
-		public void PlayerWon(bool rightLost)
+		public void PlayerWon(bool blueLost)
 		{
 			if (!_gameStarted) return;
 			HaltAI();
 			_gameStarted = false;
-			if (rightLost){
-				_redScore++;
+			if (blueLost)
+			{
+				++_redScore;
 				print("Red Won");
 			}
 			else
 			{
-				_blueScore++;
+				++_blueScore;
 				print("Blue Won");
 			}
 
-			if (Mathf.Abs(_redScore-_blueScore)>1 || _curScene==3){
-				SceneManager.LoadSceneAsync(_redScore>_blueScore ? "P2 won" : "P1 won");
-				Invoke(nameof(ResetGameKeepPlayers),2);
+			if (Mathf.Abs(_redScore - _blueScore) > 1 || _curScene == 3)
+			{
+				SceneManager.LoadSceneAsync(_redScore > _blueScore ? "P2 won" : "P1 won");
+				Invoke(nameof(ResetGameKeepPlayers), 2);
 			}
 			else
 				StartCoroutine(ResetTimer(2f));
@@ -162,12 +176,16 @@ namespace Managers
 				playerAndActionMap.Key.SwitchCurrentActionMap(playerAndActionMap.Value);
 		}
 
-		public void Quit(PlayerInput playerInput)
+		public void Quit()
 		{
+			HaltAI();
+			Time.timeScale = _prevTimeScale;
+			_paused = false;
+			_pausedBy = null;
 			pauseCanvas.SetActive(false);
 			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 				playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
-			SceneManager.LoadScene("Opening Screen");//TODO add a score reset
+			SceneManager.LoadScene(0);
 		}
 
 		#endregion
@@ -240,10 +258,12 @@ namespace Managers
 			_blueScore = 0;
 			for (int i = 0; i < _players.Count; i++)
 			{
-				SetUpPlayerForGameScene(_players[i],i);
+				SetUpPlayerForGameScene(_players[i], i);
 			}
+
 			SceneManager.LoadScene(_sceneNames[_curScene = 1]);
 		}
+
 		#endregion
 
 		#region Private Coroutines
