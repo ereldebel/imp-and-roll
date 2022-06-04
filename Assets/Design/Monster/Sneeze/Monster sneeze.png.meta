@@ -1,12 +1,66 @@
 fileFormatVersion: 2
 guid: 4f0e83e413410874ab914b3b2ddc6edc
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 7751417773922061296
+    second: Monster sneeze_0
+  - first:
+      213: 2967949157008747648
+    second: Monster sneeze_1
+  - first:
+      213: -543012793259595228
+    second: Monster sneeze_2
+  - first:
+      213: 3395779907018209919
+    second: Monster sneeze_3
+  - first:
+      213: 373119267263749983
+    second: Monster sneeze_4
+  - first:
+      213: -1688761476153709831
+    second: Monster sneeze_5
+  - first:
+      213: 3897704949744032393
+    second: Monster sneeze_6
+  - first:
+      213: -931261921743680922
+    second: Monster sneeze_7
+  - first:
+      213: -2431611131775506970
+    second: Monster sneeze_8
+  - first:
+      213: -5999487580162698724
+    second: Monster sneeze_9
+  - first:
+      213: 1302618771494588466
+    second: Monster sneeze_10
+  - first:
+      213: 1141174907421144547
+    second: Monster sneeze_11
+  - first:
+      213: 5156436094722134481
+    second: Monster sneeze_12
+  - first:
+      213: 1858426129764978091
+    second: Monster sneeze_13
+  - first:
+      213: -8454406344750679872
+    second: Monster sneeze_14
+  - first:
+      213: 3992179535568186606
+    second: Monster sneeze_15
+  - first:
+      213: 159390578994694717
+    second: Monster sneeze_16
+  - first:
+      213: -4219408834424281023
+    second: Monster sneeze_17
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -35,24 +89,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -75,13 +129,427 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Monster sneeze_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fb06488561929b60800000000000000
+      internalID: 7751417773922061296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_1
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08c2dee8806403920800000000000000
+      internalID: 2967949157008747648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_2
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42ae445ddb4d678f0800000000000000
+      internalID: -543012793259595228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_3
+      rect:
+        serializedVersion: 2
+        x: 3984
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7aba3575db302f20800000000000000
+      internalID: 3395779907018209919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_4
+      rect:
+        serializedVersion: 2
+        x: 5312
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5f1c182ff59d2500800000000000000
+      internalID: 373119267263749983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_5
+      rect:
+        serializedVersion: 2
+        x: 6640
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fa6e7782605098e0800000000000000
+      internalID: -1688761476153709831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98a56c8300e671630800000000000000
+      internalID: 3897704949744032393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_7
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66ace99573e7313f0800000000000000
+      internalID: -931261921743680922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_8
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e5a2a21f8e214ed0800000000000000
+      internalID: -2431611131775506970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_9
+      rect:
+        serializedVersion: 2
+        x: 3984
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c12d80e15d98dbca0800000000000000
+      internalID: -5999487580162698724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_10
+      rect:
+        serializedVersion: 2
+        x: 5312
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 230d0b00fd4d31210800000000000000
+      internalID: 1302618771494588466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_11
+      rect:
+        serializedVersion: 2
+        x: 6640
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e53d67388446df00800000000000000
+      internalID: 1141174907421144547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d15ae4ee475f8740800000000000000
+      internalID: 5156436094722134481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_13
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad02f9f7b47ac910800000000000000
+      internalID: 1858426129764978091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_14
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c8b35a093aebaa80800000000000000
+      internalID: -8454406344750679872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_15
+      rect:
+        serializedVersion: 2
+        x: 3984
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eec2029d222176730800000000000000
+      internalID: 3992179535568186606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_16
+      rect:
+        serializedVersion: 2
+        x: 5312
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3ac58913e4463200800000000000000
+      internalID: 159390578994694717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze_17
+      rect:
+        serializedVersion: 2
+        x: 6640
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 148eefd3506a175c0800000000000000
+      internalID: -4219408834424281023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3abc02a5acdabbf4482f25f079490c27
     internalID: 0
     vertices: []
     indices: 

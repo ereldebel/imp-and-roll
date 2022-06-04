@@ -24,11 +24,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - LeftTexture:
-        m_Texture: {fileID: 2800000, guid: 57d3ebcba79d92345bd3a5d3bf095e0d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3c2094d8f7869cd40bb237068396e6aa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - RightTexture:
-        m_Texture: {fileID: 2800000, guid: f1fadf6af2e98b64cae187ca40e332e5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3de1dd2eda57d7f4cb3fd43b4bc9fb02, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:

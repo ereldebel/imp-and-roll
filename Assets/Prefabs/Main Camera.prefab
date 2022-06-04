@@ -480,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3702076286285142948, guid: 1f28e3e517330104cb3a98a56a68f5a4, type: 3}
       propertyPath: m_Name
-      value: Sparks
+      value: Particles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f28e3e517330104cb3a98a56a68f5a4, type: 3}

@@ -38,6 +38,7 @@ namespace Environment
 
 		private IEnumerator ChangeSpeed()
 		{
+			_main.simulationSpeed = Random.Range(minRelativeSpeed, maxRelativeSpeed);
 			while (_change)
 			{
 				yield return new WaitForSeconds(Random.Range(5, 10));
@@ -52,6 +53,7 @@ namespace Environment
 
 		private IEnumerator ChangeRate()
 		{
+			_emission.rateOverTimeMultiplier = Random.Range(minSparkRate, maxSparkRate);
 			while (_change)
 			{
 				yield return new WaitForSeconds(Random.Range(5, 10));
