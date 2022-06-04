@@ -80,7 +80,7 @@ namespace Managers
 
 			_numPlayers = 0;
 			Shared = this;
-			DontDestroyOnLoad(Shared);
+			DontDestroyOnLoad(Shared.gameObject);
 		}
 
 		#endregion
@@ -186,6 +186,7 @@ namespace Managers
 			pauseCanvas.SetActive(false);
 			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 				playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
+			Destroy(GetComponent<PlayerInputManager>());
 			SceneManager.LoadScene(0);
 		}
 
