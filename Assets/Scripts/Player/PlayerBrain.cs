@@ -50,6 +50,8 @@ namespace Player
 		[SerializeField] private Vector3[] ballPositionsSide = new Vector3[7];
 		[SerializeField] private Vector3[] ballPositionsUp45 = new Vector3[7];
 
+		[Header("UI")] [SerializeField] private GameObject readyBubble;
+
 		#endregion
 
 		#region Private Fields
@@ -345,6 +347,7 @@ namespace Player
 		public void PlayerReady()
 		{
 			GameManager.Shared.PlayerReady(gameObject);
+			readyBubble.SetActive(!readyBubble.activeSelf);
 		}
 
 		#endregion
@@ -395,6 +398,7 @@ namespace Player
 					transform.rotation = _velocity.x > 0 ? _faceRight : _faceLeft;
 				}
 			}
+
 			ChangeWalkingParticlesDirection(speed * _velocity);
 			_controller.SimpleMove(speed * _velocity);
 		}
@@ -406,6 +410,7 @@ namespace Player
 			ver.z = -dir.z;
 			// _particleSystem.Emit(1);
 		}
+
 		private void AnimatorEndStun() => _stunned = false;
 
 		private void AnimatorThrowBall()
