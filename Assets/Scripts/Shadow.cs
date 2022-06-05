@@ -23,7 +23,7 @@ public class Shadow : MonoBehaviour
 		_transform.position = pos + staticOffset;
 		_transform.localScale = (modifier * objHeight + constant) * Vector3.one;
 		_transform.rotation = _rotation;
-		Destroy(gameObject);
+		Destroy(this);
 	}
 
 	private void LateUpdate()
