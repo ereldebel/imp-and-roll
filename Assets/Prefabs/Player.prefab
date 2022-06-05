@@ -605,6 +605,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfSteps: 20
   timeStepInterval: 0.01
+  sceneColors:
+  - {r: 0.42352945, g: 0.41960788, b: 0.4039216, a: 1}
+  - {r: 0.45882356, g: 0.7294118, b: 0.41176474, a: 1}
+  - {r: 0.14117648, g: 0.17254902, b: 0.5803922, a: 1}
+  - {r: 0.54901963, g: 0.098039225, b: 0.09019608, a: 1}
 --- !u!120 &5905099638005712058
 LineRenderer:
   m_ObjectHideFlags: 0
