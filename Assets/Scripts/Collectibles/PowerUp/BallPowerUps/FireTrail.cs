@@ -9,16 +9,14 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly Material[] _materials;
 		private Ball.Ball _ball;
 
-		private readonly GameObject _fireDropper;
-		private static FireDropper _fireDropperScript;
+		private readonly GameObject _fireDropperPrefab;
+		private GameObject _fireDropper;
 
 		private const CollectibleType PowerUpType = CollectibleType.FireTrail;
 
 		public FireTrail(GameObject fireDropperPrefab, Mesh mesh, Material[] materials) : base(PowerUpType)
 		{
-			_fireDropper = Object.Instantiate(fireDropperPrefab);
-			_fireDropper.SetActive(false);
-			_fireDropperScript = _fireDropper.GetComponent<FireDropper>();
+			_fireDropperPrefab = fireDropperPrefab;
 			_mesh = mesh;
 			_materials = materials;
 		}
@@ -38,6 +36,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public void OnThrow(Vector3 velocity)
 		{
+			_fireDropper = Object.Instantiate(_fireDropperPrefab);
+			_fireDropper.SetActive(false);
 			_fireDropper.transform.parent = _ball.transform;
 			_fireDropper.transform.position = _ball.transform.position;
 			_fireDropper.SetActive(true);
@@ -53,7 +53,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			collision.gameObject.GetComponent<IHittable>()
 				?.TakeHit(collision.relativeVelocity, IsUncatchableWithRoll());
 			_fireDropper.transform.parent = null;
-			_fireDropperScript.Stop();
+			_fireDropper.GetComponent<FireDropper>().Stop();
 		}
 	}
 }
