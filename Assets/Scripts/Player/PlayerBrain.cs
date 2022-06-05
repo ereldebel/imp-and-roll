@@ -10,6 +10,8 @@ using UnityEngine.InputSystem;
 namespace Player
 {
 	[RequireComponent(typeof(CharacterController))]
+	[RequireComponent(typeof(Animator))]
+	[RequireComponent(typeof(PlayerAudio))]
 	public class PlayerBrain : MonoBehaviour, IHittable
 	{
 		#region Serialized Fields
@@ -60,6 +62,7 @@ namespace Player
 		private CharacterController _controller;
 		private Animator _animator;
 		private ParticleSystem _particleSystem;
+		private PlayerAudio _audio;
 
 		//Input:
 		private Vector2 _aimDirection;
@@ -76,6 +79,7 @@ namespace Player
 		private bool _calledThrow;
 		private float _chargeStartTime = -1;
 		private float _colliderRadius;
+		private bool _running;
 
 		//Ball and ball Animation:
 		private Ball.Ball _ball; //if not null than it is held by the player and is a child of the game object.
@@ -183,6 +187,7 @@ namespace Player
 			_controller = GetComponent<CharacterController>();
 			_animator = GetComponent<Animator>();
 			_rumble = GetComponent<Rumble>();
+			_audio = GetComponent<PlayerAudio>();
 			_particleSystem = GetComponentInChildren<ParticleSystem>();
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
@@ -212,6 +217,13 @@ namespace Player
 
 		private void Update()
 		{
+			if (_running != _animator.GetBool(AnimatorRunning))
+			{
+				_running = !_running;
+				if (_chargeStartTime < 0)
+					_audio.Running(_running);
+			}
+
 			var playerLayerMask = 1 << gameObject.layer;
 			var aimDir = new Vector3(_aimDirection.x, 0, _aimDirection.y);
 			var maxDistance = GameManager.CurScene == 0 ? 50 : MatchManager.MaxDistance;
@@ -300,11 +312,14 @@ namespace Player
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
 			_animator.SetBool(won ? AnimatorWon : AnimatorLost, true);
+			if (!won)
+				_audio.Die();
 		}
 
 		public bool ChargeThrow()
 		{
 			if (_stunned || _rolling || _chargeStartTime >= 0 || _calledThrow || !_ball) return false;
+			_audio.Charge();
 			_chargeStartTime = Time.time;
 			_animator.SetBool(AnimatorThrowing, true);
 			_ball.StartCharging(_ballPowerUp);
@@ -315,6 +330,7 @@ namespace Player
 		public void ThrowBall()
 		{
 			if (_stunned || _rolling || _chargeStartTime < 0 || _calledThrow || !_ball) return;
+			_audio.Throw();
 			_animator.SetBool(AnimatorThrowing, false);
 			_calledThrow = true;
 			StartCoroutine(ThrowWithDelay(1 / 6f));
@@ -323,6 +339,7 @@ namespace Player
 		public bool TakeHit(Vector3 velocity, bool uncatchableWithRoll)
 		{
 			if (stunDuration <= 0 || (!uncatchableWithRoll && _rolling)) return false;
+			_audio.Hit();
 			if (_rumble)
 				_rumble.Stun(_stunBar);
 			if (_ball)
@@ -339,6 +356,7 @@ namespace Player
 		public void DodgeRoll()
 		{
 			if (_chargeStartTime >= 0 || _stunned || _rolling) return;
+			_audio.Roll();
 			var movementDir = MovementStick;
 			if (MovementStick == Vector2.zero)
 				StartCoroutine(DodgeRoll(new Vector3((Flipped ? 1 : -1) * _animator.GetFloat(AnimatorX), 0,

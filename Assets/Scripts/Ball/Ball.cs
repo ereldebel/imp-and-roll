@@ -49,6 +49,7 @@ namespace Ball
 		private IBallStrategy _ballStrategy;
 		private DefaultBallStrategy _defaultBallStrategy;
 		private GameObject _shadow;
+		private BallAudio _audio;
 
 		#endregion
 
@@ -63,6 +64,7 @@ namespace Ball
 			_meshRenderer = GetComponent<MeshRenderer>();
 			_meshFilter = GetComponent<MeshFilter>();
 			_shadow = GetComponentInChildren<Shadow>().gameObject;
+			_audio = GetComponent<BallAudio>();
 			_defaultBallStrategy = new DefaultBallStrategy(_meshFilter.mesh, _meshRenderer.materials);
 			_ballStrategy = _defaultBallStrategy;
 		}
@@ -70,8 +72,14 @@ namespace Ball
 		private void OnCollisionEnter(Collision collision)
 		{
 			if (!Thrown) return;
-			if (collision.gameObject == _thrower) return;
-			if (!collision.gameObject.CompareTag("Floor") && !collision.gameObject.tag.Contains("Player")) return;
+			if (collision.gameObject == _thrower || (!collision.gameObject.CompareTag("Floor") &&
+			                                         !collision.gameObject.tag.Contains("Player")))
+			{
+				_audio.SoftBounce();
+				return;
+			}
+
+			_audio.HardBounce();
 			_ballStrategy.OnHit(collision);
 			_ballStrategy = _defaultBallStrategy;
 			_defaultBallStrategy.Apply(this);

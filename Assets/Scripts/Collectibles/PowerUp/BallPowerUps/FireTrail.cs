@@ -9,20 +9,16 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly Material[] _materials;
 		private Ball.Ball _ball;
 
-		private static GameObject _fireDropper;
+		private readonly GameObject _fireDropper;
 		private static FireDropper _fireDropperScript;
 
 		private const CollectibleType PowerUpType = CollectibleType.FireTrail;
 
 		public FireTrail(GameObject fireDropperPrefab, Mesh mesh, Material[] materials) : base(PowerUpType)
 		{
-			if (_fireDropper == null)
-			{
-				_fireDropper = Object.Instantiate(fireDropperPrefab);
-				_fireDropper.SetActive(false);
-				_fireDropperScript = _fireDropper.GetComponent<FireDropper>();
-			}
-
+			_fireDropper = Object.Instantiate(fireDropperPrefab);
+			_fireDropper.SetActive(false);
+			_fireDropperScript = _fireDropper.GetComponent<FireDropper>();
 			_mesh = mesh;
 			_materials = materials;
 		}
