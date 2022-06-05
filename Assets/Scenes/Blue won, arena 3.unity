@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 759552604}
   - component: {fileID: 759552603}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Dancing Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759552602}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 5.8, z: -24.69}
+  m_LocalPosition: {x: 0, y: 6, z: -26.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -282,6 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
+--- !u!20 &977567195 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1649286880794447668, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
+  m_PrefabInstance: {fileID: 977567194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1058952838
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a0922248da3d1cd46b53027da209086a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f156e48c5df04714fbf4a6fafa67d014, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -405,10 +410,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 256
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -425,8 +430,8 @@ Canvas:
   m_GameObject: {fileID: 1341852964}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 977567195}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

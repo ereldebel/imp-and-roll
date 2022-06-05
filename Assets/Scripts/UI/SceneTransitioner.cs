@@ -33,6 +33,7 @@ namespace UI
 
 			while (!asyncLoad.isDone)
 				yield return null;
+			
 			while (color.a < 1)
 			{
 				color.a += transitionSpeed * Time.deltaTime;
