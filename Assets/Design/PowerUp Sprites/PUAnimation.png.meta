@@ -129,8 +129,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1033
-        height: 803
+        width: 693
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,10 +148,10 @@ TextureImporter:
       name: PUAnimation_1
       rect:
         serializedVersion: 2
-        x: 1033
+        x: 693
         y: 0
-        width: 1033
-        height: 803
+        width: 693
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +169,10 @@ TextureImporter:
       name: PUAnimation_2
       rect:
         serializedVersion: 2
-        x: 2066
+        x: 1386
         y: 0
-        width: 1033
-        height: 803
+        width: 693
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -359,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Name
-      value: Homing Ball (1)
+      value: Flame Trail
       objectReference: {fileID: 0}
     - target: {fileID: 5967556646459944702, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Sprite
@@ -424,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Name
-      value: Homing Ball (2)
+      value: Exploding Ball
       objectReference: {fileID: 0}
     - target: {fileID: 5967556646459944702, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Sprite
@@ -557,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Name
-      value: Homing Ball (3)
+      value: Heavy Throw
       objectReference: {fileID: 0}
     - target: {fileID: 5967556646459944702, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Sprite
@@ -716,22 +716,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8988732728712324069, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8988732728712324069, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8988732728712324069, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8988732728712324069, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8988732728913236201, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -964,30 +948,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1630467303 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8988732728712324071, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
-  m_PrefabInstance: {fileID: 1568097690}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1630467304
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630467303}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0ac9367ab8e09a4abdba9b5cd421d8d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1720509464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,6 +1144,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: a3ad365e30c1e754f9b860c9bb995de8, type: 3}
+    - target: {fileID: 2887232151850885598, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8de77bd6c1890bb40a811001d83e0345, type: 3}
     - target: {fileID: 6537296340413375428, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: pressStartCanvas
       value: 

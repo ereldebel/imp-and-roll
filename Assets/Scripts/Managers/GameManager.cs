@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Player;
+using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,7 @@ namespace Managers
 		[SerializeField] private GameObject AIPlayerPrefab;
 		[SerializeField] private GameObject pressStartCanvas;
 		[SerializeField] private GameObject pauseCanvas;
+		[SerializeField] private SceneTransitioner transitioner;
 
 		#endregion
 
@@ -53,8 +55,6 @@ namespace Managers
 
 		public static GameManager Shared { get; private set; }
 		public static IReadOnlyList<GameObject> Players => Shared._players;
-		public static GameObject BluePLayer => Shared._players[0];
-		public static GameObject RedPLayer => Shared._players[1];
 		public static int BlueScore => Shared._blueScore;
 		public static int RedScore => Shared._redScore;
 		public static int CurScene => Shared._curScene;
@@ -112,7 +112,7 @@ namespace Managers
 				++_blueScore;
 			if (Mathf.Abs(_redScore - _blueScore) > 1 || _curScene == 3)
 			{
-				SceneManager.LoadSceneAsync(_redScore > _blueScore ? "P2 won" : "P1 won");
+				transitioner.TransitionToScene(_redScore > _blueScore ? "P2 won" : "P1 won");
 				SetUpPlayersForWinningScene();
 				Invoke(nameof(ResetGameKeepPlayers), 2);
 			}
@@ -179,7 +179,7 @@ namespace Managers
 			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 				playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
 			Destroy(GetComponent<PlayerInputManager>());
-			SceneManager.LoadScene(0);
+			transitioner.TransitionToScene(0);
 		}
 
 		#endregion
@@ -225,7 +225,7 @@ namespace Managers
 
 		private void StartGameMultiplePlayers(int sceneToStart)
 		{
-			SceneManager.LoadScene(_sceneNames[sceneToStart]);
+			transitioner.TransitionToScene(_sceneNames[sceneToStart]);
 			for (var i = 0; i < _players.Count; i++)
 				SetUpPlayerForGameScene(_players[i], i);
 		}
@@ -252,7 +252,7 @@ namespace Managers
 			_blueScore = 0;
 			for (var i = 0; i < _players.Count; i++)
 				SetUpPlayerForGameScene(_players[i], i);
-			SceneManager.LoadScene(_sceneNames[_curScene = 1]);
+			transitioner.TransitionToScene(_sceneNames[_curScene = 1]);
 			_gameStarted = true;
 		}
 
