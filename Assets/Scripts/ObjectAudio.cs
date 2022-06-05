@@ -11,7 +11,7 @@ public abstract class ObjectAudio : MonoBehaviour
 
 	#endregion
 
-	#region Private fields
+	#region Protected fields
 
 	protected AudioSource Audio;
 	protected static readonly System.Random Random = new System.Random();
@@ -20,7 +20,7 @@ public abstract class ObjectAudio : MonoBehaviour
 
 	#region Function events
 
-	protected void Awake()
+	protected virtual void Awake()
 	{
 		Audio = GetComponent<AudioSource>();
 	}

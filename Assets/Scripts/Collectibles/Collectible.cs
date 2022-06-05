@@ -10,6 +10,10 @@ namespace Collectibles
 	public class Collectible : MonoBehaviour
 	{
 		[SerializeField] private CollectibleType collectibleType;
+		[SerializeField] private CollectibleFactory collectibleFactory;
+
+		private ICollectible _collectible;
+		private bool _inCollectibleCollection;
 
 		public CollectibleType CollectibleType
 		{
@@ -21,22 +25,19 @@ namespace Collectibles
 			}
 		}
 
-		[SerializeField] private CollectibleFactory collectibleFactory;
-
-		private ICollectible _collectible;
-
 		private void OnValidate() => CollectibleType = collectibleType;
 
 		private void Start()
 		{
 			OnValidate();
-			if (GameManager.CurScene != 0)
-				MatchManager.AddToCollectibleCollection(transform);				
+			if (GameManager.CurScene == 0) return;
+			MatchManager.AddToCollectibleCollection(transform);
+			_inCollectibleCollection = true;
 		}
 
 		private void OnDisable()
 		{
-			if (GameManager.CurScene!= 0)
+			if (_inCollectibleCollection)
 				MatchManager.RemoveFromCollectibleCollection(transform);
 		}
 
@@ -45,7 +46,7 @@ namespace Collectibles
 			_collectible.Collect(other.gameObject);
 			if (_collectible is PowerUp.PowerUp powerUp)
 				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
-			if(GameManager.CurScene != 0)
+			if (GameManager.CurScene != 0)
 				Destroy(gameObject);
 			else
 				OnValidate();
