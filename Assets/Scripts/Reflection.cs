@@ -18,18 +18,9 @@ public class Reflection : MonoBehaviour
     {
         _mySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _mySpriteRenderer.flipY = true;
-        // var spriteRenderers = GetComponentsInParent<SpriteRenderer>();
         _daddySpriteRenderer = GameManager.Players[playerToFollow].GetComponent<SpriteRenderer>();
         transform.SetParent(_daddySpriteRenderer.transform);
         transform.localPosition = new Vector3(0, -2, 0);
-        // transform.Rotate(Vector3.left,180);
-        // foreach (var spriteRenderer in spriteRenderers)
-        // {
-        //     if (spriteRenderer.GetComponent<PlayerBrain>() != null)
-        //     {
-        //         _daddySpriteRenderer = spriteRenderer;                
-        //     }
-        // }
         if (_daddySpriteRenderer == _mySpriteRenderer)
         {
             print("Same Sprite Renderer");
@@ -39,6 +30,7 @@ public class Reflection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _mySpriteRenderer.flipX = _daddySpriteRenderer.flipX;
         _mySpriteRenderer.sprite = _daddySpriteRenderer.sprite;
     }
 }
