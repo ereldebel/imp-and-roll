@@ -30,7 +30,7 @@ namespace Managers
 		public static Transform BallTransform => _shared.ball ? _shared.ball.transform : _shared.transform;
 		public static float ArenaLength => _shared._arenaDimensions[0];
 		public static float ArenaWidth => _shared._arenaDimensions[1];
-		public static float MaxDistance => _shared._diagonal;
+		public static float MaxDistance => _shared != null? _shared._diagonal : 50;
 		public static Transform DivisionBorder => _shared.divisionBorder;
 		public static IEnumerable<Transform> CollectibleCollection => _shared._collectibleCollection;
 

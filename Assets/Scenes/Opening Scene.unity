@@ -557,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Name
-      value: Heavy Throw
+      value: Super Throw
       objectReference: {fileID: 0}
     - target: {fileID: 5967556646459944702, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Sprite
@@ -814,7 +814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8988732728913236205, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
@@ -1251,6 +1251,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2404601894398821237, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404601894454443636, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2404601894454443637, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}

@@ -19,7 +19,7 @@ namespace Player
 		[Header("Player Movement Settings")] [SerializeField]
 		private float speed;
 
-		[Range(0, 1)] [SerializeField] private float friction;
+		[Range(0, 1)] [SerializeField] private float frictionInIceScene;
 
 		[SerializeField] private float dodgeRollSpeed;
 
@@ -92,6 +92,7 @@ namespace Player
 
 		//Movement:
 		private Vector3 _velocity = Vector3.zero;
+		private float _friction = 1;
 
 		//Animations:
 		private int _tauntIndex;
@@ -262,8 +263,9 @@ namespace Player
 			TakeHit(other.transform.position - transform.position * flameMaxKnockBackVelocity, true);
 		}
 
-		public void Reset()
+		public void Reset(bool slippery)
 		{
+			_friction = slippery ? frictionInIceScene : 1;
 			_rolling = false;
 			_stunned = false;
 			_calledThrow = false;
@@ -413,7 +415,7 @@ namespace Player
 				return;
 			}
 
-			if (Math.Abs(friction - 1) == 0 && MovementStick.sqrMagnitude <= 0.1)
+			if (Math.Abs(_friction - 1) == 0 && MovementStick.sqrMagnitude <= 0.1)
 			{
 				_animator.SetBool(AnimatorRunning, false);
 				_controller.SimpleMove(Vector3.zero);
@@ -422,7 +424,7 @@ namespace Player
 
 
 			_animator.SetBool(AnimatorRunning, true);
-			_velocity = Vector3.Lerp(_velocity, new Vector3(MovementStick.x, 0, MovementStick.y), friction);
+			_velocity = Vector3.Lerp(_velocity, new Vector3(MovementStick.x, 0, MovementStick.y), _friction);
 			if (_chargeStartTime >= 0)
 				_velocity *= movementRelativeSpeedWhileCharging;
 			else
