@@ -739,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionScreen: {fileID: 2197320275694144558}
+  transitionSpeed: 0.5
 --- !u!1 &7739874320974675641
 GameObject:
   m_ObjectHideFlags: 0

@@ -557,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 612359272554252326, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Name
-      value: Heavy Throw
+      value: Super Throw
       objectReference: {fileID: 0}
     - target: {fileID: 5967556646459944702, guid: 36da35fb0eec1ac429aed3426cf7f6f9, type: 3}
       propertyPath: m_Sprite
@@ -716,6 +716,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 882381661539763879, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c1e39b7f30365c49a10869945f6880f, type: 3}
     - target: {fileID: 8988732728913236201, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -810,7 +814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8988732728913236205, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
@@ -1147,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: 2887232151850885598, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8de77bd6c1890bb40a811001d83e0345, type: 3}
+      objectReference: {fileID: 21300000, guid: 92e52c74be14ce04a8c7ffb1d54dfc45, type: 3}
     - target: {fileID: 6537296340413375428, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: pressStartCanvas
       value: 
@@ -1200,10 +1204,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6537296341438456258, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
 --- !u!1001 &2404601893461974705
@@ -1251,6 +1251,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2404601894398821237, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404601894454443636, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2404601894454443637, guid: bb2ec9a3ef51f64468fe694ddf08a5cf, type: 3}
