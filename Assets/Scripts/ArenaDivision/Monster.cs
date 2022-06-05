@@ -27,6 +27,7 @@ namespace ArenaDivision
 		private LineRenderer _lineRenderer;
 		private Collider _collider;
 		private Animator _animator;
+		private MonsterAudio _audio;
 
 		private Transform _ball;
 		private Transform _dividerChild;
@@ -62,6 +63,7 @@ namespace ArenaDivision
 			_lineRenderer = GetComponent<LineRenderer>();
 			_collider = GetComponent<Collider>();
 			_animator = GetComponent<Animator>();
+			_audio = GetComponent<MonsterAudio>();
 			_lineRenderer.positionCount = 2;
 			_lineRenderer.SetPosition(0, Vector3.zero);
 			_startTime = Time.time;
@@ -69,7 +71,6 @@ namespace ArenaDivision
 			_dividerChild = divider.GetChild(0);
 			OnValidate();
 			enabled = false;
-			Invoke(nameof(Continue), 2);
 		}
 
 		private void Start()
@@ -89,6 +90,8 @@ namespace ArenaDivision
 		private void OnBecameVisible()
 		{
 			enabled = true;
+			_audio.Sneeze();
+			Invoke(nameof(Continue), 2);
 		}
 
 		private void Update()
@@ -98,6 +101,7 @@ namespace ArenaDivision
 			if (_dangerous || Time.time - _startTime < timeToSpeedUp * _timeStep) return;
 			_static = true;
 			_animator.SetTrigger(AnimatorAccelerate);
+			_audio.Accelerate();
 			var speedMultiplier = Mathf.Log10(_timeStep) * speedUpMultiplier + 1;
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
@@ -135,7 +139,10 @@ namespace ArenaDivision
 			var dividerPos = divider.position;
 			var targetDir = targetPos - pos;
 			var infNorm = Mathf.Max(Mathf.Abs(targetDir.x), Mathf.Abs(targetDir.z));
-			_dangerous = infNorm < dangerZoneRadius;
+			var dangerous = infNorm < dangerZoneRadius;
+			if (dangerous && !_dangerous)
+				_audio.Attack();
+			_dangerous = dangerous;
 			UpdateAnimator(targetDir, _dangerous ? 2 : (infNorm < alarmZoneRadius ? 1 : 0));
 			_collider.enabled = targetDir.sqrMagnitude < colliderEnableDistance;
 			var xMovement = Mathf.Abs(targetDir.x) > 0.01f ? Mathf.Sign(targetDir.x) * _speed : 0;

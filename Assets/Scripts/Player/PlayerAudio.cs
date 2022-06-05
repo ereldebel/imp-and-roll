@@ -4,7 +4,9 @@ namespace Player
 {
 	public class PlayerAudio : ObjectAudio
 	{
-		[Header("Clips by index:  0: Charge, 1: Throw, 2: Roll, 3: Roll End, 4-6: Hits, 7: Run")] [SerializeField]
+		[Header(
+			"0: Charge, 1: Throw, 2: Roll, 3: Roll End, 4-6: Hits, 7: Die, 8: Run, 9: Haha, 10:Yeah, 11: Nonono, 12: Snap")]
+		[SerializeField]
 		private Header _;
 
 		#region Public methods
@@ -30,6 +32,11 @@ namespace Player
 			else
 				Audio.Stop();
 		}
+
+		public void Laugh() => PlaySingleClipByIndex(9);
+		public void Ready() => PlaySingleClipByIndex(10);
+		public void Unready() => PlaySingleClipByIndex(11);
+		public void Snap() => PlaySingleClipByIndex(12);
 
 		#endregion
 	}
