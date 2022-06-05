@@ -685,9 +685,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1133.0,
-            "y": 372.0000305175781,
-            "width": 127.0,
+            "x": -1231.9998779296875,
+            "y": 332.0,
+            "width": 126.99999237060547,
             "height": 34.0
         }
     },
@@ -1409,8 +1409,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1612.0,
-            "y": 307.0,
+            "x": -1625.0,
+            "y": 474.0,
             "width": 208.00001525878907,
             "height": 314.0
         }
@@ -1436,8 +1436,8 @@
     "m_ObjectId": "8b8c41cdec69410295dcc239006dfeee",
     "m_Title": "Make Visible only from Y",
     "m_Position": {
-        "x": -1636.9998779296875,
-        "y": 248.0
+        "x": -1704.999755859375,
+        "y": 79.00003814697266
     }
 }
 
