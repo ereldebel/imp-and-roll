@@ -5,7 +5,7 @@ using Managers;
 using Player;
 using UnityEngine;
 
-public class Reflection : MonoBehaviour
+public class PlayerReflection : MonoBehaviour
 {
     private SpriteRenderer _mySpriteRenderer, _daddySpriteRenderer;
     [SerializeField] private int playerToFollow;
@@ -21,10 +21,6 @@ public class Reflection : MonoBehaviour
         _daddySpriteRenderer = GameManager.Players[playerToFollow].GetComponent<SpriteRenderer>();
         transform.SetParent(_daddySpriteRenderer.transform);
         transform.localPosition = new Vector3(0, -2, 0);
-        if (_daddySpriteRenderer == _mySpriteRenderer)
-        {
-            print("Same Sprite Renderer");
-        }
     }
 
     // Update is called once per frame
@@ -32,5 +28,9 @@ public class Reflection : MonoBehaviour
     {
         _mySpriteRenderer.flipX = _daddySpriteRenderer.flipX;
         _mySpriteRenderer.sprite = _daddySpriteRenderer.sprite;
+        if (GameManager.CurScene != 2)
+        {
+            Destroy(gameObject);
+        }
     }
 }

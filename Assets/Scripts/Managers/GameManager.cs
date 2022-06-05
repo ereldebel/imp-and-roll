@@ -89,6 +89,7 @@ namespace Managers
 
 		public void AddPlayer(PlayerInput input)
 		{
+			if (_curScene != 0) return;
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
 

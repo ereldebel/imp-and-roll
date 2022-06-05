@@ -45,5 +45,5 @@ public abstract class ObjectAudio : MonoBehaviour
 	#endregion
 	
 	[Serializable]
-	public class Header{}
+	protected class Header{}
 }

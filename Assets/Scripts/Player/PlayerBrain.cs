@@ -370,7 +370,12 @@ namespace Player
 		public void PlayerReady()
 		{
 			GameManager.Shared.PlayerReady(gameObject);
-			readyBubble.SetActive(!readyBubble.activeSelf);
+			var readyState = !readyBubble.activeSelf;
+			readyBubble.SetActive(readyState);
+			if (readyState)
+				_audio.Ready();
+			else
+				_audio.Unready();
 		}
 
 		#endregion
@@ -396,6 +401,7 @@ namespace Player
 			var ball = collision.gameObject.GetComponent<Ball.Ball>();
 			if (ball == null) return;
 			if (!ball.Pickup(transform, _rolling)) return;
+			_audio.Laugh();
 			_animator.SetBool(AnimatorHasBall, true);
 			_ball = ball;
 		}
