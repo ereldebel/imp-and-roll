@@ -13,7 +13,7 @@ public class HazardSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEach(timeBetweenSpawns));
+        // StartCoroutine(SpawnEach(timeBetweenSpawns));
     }
     private IEnumerator SpawnEach(float time)
     {

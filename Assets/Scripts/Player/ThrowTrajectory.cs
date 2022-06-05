@@ -8,7 +8,9 @@ namespace Player
 	{
 		[SerializeField] private int numOfSteps;
 		[SerializeField] private float timeStepInterval;
+		[SerializeField] private Color[] sceneColors;
 
+		private Material _material;
 		private PlayerBrain _brain;
 		private LineRenderer _lineRenderer;
 		private Ball.Ball _ball;
@@ -22,6 +24,7 @@ namespace Player
 		{
 			_brain = GetComponent<PlayerBrain>();
 			_lineRenderer = GetComponent<LineRenderer>();
+			_material = _lineRenderer.material;
 			_brain.StartedChargingThrow += Enable;
 			_brain.BallThrown += Disable;
 			MatchManager.MatchEnded += Disable;
@@ -87,7 +90,9 @@ namespace Player
 				posAtTime += gravity * Mathf.Pow(timeStep * timeStepInterval, 2);
 				_trajectoryPoints[timeStep] = _rotation * posAtTime;
 			}
-
+			_material.SetColor("_Color",sceneColors[GameManager.CurScene]);
+			// _lineRenderer.startColor = sceneColors[GameManager.CurScene];
+			// _lineRenderer.endColor = sceneColors[GameManager.CurScene];
 			_lineRenderer.SetPositions(_trajectoryPoints);
 		}
 	}
