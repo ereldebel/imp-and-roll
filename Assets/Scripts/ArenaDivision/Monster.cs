@@ -44,6 +44,7 @@ namespace ArenaDivision
 
 		private bool _gotEye;
 		private bool _dangerous;
+		private int _dangerLevel;
 		private bool _spinningLeft = true;
 		private bool _static = true;
 
@@ -139,10 +140,7 @@ namespace ArenaDivision
 			var dividerPos = divider.position;
 			var targetDir = targetPos - pos;
 			var infNorm = Mathf.Max(Mathf.Abs(targetDir.x), Mathf.Abs(targetDir.z));
-			var dangerous = infNorm < dangerZoneRadius;
-			if (dangerous && !_dangerous)
-				_audio.Attack();
-			_dangerous = dangerous;
+			_dangerous = infNorm < dangerZoneRadius;
 			UpdateAnimator(targetDir, _dangerous ? 2 : (infNorm < alarmZoneRadius ? 1 : 0));
 			_collider.enabled = targetDir.sqrMagnitude < colliderEnableDistance;
 			var xMovement = Mathf.Abs(targetDir.x) > 0.01f ? Mathf.Sign(targetDir.x) * _speed : 0;
@@ -172,6 +170,14 @@ namespace ArenaDivision
 
 		private void UpdateAnimator(Vector3 direction, int dangerLevel)
 		{
+			if (_dangerLevel != dangerLevel)
+			{
+				if (_dangerLevel == 0)
+					_audio.Attack();
+				else if (dangerLevel == 0)
+					_audio.Stop();
+			}
+			_dangerLevel = dangerLevel;
 			_animator.SetInteger(AnimatorDangerLevel, _gotEye ? 0 : dangerLevel);
 			if (direction.x == 0 && direction.z == 0) return;
 			direction.y = 0;

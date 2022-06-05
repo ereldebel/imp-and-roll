@@ -41,6 +41,13 @@ public abstract class ObjectAudio : MonoBehaviour
 		if (clipIndex < clips.Length && clips[clipIndex])
 			Audio.PlayOneShot(clips[clipIndex]);
 	}
+	
+	protected void SwitchClip(AudioClip newClip)
+	{
+		Audio.Stop();
+		Audio.clip = newClip;
+		Audio.Play();
+	}
 
 	#endregion
 	

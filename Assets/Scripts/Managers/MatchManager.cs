@@ -66,7 +66,6 @@ namespace Managers
 			GameManager.Shared.AwakeAI();
 			_spawner = StartCoroutine(SpawnCollectible());
 			_diagonal = Mathf.Sqrt(Mathf.Pow(_arenaDimensions.x, 2) + Mathf.Pow(_arenaDimensions.y, 2));
-			AudioManager.StartGameMusic();
 			MatchStarted?.Invoke();
 		}
 

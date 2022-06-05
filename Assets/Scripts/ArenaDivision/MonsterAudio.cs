@@ -12,7 +12,9 @@ namespace ArenaDivision
 		public void Sneeze() => PlaySingleClipByIndex(0);
 		public void Accelerate() => PlaySingleClipByIndex(1);
 		public void Attack() => PlaySingleClipByIndex(2);
+		public void Stop() => Audio.Stop();
 
 		#endregion
+
 	}
 }
