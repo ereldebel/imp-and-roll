@@ -70,6 +70,11 @@ namespace Managers
 			MatchStarted?.Invoke();
 		}
 
+		private void Start()
+		{
+			StartCoroutine(InitializeBallWithDelay(1.5f));
+		}
+
 		private void OnDestroy()
 		{
 			if (ball)
@@ -123,6 +128,18 @@ namespace Managers
 		#endregion
 
 		#region Private Coroutines
+
+		private IEnumerator InitializeBallWithDelay(float delay)
+		{
+			ball.FreezeBall();
+			yield return new WaitForSeconds(delay);
+			var blueRedDiff = GameManager.BlueScore - GameManager.RedScore;
+			var x = Random.Range(2, 4);
+			var z = Random.Range(-2, 2);
+			if (blueRedDiff < 0 || (blueRedDiff == 0 && Random.value > 0.5f))
+				x = -x;
+			ball.UnfreezeAndInitializeBall(new Vector3(x, 2, z));
+		}
 
 		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
 		{

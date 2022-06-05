@@ -177,6 +177,21 @@ namespace Ball
 		{
 			_curShrinkStartTime = Time.time;
 		}
+		
+		
+		public void FreezeBall()
+		{
+			_rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+			_rigidbody.isKinematic = true;
+		}
+
+		public void UnfreezeAndInitializeBall(Vector3 velocity)
+		{
+			_rigidbody.isKinematic = false;
+			_rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+			_rigidbody.velocity = velocity;
+			_rigidbody.AddTorque(velocity);
+		}
 
 		#endregion
 
@@ -207,8 +222,7 @@ namespace Ball
 			//TODO: should keep an eye on this transformation - it should work but documentation is worrisome
 			_transform.localScale = Vector3.one;
 			var lossyScale = _transform.lossyScale;
-			_transform.localScale = new Vector3(size / lossyScale.x, size / lossyScale.y,
-				size / lossyScale.z);
+			_transform.localScale = new Vector3(size / lossyScale.x, size / lossyScale.y, size / lossyScale.z);
 		}
 
 		#endregion

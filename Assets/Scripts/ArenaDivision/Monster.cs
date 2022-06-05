@@ -69,6 +69,7 @@ namespace ArenaDivision
 			_dividerChild = divider.GetChild(0);
 			OnValidate();
 			enabled = false;
+			Invoke(nameof(Continue), 2);
 		}
 
 		private void Start()
