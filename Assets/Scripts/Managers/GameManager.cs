@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Player;
 using UI;
 using UnityEngine;
@@ -89,7 +90,7 @@ namespace Managers
 
 		public void AddPlayer(PlayerInput input)
 		{
-			if (_curScene != 0) return;
+			if (_curScene != 0){Destroy(input.gameObject); return;}
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
 
