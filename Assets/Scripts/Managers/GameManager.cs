@@ -112,7 +112,8 @@ namespace Managers
 				++_blueScore;
 			if (Mathf.Abs(_redScore - _blueScore) > 1 || _curScene == 3)
 			{
-				transitioner.TransitionToScene(_redScore > _blueScore ? "P2 won" : "P1 won");
+				var winner = _redScore > _blueScore ? "Red" : "Blue";
+				transitioner.TransitionToScene($"P{winner} won, arena {_curScene}");
 				SetUpPlayersForWinningScene();
 				Invoke(nameof(ResetGameKeepPlayers), 2);
 			}
