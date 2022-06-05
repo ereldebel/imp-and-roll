@@ -305,7 +305,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1332
+  m_Name: pb_Mesh-191074
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -615,6 +615,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 663904533463407546, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4c6734c2701e3e479aa1d4d49c085de, type: 3}
     - target: {fileID: 1649286880794447670, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
       propertyPath: m_Name
       value: Main Camera
