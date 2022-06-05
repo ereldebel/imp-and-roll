@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -33,7 +34,20 @@ namespace UI
 
 			while (!asyncLoad.isDone)
 				yield return null;
-			
+			var sceneIndex = SceneManager.GetActiveScene().buildIndex;
+			switch (sceneIndex)
+			{
+				case 0:
+					AudioManager.StartScreenMusic();
+					break;
+				case var _ when sceneIndex > 3:
+					AudioManager.WinMusic();
+					break;
+				default:
+					AudioManager.MatchMusic();
+					break;
+					
+			}
 			while (color.a < 1)
 			{
 				color.a += transitionSpeed * Time.deltaTime;
