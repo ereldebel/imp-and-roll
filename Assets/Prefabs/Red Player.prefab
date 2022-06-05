@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  friction: 0
+  frictionInIceScene: 0
   dodgeRollSpeed: 11
   rollDuration: 0.5833333
   maxThrowForce: 25
