@@ -43,7 +43,7 @@ namespace Collectibles.PowerUp.BallPowerUps.Effects
 				yield return new WaitForFixedUpdate();
 			}
 
-			Destroy(gameObject);
+			Destroy(transform.parent.gameObject);
 		}
 	}
 }

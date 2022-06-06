@@ -1,5 +1,6 @@
 ﻿using Ball;
 using Player;
+using UnityEditor;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps
@@ -21,6 +22,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		private static readonly Collider[] Hits = new Collider[4];
 		private BallAudio _audio;
+		private GameObject _sparks;
 
 		public ExplodingBall(float explosionKnockBackRadius, float explosionStunRadius,
 			float knockBackVelocityMultiplier, LayerMask playerLayerMask, GameObject explosionPrefab,
@@ -55,7 +57,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			ball.Grow();
 			_ball = ball;
 			_audio = ball.GetComponent<BallAudio>();
-			Object.Instantiate(_sparksPrefab, ball.transform);
+			_sparks = Object.Instantiate(_sparksPrefab, ball.transform);
 		}
 
 		public void OnThrow(Vector3 velocity)
@@ -89,6 +91,8 @@ namespace Collectibles.PowerUp.BallPowerUps
 				if (!tookHit)
 					player.ApplyKnockBack(relativeVelocity);
 			}
+
+			Object.Destroy(_sparks);
 		}
 	}
 }
