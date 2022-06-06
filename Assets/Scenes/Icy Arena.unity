@@ -522,7 +522,7 @@ PrefabInstance:
     - target: {fileID: 663904533463407546, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 70389475331eea743970ffe186d6d0cf, type: 3}
+      objectReference: {fileID: 21300000, guid: 24530e1927465534a8e6b5ac3acedae8, type: 3}
     - target: {fileID: 1649286880794447670, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -623,6 +623,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3689806408125253878, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689806408125253878, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.89
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0065faa94b07594e90a540fda24b1e4, type: 3}
 --- !u!1001 &1123404536
@@ -867,7 +875,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!4 &1582380847
 Transform:

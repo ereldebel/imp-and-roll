@@ -170,7 +170,7 @@ namespace ArenaDivision
 
 		private void UpdateAnimator(Vector3 direction, int dangerLevel)
 		{
-			if (_dangerLevel != dangerLevel)
+			if (_dangerLevel != dangerLevel && !_gotEye)
 			{
 				if (_dangerLevel == 0)
 					_audio.Attack();
