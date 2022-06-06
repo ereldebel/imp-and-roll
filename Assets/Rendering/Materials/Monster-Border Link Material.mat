@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spectral Chain Material
-  m_Shader: {fileID: -6465566751694194690, guid: b1857d9458ee90c4dab3ed638d032bed, type: 3}
+  m_Name: Monster-Border Link Material
+  m_Shader: {fileID: -6465566751694194690, guid: a8604cc51d4cb374782afa7cc274f4ca, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

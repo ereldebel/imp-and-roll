@@ -71,6 +71,7 @@ namespace ArenaDivision
 			_originalPosition = transform.position;
 			_dividerChild = divider.GetChild(0);
 			OnValidate();
+			UpdateSpectralChain();
 			enabled = false;
 		}
 
@@ -119,6 +120,7 @@ namespace ArenaDivision
 		private void OnTriggerEnter(Collider other)
 		{
 			var otherObject = other.gameObject;
+			if (otherObject.transform.position.y > 1.5f) return;
 			if (otherObject.CompareTag("Player") && !otherObject.GetComponent<PlayerBrain>().HasBall) return;
 			_ball.gameObject.SetActive(false);
 			MatchManager.GameOver(transform.position.x > divider.position.x);
@@ -177,6 +179,7 @@ namespace ArenaDivision
 				else if (dangerLevel == 0)
 					_audio.Stop();
 			}
+
 			_dangerLevel = dangerLevel;
 			_animator.SetInteger(AnimatorDangerLevel, _gotEye ? 0 : dangerLevel);
 			if (direction.x == 0 && direction.z == 0) return;
