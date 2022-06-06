@@ -305,7 +305,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-191074
+  m_Name: pb_Mesh-115548
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868175286}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f27e15ab4eef9114ea8a29dd67c255f5, type: 3}
   m_Name: 
@@ -1468,6 +1468,10 @@ PrefabInstance:
     - target: {fileID: 5111713090803620105, guid: 7b612d4a102ad2f4187bff230c2120a4, type: 3}
       propertyPath: m_Name
       value: Hazard
+      objectReference: {fileID: 0}
+    - target: {fileID: 5111713090803620105, guid: 7b612d4a102ad2f4187bff230c2120a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5111713090803620106, guid: 7b612d4a102ad2f4187bff230c2120a4, type: 3}
       propertyPath: m_Mesh
