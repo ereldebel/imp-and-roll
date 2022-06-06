@@ -11,6 +11,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private readonly float _knockBackVelocityMultiplier;
 		private readonly LayerMask _playerLayerMask;
 		private readonly GameObject _explosionPrefab;
+		private readonly GameObject _sparksPrefab;
 		private readonly Mesh _mesh;
 		private readonly Material[] _materials;
 		private Ball.Ball _ball;
@@ -22,13 +23,14 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private BallAudio _audio;
 
 		public ExplodingBall(float explosionKnockBackRadius, float explosionStunRadius,
-			float knockBackVelocityMultiplier, LayerMask playerLayerMask, GameObject explosionPrefab, Mesh mesh,
-			Material[] materials) : base(PowerUpType)
+			float knockBackVelocityMultiplier, LayerMask playerLayerMask, GameObject explosionPrefab,
+			GameObject sparksPrefab, Mesh mesh, Material[] materials) : base(PowerUpType)
 		{
 			_explosionSqrKnockBackRadius = Mathf.Pow(explosionKnockBackRadius, 2);
 			_explosionStunSqrRadius = Mathf.Pow(explosionStunRadius, 2);
 			_knockBackVelocityMultiplier = knockBackVelocityMultiplier;
 			_explosionPrefab = explosionPrefab;
+			_sparksPrefab = sparksPrefab;
 			_playerLayerMask = playerLayerMask;
 			_mesh = mesh;
 			_materials = materials;
@@ -53,6 +55,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			ball.Grow();
 			_ball = ball;
 			_audio = ball.GetComponent<BallAudio>();
+			Object.Instantiate(_sparksPrefab, ball.transform);
 		}
 
 		public void OnThrow(Vector3 velocity)
