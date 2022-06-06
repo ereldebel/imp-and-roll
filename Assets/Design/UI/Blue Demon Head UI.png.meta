@@ -4,10 +4,10 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 7224950749745525236
-    second: Blue Demon Head UI Stunned
+    second: Blue Demon Head UI_0
   - first:
       213: 4139742027643696518
-    second: Blue Demon Head UI Regular
+    second: Blue Demon Head UI_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,15 +121,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue Demon Head UI Stunned
+      name: Blue Demon Head UI_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 258
-        height: 256
+        width: 376
+        height: 347
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,15 +142,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue Demon Head UI Regular
+      name: Blue Demon Head UI_1
       rect:
         serializedVersion: 2
-        x: 258
+        x: 376
         y: 0
-        width: 258
-        height: 256
+        width: 376
+        height: 347
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

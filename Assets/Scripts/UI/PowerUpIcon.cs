@@ -1,21 +1,27 @@
 using System.Collections.Generic;
 using Collectibles;
 using Collectibles.PowerUp;
+using Managers;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
 	public class PowerUpIcon : MonoBehaviour
 	{
+		[SerializeField] private int playerNumber;
 		[SerializeField] private CollectibleFactory collectibleFactory;
-		private SpriteRenderer _spriteRenderer;
+		
+		private Image _image;
 		private Sprite _defaultSprite;
-		private List<CollectibleType> _activatedPowerUps = new List<CollectibleType>();
+		private readonly List<CollectibleType> _activatedPowerUps = new List<CollectibleType>();
+		private GameObject _owner;
 
 		private void Awake()
 		{
-			_spriteRenderer = GetComponent<SpriteRenderer>();
-			_defaultSprite = _spriteRenderer.sprite;
+			_image = GetComponent<Image>();
+			_image.enabled = false;
+			_owner = GameManager.Players[playerNumber];
 			PowerUp.PowerUpActivated += PowerUpActivated;
 			PowerUp.PowerUpDeactivated += PowerUpDeactivated;
 		}
@@ -28,17 +34,19 @@ namespace UI
 
 		private void PowerUpActivated(GameObject player, CollectibleType type)
 		{
-			if (player != transform.parent.gameObject) return;
-			_spriteRenderer.sprite = collectibleFactory.Icon(type);
+			if (player != _owner) return;
+			if (_activatedPowerUps.Count == 0)
+				_image.enabled = true;
+			_image.sprite = collectibleFactory.Sprite(type);
 			_activatedPowerUps.Add(type);
 		}
 
 		private void PowerUpDeactivated(GameObject player, CollectibleType type)
 		{
-			if (player != transform.parent.gameObject) return;
+			if (player != _owner) return;
 			_activatedPowerUps.Remove(type);
 			if (_activatedPowerUps.Count == 0)
-				_spriteRenderer.sprite = _defaultSprite;
+				_image.enabled = false;
 		}
 	}
 }

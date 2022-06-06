@@ -31,6 +31,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   explosionPrefab: {fileID: 7127587449884104206, guid: 5504969b645537d4facf80af835892b1, type: 3}
+  sparksPrefab: {fileID: 8905995722932031843, guid: 1200733d730422e42bcaf040d24ac125, type: 3}
   explodingBallMesh: {fileID: 4300000, guid: bb77674433af7db48a3a3616b06743b6, type: 2}
   explodingBallMaterials:
   - {fileID: 2100000, guid: 905c58c16fcea3840b3b95bb9a151b31, type: 2}
