@@ -37,7 +37,7 @@ namespace Managers
 		private PlayerInput _pausedBy;
 		private readonly Dictionary<PlayerInput, string> _playerInputs = new Dictionary<PlayerInput, string>();
 
-		private readonly string[] _sceneNames = {"Opening Scene Only Arena", "Original Arena", "Icy Arena", "Volcanic Arena"};
+		private readonly string[] _sceneNames = {"Opening Scene", "Original Arena", "Icy Arena", "Volcanic Arena"};
 		private int _curScene;
 
 		private int _blueScore, _redScore;
@@ -258,7 +258,7 @@ namespace Managers
 			_blueScore = 0;
 			for (var i = 0; i < _players.Count; i++)
 				SetUpPlayerForGameScene(_players[i], i);
-			transitioner.TransitionToScene(_sceneNames[_curScene = 0]);
+			transitioner.TransitionToScene(_sceneNames[_curScene = 1]);
 			_gameStarted = true;
 		}
 
