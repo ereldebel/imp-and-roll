@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 982678058}
+  pressStartCanvas: {fileID: 1818926898}
 --- !u!4 &345388158
 Transform:
   m_ObjectHideFlags: 0

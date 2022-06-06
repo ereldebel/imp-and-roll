@@ -1826,6 +1826,14 @@ PrefabInstance:
       propertyPath: m_Maskable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2983208278103671116, guid: ed59a11a42e40f64ba03dd71cf2ece20, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573961292215973847, guid: ed59a11a42e40f64ba03dd71cf2ece20, type: 3}
+      propertyPath: player
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7497212724538952758, guid: ed59a11a42e40f64ba03dd71cf2ece20, type: 3}
       propertyPath: m_Material
       value: 
