@@ -221,6 +221,7 @@ namespace Managers
 
 		private void SetUpPlayerForGameScene(GameObject player, int playerID)
 		{
+			player.GetComponent<CharacterController>().enabled = false;
 			player.GetComponent<PlayerBrain>().Reset(CurScene == 2);
 			player.transform.position = playerInfos[playerID].locationGameScene;
 			player.GetComponent<CharacterController>().enabled = true;

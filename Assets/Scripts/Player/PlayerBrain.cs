@@ -266,6 +266,8 @@ namespace Player
 		public void Reset(bool slippery)
 		{
 			_friction = slippery ? frictionInIceScene : 1;
+			MovementStick = Vector2.zero;
+			_velocity = Vector3.zero;
 			_rolling = false;
 			_stunned = false;
 			_calledThrow = false;
