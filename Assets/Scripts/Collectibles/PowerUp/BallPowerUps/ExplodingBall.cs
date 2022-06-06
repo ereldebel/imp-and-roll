@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using Ball;
+using Player;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps
@@ -18,6 +19,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		private const CollectibleType PowerUpType = CollectibleType.ExplodingBall;
 
 		private static readonly Collider[] Hits = new Collider[4];
+		private BallAudio _audio;
 
 		public ExplodingBall(float explosionKnockBackRadius, float explosionStunRadius,
 			float knockBackVelocityMultiplier, LayerMask playerLayerMask, GameObject explosionPrefab, Mesh mesh,
@@ -50,6 +52,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 			ball.transform.rotation = Quaternion.Euler(90, 0, 0);
 			ball.Grow();
 			_ball = ball;
+			_audio = ball.GetComponent<BallAudio>();
 		}
 
 		public void OnThrow(Vector3 velocity)
@@ -63,6 +66,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 
 		public void OnHit(Collision collision)
 		{
+			_audio.Explosion();
 			var explosionPos = _ball.transform.position;
 			explosionPos.y = 0;
 			Object.Instantiate(_explosionPrefab, explosionPos, _explosionPrefab.transform.rotation);
