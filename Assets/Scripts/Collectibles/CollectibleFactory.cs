@@ -31,6 +31,7 @@ namespace Collectibles
 		[SerializeField] private float knockBackVelocityMultiplier;
 		[SerializeField] private LayerMask playerLayerMask;
 		[SerializeField] private GameObject explosionPrefab;
+		[SerializeField] private GameObject sparksPrefab;
 		[SerializeField] private Mesh explodingBallMesh;
 		[SerializeField] private Material[] explodingBallMaterials;
 		[SerializeField] private Sprite explodingBallSprite;
@@ -54,7 +55,7 @@ namespace Collectibles
 				CollectibleType.SuperThrow => new SuperThrow(superThrowSpeedBoost, superThrowMesh, superThrowMaterials),
 				CollectibleType.ExplodingBall => new ExplodingBall(
 					explosionStunRadius + explosionKnockBackOuterRingWidth, explosionStunRadius,
-					knockBackVelocityMultiplier, playerLayerMask, explosionPrefab, explodingBallMesh,
+					knockBackVelocityMultiplier, playerLayerMask, explosionPrefab, sparksPrefab, explodingBallMesh,
 					explodingBallMaterials),
 				CollectibleType.FireTrail => new FireTrail(fireDropperPrefab, fireTrailMesh, fireTrailMaterials),
 				_ => throw new ArgumentOutOfRangeException(nameof(collectibleType), collectibleType, null),
