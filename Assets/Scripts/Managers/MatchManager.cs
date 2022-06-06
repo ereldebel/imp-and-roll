@@ -179,6 +179,7 @@ namespace Managers
 				var next = powerUpsInMatch[random.Next(powerUpsInMatch.Count)];
 				newPowerUp.GetComponent<Collectible>().CollectibleType = next;
 				spawnOnRight = random.Next(numOfSpawns) < numOfLeftSpawns;
+				AudioManager.PowerUpSpawn();
 			}
 		}
 

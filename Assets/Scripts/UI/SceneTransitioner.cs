@@ -44,6 +44,7 @@ namespace UI
 					AudioManager.WinMusic();
 					break;
 				default:
+					AudioManager.MatchStart();
 					AudioManager.MatchMusic();
 					break;
 					

@@ -748,19 +748,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 80124ad70a720584e8e12861798c5f4c, type: 3}
-  - {fileID: 8300000, guid: 95d1ef518ad7a5e4595bb685f33db67e, type: 3}
-  - {fileID: 8300000, guid: cac3d547564c624488c201083c62185e, type: 3}
-  - {fileID: 8300000, guid: c830bb3f2b2739f40892edff5bde494f, type: 3}
-  - {fileID: 8300000, guid: c09dc89fbc428de4ba5ff782b1abf8a2, type: 3}
-  - {fileID: 8300000, guid: 8b5b2306f898ec343ab96fac431eeee2, type: 3}
-  - {fileID: 8300000, guid: 12af835b13c35fb45877570550900641, type: 3}
-  - {fileID: 8300000, guid: 377a1f0d6926a6f4a818c6166d177ee8, type: 3}
-  - {fileID: 8300000, guid: 2b04fe6e931339c45b76e9c1b0bef69c, type: 3}
-  - {fileID: 8300000, guid: b23657321d64ea74591a6d90e1bf9a02, type: 3}
-  - {fileID: 8300000, guid: 1c82ec9201b158041903dcc90650b6b3, type: 3}
-  - {fileID: 8300000, guid: 9a465e2a6814bb0449a55a6821241b9c, type: 3}
-  - {fileID: 8300000, guid: e5937f1bbbcc1aa4d8d82360523b6627, type: 3}
+  - clip: {fileID: 8300000, guid: 80124ad70a720584e8e12861798c5f4c, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 95d1ef518ad7a5e4595bb685f33db67e, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: cac3d547564c624488c201083c62185e, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: c830bb3f2b2739f40892edff5bde494f, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: c09dc89fbc428de4ba5ff782b1abf8a2, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 8b5b2306f898ec343ab96fac431eeee2, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 12af835b13c35fb45877570550900641, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 377a1f0d6926a6f4a818c6166d177ee8, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 2b04fe6e931339c45b76e9c1b0bef69c, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: b23657321d64ea74591a6d90e1bf9a02, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 1c82ec9201b158041903dcc90650b6b3, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 9a465e2a6814bb0449a55a6821241b9c, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: e5937f1bbbcc1aa4d8d82360523b6627, type: 3}
+    volume: 1
 --- !u!82 &3241228959062873716
 AudioSource:
   m_ObjectHideFlags: 0

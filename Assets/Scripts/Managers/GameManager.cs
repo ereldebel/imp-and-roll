@@ -154,6 +154,7 @@ namespace Managers
 			_paused = true;
 			_pausedBy = playerInput;
 			pauseCanvas.SetActive(true);
+			AudioManager.Pause();
 			foreach (var player in _playerInputs.Keys.Where(player => player).ToList())
 			{
 				_playerInputs[player] = playerInput.currentActionMap.name;
@@ -168,6 +169,7 @@ namespace Managers
 			_paused = false;
 			_pausedBy = null;
 			pauseCanvas.SetActive(false);
+			AudioManager.Resume();
 			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 				playerAndActionMap.Key.SwitchCurrentActionMap(playerAndActionMap.Value);
 		}

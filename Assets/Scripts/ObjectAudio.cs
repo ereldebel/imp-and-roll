@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -6,8 +7,7 @@ public abstract class ObjectAudio : MonoBehaviour
 {
 	#region Serialized fields
 
-	[SerializeField]
-	protected AudioClip[] clips;
+	[SerializeField] protected AudioClipAndVolume[] clips;
 
 	#endregion
 
@@ -15,6 +15,13 @@ public abstract class ObjectAudio : MonoBehaviour
 
 	protected AudioSource Audio;
 	protected static readonly System.Random Random = new System.Random();
+	protected static HashSet<AudioSource> AudioSources;
+
+	#endregion
+
+	#region Private Fields
+
+	private bool _inObjectList;
 
 	#endregion
 
@@ -23,6 +30,16 @@ public abstract class ObjectAudio : MonoBehaviour
 	protected virtual void Awake()
 	{
 		Audio = GetComponent<AudioSource>();
+
+		if (AudioSources == null) return;
+		AudioSources.Add(Audio);
+		_inObjectList = true;
+	}
+
+	protected void OnDestroy()
+	{
+		if (_inObjectList)
+			AudioSources.Remove(Audio);
 	}
 
 	#endregion
@@ -32,25 +49,37 @@ public abstract class ObjectAudio : MonoBehaviour
 	protected void PlaySingleClipByIndex(int clipIndex)
 	{
 		Audio.Stop();
-		if (clipIndex < clips.Length && clips[clipIndex])
-			Audio.PlayOneShot(clips[clipIndex]);
+		PlayClipByIndex(clipIndex);
 	}
 
 	protected void PlayClipByIndex(int clipIndex)
 	{
-		if (clipIndex < clips.Length && clips[clipIndex])
-			Audio.PlayOneShot(clips[clipIndex]);
+		if (clipIndex >= clips.Length || !clips[clipIndex].clip) return;
+		var clip = clips[clipIndex];
+		Audio.PlayOneShot(clip.clip, clip.volume);
 	}
-	
-	protected void SwitchClip(AudioClip newClip)
+
+	protected void SwitchClip(AudioClipAndVolume newClip)
 	{
 		Audio.Stop();
-		Audio.clip = newClip;
+		Audio.clip = newClip.clip;
+		Audio.volume = newClip.volume;
 		Audio.Play();
 	}
 
+	protected static void SetObjectSet(HashSet<AudioSource> newSet) => AudioSources = newSet;
+
 	#endregion
+
+	[Serializable]
+	protected class Header
+	{
+	}
 	
 	[Serializable]
-	protected class Header{}
+	protected struct AudioClipAndVolume
+	{
+		public AudioClip clip;
+		[Range(0, 1)] public float volume;
+	}
 }

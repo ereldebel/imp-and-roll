@@ -101,12 +101,12 @@ namespace ArenaDivision
 				enabled = false;
 			if (_dangerous || Time.time - _startTime < timeToSpeedUp * _timeStep) return;
 			_static = true;
-			_animator.SetTrigger(AnimatorAccelerate);
 			_audio.Accelerate();
+			_animator.SetTrigger(AnimatorAccelerate);
+			++_timeStep;
 			var speedMultiplier = Mathf.Log10(_timeStep) * speedUpMultiplier + 1;
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
-			++_timeStep;
 		}
 
 		private void FixedUpdate()

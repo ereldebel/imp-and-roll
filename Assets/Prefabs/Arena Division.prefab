@@ -445,9 +445,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 8df3c122f086e4a4499643f377c2eff0, type: 3}
-  - {fileID: 8300000, guid: fe7f5df4082ba3c42b2d7b0c5c247e76, type: 3}
-  - {fileID: 8300000, guid: e370dbb6a9a7a674ca0433f93f4219f4, type: 3}
+  - clip: {fileID: 8300000, guid: 8df3c122f086e4a4499643f377c2eff0, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: fe7f5df4082ba3c42b2d7b0c5c247e76, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: e370dbb6a9a7a674ca0433f93f4219f4, type: 3}
+    volume: 1
 --- !u!1001 &4215994224097321475
 PrefabInstance:
   m_ObjectHideFlags: 0
