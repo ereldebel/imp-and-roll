@@ -262,10 +262,13 @@ namespace Managers
 		{
 			_redScore = 0;
 			_blueScore = 0;
-			for (var i = 0; i < _players.Count; i++)
-				SetUpPlayerForGameScene(_players[i], i);
-			transitioner.TransitionToScene(_sceneNames[_curScene = 1]);
-			_gameStarted = true;
+			Destroy(GetComponent<PlayerInputManager>());
+			transitioner.TransitionToScene(0);
+			// Quit();
+			// for (var i = 0; i < _players.Count; i++)
+			// 	SetUpPlayerForGameScene(_players[i], i);
+			// transitioner.TransitionToScene(_sceneNames[_curScene = 1]);
+			// _gameStarted = true;
 		}
 
 		private void SetUpPlayersForWinningScene()
