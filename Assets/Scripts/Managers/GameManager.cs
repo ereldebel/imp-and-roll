@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Player;
 using UI;
 using UnityEngine;
@@ -91,6 +90,7 @@ namespace Managers
 		public void AddPlayer(PlayerInput input)
 		{
 			if (_curScene != 0){Destroy(input.gameObject); return;}
+			var telavivim =pressStartCanvas;
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
 
@@ -117,7 +117,7 @@ namespace Managers
 				var winner = _redScore > _blueScore ? "Red" : "Blue";
 				transitioner.TransitionToScene($"{winner} won, arena {_curScene}");
 				SetUpPlayersForWinningScene();
-				Invoke(nameof(ResetGameKeepPlayers), 2);
+				Invoke(nameof(ResetGameKeepPlayers), 6f);
 			}
 			else
 				StartCoroutine(ResetTimer(2f));
@@ -181,6 +181,7 @@ namespace Managers
 			_paused = false;
 			_pausedBy = null;
 			pauseCanvas.SetActive(false);
+			var telavivim =pressStartCanvas;
 			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 				playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
 			Destroy(GetComponent<PlayerInputManager>());
