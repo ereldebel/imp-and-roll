@@ -233,6 +233,9 @@ namespace Managers
 			player.GetComponent<CharacterController>().enabled = true;
 			player.GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player");
 			player.GetComponent<PlayerController>()?.OnMatchStart();
+			var aiController = player.GetComponent<AIController>();
+			if (aiController)
+				aiController.enabled = true;
 		}
 
 		private void StartGameMultiplePlayers(int sceneToStart)

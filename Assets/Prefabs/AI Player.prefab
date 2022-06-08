@@ -7,10 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3525636514363418516, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
-      propertyPath: frictionInIceScene
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4437818291732569120, guid: 5263e4dd64a8fe0469ca2673fa72b291, type: 3}
       propertyPath: m_RootOrder
       value: 0

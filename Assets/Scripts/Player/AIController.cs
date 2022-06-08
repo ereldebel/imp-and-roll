@@ -1,4 +1,3 @@
-using System;
 using Managers;
 using UnityEngine;
 
@@ -7,74 +6,98 @@ namespace Player
 	[RequireComponent(typeof(PlayerBrain))]
 	public class AIController : MonoBehaviour
 	{
-		[SerializeField] private Transform otherPlayer;
 		[SerializeField] private float throwLoad = 0.8f;
+		[SerializeField] private bool printStateChanges = true;
+		[SerializeField] private AIState state;
 
-		private Transform _border;
-		private Transform _ball;
+		private Transform _otherPlayer;
 		private PlayerBrain _brain;
 		private bool _rightSide;
-		private bool _throwing;
+
+		private float DistanceToBorder => Mathf.Abs(MatchManager.DivisionBorder.position.x - transform.position.x);
+
+		private Vector3 PlayerSideCenter
+		{
+			get
+			{
+				var midOfPlayerSideX = MatchManager.ArenaLength / 4;
+				midOfPlayerSideX = _rightSide ? midOfPlayerSideX : -midOfPlayerSideX;
+				midOfPlayerSideX += MatchManager.DivisionBorder.position.x / 2;
+				return new Vector3(midOfPlayerSideX, 0, 0);
+			}
+		}
+		
+		private AIState State
+		{
+			set
+			{
+				if (printStateChanges && state != value)
+					print(value);
+				state = value;
+			}
+		}
+		private enum AIState{Idle, Throwing, ChasingBall, ChasingPowerUp, DodgingMonster, DodgingBall}
 
 		private void Awake()
 		{
 			_rightSide = transform.position.x > 0;
 			_brain = GetComponent<PlayerBrain>();
-			MatchManager.MatchStarted += OnEnable;
-			if (otherPlayer == null)
-				otherPlayer = GameManager.Players[0].transform;
-		}
-
-		private void OnDestroy()
-		{
-			MatchManager.MatchStarted -= OnEnable;
-		}
-
-		private void OnEnable()
-		{
-			_ball = MatchManager.BallTransform;
-			_border = MatchManager.DivisionBorder;
+			foreach(var player in GameManager.Shared.GetOpposingPlayer(gameObject))
+			{
+				_otherPlayer = player.transform;
+				return;
+			}
 		}
 
 		private void Update()
 		{
-			var ballIsOnBorderRight = _ball.position.x > _border.position.x;
-			if (_throwing)
+			var ballIsOnBorderRight = MatchManager.BallTransform.position.x > MatchManager.DivisionBorder.position.x;
+			if (_brain.ThrowChargeTime > 0)
 			{
-				_brain.AimingStick = DirectionTo(otherPlayer.position);
-				if (!(_brain.ThrowChargeTime > throwLoad)) return;
-				_brain.ThrowBall();
-				_throwing = false;
+				State = AIState.Throwing;
+				_brain.AimingStick = DirectionTo(_otherPlayer.position + Next2DGaussianXZ()/4);
+				if (_brain.ThrowChargeTime > throwLoad + NextStdGaussian()/10 || DistanceToBorder < 1)
+					_brain.ThrowBall();
+				else
+					MoveInDirection(DirectionTo(_otherPlayer.position));
 			}
 			else if (_rightSide == ballIsOnBorderRight)
 			{
 				if (_brain.HasBall)
-					_throwing = _brain.ChargeThrow();
+				{
+					State = AIState.Throwing;
+					if (DistanceToBorder < 1.5)
+						MoveInDirection(new Vector3(_rightSide ? 2 : -2, 0, -transform.position.z), 2);
+					else
+						_brain.ChargeThrow();
+				}
 				else
-					MoveInDirection(DirectionTo(_ball.position));
+				{
+					State = AIState.ChasingBall;
+					MoveInDirection(DirectionTo(MatchManager.BallTransform.position), 1);
+				}
 			}
 			else
 			{
 				foreach (var collectible in MatchManager.CollectibleCollection)
 				{
-					var collectibleIsOnBorderRight = collectible.position.x > _border.position.x;
+					State = AIState.ChasingPowerUp;
+					var collectibleIsOnBorderRight = collectible.position.x > MatchManager.DivisionBorder.position.x;
 					if (_rightSide != collectibleIsOnBorderRight) continue;
 					MoveInDirection(DirectionTo(collectible.position));
 					return;
 				}
-
-				var midOfPlayerPartX = MatchManager.ArenaLength / 4;
-				midOfPlayerPartX = _rightSide ? midOfPlayerPartX : -midOfPlayerPartX;
-				midOfPlayerPartX += _border.position.x / 2;
-				var movementDirection = DirectionTo(new Vector3(midOfPlayerPartX, 0, 0));
+				State = AIState.Idle;
+				var movementDirection = DirectionTo(PlayerSideCenter);
 				MoveInDirection(movementDirection.sqrMagnitude > 0.5f ? movementDirection : Vector2.zero);
 			}
 		}
 
-		private void MoveInDirection(Vector2 movementDirection)
+		private void MoveInDirection(Vector2 movementDirection, int stressLevel = 0)
 		{
 			_brain.MovementStick = movementDirection.normalized;
-			if (movementDirection.sqrMagnitude > 100)
+			var sqrMagnitude = movementDirection.sqrMagnitude;
+			if (stressLevel == 2 || (stressLevel == 1 && sqrMagnitude > 50) || movementDirection.sqrMagnitude > 100)
 				_brain.DodgeRoll();
 		}
 
@@ -82,6 +105,24 @@ namespace Player
 		{
 			var pos = transform.position;
 			return new Vector2(destination.x - pos.x, destination.z - pos.z);
+		}
+
+		private static Vector3 Next2DGaussianXZ()
+		{
+			return new Vector3(NextStdGaussian(), 0, NextStdGaussian());
+		}
+
+		private static float NextStdGaussian()
+		{
+			float u, s;
+			do
+			{
+				u = 2f * Random.value - 1f;
+				var v = 2f * Random.value - 1f;
+				s = u * u + v * v;
+			} while (s >= 1);
+
+			return u * Mathf.Sqrt(-2f * Mathf.Log(s) / s);
 		}
 	}
 }

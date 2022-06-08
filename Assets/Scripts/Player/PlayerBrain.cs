@@ -112,6 +112,8 @@ namespace Player
 		private static readonly int AnimatorHasBall = Animator.StringToHash("Has Ball");
 		private static readonly int AnimatorTaunt = Animator.StringToHash("Taunt");
 		private static readonly int AnimatorTauntIndex = Animator.StringToHash("Taunt Index");
+		private AIController _aiController;
+		private PlayerInput _playerInput;
 
 		#endregion
 
@@ -190,6 +192,8 @@ namespace Player
 			_rumble = GetComponent<Rumble>();
 			_audio = GetComponent<PlayerAudio>();
 			_particleSystem = GetComponentInChildren<ParticleSystem>();
+			_aiController = GetComponent<AIController>();
+			_playerInput = GetComponent<PlayerInput>();
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
 			_ballPositionsByDirection.Add(ballPositionsUp45);
@@ -297,7 +301,7 @@ namespace Player
 				_ballPowerUp = ballPowerUp;
 			else
 				_ballPowerUp = null;
-			if(_chargeStartTime >= 0)
+			if (_chargeStartTime >= 0)
 				_ballPowerUp.OnCharge(_ball);
 		}
 
@@ -313,7 +317,10 @@ namespace Player
 			_chargeStartTime = -1;
 			_ball = null;
 			SetPowerUp(null);
-			GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Start Menu");
+			if (_playerInput)
+				_playerInput.SwitchCurrentActionMap("Start Menu");
+			if (_aiController)
+				_aiController.enabled = false;
 			transform.rotation = _left ? _faceLeft : _faceRight;
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
