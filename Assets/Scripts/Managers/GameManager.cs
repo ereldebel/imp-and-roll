@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Player;
 using UI;
 using UnityEngine;
@@ -26,8 +25,8 @@ namespace Managers
 
 		#region Private Fields
 
-		private readonly List<GameObject> _players = new List<GameObject>();
-		private readonly Dictionary<GameObject, bool> _playerReadyStatus = new Dictionary<GameObject, bool>();
+		private  List<GameObject> _players;
+		private  Dictionary<GameObject, bool> _playerReadyStatus;
 		private int _numPlayers;
 		private bool _gameStarted;
 		private bool _AIPlaying;
@@ -35,7 +34,7 @@ namespace Managers
 		private float _prevTimeScale;
 		private bool _paused;
 		private PlayerInput _pausedBy;
-		private readonly Dictionary<PlayerInput, string> _playerInputs = new Dictionary<PlayerInput, string>();
+		private Dictionary<PlayerInput, string> _playerInputs;
 
 		private readonly string[] _sceneNames = {"Opening Scene", "Original Arena", "Icy Arena", "Volcanic Arena"};
 		private int _curScene;
@@ -66,6 +65,11 @@ namespace Managers
 
 		private void Awake()
 		{
+			pressStartCanvas.SetActive(true);
+			_playerReadyStatus = new Dictionary<GameObject, bool>();
+			_players = new List<GameObject>();
+			_playerInputs = new Dictionary<PlayerInput, string>();
+			var telavivim = Shared;
 			if (Shared)
 			{
 				if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -81,6 +85,7 @@ namespace Managers
 
 			_numPlayers = 0;
 			Shared = this;
+
 			DontDestroyOnLoad(Shared.gameObject);
 		}
 
@@ -90,7 +95,7 @@ namespace Managers
 
 		public void AddPlayer(PlayerInput input)
 		{
-			if (_curScene != 0){Destroy(input.gameObject); return;}
+			if (_curScene != 0 || _players == null){Destroy(input.gameObject); return;}
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
 
@@ -117,7 +122,7 @@ namespace Managers
 				var winner = _redScore > _blueScore ? "Red" : "Blue";
 				transitioner.TransitionToScene($"{winner} won, arena {_curScene}");
 				SetUpPlayersForWinningScene();
-				Invoke(nameof(ResetGameKeepPlayers), 2);
+				Invoke(nameof(ResetGameKeepPlayers), 6f);
 			}
 			else
 				StartCoroutine(ResetTimer(2f));
@@ -180,10 +185,11 @@ namespace Managers
 			Time.timeScale = _prevTimeScale;
 			_paused = false;
 			_pausedBy = null;
-			pauseCanvas.SetActive(false);
-			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
-				playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
 			Destroy(GetComponent<PlayerInputManager>());
+
+			pauseCanvas.SetActive(false);
+			// foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
+			// 	playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
 			transitioner.TransitionToScene(0);
 		}
 
@@ -256,10 +262,13 @@ namespace Managers
 		{
 			_redScore = 0;
 			_blueScore = 0;
-			for (var i = 0; i < _players.Count; i++)
-				SetUpPlayerForGameScene(_players[i], i);
-			transitioner.TransitionToScene(_sceneNames[_curScene = 1]);
-			_gameStarted = true;
+			Destroy(GetComponent<PlayerInputManager>());
+			transitioner.TransitionToScene(0);
+			// Quit();
+			// for (var i = 0; i < _players.Count; i++)
+			// 	SetUpPlayerForGameScene(_players[i], i);
+			// transitioner.TransitionToScene(_sceneNames[_curScene = 1]);
+			// _gameStarted = true;
 		}
 
 		private void SetUpPlayersForWinningScene()

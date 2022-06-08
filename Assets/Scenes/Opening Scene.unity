@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 982678058}
-  pressStartCanvas: {fileID: 1818926898}
 --- !u!4 &345388158
 Transform:
   m_ObjectHideFlags: 0
@@ -830,6 +829,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3c1e39b7f30365c49a10869945f6880f, type: 3}
+    - target: {fileID: 8988732728712324069, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988732728712324070, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 682.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988732728712324070, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 172.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 8988732728712324070, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 8988732728913236201, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1337,6 +1352,10 @@ PrefabInstance:
     - target: {fileID: 6537296340413375429, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537296340413375434, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
+      propertyPath: m_MaxPlayerCount
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6537296340413375435, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: m_RootOrder
