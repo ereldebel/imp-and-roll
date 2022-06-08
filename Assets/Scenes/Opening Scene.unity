@@ -1353,6 +1353,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 6537296340413375434, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
+      propertyPath: m_MaxPlayerCount
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6537296340413375435, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: m_RootOrder
       value: 3
