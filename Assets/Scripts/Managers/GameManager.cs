@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Player;
 using UI;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -20,13 +21,16 @@ namespace Managers
 		[SerializeField] private GameObject pressStartCanvas;
 		[SerializeField] private GameObject pauseCanvas;
 		[SerializeField] private SceneTransitioner transitioner;
-
+		[SerializeField] private GameObject[] huds;
+		[SerializeField] private Animator emptyHudAnimator;
+		[SerializeField] private GameObject AILabel;
+		
 		#endregion
 
 		#region Private Fields
 
-		private  List<GameObject> _players;
-		private  Dictionary<GameObject, bool> _playerReadyStatus;
+		private List<GameObject> _players;
+		private Dictionary<GameObject, bool> _playerReadyStatus;
 		private int _numPlayers;
 		private bool _gameStarted;
 		private bool _AIPlaying;
@@ -69,7 +73,6 @@ namespace Managers
 			_playerReadyStatus = new Dictionary<GameObject, bool>();
 			_players = new List<GameObject>();
 			_playerInputs = new Dictionary<PlayerInput, string>();
-			var telavivim = Shared;
 			if (Shared)
 			{
 				if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -95,7 +98,12 @@ namespace Managers
 
 		public void AddPlayer(PlayerInput input)
 		{
-			if (_curScene != 0 || _players == null){Destroy(input.gameObject); return;}
+			if (_curScene != 0 || _players == null)
+			{
+				Destroy(input.gameObject);
+				return;
+			}
+
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
 
@@ -106,6 +114,8 @@ namespace Managers
 			SetUpPlayerForStartScene(player, _numPlayers);
 			_numPlayers++;
 			_playerInputs.Add(input, "");
+			if (_numPlayers == 2)
+				emptyHudAnimator.enabled = true;
 		}
 
 		public void PlayerWon(bool blueLost)
@@ -146,7 +156,7 @@ namespace Managers
 				_players[1].GetComponent<AIController>().enabled = true;
 		}
 
-		public IEnumerable<GameObject> GetOpposingPlayer(GameObject callingPlayer)
+		public IEnumerable<GameObject> GetOpposingPlayers(GameObject callingPlayer)
 		{
 			return _players.Where(player => player != callingPlayer);
 		}
@@ -212,6 +222,7 @@ namespace Managers
 
 		private void SetUpPlayerForStartScene(GameObject player, int playerID)
 		{
+			huds[playerID].SetActive(true);
 			player.GetComponent<CharacterController>().enabled = true;
 			player.transform.position = playerInfos[playerID].locationOpeningScene;
 			player.GetComponent<PlayerInput>()
@@ -254,12 +265,15 @@ namespace Managers
 		private void CreateAI()
 		{
 			_AIPlaying = true;
+			AILabel.SetActive(true);
 			var player = Instantiate(AIPlayerPrefab, playerInfos[1].locationOpeningScene,
 				AIPlayerPrefab.transform.rotation);
 			DontDestroyOnLoad(player);
 			_players.Add(player);
-			MakePlayerRed(player);
+			emptyHudAnimator.enabled = true;
+			SetUpPlayerForStartScene(player, _numPlayers);
 		}
+		
 
 		private void ResetGameKeepPlayers()
 		{
@@ -295,7 +309,7 @@ namespace Managers
 			for (var i = waitTime; i > 0; i--)
 			{
 				yield return new WaitForSeconds(1);
-				if (_numPlayers == 1) continue;
+				if (_playerReadyStatus.All(pair=>pair.Value)) continue;
 				_gameStarted = false;
 				yield break;
 			}

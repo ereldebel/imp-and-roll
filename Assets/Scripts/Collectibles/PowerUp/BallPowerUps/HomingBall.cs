@@ -29,7 +29,7 @@ namespace Collectibles.PowerUp.BallPowerUps
 		public override void Collect(GameObject collector)
 		{
 			base.Collect(collector);
-			_otherPlayers = GameManager.Shared.GetOpposingPlayer(collector);
+			_otherPlayers = GameManager.Shared.GetOpposingPlayers(collector);
 		}
 
 		public bool IsUncatchableWithRoll()

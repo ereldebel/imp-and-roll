@@ -151,17 +151,6 @@
                 },
                 {
                     "name": "",
-                    "id": "728a8b46-e3bb-4b76-9618-e4acbea432f9",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b11d78a6-82e7-4fff-a03a-e8df79452200",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -291,6 +280,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Taunt",
+                    "type": "Button",
+                    "id": "3815fa0b-104c-4417-bcfc-c817562b1ef3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Start",
                     "type": "Button",
                     "id": "a5fb549a-b537-480f-a511-111b6410e7da",
@@ -391,17 +389,6 @@
                 },
                 {
                     "name": "",
-                    "id": "bedfd79d-777e-4a03-9bdd-2c07c0cbbd90",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "be2d5c97-d0a1-405f-bf2c-27ff132e7c2e",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -463,6 +450,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b96b66b-202a-4e61-ae5a-3972a47cf2e4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Taunt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65c5ad55-a52d-4455-9c22-4beaf6fedb63",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Taunt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

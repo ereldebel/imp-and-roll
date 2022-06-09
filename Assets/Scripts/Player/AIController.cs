@@ -51,7 +51,7 @@ namespace Player
 		{
 			_rightSide = transform.position.x > 0;
 			_brain = GetComponent<PlayerBrain>();
-			foreach (var player in GameManager.Shared.GetOpposingPlayer(gameObject))
+			foreach (var player in GameManager.Shared.GetOpposingPlayers(gameObject))
 			{
 				_otherPlayer = player.transform;
 				return;
