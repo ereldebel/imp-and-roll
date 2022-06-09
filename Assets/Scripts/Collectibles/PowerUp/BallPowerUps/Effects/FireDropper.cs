@@ -32,8 +32,9 @@ namespace Collectibles.PowerUp.BallPowerUps.Effects
 
 		private void Update()
 		{
-			if (_stopped && Time.time - _enableTime > _effectTime)
-				gameObject.SetActive(false);
+			if (!_stopped || !(Time.time - _enableTime > _effectTime)) return;
+			gameObject.SetActive(false);
+			Destroy(gameObject,5);
 		}
 	}
 }

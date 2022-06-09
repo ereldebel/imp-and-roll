@@ -21,14 +21,21 @@ namespace Reflections
 
 		private void Update()
 		{
+			if (!_daddyT.gameObject.activeSelf)
+			{
+				_myMeshRenderer.enabled = false;
+				return;
+			}
+
+			_myMeshRenderer.enabled = true;
 			var newPos = _daddyT.position;
 			newPos.y *= -1;
 			_myT.position = newPos;
 			_myT.localScale = _daddyT.localScale;
 			_myT.rotation = Quaternion.AngleAxis(180, Vector3.forward) * _daddyT.rotation;
 			_myMeshFilter.mesh = _daddyMeshFilter.mesh;
-			if (_daddyMeshRenderer.materials != _myMeshRenderer.materials)
-				_myMeshRenderer.materials = _daddyMeshRenderer.materials;
+			if (_daddyMeshRenderer.material != _myMeshRenderer.material)
+				_myMeshRenderer.material = _daddyMeshRenderer.material;
 			if (GameManager.CurScene != 2)
 				Destroy(gameObject);
 		}

@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Right Side Hand Lava
+  m_Controller: {fileID: 9100000, guid: 7a9e9c71817e32440a3963bc0c139fb8, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2a326ee322f5b1c42a428f835ebc1a42, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a5d29132808a88b43bb4ab54f6342425, type: 2}

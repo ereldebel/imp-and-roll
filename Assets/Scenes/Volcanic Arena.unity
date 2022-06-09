@@ -1602,6 +1602,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 179409885439810052, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: ac026230143ed254986fe349c0731d5d, type: 2}
     - target: {fileID: 1082994639078172355, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
@@ -1630,6 +1634,18 @@ PrefabInstance:
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4161231417975660283, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 193b89495aaf6764c8c07087870e053c, type: 2}
+    - target: {fileID: 4300532631290305657, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: ac026230143ed254986fe349c0731d5d, type: 2}
+    - target: {fileID: 4440245491291373395, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 99e65f4860c8dd644885bacdba07a635, type: 2}
     - target: {fileID: 4587116394386670154, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
@@ -1646,6 +1662,30 @@ PrefabInstance:
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5695681004898688065, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 193b89495aaf6764c8c07087870e053c, type: 2}
+    - target: {fileID: 5705421267399637537, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 99e65f4860c8dd644885bacdba07a635, type: 2}
+    - target: {fileID: 6834988490633207138, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 193b89495aaf6764c8c07087870e053c, type: 2}
+    - target: {fileID: 7638379984543947304, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 99e65f4860c8dd644885bacdba07a635, type: 2}
+    - target: {fileID: 7910215383574908503, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: ac026230143ed254986fe349c0731d5d, type: 2}
+    - target: {fileID: 8003590590253997474, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: ac026230143ed254986fe349c0731d5d, type: 2}
     - target: {fileID: 8546310232643932339, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 

@@ -113,6 +113,8 @@ namespace ArenaDivision
 		private void FixedUpdate()
 		{
 			if (_static) return;
+			if (_ball.position.y >= transform.position.y && !_gotEye)
+				return;
 			Move(_gotEye ? _originalPosition : _ball.position);
 			UpdateSpectralChain();
 		}

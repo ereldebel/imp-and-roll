@@ -412,9 +412,9 @@ namespace Player
 			var ball = collision.gameObject.GetComponent<Ball.Ball>();
 			if (ball == null) return;
 			if (!ball.Pickup(transform, _rolling)) return;
+			_ball = ball;
 			_audio.Laugh();
 			_animator.SetBool(AnimatorHasBall, true);
-			_ball = ball;
 		}
 
 		private void ProcessMovementInput()
