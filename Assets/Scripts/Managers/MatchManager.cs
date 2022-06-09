@@ -51,7 +51,6 @@ namespace Managers
 
 		#region Public C# Events
 
-		public static event Action MatchStarted;
 		public static event Action MatchEnded;
 
 		#endregion
@@ -66,7 +65,6 @@ namespace Managers
 			GameManager.Shared.AwakeAI();
 			_spawner = StartCoroutine(SpawnCollectible());
 			_diagonal = Mathf.Sqrt(Mathf.Pow(_arenaDimensions.x, 2) + Mathf.Pow(_arenaDimensions.y, 2));
-			MatchStarted?.Invoke();
 		}
 
 		private void Start()
@@ -90,8 +88,8 @@ namespace Managers
 			var winningPlayerIndex = leftWon ? 1 : 0; // assumes the right player is player 0.
 			GameManager.Players[winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(true);
 			GameManager.Players[1 - winningPlayerIndex].GetComponent<PlayerBrain>()?.GameOver(false);
+			GameManager.Shared.PlayerWon(leftWon);
 			MatchEnded?.Invoke();
-			_shared.StartCoroutine(EndMatchWithDelay(leftWon, 3));
 		}
 
 		public static void AddToCollectibleCollection(Transform collectibleTransform)
@@ -138,12 +136,6 @@ namespace Managers
 			if (blueRedDiff < 0 || (blueRedDiff == 0 && Random.value > 0.5f))
 				x = -x;
 			ball.UnfreezeAndInitializeBall(new Vector3(x, 2, z));
-		}
-
-		private static IEnumerator EndMatchWithDelay(bool leftWon, float delay)
-		{
-			yield return new WaitForSeconds(delay);
-			GameManager.Shared.PlayerWon(leftWon);
 		}
 
 		private IEnumerator SpawnCollectible()

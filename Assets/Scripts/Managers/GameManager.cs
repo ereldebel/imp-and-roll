@@ -135,7 +135,7 @@ namespace Managers
 				Invoke(nameof(ResetGameKeepPlayers), 6f);
 			}
 			else
-				StartCoroutine(ResetTimer(2f));
+				StartCoroutine(ResetTimer(3f));
 		}
 
 		public void PlayerReady(GameObject player)
