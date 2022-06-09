@@ -70,5 +70,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwLoad: 0.8
-  printStateChanges: 1
+  printStateChanges: 0
   state: 0

@@ -60,6 +60,7 @@ namespace Player
 
 		private void Update()
 		{
+			if (!MatchManager.BallTransform || !MatchManager.DivisionBorder) return;
 			var ballPosition = MatchManager.BallTransform.position;
 			if (!_brain.HasBall && ballPosition.y > 0.3 &&
 			    Vector3.Distance(transform.position, ballPosition) < 0.4 + (NextStdGaussian() / 10))

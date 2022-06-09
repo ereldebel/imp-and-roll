@@ -27,12 +27,14 @@ namespace Managers
 
 		#region Public Properties
 
-		public static Transform BallTransform => _shared.ball ? _shared.ball.transform : _shared.transform;
-		public static float ArenaLength => _shared._arenaDimensions[0];
-		public static float ArenaWidth => _shared._arenaDimensions[1];
-		public static float MaxDistance => _shared != null? _shared._diagonal : 50;
-		public static Transform DivisionBorder => _shared.divisionBorder;
-		public static IEnumerable<Transform> CollectibleCollection => _shared._collectibleCollection;
+		public static Transform BallTransform =>
+			_shared ? (_shared.ball ? _shared.ball.transform : _shared.transform) : null;
+
+		public static float ArenaLength => _shared ? _shared._arenaDimensions[0] : 100;
+		public static float ArenaWidth => _shared ? _shared._arenaDimensions[1] : 100;
+		public static float MaxDistance => _shared ? (_shared != null ? _shared._diagonal : 50) : 100;
+		public static Transform DivisionBorder => _shared ? _shared.divisionBorder : null;
+		public static IEnumerable<Transform> CollectibleCollection => _shared ? _shared._collectibleCollection : null;
 
 		#endregion
 
