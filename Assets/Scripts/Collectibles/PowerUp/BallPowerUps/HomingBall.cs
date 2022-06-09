@@ -73,9 +73,12 @@ namespace Collectibles.PowerUp.BallPowerUps
 			if (diff == Vector3.zero) return;
 			var diffNorm = diff.magnitude;
 			var currVelocity = _ballRigidbody.velocity;
-			_ballRigidbody.velocity =
-				Vector3.Slerp(currVelocity, diff * (currVelocity.magnitude / diffNorm),
-					Mathf.Pow(diffNorm + 1, _attractionRate));
+			var currYVelocity = currVelocity.y;
+			currVelocity.y = 0;
+			var newVelocity = Vector3.Slerp(currVelocity, diff * (currVelocity.magnitude / diffNorm),
+				Mathf.Pow(diffNorm + 1, _attractionRate));
+			newVelocity.y = currYVelocity;
+			_ballRigidbody.velocity = newVelocity;
 			_ballTransform.LookAt(_target);
 			_ballTransform.rotation = RotationOffset * _ballTransform.rotation;
 		}
