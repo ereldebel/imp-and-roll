@@ -26,7 +26,7 @@ namespace Player
 				return new Vector3(midOfPlayerSideX, 0, 0);
 			}
 		}
-		
+
 		private AIState State
 		{
 			set
@@ -36,13 +36,22 @@ namespace Player
 				state = value;
 			}
 		}
-		private enum AIState{Idle, Throwing, ChasingBall, ChasingPowerUp, DodgingMonster, DodgingBall}
+
+		private enum AIState
+		{
+			Idle,
+			Throwing,
+			ChasingBall,
+			ChasingPowerUp,
+			DodgingMonster,
+			DodgingBall
+		}
 
 		private void Awake()
 		{
 			_rightSide = transform.position.x > 0;
 			_brain = GetComponent<PlayerBrain>();
-			foreach(var player in GameManager.Shared.GetOpposingPlayer(gameObject))
+			foreach (var player in GameManager.Shared.GetOpposingPlayer(gameObject))
 			{
 				_otherPlayer = player.transform;
 				return;
@@ -51,12 +60,22 @@ namespace Player
 
 		private void Update()
 		{
-			var ballIsOnBorderRight = MatchManager.BallTransform.position.x > MatchManager.DivisionBorder.position.x;
+			var ballPosition = MatchManager.BallTransform.position;
+			if (!_brain.HasBall && ballPosition.y > 0.3 &&
+			    Vector3.Distance(transform.position, ballPosition) < 0.4 + (NextStdGaussian() / 10))
+			{
+				State = AIState.DodgingBall;
+				_brain.DodgeRoll();
+				return;
+			}
+
+			var divisionPosition = MatchManager.DivisionBorder.position;
+			var ballIsOnBorderRight = ballPosition.x > divisionPosition.x;
 			if (_brain.ThrowChargeTime > 0)
 			{
 				State = AIState.Throwing;
-				_brain.AimingStick = DirectionTo(_otherPlayer.position + Next2DGaussianXZ()/4);
-				if (_brain.ThrowChargeTime > throwLoad + NextStdGaussian()/10 || DistanceToBorder < 1)
+				_brain.AimingStick = DirectionTo(_otherPlayer.position + Next2DGaussianXZ() / 4);
+				if (_brain.ThrowChargeTime > throwLoad + NextStdGaussian() / 10 || DistanceToBorder < 1)
 					_brain.ThrowBall();
 				else
 					MoveInDirection(DirectionTo(_otherPlayer.position));
@@ -67,14 +86,17 @@ namespace Player
 				{
 					State = AIState.Throwing;
 					if (DistanceToBorder < 1.5)
+					{
+						State = AIState.DodgingMonster;
 						MoveInDirection(new Vector3(_rightSide ? 2 : -2, 0, -transform.position.z), 2);
+					}
 					else
 						_brain.ChargeThrow();
 				}
 				else
 				{
 					State = AIState.ChasingBall;
-					MoveInDirection(DirectionTo(MatchManager.BallTransform.position), 1);
+					MoveInDirection(DirectionTo(ballPosition), 1);
 				}
 			}
 			else
@@ -82,11 +104,12 @@ namespace Player
 				foreach (var collectible in MatchManager.CollectibleCollection)
 				{
 					State = AIState.ChasingPowerUp;
-					var collectibleIsOnBorderRight = collectible.position.x > MatchManager.DivisionBorder.position.x;
+					var collectibleIsOnBorderRight = collectible.position.x > divisionPosition.x;
 					if (_rightSide != collectibleIsOnBorderRight) continue;
 					MoveInDirection(DirectionTo(collectible.position));
 					return;
 				}
+
 				State = AIState.Idle;
 				var movementDirection = DirectionTo(PlayerSideCenter);
 				MoveInDirection(movementDirection.sqrMagnitude > 0.5f ? movementDirection : Vector2.zero);
