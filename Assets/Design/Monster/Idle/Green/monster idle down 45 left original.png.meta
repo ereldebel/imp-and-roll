@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 5931bcc889ab778449d964aca2b40075
+guid: b660bfd5c07d856409112aa1084c9139
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -7239192150508331739
+    second: monster idle down 45 left original_0
+  - first:
+      213: -647542929703067326
+    second: monster idle down 45 left original_1
+  - first:
+      213: -3442324284353123268
+    second: monster idle down 45 left original_2
+  - first:
+      213: 7124023459804050162
+    second: monster idle down 45 left original_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +125,95 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: monster idle down 45 left original_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52d97201819398b90800000000000000
+      internalID: -7239192150508331739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster idle down 45 left original_1
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 241ab32e2277307f0800000000000000
+      internalID: -647542929703067326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster idle down 45 left original_2
+      rect:
+        serializedVersion: 2
+        x: 2748
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3c6e653d486a30d0800000000000000
+      internalID: -3442324284353123268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster idle down 45 left original_3
+      rect:
+        serializedVersion: 2
+        x: 4122
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f27b2d879d9dd260800000000000000
+      internalID: 7124023459804050162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 181e2d503b970e44eae8aaf3a739ea9b
     internalID: 0
     vertices: []
     indices: 
