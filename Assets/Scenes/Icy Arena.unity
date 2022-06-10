@@ -1576,6 +1576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 161067343215516415, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
     - target: {fileID: 161067343448234020, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: m_Name
       value: Hands
@@ -1633,6 +1637,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: a2fe5998b6021924ab4d1a87d7a895b3, type: 2}
     - target: {fileID: 1082994639078172355, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: yMaxVal
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082994639078172355, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 0}
@@ -1641,16 +1649,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 560536426}
     - target: {fileID: 1737403914631151925, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: yMaxVal
+      value: -1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737403914631151925, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: positionFix
+      value: 3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737403914631151925, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 560536426}
+    - target: {fileID: 2318846560577433660, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: yMaxVal
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2318846560577433660, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 560536426}
     - target: {fileID: 3038471420860057290, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: yMaxVal
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038471420860057290, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602858583360074015, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: yMaxVal
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3602858583360074015, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
@@ -1677,6 +1705,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5137299399959622565, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: yMaxVal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137299399959622565, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
       objectReference: {fileID: 0}
@@ -1686,11 +1718,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5653225861557408539, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: yMaxVal
-      value: 17.8
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 5653225861557408539, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: positionFix
-      value: -3.6
+      value: 3.7
       objectReference: {fileID: 0}
     - target: {fileID: 5653225861557408539, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
@@ -1727,6 +1759,10 @@ PrefabInstance:
     - target: {fileID: 8927354619090454702, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058076094435681201, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
+      propertyPath: yMaxVal
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 9058076094435681201, guid: c6834ebe44d1a1348884c05dd36e438b, type: 3}
       propertyPath: objectToFollow

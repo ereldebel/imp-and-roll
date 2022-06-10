@@ -44,6 +44,7 @@ namespace Managers
 		private int _curScene;
 
 		private int _blueScore, _redScore;
+		private AIController _AIController;
 
 		private enum TargetScene
 		{
@@ -153,7 +154,7 @@ namespace Managers
 		public void AwakeAI()
 		{
 			if (_AIPlaying)
-				_players[1].GetComponent<AIController>().enabled = true;
+				_AIController.enabled = true;
 		}
 
 		public IEnumerable<GameObject> GetOpposingPlayers(GameObject callingPlayer)
@@ -170,6 +171,7 @@ namespace Managers
 			_pausedBy = playerInput;
 			pauseCanvas.SetActive(true);
 			AudioManager.Pause();
+			HaltAI();
 			foreach (var player in _playerInputs.Keys.Where(player => player).ToList())
 			{
 				_playerInputs[player] = playerInput.currentActionMap.name;
@@ -185,6 +187,7 @@ namespace Managers
 			_pausedBy = null;
 			pauseCanvas.SetActive(false);
 			AudioManager.Resume();
+			AwakeAI();
 			foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 				playerAndActionMap.Key.SwitchCurrentActionMap(playerAndActionMap.Value);
 		}
@@ -217,7 +220,7 @@ namespace Managers
 		private void HaltAI()
 		{
 			if (_AIPlaying)
-				_players[1].GetComponent<AIController>().enabled = false;
+				_AIController.enabled = false;
 		}
 
 		private void SetUpPlayerForStartScene(GameObject player, int playerID)
@@ -268,6 +271,7 @@ namespace Managers
 			AILabel.SetActive(true);
 			var player = Instantiate(AIPlayerPrefab, playerInfos[1].locationOpeningScene,
 				AIPlayerPrefab.transform.rotation);
+			_AIController = player.GetComponent<AIController>();
 			DontDestroyOnLoad(player);
 			_players.Add(player);
 			emptyHudAnimator.enabled = true;

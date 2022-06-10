@@ -96,12 +96,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378a2dff2917ed24fbbe54be961217ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yMaxVal: 9
+  yMaxVal: 6
   followX: 1
   followHeight: 0
   target: 0
   type: 1
   positionFix: 0
+  borderValues:
+  - 7
+  - -8
+  - -10
+  - 10
 --- !u!95 &4892581943313963664
 Animator:
   serializedVersion: 3

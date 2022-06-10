@@ -15,6 +15,7 @@ namespace Environment
 		[SerializeField] private Target target;
 		[SerializeField] private HandType type;
 		[SerializeField] private float positionFix;
+		
 
 		#endregion
 
@@ -22,9 +23,9 @@ namespace Environment
 		private SpriteRenderer _spriteRenderer;
 		private Vector3 _startingPos;
 		private float _yMinVal;
-		private readonly float[] _borderValues = {7, -8, -10, 10};
 		private Vector3 _up;
 
+		private static readonly float[] BorderValues = {7, -8, -10, 10};
 		private enum HandType
 		{
 			Top = 0,
@@ -75,14 +76,14 @@ namespace Environment
 			var currMaxY = followHeight ? yMaxVal + targetPos.y : yMaxVal;
 			if (followX)
 			{
-				var t = Math.Abs(_borderValues[(int) type] - targetPos.z);
+				var t = Math.Abs(BorderValues[(int) type] - targetPos.z);
 				if (t >= 5) return;
 				pos.x = targetPos.x + positionFix;
 				pos.y = Mathf.Lerp(currMaxY, _yMinVal, t / 5);
 			}
 			else
 			{
-				var t = Math.Abs(_borderValues[(int) type] - targetPos.x);
+				var t = Math.Abs(BorderValues[(int) type] - targetPos.x);
 				if (t >= 3) return;
 				pos.z = targetPos.z + positionFix;
 				pos.y = 0;
