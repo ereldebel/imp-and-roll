@@ -38,7 +38,6 @@ namespace Player
 		private float knockBackDuration = 0.5f;
 
 		[SerializeField] private float knockBackRelativeSpeed = 0.5f;
-		[SerializeField] private float flameMaxKnockBackVelocity = 2f;
 
 		[Header("Stun Settings")] [SerializeField]
 		private float stunDuration = 1;
@@ -262,11 +261,6 @@ namespace Player
 			PickupBall(collision);
 		}
 
-		private void OnParticleCollision(GameObject other)
-		{
-			TakeHit(other.transform.position - transform.position * flameMaxKnockBackVelocity, true);
-		}
-
 		public void Reset(bool slippery)
 		{
 			_friction = slippery ? frictionInIceScene : 1;
@@ -294,15 +288,33 @@ namespace Player
 
 		#region Public Methods
 
+		public bool TakeHitFromMonster()
+		{
+			if (!_ball) return false;
+			_ballThrowPositionIndex = 0;
+			_chargeStartTime = -1;
+			_ball.Release(Vector3.zero);
+			if (_ballPowerUp != null)
+				SetPowerUp(null);
+			_animator.SetBool(AnimatorHasBall, false);
+			_calledThrow = false;
+			BallThrown?.Invoke();
+			var ball = _ball;
+			_ball = null;
+			return true;
+		}
+
 		public void SetPowerUp(PowerUp powerUp)
 		{
 			_ballPowerUp?.OnRemove();
 			if (powerUp is IBallPowerUp ballPowerUp)
+			{
 				_ballPowerUp = ballPowerUp;
+				if (_chargeStartTime >= 0)
+					_ballPowerUp.OnCharge(_ball);
+			}
 			else
 				_ballPowerUp = null;
-			if (_chargeStartTime >= 0)
-				_ballPowerUp.OnCharge(_ball);
 		}
 
 		public void Taunt()
@@ -349,7 +361,7 @@ namespace Player
 			StartCoroutine(ThrowWithDelay(1 / 6f));
 		}
 
-		public bool TakeHit(Vector3 velocity, bool uncatchableWithRoll)
+		public bool TakeHit(Vector3 velocity, bool uncatchableWithRoll = false, float damage = 1)
 		{
 			if (stunDuration <= 0 || (!uncatchableWithRoll && _rolling)) return false;
 			_audio.Hit();
@@ -357,7 +369,11 @@ namespace Player
 				_rumble.Stun(_stunBar);
 			if (_ball)
 				Throw((ThrowVelocity + velocity) / 2);
-			StartCoroutine(Stun(velocity));
+			_animator.SetBool(AnimatorHasBall, false);
+			_animator.SetBool(AnimatorRunning, false);
+			_animator.SetBool(AnimatorDodge, false);
+			_animator.SetBool(AnimatorThrowing, false);
+			StartCoroutine(Stun(velocity, damage));
 			return true;
 		}
 
@@ -501,7 +517,7 @@ namespace Player
 			_rolling = false;
 		}
 
-		private IEnumerator Stun(Vector3 knockBackDir)
+		private IEnumerator Stun(Vector3 knockBackDir, float damage)
 		{
 			_animator.SetBool(AnimatorRunning, false);
 			_animator.SetBool(AnimatorStunned, true);
@@ -509,7 +525,7 @@ namespace Player
 			_animator.SetFloat(AnimatorZ, -1);
 			transform.rotation = knockBackDir.x > 0 ? _faceRight : _faceLeft;
 			if (_stunBar > 0)
-				_stunBar = Mathf.Max(_stunBar - stunBarPercentagePerHit, 0);
+				_stunBar = Mathf.Max(_stunBar - (stunBarPercentagePerHit * damage), 0);
 			var currStunDuration = stunDuration + maxStunDurationIncrease * (1 - _stunBar);
 			StunStarted?.Invoke(_stunBar);
 			_stunned = true;

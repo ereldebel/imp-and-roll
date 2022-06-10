@@ -2,6 +2,7 @@
 using Managers;
 using Player;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace UI
@@ -27,12 +28,19 @@ namespace UI
 			_material = GetComponent<Image>().material;
 			_material.SetFloat(BarRotation, rotationRange.max);
 			_playerBrain.StunStarted += StunStarted;
+			MatchManager.MatchStarted += Reset;
+		}
+
+		private void Reset()
+		{
+			_material.SetFloat(BarRotation, rotationRange.max);
 		}
 
 		private void OnDestroy()
 		{
 			_material.SetFloat(BarRotation, 1);
 			_playerBrain.StunStarted -= StunStarted;
+			MatchManager.MatchStarted -= Reset;
 		}
 
 		private void StunStarted(float percentage)

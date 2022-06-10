@@ -113,14 +113,15 @@ namespace Player
 
 				State = AIState.Idle;
 				var movementDirection = DirectionTo(PlayerSideCenter);
-				MoveInDirection(movementDirection.sqrMagnitude > 0.5f ? movementDirection : Vector2.zero);
+				MoveInDirection(movementDirection);
 			}
 		}
 
 		private void MoveInDirection(Vector2 movementDirection, int stressLevel = 0)
 		{
-			_brain.MovementStick = movementDirection.normalized;
 			var sqrMagnitude = movementDirection.sqrMagnitude;
+			if (sqrMagnitude > 0.15f)
+				_brain.MovementStick = sqrMagnitude > 1 ? movementDirection.normalized : movementDirection;
 			if (stressLevel == 2 || (stressLevel == 1 && sqrMagnitude > 50) || movementDirection.sqrMagnitude > 100)
 				_brain.DodgeRoll();
 		}

@@ -166,6 +166,19 @@ namespace Ball
 			_trailRenderer.enabled = true;
 			_thrower = thrower;
 		}
+		
+		public void Release(Vector3 posChange)
+		{
+			_transform.position += posChange;
+			_curGrowStartTime = -1;
+			_rigidbody.isKinematic = false;
+			_rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+			_collider.enabled = true;
+			_trailRenderer.enabled = true;
+			_shadow.SetActive(true);
+			_transform.SetParent(null);
+			_held = false;
+		}
 
 
 		public void Grow()
@@ -196,19 +209,6 @@ namespace Ball
 		#endregion
 
 		#region Private Methods
-
-		private void Release(Vector3 posChange)
-		{
-			_transform.position += posChange;
-			_curGrowStartTime = -1;
-			_rigidbody.isKinematic = false;
-			_rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-			_collider.enabled = true;
-			_trailRenderer.enabled = true;
-			_shadow.SetActive(true);
-			_transform.SetParent(null);
-			_held = false;
-		}
 
 		private void Landed()
 		{

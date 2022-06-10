@@ -24,7 +24,7 @@ namespace Managers
 		[SerializeField] private GameObject[] huds;
 		[SerializeField] private Animator emptyHudAnimator;
 		[SerializeField] private GameObject AILabel;
-		
+
 		#endregion
 
 		#region Private Fields
@@ -131,9 +131,7 @@ namespace Managers
 			if (Mathf.Abs(_redScore - _blueScore) > 1 || _curScene == 3)
 			{
 				var winner = _redScore > _blueScore ? "Red" : "Blue";
-				transitioner.TransitionToScene($"{winner} won, arena {_curScene}");
-				SetUpPlayersForWinningScene();
-				Invoke(nameof(ResetGameKeepPlayers), 6f);
+				StartCoroutine(DisplayWinner(winner, 1f));
 			}
 			else
 				StartCoroutine(ResetTimer(3f));
@@ -210,13 +208,6 @@ namespace Managers
 
 		#region Private Methods
 
-		private IEnumerator ResetTimer(float time)
-		{
-			yield return new WaitForSeconds(time);
-			StartGameMultiplePlayers(++_curScene);
-			_gameStarted = true;
-		}
-
 		private void HaltAI()
 		{
 			if (_AIPlaying)
@@ -277,7 +268,7 @@ namespace Managers
 			emptyHudAnimator.enabled = true;
 			SetUpPlayerForStartScene(player, _numPlayers);
 		}
-		
+
 
 		private void ResetGameKeepPlayers()
 		{
@@ -313,12 +304,27 @@ namespace Managers
 			for (var i = waitTime; i > 0; i--)
 			{
 				yield return new WaitForSeconds(1);
-				if (_playerReadyStatus.All(pair=>pair.Value)) continue;
+				if (_playerReadyStatus.All(pair => pair.Value)) continue;
 				_gameStarted = false;
 				yield break;
 			}
 
 			StartGameOnePlayer();
+		}
+
+		private IEnumerator ResetTimer(float time)
+		{
+			yield return new WaitForSeconds(time);
+			StartGameMultiplePlayers(++_curScene);
+			_gameStarted = true;
+		}
+
+		private IEnumerator DisplayWinner(string winner, float delay)
+		{
+			yield return new WaitForSeconds(delay);
+			transitioner.TransitionToScene($"{winner} won, arena {_curScene}");
+			SetUpPlayersForWinningScene();
+			Invoke(nameof(ResetGameKeepPlayers), 6f);
 		}
 
 		#endregion
