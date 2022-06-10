@@ -53,6 +53,7 @@ namespace Managers
 
 		#region Public C# Events
 
+		public static event Action MatchStarted;
 		public static event Action MatchEnded;
 
 		#endregion
@@ -67,6 +68,7 @@ namespace Managers
 			GameManager.Shared.AwakeAI();
 			_spawner = StartCoroutine(SpawnCollectible());
 			_diagonal = Mathf.Sqrt(Mathf.Pow(_arenaDimensions.x, 2) + Mathf.Pow(_arenaDimensions.y, 2));
+			MatchStarted?.Invoke();
 		}
 
 		private void Start()

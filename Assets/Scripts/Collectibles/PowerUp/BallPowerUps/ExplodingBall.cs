@@ -1,6 +1,5 @@
 ﻿using Ball;
 using Player;
-using UnityEditor;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps
@@ -91,8 +90,12 @@ namespace Collectibles.PowerUp.BallPowerUps
 				if (!tookHit)
 					player.ApplyKnockBack(relativeVelocity);
 			}
+		}
 
+		public override void OnRemove()
+		{
 			Object.Destroy(_sparks);
+			base.OnRemove();
 		}
 	}
 }
