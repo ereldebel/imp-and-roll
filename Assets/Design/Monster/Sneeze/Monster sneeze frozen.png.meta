@@ -1,7 +1,61 @@
 fileFormatVersion: 2
 guid: 3307b656f11ed564598bf4baafbdb4ff
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -3114433745727861786
+    second: Monster sneeze frozen_0
+  - first:
+      213: -5759557296706727169
+    second: Monster sneeze frozen_1
+  - first:
+      213: 3456142073591620791
+    second: Monster sneeze frozen_2
+  - first:
+      213: 7075385420279322689
+    second: Monster sneeze frozen_3
+  - first:
+      213: -2013811535976847351
+    second: Monster sneeze frozen_4
+  - first:
+      213: 6446323139974906699
+    second: Monster sneeze frozen_5
+  - first:
+      213: -4569583988126561941
+    second: Monster sneeze frozen_6
+  - first:
+      213: -3526822546487424068
+    second: Monster sneeze frozen_7
+  - first:
+      213: -409401353781306206
+    second: Monster sneeze frozen_8
+  - first:
+      213: -5894601871169013614
+    second: Monster sneeze frozen_9
+  - first:
+      213: -6430432707835702081
+    second: Monster sneeze frozen_10
+  - first:
+      213: 4157886741143742299
+    second: Monster sneeze frozen_11
+  - first:
+      213: 4895000609035079476
+    second: Monster sneeze frozen_12
+  - first:
+      213: -7943066388922456911
+    second: Monster sneeze frozen_13
+  - first:
+      213: -1275976415441451850
+    second: Monster sneeze frozen_14
+  - first:
+      213: -8395721442560831817
+    second: Monster sneeze frozen_15
+  - first:
+      213: 7774966380474795364
+    second: Monster sneeze frozen_16
+  - first:
+      213: 6579543550253869019
+    second: Monster sneeze frozen_17
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +167,389 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Monster sneeze frozen_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ebc66d520f47c4d0800000000000000
+      internalID: -3114433745727861786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_1
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff259427721f110b0800000000000000
+      internalID: -5759557296706727169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_2
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b4e5bd87eea6ff20800000000000000
+      internalID: 3456142073591620791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_3
+      rect:
+        serializedVersion: 2
+        x: 3984
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1481ab08d81d03260800000000000000
+      internalID: 7075385420279322689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_4
+      rect:
+        serializedVersion: 2
+        x: 5312
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9082481e3118d04e0800000000000000
+      internalID: -2013811535976847351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_5
+      rect:
+        serializedVersion: 2
+        x: 6640
+        y: 3638
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b43c591edb0f57950800000000000000
+      internalID: 6446323139974906699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b694760d2939590c0800000000000000
+      internalID: -4569583988126561941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_7
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb47c274953e0fc0800000000000000
+      internalID: -3526822546487424068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_8
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ac1d4943a3815af0800000000000000
+      internalID: -409401353781306206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_9
+      rect:
+        serializedVersion: 2
+        x: 3984
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2983e9044da223ea0800000000000000
+      internalID: -5894601871169013614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_10
+      rect:
+        serializedVersion: 2
+        x: 5312
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb45669a58382c6a0800000000000000
+      internalID: -6430432707835702081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_11
+      rect:
+        serializedVersion: 2
+        x: 6640
+        y: 1819
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b57ed2e26f7c3b930800000000000000
+      internalID: 4157886741143742299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f4bdc7e198ee340800000000000000
+      internalID: 4895000609035079476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_13
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b4aee4143f84c190800000000000000
+      internalID: -7943066388922456911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_14
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b406d7e532da4ee0800000000000000
+      internalID: -1275976415441451850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_15
+      rect:
+        serializedVersion: 2
+        x: 3984
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be080794d76c7b80800000000000000
+      internalID: -8395721442560831817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_16
+      rect:
+        serializedVersion: 2
+        x: 5312
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4650ec0caba36eb60800000000000000
+      internalID: 7774966380474795364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster sneeze frozen_17
+      rect:
+        serializedVersion: 2
+        x: 6640
+        y: 0
+        width: 1328
+        height: 1819
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd72811cffb3f4b50800000000000000
+      internalID: 6579543550253869019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 89993cfd60c896e4dbee4304f55c5c7a
     internalID: 0
     vertices: []
     indices: 
