@@ -1,7 +1,31 @@
 fileFormatVersion: 2
 guid: 471026ea2f7d67842bae2862ed53a5d3
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5911759432464232537
+    second: Monster attack 45 down left frozen_0
+  - first:
+      213: -741801706223912124
+    second: Monster attack 45 down left frozen_1
+  - first:
+      213: 8689176545104592605
+    second: Monster attack 45 down left frozen_2
+  - first:
+      213: 8490679011541397215
+    second: Monster attack 45 down left frozen_3
+  - first:
+      213: 5173519073789277921
+    second: Monster attack 45 down left frozen_4
+  - first:
+      213: 6153598215056588271
+    second: Monster attack 45 down left frozen_5
+  - first:
+      213: -6563603729278309071
+    second: Monster attack 45 down left frozen_6
+  - first:
+      213: 4031797111655131170
+    second: Monster attack 45 down left frozen_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +137,179 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9507899c1e9ca0250800000000000000
+      internalID: 5911759432464232537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_1
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44bbeb6474794b5f0800000000000000
+      internalID: -741801706223912124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_2
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dde7d91d708269870800000000000000
+      internalID: 8689176545104592605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_3
+      rect:
+        serializedVersion: 2
+        x: 5226
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde2ac05393f4d570800000000000000
+      internalID: 8490679011541397215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_4
+      rect:
+        serializedVersion: 2
+        x: 6968
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e6fae7ef280cc740800000000000000
+      internalID: 5173519073789277921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_5
+      rect:
+        serializedVersion: 2
+        x: 8710
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fedfce239f8f56550800000000000000
+      internalID: 6153598215056588271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_6
+      rect:
+        serializedVersion: 2
+        x: 10452
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13defe50f2569e4a0800000000000000
+      internalID: -6563603729278309071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack 45 down left frozen_7
+      rect:
+        serializedVersion: 2
+        x: 12194
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22866a69c12d3f730800000000000000
+      internalID: 4031797111655131170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6b02c1fc65eea2342b1445fbae264d77
     internalID: 0
     vertices: []
     indices: 

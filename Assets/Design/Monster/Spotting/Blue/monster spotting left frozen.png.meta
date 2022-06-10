@@ -1,7 +1,16 @@
 fileFormatVersion: 2
-guid: 0d9ca5077d41da548bb447c750c9300b
+guid: 6af2981075ae3844995f0462aee18bcc
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3846655944351681089
+    second: monster spotting left frozen_0
+  - first:
+      213: 3348898380209481496
+    second: monster spotting left frozen_1
+  - first:
+      213: -1009719105675819658
+    second: monster spotting left frozen_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +122,74 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: monster spotting left frozen_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14a0a307331126530800000000000000
+      internalID: 3846655944351681089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster spotting left frozen_1
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8176445655da97e20800000000000000
+      internalID: 3348898380209481496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster spotting left frozen_2
+      rect:
+        serializedVersion: 2
+        x: 2748
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6758447b2d1ccf1f0800000000000000
+      internalID: -1009719105675819658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1c0653fe3f22b364eae0ab4c2679f528
     internalID: 0
     vertices: []
     indices: 

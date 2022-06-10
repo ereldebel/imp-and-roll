@@ -1,7 +1,31 @@
 fileFormatVersion: 2
 guid: 15a9787f8d7f7b4469e611a920853f0c
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -3552177108273854208
+    second: Monster attack right frozen_0
+  - first:
+      213: -3084615511457894268
+    second: Monster attack right frozen_1
+  - first:
+      213: 8870560759709799662
+    second: Monster attack right frozen_2
+  - first:
+      213: 7023665289001343456
+    second: Monster attack right frozen_3
+  - first:
+      213: 566933587649713022
+    second: Monster attack right frozen_4
+  - first:
+      213: -1184483381719777708
+    second: Monster attack right frozen_5
+  - first:
+      213: 1915694876534025434
+    second: Monster attack right frozen_6
+  - first:
+      213: -712263049309849673
+    second: Monster attack right frozen_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +137,179 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Monster attack right frozen_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00900128db124bec0800000000000000
+      internalID: -3552177108273854208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack right frozen_1
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48074ea098e3135d0800000000000000
+      internalID: -3084615511457894268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack right frozen_2
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee4950143009a1b70800000000000000
+      internalID: 8870560759709799662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack right frozen_3
+      rect:
+        serializedVersion: 2
+        x: 5226
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e99a2c0e52197160800000000000000
+      internalID: 7023665289001343456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack right frozen_4
+      rect:
+        serializedVersion: 2
+        x: 6968
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e73591f18172ed700800000000000000
+      internalID: 566933587649713022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack right frozen_5
+      rect:
+        serializedVersion: 2
+        x: 8710
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e3d36d3aedf8fe0800000000000000
+      internalID: -1184483381719777708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack right frozen_6
+      rect:
+        serializedVersion: 2
+        x: 10452
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adca8d5275ae59a10800000000000000
+      internalID: 1915694876534025434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster attack right frozen_7
+      rect:
+        serializedVersion: 2
+        x: 12194
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b7ff37c7888d16f0800000000000000
+      internalID: -712263049309849673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 87036413395f53d4dbfacd60a3d8faef
     internalID: 0
     vertices: []
     indices: 
