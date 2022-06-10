@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green Monster Override
+  m_Name: Blue Monster Override
   m_Controller: {fileID: 9100000, guid: 16f7cbb7fa7ba3341b82db387c82a198, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: e75bf1d1de9e6be449ea1757ed4845cb, type: 2}
