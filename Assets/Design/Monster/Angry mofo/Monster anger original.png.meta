@@ -1,7 +1,43 @@
 fileFormatVersion: 2
 guid: 6ed7b86cbdcc7dd45b0cb05609b24003
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 1604784713452956304
+    second: Monster anger original_0
+  - first:
+      213: -3407429234608348663
+    second: Monster anger original_1
+  - first:
+      213: -3984250745133968161
+    second: Monster anger original_2
+  - first:
+      213: -8859204925650694063
+    second: Monster anger original_3
+  - first:
+      213: -9122268024641891569
+    second: Monster anger original_4
+  - first:
+      213: -7402130896306551109
+    second: Monster anger original_5
+  - first:
+      213: -2692968504949806802
+    second: Monster anger original_6
+  - first:
+      213: -5264556523458238611
+    second: Monster anger original_7
+  - first:
+      213: 574613412637923640
+    second: Monster anger original_8
+  - first:
+      213: 8797327996763031763
+    second: Monster anger original_9
+  - first:
+      213: -4362745534158277493
+    second: Monster anger original_10
+  - first:
+      213: 2538198899735273156
+    second: Monster anger original_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -65,7 +101,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -77,7 +113,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -113,11 +149,263 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Monster anger original_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1372
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a2752c137554610800000000000000
+      internalID: 1604784713452956304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_1
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 1372
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90263e91a2166b0d0800000000000000
+      internalID: -3407429234608348663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_2
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 1372
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd454388e0915b8c0800000000000000
+      internalID: -3984250745133968161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_3
+      rect:
+        serializedVersion: 2
+        x: 5226
+        y: 1372
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1501336ee08cd0580800000000000000
+      internalID: -8859204925650694063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_4
+      rect:
+        serializedVersion: 2
+        x: 6968
+        y: 1372
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f03d05d3091376180800000000000000
+      internalID: -9122268024641891569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_5
+      rect:
+        serializedVersion: 2
+        x: 8710
+        y: 1372
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb644b00b29564990800000000000000
+      internalID: -7402130896306551109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e29e627a967a0aad0800000000000000
+      internalID: -2692968504949806802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_7
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 0
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d676e471cb980f6b0800000000000000
+      internalID: -5264556523458238611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_8
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 0
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8395577badf69f700800000000000000
+      internalID: 574613412637923640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_9
+      rect:
+        serializedVersion: 2
+        x: 5226
+        y: 0
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d8c8abe333661a70800000000000000
+      internalID: 8797327996763031763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_10
+      rect:
+        serializedVersion: 2
+        x: 6968
+        y: 0
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b84f21f2d0a6473c0800000000000000
+      internalID: -4362745534158277493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster anger original_11
+      rect:
+        serializedVersion: 2
+        x: 8710
+        y: 0
+        width: 1742
+        height: 1372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ce120c837e793320800000000000000
+      internalID: 2538198899735273156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6b630a4d18757f044b158e1e0cd9bc4c
     internalID: 0
     vertices: []
     indices: 

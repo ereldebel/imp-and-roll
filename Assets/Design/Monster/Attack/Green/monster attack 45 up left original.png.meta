@@ -1,43 +1,31 @@
 fileFormatVersion: 2
-guid: c893dd23b3b8def458d710a6bf9c5d96
+guid: 37ee228a3ab3432468414efe4e825f81
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7268071793478025028
-    second: Monster anger frozen_0
+      213: -9199261970908985450
+    second: monster attack 45 up left original_0
   - first:
-      213: 5435162763983440178
-    second: Monster anger frozen_1
+      213: 300045853462608265
+    second: monster attack 45 up left original_1
   - first:
-      213: -6339022607675786342
-    second: Monster anger frozen_2
+      213: 971954633461721786
+    second: monster attack 45 up left original_2
   - first:
-      213: -8928550899501910830
-    second: Monster anger frozen_3
+      213: 921753134248398146
+    second: monster attack 45 up left original_3
   - first:
-      213: 2178017102281805563
-    second: Monster anger frozen_4
+      213: 3285772066445224388
+    second: monster attack 45 up left original_4
   - first:
-      213: -3377756291270687480
-    second: Monster anger frozen_5
+      213: -1246689933739280052
+    second: monster attack 45 up left original_5
   - first:
-      213: -1171929030623451149
-    second: Monster anger frozen_6
+      213: 1141924630417920297
+    second: monster attack 45 up left original_6
   - first:
-      213: -4532695926686251140
-    second: Monster anger frozen_7
-  - first:
-      213: 594106493564469412
-    second: Monster anger frozen_8
-  - first:
-      213: -1037807824241970362
-    second: Monster anger frozen_9
-  - first:
-      213: 3405402567802292394
-    second: Monster anger frozen_10
-  - first:
-      213: -2479649887996357438
-    second: Monster anger frozen_11
+      213: -2986129177201996270
+    second: monster attack 45 up left original_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -151,139 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Monster anger frozen_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1372
-        width: 1742
-        height: 1372
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 44f3b4cc9c06dd460800000000000000
-      internalID: 7268071793478025028
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monster anger frozen_1
-      rect:
-        serializedVersion: 2
-        x: 1742
-        y: 1372
-        width: 1742
-        height: 1372
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 239c9a3bcb39d6b40800000000000000
-      internalID: 5435162763983440178
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monster anger frozen_2
-      rect:
-        serializedVersion: 2
-        x: 3484
-        y: 1372
-        width: 1742
-        height: 1372
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a9b705e16844708a0800000000000000
-      internalID: -6339022607675786342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monster anger frozen_3
-      rect:
-        serializedVersion: 2
-        x: 5226
-        y: 1372
-        width: 1742
-        height: 1372
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d4b13c234a671480800000000000000
-      internalID: -8928550899501910830
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monster anger frozen_4
-      rect:
-        serializedVersion: 2
-        x: 6968
-        y: 1372
-        width: 1742
-        height: 1372
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bfe8b30d30fd93e10800000000000000
-      internalID: 2178017102281805563
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monster anger frozen_5
-      rect:
-        serializedVersion: 2
-        x: 8710
-        y: 1372
-        width: 1742
-        height: 1372
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80548f89c8ccf11d0800000000000000
-      internalID: -3377756291270687480
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monster anger frozen_6
+      name: monster attack 45 up left original_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1742
-        height: 1372
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f7a8bb71c87cbfe0800000000000000
-      internalID: -1171929030623451149
+      spriteID: 697c53c2af7a55080800000000000000
+      internalID: -9199261970908985450
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monster anger frozen_7
+      name: monster attack 45 up left original_1
       rect:
         serializedVersion: 2
         x: 1742
         y: 0
         width: 1742
-        height: 1372
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -312,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c778107e111a811c0800000000000000
-      internalID: -4532695926686251140
+      spriteID: 989b7ff2d1af92400800000000000000
+      internalID: 300045853462608265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monster anger frozen_8
+      name: monster attack 45 up left original_2
       rect:
         serializedVersion: 2
         x: 3484
         y: 0
         width: 1742
-        height: 1372
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a0c9ab45b0be3800800000000000000
-      internalID: 594106493564469412
+      spriteID: abae749e6931d7d00800000000000000
+      internalID: 971954633461721786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monster anger frozen_9
+      name: monster attack 45 up left original_3
       rect:
         serializedVersion: 2
         x: 5226
         y: 0
         width: 1742
-        height: 1372
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -354,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 643bfea4847f891f0800000000000000
-      internalID: -1037807824241970362
+      spriteID: 24d8a798799bacc00800000000000000
+      internalID: 921753134248398146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monster anger frozen_10
+      name: monster attack 45 up left original_4
       rect:
         serializedVersion: 2
         x: 6968
         y: 0
         width: 1742
-        height: 1372
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -375,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa80f03c79b624f20800000000000000
-      internalID: 3405402567802292394
+      spriteID: 4c96e512948699d20800000000000000
+      internalID: 3285772066445224388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monster anger frozen_11
+      name: monster attack 45 up left original_5
       rect:
         serializedVersion: 2
         x: 8710
         y: 0
         width: 1742
-        height: 1372
+        height: 1873
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -396,8 +258,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c4d3aa8093869dd0800000000000000
-      internalID: -2479649887996357438
+      spriteID: c493a6a4c1ed2bee0800000000000000
+      internalID: -1246689933739280052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster attack 45 up left original_6
+      rect:
+        serializedVersion: 2
+        x: 10452
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9215454b66ee8df00800000000000000
+      internalID: 1141924630417920297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster attack 45 up left original_7
+      rect:
+        serializedVersion: 2
+        x: 12194
+        y: 0
+        width: 1742
+        height: 1873
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e0273a5532f86d0800000000000000
+      internalID: -2986129177201996270
       vertices: []
       indices: 
       edges: []
@@ -405,7 +309,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 19c6a7463d2434c48ac7eadda6c740e1
+    spriteID: dfd586e1ee36c784babd66bb9dc495db
     internalID: 0
     vertices: []
     indices: 
