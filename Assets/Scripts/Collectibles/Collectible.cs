@@ -1,7 +1,7 @@
-﻿using Managers;
+﻿using System.Collections;
+using Managers;
 using Player;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Collectibles
 {
@@ -11,6 +11,7 @@ namespace Collectibles
 	{
 		[SerializeField] private CollectibleType collectibleType;
 		[SerializeField] private CollectibleFactory collectibleFactory;
+		[SerializeField] private float transitionSpeed = 5;
 
 		private ICollectible _collectible;
 		private bool _inCollectibleCollection;
@@ -46,10 +47,35 @@ namespace Collectibles
 			_collectible.Collect(other.gameObject);
 			if (_collectible is PowerUp.PowerUp powerUp)
 				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
+			GameManager.Shared.StartCoroutine(Disappear());
+		}
+
+		private IEnumerator Disappear()
+		{
+			var scale = transform.localScale;
+			for (float scaleFactor = 1; scaleFactor > 0; scaleFactor -= transitionSpeed * Time.deltaTime)
+			{
+				transform.localScale = scale * scaleFactor;
+				yield return null;
+			}
+
 			if (GameManager.CurScene != 0)
+			{
 				Destroy(gameObject);
-			else
-				OnValidate();
+				yield break;
+			}
+
+			transform.localScale = scale;
+			yield return WaitAndRespawn(2f);
+		}
+
+		private IEnumerator WaitAndRespawn(float delay)
+		{
+			print("started");
+			gameObject.SetActive(false);
+			yield return new WaitForSeconds(delay);
+			gameObject.SetActive(true);
+			OnValidate();
 		}
 	}
 }

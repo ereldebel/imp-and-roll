@@ -326,6 +326,7 @@ namespace Player
 
 		public void GameOver(bool won)
 		{
+			MovementStick = Vector2.zero;
 			_chargeStartTime = -1;
 			_ball = null;
 			SetPowerUp(null);

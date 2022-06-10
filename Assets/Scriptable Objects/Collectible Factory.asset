@@ -25,7 +25,7 @@ MonoBehaviour:
   superThrowSprite: {fileID: 21300000, guid: b95a32bfacae23f4ab747f6ff4239e5f, type: 3}
   superThrowIcon: {fileID: 21300000, guid: 8e745225671abc84abf03f22f2a06e00, type: 3}
   explosionStunRadius: 5
-  explosionKnockBackOuterRingWidth: 1
+  explosionKnockBackOuterRingWidth: 0.2
   knockBackVelocityMultiplier: 3
   playerLayerMask:
     serializedVersion: 2
@@ -42,6 +42,7 @@ MonoBehaviour:
   fireTrailParticleLifeSpan: 4
   fireDropperPrefab: {fileID: 285930222026714181, guid: 01da4b1f9b909f74eb20a6c139b648c1, type: 3}
   fireTrailMesh: {fileID: 4300000, guid: fe4b344816e71ee44b2928b5c4496d17, type: 2}
-  fireTrailMaterials: []
+  fireTrailMaterials:
+  - {fileID: 2100000, guid: ddd4459add191094686391a6523cd805, type: 2}
   fireTrailSprite: {fileID: 21300000, guid: 3d3662e29838694489436aa81027d953, type: 3}
   fireTrailIcon: {fileID: 21300000, guid: 8ae2ab3d9b669e1448c76c523f17971a, type: 3}

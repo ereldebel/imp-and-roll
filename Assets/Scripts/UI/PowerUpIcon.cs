@@ -13,7 +13,6 @@ namespace UI
 		[SerializeField] private CollectibleFactory collectibleFactory;
 		
 		private Image _image;
-		private Sprite _defaultSprite;
 		private readonly List<CollectibleType> _activatedPowerUps = new List<CollectibleType>();
 		private GameObject _owner;
 
