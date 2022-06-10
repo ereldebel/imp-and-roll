@@ -6,9 +6,9 @@ PhysicMaterial:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ice Physic Material
-  dynamicFriction: 10
-  staticFriction: 10
-  bounciness: 0.01
+  m_Name: Divider Physic Material
+  dynamicFriction: 0.1
+  staticFriction: 0.1
+  bounciness: 0.7
   frictionCombine: 0
-  bounceCombine: 2
+  bounceCombine: 0
