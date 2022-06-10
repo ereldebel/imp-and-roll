@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 8b1b57b8c72494540bd554af7bb96f32
+guid: 04f77b26139b0a543a45c0b831786147
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 8995563483606132977
+    second: monster idle left original_0
+  - first:
+      213: 9107705286392326120
+    second: monster idle left original_1
+  - first:
+      213: -2447411908398231171
+    second: monster idle left original_2
+  - first:
+      213: -3501640992067042862
+    second: monster idle left original_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -113,11 +125,95 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: monster idle left original_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8a1dae359a6dc70800000000000000
+      internalID: 8995563483606132977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster idle left original_1
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e7ac5a04b1156e70800000000000000
+      internalID: 9107705286392326120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster idle left original_2
+      rect:
+        serializedVersion: 2
+        x: 2748
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71dcd416db090ed0800000000000000
+      internalID: -2447411908398231171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster idle left original_3
+      rect:
+        serializedVersion: 2
+        x: 4122
+        y: 0
+        width: 1374
+        height: 1440
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d1c5e8f11ca76fc0800000000000000
+      internalID: -3501640992067042862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 532ca73183b4cd14b98c1a33fa787f19
     internalID: 0
     vertices: []
     indices: 
