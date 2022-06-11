@@ -288,6 +288,7 @@ namespace Player
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
 		}
+
 		#endregion
 
 		#region Public Methods
@@ -463,8 +464,10 @@ namespace Player
 				}
 				else
 				{
-					_animator.SetFloat(AnimatorX, Mathf.Round(Mathf.Abs(MovementStick.x)));
-					_animator.SetFloat(AnimatorZ, Mathf.Round(MovementStick.y));
+					var x = Mathf.Round(Mathf.Abs(MovementStick.x));
+					_animator.SetFloat(AnimatorX, x);
+					_animator.SetFloat(AnimatorZ,
+						x == 0 ? (MovementStick.y > 0 ? 1 : -1) : Mathf.Round(MovementStick.y));
 					transform.rotation = _velocity.x > 0 ? _faceRight : _faceLeft;
 				}
 			}
@@ -478,7 +481,6 @@ namespace Player
 			var ver = _particleSystem.velocityOverLifetime;
 			ver.x = -dir.x;
 			ver.z = -dir.z;
-			// _particleSystem.Emit(1);
 		}
 
 		private void AnimatorChangeBallPosition() => ChangeBallPosition(_ballThrowPositionIndex++);
