@@ -18,6 +18,7 @@ namespace Managers
 		[SerializeField] private float waitTime = 2;
 		[SerializeField] private GameObject AIPlayerPrefab;
 		[SerializeField] private GameObject pressStartCanvas;
+		[SerializeField] private GameObject powerUps;
 		[SerializeField] private GameObject pauseCanvas;
 		[SerializeField] private SceneTransitioner transitioner;
 		[SerializeField] private GameObject[] huds;
@@ -103,9 +104,10 @@ namespace Managers
 				Destroy(input.gameObject);
 				return;
 			}
-
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
+			if (!powerUps.activeSelf)
+				powerUps.SetActive(true);
 
 			var player = input.gameObject;
 			DontDestroyOnLoad(player);
@@ -116,6 +118,40 @@ namespace Managers
 			_playerInputs.Add(input, "");
 			if (_numPlayers == 2)
 				emptyHudAnimator.enabled = true;
+		}
+		
+		public void RemovePlayer(PlayerInput input)
+		{
+			var player = input.gameObject;
+			if (_curScene != 0 || _players == null)
+			{
+				Destroy(player);
+				return;
+			}
+
+			var playerIndex = _players.FindIndex(somePlayer=>somePlayer==player);
+			if (playerIndex == 0)
+			{
+				foreach (var somePlayer in _players)
+					Destroy(somePlayer);
+				foreach (var hud in huds)
+					hud.SetActive(false);
+				_players = new List<GameObject>();
+				_playerReadyStatus = new Dictionary<GameObject, bool>();
+				_playerInputs = new Dictionary<PlayerInput, string>();
+				_numPlayers = 0;
+				pressStartCanvas.SetActive(true);
+				powerUps.SetActive(false);
+				return;
+			}
+			_players.RemoveAt(playerIndex);
+			huds[playerIndex].SetActive(false);
+			_playerReadyStatus.Remove(player);
+			_numPlayers--;
+			_playerInputs.Remove(input);
+			if (_numPlayers == 1)
+				emptyHudAnimator.gameObject.SetActive(true);
+			Destroy(player);
 		}
 
 		public void PlayerWon(bool blueLost)

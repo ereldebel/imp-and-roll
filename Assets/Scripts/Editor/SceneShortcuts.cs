@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Editor
 {
-	public class SceneShortcuts : MonoBehaviour
+	internal class SceneShortcuts : MonoBehaviour
 	{
 		private static int _scene;
 		private static List<string> _scenes;
@@ -26,8 +26,20 @@ namespace Editor
 			EditorApplication.isPlaying = true;
 		}
 
-		[MenuItem("Scenes/To Game Scene #TAB")]
-		public static void SwitchToGameScene()
+		[MenuItem("Scenes/Switch scene clockwise %TAB")]
+		public static void ClockwiseSwitchScene()
+		{
+			CyclicSceneSwitch(1);
+			print("hello");
+		}
+		
+		[MenuItem("Scenes/Switch scene counter-clockwise %#TAB")]
+		public static void CounterClockwiseSwitchScene()
+		{
+			CyclicSceneSwitch(-1);
+		}
+
+		private static void CyclicSceneSwitch(int movement)
 		{
 			if (EditorApplication.isPlaying)
 			{
@@ -38,7 +50,9 @@ namespace Editor
 				.Where(filename => filename.EndsWith(".unity")));
 			EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 			EditorSceneManager.OpenScene(_scenes[_scene]);
-			_scene = (_scene + 1) % _scenes.Count;
+			_scene = (_scene + movement) % _scenes.Count;
+			if (_scene < 0)
+				_scene += _scenes.Count;
 		}
 	}
 }

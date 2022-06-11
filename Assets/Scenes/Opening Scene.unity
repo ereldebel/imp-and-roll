@@ -1103,7 +1103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1571736824
 Transform:
   m_ObjectHideFlags: 0
@@ -1569,6 +1569,10 @@ PrefabInstance:
       propertyPath: AILabel
       value: 
       objectReference: {fileID: 2037304206}
+    - target: {fileID: 6537296340413375428, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
+      propertyPath: powerUps
+      value: 
+      objectReference: {fileID: 1571736823}
     - target: {fileID: 6537296340413375428, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: huds.Array.size
       value: 2
