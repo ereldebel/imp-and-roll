@@ -71,26 +71,29 @@ namespace Managers
 		private void Awake()
 		{
 			pressStartCanvas.SetActive(true);
-			_playerReadyStatus = new Dictionary<GameObject, bool>();
-			_players = new List<GameObject>();
-			_playerInputs = new Dictionary<PlayerInput, string>();
-			if (Shared)
+			_curScene = 0;
+			if (Shared == null)
 			{
 				if (SceneManager.GetActiveScene().buildIndex != 0)
 				{
 					Destroy(gameObject);
 					return;
 				}
-
-				foreach (var player in Shared._players)
-					Destroy(player);
-				Destroy(Shared.gameObject);
+				_playerReadyStatus = new Dictionary<GameObject, bool>();
+				_players = new List<GameObject>();
+				_playerInputs = new Dictionary<PlayerInput, string>();
+				_numPlayers = 0;
+				Shared = this;
+				DontDestroyOnLoad(Shared.gameObject);
+			}
+			else
+			{
+				pressStartCanvas.SetActive(false);
 			}
 
-			_numPlayers = 0;
-			Shared = this;
 
-			DontDestroyOnLoad(Shared.gameObject);
+
+
 		}
 
 		#endregion
@@ -122,7 +125,11 @@ namespace Managers
 		
 		public void RemovePlayer(PlayerInput input)
 		{
-			var player = input.gameObject;
+			RemovePlayer(input.gameObject);
+		}
+
+		private void RemovePlayer(GameObject player)
+		{
 			if (_curScene != 0 || _players == null)
 			{
 				Destroy(player);
@@ -148,7 +155,7 @@ namespace Managers
 			huds[playerIndex].SetActive(false);
 			_playerReadyStatus.Remove(player);
 			_numPlayers--;
-			_playerInputs.Remove(input);
+			_playerInputs.Remove(player.GetComponent<PlayerInput>());
 			if (_numPlayers == 1)
 				emptyHudAnimator.gameObject.SetActive(true);
 			Destroy(player);
@@ -232,7 +239,10 @@ namespace Managers
 			_paused = false;
 			_pausedBy = null;
 			Destroy(GetComponent<PlayerInputManager>());
-
+			foreach (var player in Shared._players)
+				Destroy(player);
+			Destroy(Shared.gameObject);
+			Shared = null;
 			pauseCanvas.SetActive(false);
 			// foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
 			// 	playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
@@ -254,6 +264,8 @@ namespace Managers
 			huds[playerID].SetActive(true);
 			player.GetComponent<CharacterController>().enabled = true;
 			player.transform.position = playerInfos[playerID].locationOpeningScene;
+			_playerReadyStatus[player] = false;
+			// player.GetComponent<PlayerBrain>().Reset(false);
 			player.GetComponent<PlayerInput>()
 				?.SwitchCurrentActionMap("Player Tutorial Area"); // To keep Playability without entry scene
 			if (playerID % 2 == 1)
@@ -309,13 +321,17 @@ namespace Managers
 		{
 			_redScore = 0;
 			_blueScore = 0;
-			Destroy(GetComponent<PlayerInputManager>());
+			_curScene = 0;
+			if (_players[1].GetComponent<AIController>() != null)
+			{
+				RemovePlayer(_players[1]);
+			}
+			for (var i = 0; i < _players.Count; i++){
+				SetUpPlayerForStartScene(_players[i], i);
+				_players[i].GetComponent<PlayerBrain>().ResetAnimator();
+			}
+			
 			transitioner.TransitionToScene(0);
-			// Quit();
-			// for (var i = 0; i < _players.Count; i++)
-			// 	SetUpPlayerForGameScene(_players[i], i);
-			// transitioner.TransitionToScene(_sceneNames[_curScene = 1]);
-			// _gameStarted = true;
 		}
 
 		private void SetUpPlayersForWinningScene()

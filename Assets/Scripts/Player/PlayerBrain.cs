@@ -272,6 +272,12 @@ namespace Player
 			_ball = null;
 			_chargeStartTime = -1;
 			_stunBar = 1;
+			ResetAnimator();
+			SetPowerUp(null);
+		}
+
+		public void ResetAnimator()
+		{
 			_animator.SetBool(AnimatorWon, false);
 			_animator.SetBool(AnimatorHasBall, false);
 			_animator.SetBool(AnimatorLost, false);
@@ -281,9 +287,7 @@ namespace Player
 			_animator.SetBool(AnimatorThrowing, false);
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
-			SetPowerUp(null);
 		}
-
 		#endregion
 
 		#region Public Methods
