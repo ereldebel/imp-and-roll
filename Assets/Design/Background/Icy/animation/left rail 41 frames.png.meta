@@ -1,0 +1,516 @@
+fileFormatVersion: 2
+guid: 895e2142446e594479adf2ddd93bb436
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4137389700997893102
+    second: left rail 41 frames_0
+  - first:
+      213: 2911003619783948284
+    second: left rail 41 frames_1
+  - first:
+      213: -1581524499523873904
+    second: left rail 41 frames_2
+  - first:
+      213: 195476070417223843
+    second: left rail 41 frames_3
+  - first:
+      213: -320818013955815043
+    second: left rail 41 frames_4
+  - first:
+      213: -5689388510832497337
+    second: left rail 41 frames_5
+  - first:
+      213: 1303254927118897699
+    second: left rail 41 frames_6
+  - first:
+      213: 1401184194009409005
+    second: left rail 41 frames_7
+  - first:
+      213: 7104413921397965895
+    second: left rail 41 frames_8
+  - first:
+      213: -1094281071208057911
+    second: left rail 41 frames_9
+  - first:
+      213: -304465982345256215
+    second: left rail 41 frames_10
+  - first:
+      213: -7522002346703233773
+    second: left rail 41 frames_11
+  - first:
+      213: 3086625006297596986
+    second: left rail 41 frames_12
+  - first:
+      213: -5866302677837493990
+    second: left rail 41 frames_13
+  - first:
+      213: 362758761714297764
+    second: left rail 41 frames_14
+  - first:
+      213: 6111713366164340638
+    second: left rail 41 frames_15
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: left rail 41 frames_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21439aedcf90596c0800000000000000
+      internalID: -4137389700997893102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_1
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf739197e56f56820800000000000000
+      internalID: 2911003619783948284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_2
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0935d42d8db4d0ae0800000000000000
+      internalID: -1581524499523873904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_3
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a0de4b437876b200800000000000000
+      internalID: 195476070417223843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_4
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d790e9057b93c8bf0800000000000000
+      internalID: -320818013955815043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_5
+      rect:
+        serializedVersion: 2
+        x: 1460
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74de3a60b4b3b01b0800000000000000
+      internalID: -5689388510832497337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_6
+      rect:
+        serializedVersion: 2
+        x: 1752
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32213b68377161210800000000000000
+      internalID: 1303254927118897699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_7
+      rect:
+        serializedVersion: 2
+        x: 2044
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de5a2d4c991027310800000000000000
+      internalID: 1401184194009409005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_8
+      rect:
+        serializedVersion: 2
+        x: 2336
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 744044a12d2f79260800000000000000
+      internalID: 7104413921397965895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_9
+      rect:
+        serializedVersion: 2
+        x: 2628
+        y: 1652
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c3b53ad92550d0f0800000000000000
+      internalID: -1094281071208057911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1239
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e2ee1c5dc156cbf0800000000000000
+      internalID: -304465982345256215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_11
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 1239
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31d591d08ba7c9790800000000000000
+      internalID: -7522002346703233773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_12
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 1239
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a34c43fe615e5da20800000000000000
+      internalID: 3086625006297596986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_13
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 1239
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a19c296abc4b69ea0800000000000000
+      internalID: -5866302677837493990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_14
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 1239
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ab242bfb27c80500800000000000000
+      internalID: 362758761714297764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left rail 41 frames_15
+      rect:
+        serializedVersion: 2
+        x: 1460
+        y: 1239
+        width: 292
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9f7b3fdcea21d450800000000000000
+      internalID: 6111713366164340638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 45b5e12ce98c22d479d0f6d577d0e4bd
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
