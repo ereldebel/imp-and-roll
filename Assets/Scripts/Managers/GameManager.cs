@@ -89,7 +89,25 @@ namespace Managers
 			}
 			else
 			{
+				_playerReadyStatus = Shared._playerReadyStatus;
+				_players = Shared._players;
+				_playerInputs = Shared._playerInputs;
+				_numPlayers = Shared._numPlayers;
+				Shared = this;
 				pressStartCanvas.SetActive(false);
+				if (_numPlayers == 1)
+				{
+					huds[0].SetActive(true);
+					emptyHudAnimator.gameObject.SetActive(true);
+					// emptyHudAnimator.enabled = true;
+				}
+				else
+				{
+					foreach (var hud in huds)
+					{
+						hud.SetActive(true);
+					}
+				}
 			}
 
 
@@ -165,8 +183,11 @@ namespace Managers
 			_players.RemoveAt(playerIndex);
 			huds[playerIndex].SetActive(false);
 			_playerReadyStatus.Remove(player);
-			_numPlayers--;
-			_playerInputs.Remove(player.GetComponent<PlayerInput>());
+			_numPlayers = player.GetComponent<AIController>() != null ? _numPlayers: _numPlayers-1;
+			if (player.GetComponent<PlayerInput>() != null)
+			{
+				_playerInputs.Remove(player.GetComponent<PlayerInput>());				
+			}
 			if (_numPlayers == 1)
 				emptyHudAnimator.gameObject.SetActive(true);
 			Destroy(player);
@@ -270,18 +291,7 @@ namespace Managers
 				_AIController.enabled = false;
 		}
 
-		private void SetUpPlayerForStartScene(GameObject player, int playerID)
-		{
-			huds[playerID].SetActive(true);
-			player.GetComponent<CharacterController>().enabled = true;
-			player.transform.position = playerInfos[playerID].locationOpeningScene;
-			_playerReadyStatus[player] = false;
-			// player.GetComponent<PlayerBrain>().Reset(false);
-			player.GetComponent<PlayerInput>()
-				?.SwitchCurrentActionMap("Player Tutorial Area"); // To keep Playability without entry scene
-			if (playerID % 2 == 1)
-				MakePlayerRed(player);
-		}
+
 
 		private void MakePlayerRed(GameObject player)
 		{
@@ -329,7 +339,17 @@ namespace Managers
 			SetUpPlayerForStartScene(player, _numPlayers);
 		}
 
-
+		private void SetUpPlayerForStartScene(GameObject player, int playerID)
+		{			
+			huds[playerID].SetActive(true);
+			player.transform.position = playerInfos[playerID].locationOpeningScene;
+			_playerReadyStatus[player] = false;
+			player.GetComponent<PlayerInput>()
+				?.SwitchCurrentActionMap("Player Tutorial Area"); // To keep Playability without entry scene
+			if (playerID % 2 == 1)
+				MakePlayerRed(player);
+			
+		}
 		private void ResetGameKeepPlayers()
 		{
 			_redScore = 0;
@@ -340,10 +360,11 @@ namespace Managers
 				RemovePlayer(_players[1]);
 			}
 			for (var i = 0; i < _players.Count; i++){
+				_players[i].GetComponent<PlayerBrain>().Reset(false);
+				_players[i].GetComponent<CharacterController>().enabled = false;
 				SetUpPlayerForStartScene(_players[i], i);
-				_players[i].GetComponent<PlayerBrain>().ResetAnimator();
+				StartCoroutine(ResetPC(_players[i], 1f));
 			}
-			
 			transitioner.TransitionToScene(0);
 		}
 
@@ -390,7 +411,12 @@ namespace Managers
 			SetUpPlayersForWinningScene();
 			Invoke(nameof(ResetGameKeepPlayers), 6f);
 		}
-
+		private IEnumerator ResetPC(GameObject player, float time)
+		{
+			yield return new WaitForSeconds(time);
+			player.GetComponent<CharacterController>().enabled = true;
+			// _gameStarted = true;
+		}
 		#endregion
 	}
 }

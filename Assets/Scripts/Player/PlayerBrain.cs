@@ -272,6 +272,7 @@ namespace Player
 			_ball = null;
 			_chargeStartTime = -1;
 			_stunBar = 1;
+			readyBubble.SetActive(false);
 			ResetAnimator();
 			SetPowerUp(null);
 		}

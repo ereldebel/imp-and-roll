@@ -13,16 +13,16 @@ namespace UI
 		private void Awake()
 		{
 			_parent = transform.parent;
-			transform.SetParent(null);
+			// transform.SetParent(null);
 			transform.rotation = rotation;
-			SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+			// SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
 		}
 
-		private void LateUpdate()
-		{
-			if (!transform)
-				Destroy(gameObject);
-			transform.position = _parent.position + localPosition;
-		}
+		// private void LateUpdate()
+		// {
+		// 	if (!transform)
+		// 		Destroy(gameObject);
+		// 	// transform.position = _parent.position + localPosition;
+		// }
 	}
 }
