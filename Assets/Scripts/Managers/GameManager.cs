@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,6 +108,7 @@ namespace Managers
 				Destroy(input.gameObject);
 				return;
 			}
+
 			if (pressStartCanvas.activeSelf)
 				pressStartCanvas.SetActive(false);
 			if (!powerUps.activeSelf)
@@ -119,10 +121,17 @@ namespace Managers
 			SetUpPlayerForStartScene(player, _numPlayers);
 			_numPlayers++;
 			_playerInputs.Add(input, "");
-			if (_numPlayers == 2)
-				emptyHudAnimator.enabled = true;
+			switch (_numPlayers)
+			{
+				case 1:
+					emptyHudAnimator.gameObject.SetActive(true);
+					break;
+				case 2:
+					emptyHudAnimator.enabled = true;
+					break;
+			}
 		}
-		
+
 		public void RemovePlayer(PlayerInput input)
 		{
 			RemovePlayer(input.gameObject);
@@ -136,7 +145,7 @@ namespace Managers
 				return;
 			}
 
-			var playerIndex = _players.FindIndex(somePlayer=>somePlayer==player);
+			var playerIndex = _players.FindIndex(somePlayer => somePlayer == player);
 			if (playerIndex == 0)
 			{
 				foreach (var somePlayer in _players)
@@ -149,8 +158,10 @@ namespace Managers
 				_numPlayers = 0;
 				pressStartCanvas.SetActive(true);
 				powerUps.SetActive(false);
+				emptyHudAnimator.gameObject.SetActive(false);
 				return;
 			}
+
 			_players.RemoveAt(playerIndex);
 			huds[playerIndex].SetActive(false);
 			_playerReadyStatus.Remove(player);
@@ -290,17 +301,19 @@ namespace Managers
 				aiController.enabled = true;
 		}
 
-		private void StartGameMultiplePlayers(int sceneToStart)
+		private void StartGameMultiplePlayers(int sceneToStart, Action preparationAction = null)
 		{
-			transitioner.TransitionToScene(_sceneNames[sceneToStart]);
-			for (var i = 0; i < _players.Count; i++)
-				SetUpPlayerForGameScene(_players[i], i);
+			transitioner.TransitionToScene(_sceneNames[sceneToStart], () =>
+			{
+				preparationAction?.Invoke();
+				for (var i = 0; i < _players.Count; i++)
+					SetUpPlayerForGameScene(_players[i], i);
+			});
 		}
 
 		private void StartGameOnePlayer()
 		{
-			CreateAI();
-			StartGameMultiplePlayers(++_curScene);
+			StartGameMultiplePlayers(++_curScene, CreateAI);
 		}
 
 		private void CreateAI()

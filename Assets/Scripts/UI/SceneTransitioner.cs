@@ -1,37 +1,45 @@
+using System;
 using System.Collections;
 using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace UI
 {
 	public class SceneTransitioner : MonoBehaviour
 	{
-		[SerializeField] private Image transitionScreen;
 		[SerializeField] private float transitionSpeed = 0.5f;
+		private CanvasGroup transitionScreen;
 
-		public void TransitionToScene(string sceneName)
+		private void Awake()
 		{
-			StartCoroutine(PerformTransition(SceneManager.LoadSceneAsync(sceneName)));
+			transitionScreen = GetComponent<CanvasGroup>();
 		}
 
-		public void TransitionToScene(int sceneBuildIndex)
+		public void TransitionToScene(string sceneName, Action preSceneOrganizing = null)
 		{
-			StartCoroutine(PerformTransition(SceneManager.LoadSceneAsync(sceneBuildIndex)));
+			StartCoroutine(PerformTransition(() => SceneManager.LoadSceneAsync(sceneName), preSceneOrganizing));
 		}
 
-		private IEnumerator PerformTransition(AsyncOperation asyncLoad)
+		public void TransitionToScene(int sceneBuildIndex, Action preSceneOrganizing = null)
 		{
-			transitionScreen.gameObject.SetActive(true);
-			var color = transitionScreen.color;
-			while (!asyncLoad.isDone && color.a > 0)
+			StartCoroutine(PerformTransition(() => SceneManager.LoadSceneAsync(sceneBuildIndex), preSceneOrganizing));
+		}
+
+		private IEnumerator PerformTransition(Func<AsyncOperation> asyncLoadFunc, Action preSceneOrganizing)
+		{
+			float alpha = 0;
+			transitionScreen.alpha = alpha;
+			while (alpha < 1)
 			{
-				color.a -= transitionSpeed * Time.deltaTime;
-				transitionScreen.color = color;
+				alpha += transitionSpeed * Time.deltaTime;
+				transitionScreen.alpha = alpha;
 				yield return null;
 			}
 
+			transitionScreen.alpha = alpha = 1;
+			var asyncLoad = asyncLoadFunc();
+			preSceneOrganizing?.Invoke();
 			while (!asyncLoad.isDone)
 				yield return null;
 			var sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -47,16 +55,16 @@ namespace UI
 					AudioManager.MatchStart();
 					AudioManager.MatchMusic();
 					break;
-					
 			}
-			while (color.a < 1)
+
+			while (alpha > 0)
 			{
-				color.a += transitionSpeed * Time.deltaTime;
-				transitionScreen.color = color;
+				alpha -= transitionSpeed * Time.deltaTime;
+				transitionScreen.alpha = alpha;
 				yield return null;
 			}
 
-			transitionScreen.gameObject.SetActive(false);
+			transitionScreen.alpha = 0;
 		}
 	}
 }
