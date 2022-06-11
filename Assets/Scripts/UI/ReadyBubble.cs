@@ -20,6 +20,8 @@ namespace UI
 
 		private void LateUpdate()
 		{
+			if (!transform)
+				Destroy(gameObject);
 			transform.position = _parent.position + localPosition;
 		}
 	}

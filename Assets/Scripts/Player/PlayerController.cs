@@ -72,6 +72,11 @@ namespace Player
 		{
 			GameManager.Shared.Pause(_playerInput);
 		}
+		
+		public void OnReconnect()
+		{
+			GameManager.Shared.Resume(_playerInput);
+		}
 
 		public void OnPause(InputAction.CallbackContext context)
 		{
@@ -89,6 +94,12 @@ namespace Player
 		{
 			if (context.started)
 				GameManager.Shared.Quit();
+		}
+
+		public void OnRemove(InputAction.CallbackContext context)
+		{
+			if (context.started)
+				GameManager.Shared.RemovePlayer(_playerInput);
 		}
 
 		private Vector2 ScreenToWorld2D(Vector2 screenPos)
