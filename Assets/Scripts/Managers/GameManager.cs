@@ -80,6 +80,7 @@ namespace Managers
 					Destroy(gameObject);
 					return;
 				}
+
 				_playerReadyStatus = new Dictionary<GameObject, bool>();
 				_players = new List<GameObject>();
 				_playerInputs = new Dictionary<PlayerInput, string>();
@@ -103,16 +104,11 @@ namespace Managers
 				else
 				{
 					foreach (var hud in huds)
-					{
 						hud.SetActive(true);
-					}
 				}
+
 				powerUps.SetActive(true);
 			}
-
-
-
-
 		}
 
 		#endregion
@@ -183,11 +179,11 @@ namespace Managers
 			_players.RemoveAt(playerIndex);
 			huds[playerIndex].SetActive(false);
 			_playerReadyStatus.Remove(player);
-			_numPlayers = player.GetComponent<AIController>() != null ? _numPlayers: _numPlayers-1;
-			if (player.GetComponent<PlayerInput>() != null)
-			{
-				_playerInputs.Remove(player.GetComponent<PlayerInput>());				
-			}
+			_numPlayers = player.GetComponent<AIController>() != null ? _numPlayers : _numPlayers - 1;
+			var playerInput = player.GetComponent<PlayerInput>();
+			if (playerInput != null)
+				_playerInputs.Remove(playerInput);
+
 			if (_numPlayers == 1)
 				emptyHudAnimator.gameObject.SetActive(true);
 			Destroy(player);
@@ -292,24 +288,24 @@ namespace Managers
 		}
 
 
-
 		private void MakePlayerRed(GameObject player)
 		{
-			player.GetComponent<Animator>().runtimeAnimatorController = redController;
-			player.GetComponent<PlayerBrain>().FlipReadyBubble();
+			var playerBrain = player.GetComponent<PlayerBrain>();
+			playerBrain.Animator.runtimeAnimatorController = redController;
+			playerBrain.FlipReadyBubble();
 		}
 
 		private void SetUpPlayerForGameScene(GameObject player, int playerID)
 		{
-			player.GetComponent<CharacterController>().enabled = false;
-			player.GetComponent<PlayerBrain>().Reset(CurScene == 2);
+			var playerBrain = player.GetComponent<PlayerBrain>();
+			var characterController = playerBrain.CharacterController;
+			characterController.enabled = false;
+			playerBrain.Reset(CurScene == 2);
 			player.transform.position = playerInfos[playerID].locationGameScene;
-			player.GetComponent<CharacterController>().enabled = true;
-			player.GetComponent<PlayerInput>()?.SwitchCurrentActionMap("Player");
+			characterController.enabled = true;
+			if (playerBrain.PlayerInput)
+				playerBrain.PlayerInput.SwitchCurrentActionMap("Player");
 			player.GetComponent<PlayerController>()?.OnMatchStart();
-			var aiController = player.GetComponent<AIController>();
-			if (aiController)
-				aiController.enabled = true;
 		}
 
 		private void StartGameMultiplePlayers(int sceneToStart, Action preparationAction = null)
@@ -319,6 +315,7 @@ namespace Managers
 				preparationAction?.Invoke();
 				for (var i = 0; i < _players.Count; i++)
 					SetUpPlayerForGameScene(_players[i], i);
+				AwakeAI();
 			});
 		}
 
@@ -341,7 +338,7 @@ namespace Managers
 		}
 
 		private void SetUpPlayerForStartScene(GameObject player, int playerID)
-		{			
+		{
 			huds[playerID].SetActive(true);
 			player.transform.position = playerInfos[playerID].locationOpeningScene;
 			_playerReadyStatus[player] = false;
@@ -349,23 +346,25 @@ namespace Managers
 				?.SwitchCurrentActionMap("Player Tutorial Area"); // To keep Playability without entry scene
 			if (playerID % 2 == 1)
 				MakePlayerRed(player);
-			
 		}
+
 		private void ResetGameKeepPlayers()
 		{
 			_redScore = 0;
 			_blueScore = 0;
 			_curScene = 0;
 			if (_players[1].GetComponent<AIController>() != null)
-			{
 				RemovePlayer(_players[1]);
-			}
-			for (var i = 0; i < _players.Count; i++){
-				_players[i].GetComponent<PlayerBrain>().Reset(false);
-				_players[i].GetComponent<CharacterController>().enabled = false;
+
+			for (var i = 0; i < _players.Count; i++)
+			{
+				var playerBrain = _players[i].GetComponent<PlayerBrain>();
+				playerBrain.Reset(false);
+				playerBrain.CharacterController.enabled = false;
 				SetUpPlayerForStartScene(_players[i], i);
 				StartCoroutine(ResetPC(_players[i], 1f));
 			}
+
 			transitioner.TransitionToScene(0);
 		}
 
@@ -412,12 +411,14 @@ namespace Managers
 			SetUpPlayersForWinningScene();
 			Invoke(nameof(ResetGameKeepPlayers), 6f);
 		}
+
 		private IEnumerator ResetPC(GameObject player, float time)
 		{
 			yield return new WaitForSeconds(time);
 			player.GetComponent<CharacterController>().enabled = true;
 			// _gameStarted = true;
 		}
+
 		#endregion
 	}
 }

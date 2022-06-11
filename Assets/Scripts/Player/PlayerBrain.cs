@@ -62,6 +62,7 @@ namespace Player
 		private Animator _animator;
 		private ParticleSystem _particleSystem;
 		private PlayerAudio _audio;
+		private PlayerInput _playerInput;
 
 		//Input:
 		private Vector2 _aimDirection;
@@ -111,8 +112,6 @@ namespace Player
 		private static readonly int AnimatorHasBall = Animator.StringToHash("Has Ball");
 		private static readonly int AnimatorTaunt = Animator.StringToHash("Taunt");
 		private static readonly int AnimatorTauntIndex = Animator.StringToHash("Taunt Index");
-		private AIController _aiController;
-		private PlayerInput _playerInput;
 
 		#endregion
 
@@ -170,6 +169,10 @@ namespace Player
 		public bool Flipped => _left == (transform.rotation == _faceRight);
 		public float ThrowCharge => Mathf.Clamp(Time.time - _chargeStartTime, minThrowChargeTime, maxThrowChargeTime);
 
+		public CharacterController CharacterController => _controller;
+		public PlayerInput PlayerInput => _playerInput;
+		public Animator Animator => _animator;
+
 		#endregion;
 
 		#region Public C# Events
@@ -191,7 +194,6 @@ namespace Player
 			_rumble = GetComponent<Rumble>();
 			_audio = GetComponent<PlayerAudio>();
 			_particleSystem = GetComponentInChildren<ParticleSystem>();
-			_aiController = GetComponent<AIController>();
 			_playerInput = GetComponent<PlayerInput>();
 			_ballPositionsByDirection.Add(ballPositionsDown45);
 			_ballPositionsByDirection.Add(ballPositionsSide);
@@ -337,8 +339,6 @@ namespace Player
 			SetPowerUp(null);
 			if (_playerInput)
 				_playerInput.SwitchCurrentActionMap("Inactive");
-			if (_aiController)
-				_aiController.enabled = false;
 			transform.rotation = _left ? _faceLeft : _faceRight;
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);

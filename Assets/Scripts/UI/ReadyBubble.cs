@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -9,20 +8,19 @@ namespace UI
 		[SerializeField] private Quaternion rotation;
 		
 		private Transform _parent;
+		private Transform _transform;
 
 		private void Awake()
 		{
-			_parent = transform.parent;
-			// transform.SetParent(null);
-			transform.rotation = rotation;
-			// SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+			_transform = transform;
+			_parent = _transform.parent;
+			_transform.rotation = rotation;
 		}
 
-		// private void LateUpdate()
-		// {
-		// 	if (!transform)
-		// 		Destroy(gameObject);
-		// 	// transform.position = _parent.position + localPosition;
-		// }
+		private void LateUpdate()
+		{
+			_transform.position = _parent.position + localPosition;
+			_transform.rotation = rotation;
+		}
 	}
 }
