@@ -296,6 +296,7 @@ namespace Managers
 		private void MakePlayerRed(GameObject player)
 		{
 			player.GetComponent<Animator>().runtimeAnimatorController = redController;
+			player.GetComponent<PlayerBrain>().FlipReadyBubble();
 		}
 
 		private void SetUpPlayerForGameScene(GameObject player, int playerID)
