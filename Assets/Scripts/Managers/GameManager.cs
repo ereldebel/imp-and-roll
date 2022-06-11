@@ -408,7 +408,7 @@ namespace Managers
 		private IEnumerator DisplayWinner(string winner, float delay)
 		{
 			yield return new WaitForSeconds(delay);
-			transitioner.TransitionToScene($"{winner} won, arena {_curScene}");
+			transitioner.QuickTransitionToScene($"{winner} won, arena {_curScene}");
 			SetUpPlayersForWinningScene();
 			Invoke(nameof(ResetGameKeepPlayers), 6f);
 		}

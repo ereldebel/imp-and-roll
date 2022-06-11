@@ -16,19 +16,33 @@ namespace UI
 			transitionScreen = GetComponent<CanvasGroup>();
 		}
 
-		public void TransitionToScene(string sceneName, Action preSceneOrganizing = null)
-		{
-			StartCoroutine(PerformTransition(() => SceneManager.LoadSceneAsync(sceneName), preSceneOrganizing));
-		}
+		public void QuickTransitionToScene(string sceneName) =>
+			StartCoroutine(PerformQuickTransition(SceneManager.LoadSceneAsync(sceneName)));
 
-		public void TransitionToScene(int sceneBuildIndex, Action preSceneOrganizing = null)
-		{
-			StartCoroutine(PerformTransition(() => SceneManager.LoadSceneAsync(sceneBuildIndex), preSceneOrganizing));
-		}
+		public void QuickTransitionToScene(int sceneBuildIndex) =>
+			StartCoroutine(PerformQuickTransition(SceneManager.LoadSceneAsync(sceneBuildIndex)));
 
-		private IEnumerator PerformTransition(Func<AsyncOperation> asyncLoadFunc, Action preSceneOrganizing)
+		public void TransitionToScene(string sceneName) =>
+			StartCoroutine(PerformTransition(SceneManager.LoadSceneAsync(sceneName), false, null));
+
+		public void TransitionToScene(int sceneBuildIndex) =>
+			StartCoroutine(PerformTransition(SceneManager.LoadSceneAsync(sceneBuildIndex), false, null));
+
+		public void TransitionToScene(string sceneName, Action preSceneOrganizing) =>
+			StartCoroutine(PerformTransition(SceneManager.LoadSceneAsync(sceneName), true, preSceneOrganizing));
+
+		public void TransitionToScene(int sceneBuildIndex, Action preSceneOrganizing) =>
+			StartCoroutine(PerformTransition(SceneManager.LoadSceneAsync(sceneBuildIndex), true, preSceneOrganizing));
+
+		private static IEnumerator PerformQuickTransition(AsyncOperation asyncLoad)
 		{
-			var asyncLoad = asyncLoadFunc();
+			while (!asyncLoad.isDone)
+				yield return null;
+			SwitchMusicByScene();
+		}
+		
+		private IEnumerator PerformTransition(AsyncOperation asyncLoad, bool needsOrganizing, Action preSceneOrganizing)
+		{
 			float alpha = 0;
 			transitionScreen.alpha = alpha;
 			while (alpha < 1)
@@ -39,9 +53,24 @@ namespace UI
 			}
 
 			transitionScreen.alpha = alpha = 1;
-			preSceneOrganizing?.Invoke();
+			if (needsOrganizing)
+				preSceneOrganizing();
 			while (!asyncLoad.isDone)
 				yield return null;
+			SwitchMusicByScene();
+
+			while (alpha > 0)
+			{
+				alpha -= transitionSpeed * Time.deltaTime;
+				transitionScreen.alpha = alpha;
+				yield return null;
+			}
+
+			transitionScreen.alpha = 0;
+		}
+
+		private static void SwitchMusicByScene()
+		{
 			var sceneIndex = SceneManager.GetActiveScene().buildIndex;
 			switch (sceneIndex)
 			{
@@ -56,15 +85,6 @@ namespace UI
 					AudioManager.MatchMusic();
 					break;
 			}
-
-			while (alpha > 0)
-			{
-				alpha -= transitionSpeed * Time.deltaTime;
-				transitionScreen.alpha = alpha;
-				yield return null;
-			}
-
-			transitionScreen.alpha = 0;
 		}
 	}
 }
