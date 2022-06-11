@@ -30,7 +30,6 @@ namespace Editor
 		public static void ClockwiseSwitchScene()
 		{
 			CyclicSceneSwitch(1);
-			print("hello");
 		}
 		
 		[MenuItem("Scenes/Switch scene counter-clockwise %#TAB")]
