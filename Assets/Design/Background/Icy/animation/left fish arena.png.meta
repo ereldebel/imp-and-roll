@@ -1,12 +1,57 @@
 fileFormatVersion: 2
-guid: 4f90c9f4898d52742826eb8396bb4f48
+guid: 6328fdad86ee7594d8f48e943ee708a3
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 1584978462979572002
+    second: left fish arena_0
+  - first:
+      213: 4843490121655542809
+    second: left fish arena_1
+  - first:
+      213: 658674412399373587
+    second: left fish arena_2
+  - first:
+      213: -7427879581681189815
+    second: left fish arena_3
+  - first:
+      213: 6693525786321139010
+    second: left fish arena_4
+  - first:
+      213: -1045459740001767070
+    second: left fish arena_5
+  - first:
+      213: -6027057153995506026
+    second: left fish arena_6
+  - first:
+      213: -4734014113240045505
+    second: left fish arena_7
+  - first:
+      213: -8653024246141290812
+    second: left fish arena_8
+  - first:
+      213: 3649632597183538249
+    second: left fish arena_9
+  - first:
+      213: 683398468712539096
+    second: left fish arena_10
+  - first:
+      213: -1141460030128548088
+    second: left fish arena_11
+  - first:
+      213: -2928228613975167869
+    second: left fish arena_12
+  - first:
+      213: -1543037100676955042
+    second: left fish arena_13
+  - first:
+      213: -887424884787838190
+    second: left fish arena_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -35,24 +80,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -65,10 +110,46 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +158,326 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: left fish arena_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 221ca86b389fef510800000000000000
+      internalID: 1584978462979572002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_1
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 914646e8a98873340800000000000000
+      internalID: 4843490121655542809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_2
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31d24b563e4142900800000000000000
+      internalID: 658674412399373587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_3
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94cf38300eedae890800000000000000
+      internalID: -7427879581681189815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_4
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 245b6942d3e24ec50800000000000000
+      internalID: 6693525786321139010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_5
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 261f832d7e7cd71f0800000000000000
+      internalID: -1045459740001767070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_6
+      rect:
+        serializedVersion: 2
+        x: 1794
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69efe1f73779b5ca0800000000000000
+      internalID: -6027057153995506026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_7
+      rect:
+        serializedVersion: 2
+        x: 2093
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3824a2fe376d4eb0800000000000000
+      internalID: -4734014113240045505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_8
+      rect:
+        serializedVersion: 2
+        x: 2392
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c6f7e73b484ae780800000000000000
+      internalID: -8653024246141290812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_9
+      rect:
+        serializedVersion: 2
+        x: 2691
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 944afc3b28916a230800000000000000
+      internalID: 3649632597183538249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_10
+      rect:
+        serializedVersion: 2
+        x: 2990
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d328a7594beb7900800000000000000
+      internalID: 683398468712539096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_11
+      rect:
+        serializedVersion: 2
+        x: 3289
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80791ea7628b820f0800000000000000
+      internalID: -1141460030128548088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_12
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38c20ea0797dc57d0800000000000000
+      internalID: -2928228613975167869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_13
+      rect:
+        serializedVersion: 2
+        x: 3887
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e54c6eaaee7069ae0800000000000000
+      internalID: -1543037100676955042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left fish arena_14
+      rect:
+        serializedVersion: 2
+        x: 4186
+        y: 0
+        width: 299.93332
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2130161e4cb3fa3f0800000000000000
+      internalID: -887424884787838190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 31ca2c6a63dc7974e944cdd663362346
     internalID: 0
     vertices: []
     indices: 

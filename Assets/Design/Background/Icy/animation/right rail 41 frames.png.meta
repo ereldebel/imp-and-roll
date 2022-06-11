@@ -1,12 +1,78 @@
 fileFormatVersion: 2
-guid: be1053abe6d45b945920f72085f401c3
+guid: b9ba9d89955cf5649a44f48558cbd7f6
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2397602421941570434
+    second: right rail 41 frames_0
+  - first:
+      213: -6442104430753037282
+    second: right rail 41 frames_1
+  - first:
+      213: -4518132203845738925
+    second: right rail 41 frames_2
+  - first:
+      213: -9217182079999470834
+    second: right rail 41 frames_3
+  - first:
+      213: 980006732107497392
+    second: right rail 41 frames_4
+  - first:
+      213: 4653255204646867896
+    second: right rail 41 frames_5
+  - first:
+      213: 9102194523881912191
+    second: right rail 41 frames_6
+  - first:
+      213: 9189085291934447779
+    second: right rail 41 frames_7
+  - first:
+      213: 1071790426454764812
+    second: right rail 41 frames_8
+  - first:
+      213: 2641672732972303011
+    second: right rail 41 frames_9
+  - first:
+      213: 6979680380756379023
+    second: right rail 41 frames_10
+  - first:
+      213: -3468644181947919881
+    second: right rail 41 frames_11
+  - first:
+      213: -8474729485413049979
+    second: right rail 41 frames_12
+  - first:
+      213: 5534926650959628721
+    second: right rail 41 frames_13
+  - first:
+      213: -5520195335279994216
+    second: right rail 41 frames_14
+  - first:
+      213: 6270384225505398073
+    second: right rail 41 frames_15
+  - first:
+      213: -5666159499578712725
+    second: right rail 41 frames_16
+  - first:
+      213: -1606727637061859075
+    second: right rail 41 frames_17
+  - first:
+      213: 6989449682960593923
+    second: right rail 41 frames_18
+  - first:
+      213: 8756173789773611298
+    second: right rail 41 frames_19
+  - first:
+      213: 2570888392775220413
+    second: right rail 41 frames_20
+  - first:
+      213: 3730859005590716624
+    second: right rail 41 frames_21
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -35,24 +101,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -65,10 +131,46 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +179,473 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: right rail 41 frames_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28b817023bef54120800000000000000
+      internalID: 2397602421941570434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_1
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e14cef6e62c0996a0800000000000000
+      internalID: -6442104430753037282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_2
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e958dd2be5c41c0800000000000000
+      internalID: -4518132203845738925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_3
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e031983abbdf51080800000000000000
+      internalID: -9217182079999470834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_4
+      rect:
+        serializedVersion: 2
+        x: 1696
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bf32c83eeea99d00800000000000000
+      internalID: 980006732107497392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_5
+      rect:
+        serializedVersion: 2
+        x: 2120
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b3d63264fea39040800000000000000
+      internalID: 4653255204646867896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_6
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f77bc78a1bd715e70800000000000000
+      internalID: 9102194523881912191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_7
+      rect:
+        serializedVersion: 2
+        x: 2968
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8f48c1360368f70800000000000000
+      internalID: 9189085291934447779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_8
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0d208ad6b3cfde00800000000000000
+      internalID: 1071790426454764812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_9
+      rect:
+        serializedVersion: 2
+        x: 3816
+        y: 2852
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a246adba5b19a420800000000000000
+      internalID: 2641672732972303011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f854fbc835eccd060800000000000000
+      internalID: 6979680380756379023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_11
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f1d4c28e76ecdfc0800000000000000
+      internalID: -3468644181947919881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_12
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5891d6e1f66b36a80800000000000000
+      internalID: -8474729485413049979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_13
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b98a48b67200dc40800000000000000
+      internalID: 5534926650959628721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_14
+      rect:
+        serializedVersion: 2
+        x: 1696
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a1eddf6935463b0800000000000000
+      internalID: -5520195335279994216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_15
+      rect:
+        serializedVersion: 2
+        x: 2120
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93d467e2b31e40750800000000000000
+      internalID: 6270384225505398073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_16
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6dd7eaa4f1cd51b0800000000000000
+      internalID: -5666159499578712725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_17
+      rect:
+        serializedVersion: 2
+        x: 2968
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df800261ab1c3b9e0800000000000000
+      internalID: -1606727637061859075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_18
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 304355874738ff060800000000000000
+      internalID: 6989449682960593923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_19
+      rect:
+        serializedVersion: 2
+        x: 3816
+        y: 2139
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 221ca0b6bad248970800000000000000
+      internalID: 8756173789773611298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1426
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbcba804f51ada320800000000000000
+      internalID: 2570888392775220413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right rail 41 frames_21
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 1426
+        width: 424
+        height: 713
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d04d47af7ca6c330800000000000000
+      internalID: 3730859005590716624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 48664e941e4d62847af5114b7993befc
     internalID: 0
     vertices: []
     indices: 
