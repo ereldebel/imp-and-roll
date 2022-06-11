@@ -99,7 +99,6 @@ namespace Managers
 				{
 					huds[0].SetActive(true);
 					emptyHudAnimator.gameObject.SetActive(true);
-					// emptyHudAnimator.enabled = true;
 				}
 				else
 				{
@@ -108,6 +107,7 @@ namespace Managers
 						hud.SetActive(true);
 					}
 				}
+				powerUps.SetActive(true);
 			}
 
 
@@ -296,6 +296,7 @@ namespace Managers
 		private void MakePlayerRed(GameObject player)
 		{
 			player.GetComponent<Animator>().runtimeAnimatorController = redController;
+			player.GetComponent<PlayerBrain>().FlipReadyBubble();
 		}
 
 		private void SetUpPlayerForGameScene(GameObject player, int playerID)
