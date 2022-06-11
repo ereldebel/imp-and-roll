@@ -10,6 +10,7 @@ namespace Ball
 		public float Mass => _rigidbody.mass;
 		public float Radius => _collider.radius;
 		public bool Thrown { get; private set; }
+		public bool Held => _held;
 
 		#endregion
 

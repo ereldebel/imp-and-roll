@@ -8,6 +8,7 @@ namespace Reflections
 		private MeshRenderer _myMeshRenderer, _daddyMeshRenderer;
 		private MeshFilter _myMeshFilter, _daddyMeshFilter;
 		private Transform _myT, _daddyT;
+		private Ball.Ball _ball;
 
 		private void OnEnable()
 		{
@@ -16,12 +17,13 @@ namespace Reflections
 			_myMeshFilter = GetComponent<MeshFilter>();
 			_daddyMeshRenderer = MatchManager.BallTransform.GetComponent<MeshRenderer>();
 			_daddyT = _daddyMeshRenderer.transform;
+			_ball = _daddyT.GetComponent<Ball.Ball>();
 			_daddyMeshFilter = _daddyT.GetComponent<MeshFilter>();
 		}
 
 		private void Update()
 		{
-			if (!_daddyT.gameObject.activeSelf)
+			if (!_daddyT.gameObject.activeSelf || _ball.Held)
 			{
 				_myMeshRenderer.enabled = false;
 				return;

@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Design/Background/Flaming hot/animation/left-fire-instruction.jpg.meta
-guid: d9b0ec0231c52e7448f8f3a32399527c
-========
-guid: ccfeba63e809c99498c0b2e642297f49
->>>>>>>> 5c7a5b1d1e10371c688f518502a2e0494ee191c0:Assets/Design/Background/Flaming hot/animation/left fire.png.meta
+guid: 86c0d43a121f3f74c9beb1278371a89d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,50 +65,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<<< HEAD:Assets/Design/Background/Flaming hot/animation/left-fire-instruction.jpg.meta
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 2
-========
     textureCompression: 1
->>>>>>>> 5c7a5b1d1e10371c688f518502a2e0494ee191c0:Assets/Design/Background/Flaming hot/animation/left fire.png.meta
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
