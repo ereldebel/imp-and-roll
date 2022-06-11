@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Managers;
 using Player;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Collectibles
 
 		private ICollectible _collectible;
 		private bool _inCollectibleCollection;
+		private Coroutine _disappearance;
 
 		public CollectibleType CollectibleType
 		{
@@ -47,7 +49,13 @@ namespace Collectibles
 			_collectible.Collect(other.gameObject);
 			if (_collectible is PowerUp.PowerUp powerUp)
 				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
-			GameManager.Shared.StartCoroutine(Disappear());
+			_disappearance = GameManager.Shared.StartCoroutine(Disappear());
+		}
+
+		private void OnDestroy()
+		{
+			if (_disappearance != null)
+				StopCoroutine(_disappearance);
 		}
 
 		private IEnumerator Disappear()

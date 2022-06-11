@@ -280,8 +280,12 @@ MonoBehaviour:
   waitTime: 2
   AIPlayerPrefab: {fileID: 3231730942035179633, guid: 182cb924edd81cc468e0c67fed9e3d7b, type: 3}
   pressStartCanvas: {fileID: 0}
+  powerUps: {fileID: 0}
   pauseCanvas: {fileID: 6537296341438456258}
   transitioner: {fileID: 5474760835387672596}
+  huds: []
+  emptyHudAnimator: {fileID: 0}
+  AILabel: {fileID: 0}
 --- !u!114 &6537296340413375434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,9 +451,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips: []
-  startMusic: {fileID: 8300000, guid: b85ebc299fb2f0c4bb955a80c2d65275, type: 3}
-  matchMusic: {fileID: 8300000, guid: 23ed4e8f19d705e488fd60fd23e39026, type: 3}
-  winMusic: {fileID: 8300000, guid: f5f2dfad214a89a4187a5002801b37b7, type: 3}
+  startMusic:
+    clip: {fileID: 0}
+    volume: 0
+  matchMusic:
+    clip: {fileID: 0}
+    volume: 0
+  winMusic:
+    clip: {fileID: 0}
+    volume: 0
+  pauseAudioSource: {fileID: 0}
 --- !u!1 &6537296341438456258
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +652,7 @@ GameObject:
   - component: {fileID: 1193161183612971688}
   - component: {fileID: 2900946007633691266}
   - component: {fileID: 5474760835387672596}
+  - component: {fileID: 7222118683288411495}
   m_Layer: 5
   m_Name: Transition Screen
   m_TagString: Untagged
@@ -687,7 +699,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!114 &1193161183612971688
 MonoBehaviour:
@@ -741,8 +753,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a19b1331c558b43ad80ef828cc6105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionScreen: {fileID: 2197320275694144558}
-  transitionSpeed: 0.5
+  transitionSpeed: 2
+--- !u!225 &7222118683288411495
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567204583803209532}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7739874320974675641
 GameObject:
   m_ObjectHideFlags: 0
