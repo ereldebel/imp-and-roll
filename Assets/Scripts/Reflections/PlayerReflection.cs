@@ -26,7 +26,15 @@ public class PlayerReflection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _mySpriteRenderer.flipX = _daddySpriteRenderer.flipX;
+        if (playerToFollow == 1)
+        {
+            _mySpriteRenderer.flipX = !_daddySpriteRenderer.flipX;            
+        }
+        else
+        {
+            _mySpriteRenderer.flipX = _daddySpriteRenderer.flipX;
+        }
+
         _mySpriteRenderer.sprite = _daddySpriteRenderer.sprite;
         if (GameManager.CurScene != 2)
         {
