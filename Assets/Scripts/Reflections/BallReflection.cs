@@ -9,7 +9,7 @@ namespace Reflections
 		private MeshFilter _myMeshFilter, _daddyMeshFilter;
 		private Transform _myT, _daddyT;
 		private Ball.Ball _ball;
-
+		private int _texturePropertyID, _colorPropertyID;
 		private void OnEnable()
 		{
 			_myT = transform;
@@ -19,6 +19,11 @@ namespace Reflections
 			_daddyT = _daddyMeshRenderer.transform;
 			_ball = _daddyT.GetComponent<Ball.Ball>();
 			_daddyMeshFilter = _daddyT.GetComponent<MeshFilter>();
+			_texturePropertyID = _myMeshRenderer.material.shader.FindPropertyIndex("_MainTex");
+			_texturePropertyID = _myMeshRenderer.material.shader.GetPropertyNameId(_texturePropertyID);
+			_colorPropertyID = _myMeshRenderer.material.shader.FindPropertyIndex("_Color");
+			_colorPropertyID = _myMeshRenderer.material.shader.GetPropertyNameId(_colorPropertyID);
+
 		}
 
 		private void Update()
@@ -36,8 +41,26 @@ namespace Reflections
 			_myT.localScale = _daddyT.localScale;
 			_myT.rotation = Quaternion.AngleAxis(180, Vector3.forward) * _daddyT.rotation;
 			_myMeshFilter.mesh = _daddyMeshFilter.mesh;
-			if (_daddyMeshRenderer.material != _myMeshRenderer.material)
-				_myMeshRenderer.material = _daddyMeshRenderer.material;
+			if (_daddyMeshRenderer.materials.Length > 1)
+			{
+				for (int i = 0; i < _daddyMeshRenderer.materials.Length; i++)
+				{
+					_myMeshRenderer.materials[i].SetTexture(_texturePropertyID,_daddyMeshRenderer.materials[i].mainTexture);
+					_myMeshRenderer.materials[i].SetColor(_colorPropertyID,_daddyMeshRenderer.materials[i].color);
+				}
+			}
+			else
+			{
+				_myMeshRenderer.material.SetTexture(_texturePropertyID,_daddyMeshRenderer.material.mainTexture);
+				_myMeshRenderer.material.SetColor(_colorPropertyID,_daddyMeshRenderer.material.color);
+				for (int i = 1; i < _myMeshRenderer.materials.Length; i++)
+				{
+					_myMeshRenderer.materials[i].SetTexture(_texturePropertyID,Texture2D.blackTexture);
+					_myMeshRenderer.materials[i].SetColor(_colorPropertyID,Color.white);
+				}
+			}
+
+
 			if (GameManager.CurScene != 2)
 				Destroy(gameObject);
 		}
