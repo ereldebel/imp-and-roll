@@ -370,10 +370,6 @@ namespace Player
 				_rumble.Stun(_stunBar);
 			if (_ball)
 				Throw((ThrowVelocity + velocity) / 2);
-			_animator.SetBool(AnimatorHasBall, false);
-			_animator.SetBool(AnimatorRunning, false);
-			_animator.SetBool(AnimatorDodge, false);
-			_animator.SetBool(AnimatorThrowing, false);
 			StartCoroutine(Stun(velocity, damage));
 			return true;
 		}
@@ -520,7 +516,10 @@ namespace Player
 
 		private IEnumerator Stun(Vector3 knockBackDir, float damage)
 		{
+			_animator.SetBool(AnimatorHasBall, false);
 			_animator.SetBool(AnimatorRunning, false);
+			_animator.SetBool(AnimatorDodge, false);
+			_animator.SetBool(AnimatorThrowing, false);
 			_animator.SetBool(AnimatorStunned, true);
 			_animator.SetFloat(AnimatorX, 1);
 			_animator.SetFloat(AnimatorZ, -1);
