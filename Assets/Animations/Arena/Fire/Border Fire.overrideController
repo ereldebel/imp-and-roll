@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Border Fire
+  m_Controller: {fileID: 9100000, guid: 4f571e417b8f1bd47a923d886bd70d67, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 46e34e14f9ec0eb4da4a8618dd3c3892, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f35d76022818bd145bbd00f39781d1cb, type: 2}

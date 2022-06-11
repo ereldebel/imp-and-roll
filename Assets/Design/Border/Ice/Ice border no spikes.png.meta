@@ -1,12 +1,36 @@
 fileFormatVersion: 2
 guid: 319391bee81faa84f8f5860ee9a3f374
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2058336242539127449
+    second: Ice border no spikes_0
+  - first:
+      213: -205344294145693567
+    second: Ice border no spikes_1
+  - first:
+      213: -72953205053724473
+    second: Ice border no spikes_2
+  - first:
+      213: -4407623447612756228
+    second: Ice border no spikes_3
+  - first:
+      213: -4757822558872285179
+    second: Ice border no spikes_4
+  - first:
+      213: 1417170785462546823
+    second: Ice border no spikes_5
+  - first:
+      213: -4932248604876145902
+    second: Ice border no spikes_6
+  - first:
+      213: -8336530829842464510
+    second: Ice border no spikes_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -35,24 +59,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -75,13 +99,193 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Ice border no spikes_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9926bd438eda09c10800000000000000
+      internalID: 2058336242539127449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice border no spikes_1
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 188eac2d378762df0800000000000000
+      internalID: -205344294145693567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice border no spikes_2
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c8eb8f4271dcfef0800000000000000
+      internalID: -72953205053724473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice border no spikes_3
+      rect:
+        serializedVersion: 2
+        x: 2493
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfeeb55b3d9f4d2c0800000000000000
+      internalID: -4407623447612756228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice border no spikes_4
+      rect:
+        serializedVersion: 2
+        x: 3324
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 500d31a3791d8fdb0800000000000000
+      internalID: -4757822558872285179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice border no spikes_5
+      rect:
+        serializedVersion: 2
+        x: 4155
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7817e85225dcaa310800000000000000
+      internalID: 1417170785462546823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice border no spikes_6
+      rect:
+        serializedVersion: 2
+        x: 4986
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21bf07aa6022d8bb0800000000000000
+      internalID: -4932248604876145902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice border no spikes_7
+      rect:
+        serializedVersion: 2
+        x: 5817
+        y: 0
+        width: 831
+        height: 746
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 201c52c0161be4c80800000000000000
+      internalID: -8336530829842464510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9f7d7b772d8db6e43bb1d3cfec7e5652
     internalID: 0
     vertices: []
     indices: 
