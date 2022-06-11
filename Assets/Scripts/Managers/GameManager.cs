@@ -18,7 +18,7 @@ namespace Managers
 		[SerializeField] private AnimatorOverrideController redController;
 		[SerializeField] private float waitTime = 2;
 		[SerializeField] private GameObject AIPlayerPrefab;
-		[SerializeField] private GameObject pressStartCanvas;
+		[SerializeField] private OpeningScreen openingScreen;
 		[SerializeField] private GameObject powerUps;
 		[SerializeField] private GameObject pauseCanvas;
 		[SerializeField] private SceneTransitioner transitioner;
@@ -71,7 +71,7 @@ namespace Managers
 
 		private void Awake()
 		{
-			pressStartCanvas.SetActive(true);
+			openingScreen.gameObject.SetActive(true);
 			_curScene = 0;
 			if (Shared == null)
 			{
@@ -94,8 +94,10 @@ namespace Managers
 				_players = Shared._players;
 				_playerInputs = Shared._playerInputs;
 				_numPlayers = Shared._numPlayers;
+				if (Shared != this)
+					Destroy(Shared.gameObject);
 				Shared = this;
-				pressStartCanvas.SetActive(false);
+				openingScreen.Enter();
 				if (_numPlayers == 1)
 				{
 					huds[0].SetActive(true);
@@ -123,8 +125,8 @@ namespace Managers
 				return;
 			}
 
-			if (pressStartCanvas.activeSelf)
-				pressStartCanvas.SetActive(false);
+			if (openingScreen.Showing)
+				openingScreen.Enter();
 			if (!powerUps.activeSelf)
 				powerUps.SetActive(true);
 
@@ -170,7 +172,7 @@ namespace Managers
 				_playerReadyStatus = new Dictionary<GameObject, bool>();
 				_playerInputs = new Dictionary<PlayerInput, string>();
 				_numPlayers = 0;
-				pressStartCanvas.SetActive(true);
+				openingScreen.Exit();
 				powerUps.SetActive(false);
 				emptyHudAnimator.gameObject.SetActive(false);
 				return;
@@ -389,7 +391,7 @@ namespace Managers
 			for (var i = waitTime; i > 0; i--)
 			{
 				yield return new WaitForSeconds(1);
-				if (_playerReadyStatus.All(pair => pair.Value)) continue;
+				if (_playerReadyStatus.Count > 0 && _playerReadyStatus.All(pair => pair.Value)) continue;
 				_gameStarted = false;
 				yield break;
 			}
