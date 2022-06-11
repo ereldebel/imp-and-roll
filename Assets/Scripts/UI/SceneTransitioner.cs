@@ -3,12 +3,17 @@ using System.Collections;
 using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace UI
 {
 	public class SceneTransitioner : MonoBehaviour
 	{
 		[SerializeField] private float transitionSpeed = 0.5f;
+		[SerializeField] private Sprite[] tips;
+		[SerializeField] private Image tipImage;
+
+		private static int _tipIndex;
 		private CanvasGroup transitionScreen;
 
 		private void Awake()
@@ -43,6 +48,8 @@ namespace UI
 		
 		private IEnumerator PerformTransition(AsyncOperation asyncLoad, bool needsOrganizing, Action preSceneOrganizing)
 		{
+			tipImage.sprite = tips[_tipIndex++];
+			_tipIndex %= tips.Length;
 			float alpha = 0;
 			transitionScreen.alpha = alpha;
 			while (alpha < 1)
