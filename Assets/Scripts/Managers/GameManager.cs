@@ -205,7 +205,7 @@ namespace Managers
 			if (Mathf.Abs(_redScore - _blueScore) > 1 || _curScene == 3)
 			{
 				var winner = _redScore > _blueScore ? "Red" : "Blue";
-				StartCoroutine(DisplayWinner(winner, 1f));
+				StartCoroutine(DisplayWinner(winner, 3f));
 			}
 			else
 				StartCoroutine(ResetTimer(3f));
