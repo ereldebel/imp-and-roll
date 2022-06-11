@@ -304,7 +304,6 @@ namespace Player
 			_animator.SetBool(AnimatorHasBall, false);
 			_calledThrow = false;
 			BallThrown?.Invoke();
-			var ball = _ball;
 			_ball = null;
 			return true;
 		}

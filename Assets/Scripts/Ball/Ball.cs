@@ -176,6 +176,7 @@ namespace Ball
 			_rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
 			_collider.enabled = true;
 			_trailRenderer.enabled = true;
+			gameObject.SetActive(true);
 			_shadow.SetActive(true);
 			_transform.SetParent(null);
 			_held = false;

@@ -28,6 +28,7 @@ namespace UI
 
 		private IEnumerator PerformTransition(Func<AsyncOperation> asyncLoadFunc, Action preSceneOrganizing)
 		{
+			var asyncLoad = asyncLoadFunc();
 			float alpha = 0;
 			transitionScreen.alpha = alpha;
 			while (alpha < 1)
@@ -38,7 +39,6 @@ namespace UI
 			}
 
 			transitionScreen.alpha = alpha = 1;
-			var asyncLoad = asyncLoadFunc();
 			preSceneOrganizing?.Invoke();
 			while (!asyncLoad.isDone)
 				yield return null;
