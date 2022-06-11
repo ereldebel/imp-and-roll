@@ -331,7 +331,7 @@ namespace Player
 			_ball = null;
 			SetPowerUp(null);
 			if (_playerInput)
-				_playerInput.SwitchCurrentActionMap("Start Menu");
+				_playerInput.SwitchCurrentActionMap("Inactive");
 			if (_aiController)
 				_aiController.enabled = false;
 			transform.rotation = _left ? _faceLeft : _faceRight;

@@ -220,8 +220,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.55
-  m_Height: 2
+  m_Radius: 0.57
+  m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5085160740069576546
@@ -337,22 +337,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6e6ad36e-4200-4325-9c0d-f6bd785258db
     m_ActionName: Player/Dodge Roll[/XInputControllerWindows/buttonEast,/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4320430827449331697}
-        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
-        m_MethodName: OnStart
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 178b9fad-0fa0-4b14-af33-4b7a54c96231
-    m_ActionName: Start Menu/Start[/Keyboard/enter,/Keyboard/space,/XInputControllerWindows/start]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4320430827449331697}
@@ -933,7 +917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5823546078410145418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4437818291732569120}
@@ -1022,7 +1006,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1513,7 +1497,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1567,13 +1551,13 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 5.55
+    angle: 7
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: -60, y: 0, z: 0}
+    m_Rotation: {x: -55, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -1653,7 +1637,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.33
+      value: 0.2
       mode: 0
       spread: 0
       speed:

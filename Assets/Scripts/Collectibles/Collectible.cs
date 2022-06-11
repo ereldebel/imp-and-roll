@@ -17,6 +17,7 @@ namespace Collectibles
 		private ICollectible _collectible;
 		private bool _inCollectibleCollection;
 		private Coroutine _disappearance;
+		private Vector3 _scale;
 
 		public CollectibleType CollectibleType
 		{
@@ -26,6 +27,11 @@ namespace Collectibles
 				_collectible = collectibleFactory.Create(value);
 				GetComponent<SpriteRenderer>().sprite = collectibleFactory.Sprite(value);
 			}
+		}
+
+		private void Awake()
+		{
+			_scale = transform.localScale;
 		}
 
 		private void OnValidate() => CollectibleType = collectibleType;
@@ -42,6 +48,11 @@ namespace Collectibles
 		{
 			if (_inCollectibleCollection)
 				MatchManager.RemoveFromCollectibleCollection(transform);
+		}
+
+		private void OnEnable()
+		{
+			transform.localScale = _scale;
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -79,7 +90,6 @@ namespace Collectibles
 
 		private IEnumerator WaitAndRespawn(float delay)
 		{
-			print("started");
 			gameObject.SetActive(false);
 			yield return new WaitForSeconds(delay);
 			gameObject.SetActive(true);
