@@ -1400,22 +1400,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1710618002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7567204583803209532, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
-  m_PrefabInstance: {fileID: 2114236149}
-  m_PrefabAsset: {fileID: 0}
---- !u!210 &1710618009
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710618002}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10000
 --- !u!1 &1720509464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,10 +1829,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6537296340413375435, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7222118683288411495, guid: b27ec398cbea9074da8ee2166d702a4f, type: 3}
-      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
