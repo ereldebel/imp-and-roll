@@ -28,7 +28,7 @@ namespace Reflections
 
 		private void Update()
 		{
-			if (!_daddyT.gameObject.activeSelf || _ball.Held)
+			if (!_daddyT.gameObject.activeSelf || !_ball.gameObject.activeSelf)
 			{
 				_myMeshRenderer.enabled = false;
 				return;
