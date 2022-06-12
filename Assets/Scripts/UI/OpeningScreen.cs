@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Managers;
 using UnityEngine;
 
 namespace UI
@@ -33,16 +34,19 @@ namespace UI
 			_rectTransform = GetComponent<RectTransform>();
 			_canvasGroup = GetComponent<CanvasGroup>();
 			_originalScale = _rectTransform.localScale;
+			AudioManager.OpeningScreenMusic();
 		}
 
 		public void Enter()
 		{
 			StartCoroutine(EnterScene());
+			AudioManager.TutorialScreenMusic();
 		}
 
 		public void Exit()
 		{
 			StartCoroutine(ExitScene());
+			AudioManager.OpeningScreenMusic();
 		}
 
 		private IEnumerator EnterScene()

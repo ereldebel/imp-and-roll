@@ -633,16 +633,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d299f2aee7142268d20546f16d8f66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips: []
-  startMusic:
-    clip: {fileID: 0}
-    volume: 0
+  clips:
+  - clip: {fileID: 8300000, guid: e4615d4fa98eeb5459cabe61064eaee8, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 4051adfb72044044d9a0abf38b0068fe, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: b06758f43d52b4e4d9cc1f99595b2f87, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: d75d795ce195c38409bab9505669694b, type: 3}
+    volume: 1
+  tutorialMusic:
+    clip: {fileID: 8300000, guid: b85ebc299fb2f0c4bb955a80c2d65275, type: 3}
+    volume: 1
   matchMusic:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: 23ed4e8f19d705e488fd60fd23e39026, type: 3}
+    volume: 1
   winMusic:
-    clip: {fileID: 0}
-    volume: 0
+    clip: {fileID: 8300000, guid: f5f2dfad214a89a4187a5002801b37b7, type: 3}
+    volume: 1
+  openingScreenMusic:
+    clip: {fileID: 8300000, guid: 101ceaba893493d43bef4641cb6a7bf5, type: 3}
+    volume: 1
   pauseAudioSource: {fileID: 0}
 --- !u!1 &6537296341438456258
 GameObject:

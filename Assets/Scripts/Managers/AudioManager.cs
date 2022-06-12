@@ -7,12 +7,13 @@ namespace Managers
 {
 	public class AudioManager : ObjectAudio
 	{
-		[SerializeField] [Header("0: Pause, 1: Match start, 2: PowerUp spawn")]
+		[SerializeField] [Header("0: Pause, 1: Match start, 2: PowerUp spawn, 3: PowerUp pickup, 4: Counter")]
 		private Header _;
 
-		[SerializeField] private AudioClipAndVolume startMusic;
+		[SerializeField] private AudioClipAndVolume tutorialMusic;
 		[SerializeField] private AudioClipAndVolume matchMusic;
 		[SerializeField] private AudioClipAndVolume winMusic;
+		[SerializeField] private AudioClipAndVolume openingScreenMusic;
 		[SerializeField] private AudioSource pauseAudioSource;
 
 		private static AudioManager _shared;
@@ -37,9 +38,10 @@ namespace Managers
 			SetObjectSet(new HashSet<AudioSource> {Audio});
 		}
 
-		public static void StartScreenMusic() => _shared.SwitchClip(_shared.startMusic);
+		public static void TutorialScreenMusic() => _shared.SwitchClip(_shared.tutorialMusic);
 		public static void MatchMusic() => _shared.SwitchClip(_shared.matchMusic);
 		public static void WinMusic() => _shared.SwitchClip(_shared.winMusic);
+		public static void OpeningScreenMusic() => _shared.SwitchClip(_shared.openingScreenMusic);
 
 		public static void Pause()
 		{
@@ -64,5 +66,16 @@ namespace Managers
 		{
 			_shared.PlayClipByIndex(2);
 		}
+		
+		public static void PowerUpPickUp()
+		{
+			_shared.PlayClipByIndex(3);
+		}
+		
+		public static void Counter()
+		{
+			_shared.PlayClipByIndex(4);
+		}
+		
 	}
 }

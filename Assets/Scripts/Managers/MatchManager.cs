@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ArenaDivision;
 using Collectibles;
 using Player;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Managers
 		[SerializeField] private GameObject powerUpPrefab;
 		[SerializeField] private float timeBetweenPowerUpSpawns;
 		[SerializeField] private float minPowerUpDistFromPlayers;
+		[SerializeField] private Animator counterAnimator;
+		[SerializeField] private Monster monster;
 
 		[Tooltip("Duplicates mean that the powerUp has a higher chance of being picked.")] [SerializeField]
 		private List<CollectibleType> powerUpsInMatch;
@@ -49,6 +52,8 @@ namespace Managers
 
 		private readonly List<Transform> _collectibleCollection = new List<Transform>();
 
+		private static readonly int AnimatorBlueStarts = Animator.StringToHash("Blue Starts");
+
 		#endregion
 
 		#region Public C# Events
@@ -73,7 +78,7 @@ namespace Managers
 
 		private void Start()
 		{
-			StartCoroutine(InitializeBallWithDelay(1.5f));
+			ball.FreezeBall();
 		}
 
 		private void OnDestroy()
@@ -85,6 +90,11 @@ namespace Managers
 		#endregion
 
 		#region Public Methods
+
+		public static void StartMatch()
+		{
+			_shared.StartCoroutine(_shared.InitializeBallWithDelay(3f));
+		}
 
 		public static void GameOver(bool leftWon)
 		{
@@ -132,14 +142,21 @@ namespace Managers
 
 		private IEnumerator InitializeBallWithDelay(float delay)
 		{
-			ball.FreezeBall();
-			yield return new WaitForSeconds(delay);
 			var blueRedDiff = GameManager.BlueScore - GameManager.RedScore;
 			var x = Random.Range(2, 4);
 			var z = Random.Range(-2, 2);
 			if (blueRedDiff < 0 || (blueRedDiff == 0 && Random.value > 0.5f))
 				x = -x;
-			ball.UnfreezeAndInitializeBall(new Vector3(x, 2, z));
+			var velocity = new Vector3(x, 2, z);
+			var counterParent = counterAnimator.transform.parent;
+			counterAnimator.SetBool(AnimatorBlueStarts, x > 0);
+			AudioManager.Counter();
+			yield return new WaitForSeconds(delay - 0.5f);
+			monster.Sneeze();
+			yield return new WaitForSeconds(0.5f);
+			ball.UnfreezeAndInitializeBall(velocity);
+			yield return new WaitForSeconds(1);
+			counterParent.gameObject.SetActive(false);
 		}
 
 		private IEnumerator SpawnCollectible()

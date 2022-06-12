@@ -82,14 +82,19 @@ namespace UI
 			switch (sceneIndex)
 			{
 				case 0:
-					AudioManager.StartScreenMusic();
+					if (UICanvas.instance)
+						UICanvas.instance.gameObject.SetActive(true);
+					AudioManager.OpeningScreenMusic();
 					break;
 				case var _ when sceneIndex > 3:
+					if (UICanvas.instance)
+						UICanvas.instance.gameObject.SetActive(false);
 					AudioManager.WinMusic();
 					break;
 				default:
 					AudioManager.MatchStart();
 					AudioManager.MatchMusic();
+					MatchManager.StartMatch();
 					break;
 			}
 		}
