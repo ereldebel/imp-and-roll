@@ -10,17 +10,19 @@ namespace Collectibles.PowerUp.BallPowerUps.Effects
 		[SerializeField] private CollectibleFactory collectibleFactory;
 		[SerializeField] private float flameKnockBackVelocityMultiplier = 2.5f;
 
+		private ParticleSystem _particleSystem;
+		private AudioSource _audioSource;
+		private GameObject _flame;
 		private float _enableTime;
 		private float _effectTime;
-		private ParticleSystem _particleSystem;
 		private bool _stopped;
-		private GameObject _flame;
 
 		private static readonly List<ParticleCollisionEvent> CollisionEvents = new List<ParticleCollisionEvent>();
 
 		private void Awake()
 		{
 			_particleSystem = GetComponent<ParticleSystem>();
+			_audioSource = GetComponent<AudioSource>();
 			_particleSystem.Stop();
 			_flame = transform.GetChild(0).gameObject;
 		}
@@ -51,6 +53,7 @@ namespace Collectibles.PowerUp.BallPowerUps.Effects
 			_enableTime = Time.time;
 			_effectTime = collectibleFactory.fireTrailParticleLifeSpan;
 			_stopped = false;
+			_audioSource.Play();
 		}
 
 		public void Stop()
