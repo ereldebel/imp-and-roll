@@ -79,11 +79,8 @@ namespace UI
 			}
 
 			var sceneIndex = SceneManager.GetActiveScene().buildIndex;
-			if (sceneIndex != 0 && SceneManager.GetActiveScene().buildIndex <= 3)
-			{
+			if (sceneIndex != 0 && sceneIndex <= 3)
 				MatchManager.StartMatch();
-
-			}
 			transitionScreen.alpha = 0;
 		}
 

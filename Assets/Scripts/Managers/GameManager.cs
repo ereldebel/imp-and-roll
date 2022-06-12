@@ -421,7 +421,8 @@ namespace Managers
 			yield return new WaitForSeconds(delay);
 			transitioner.QuickTransitionToScene($"{winner} won, arena {_curScene}");
 			SetUpPlayersForWinningScene();
-			Invoke(nameof(ResetGameKeepPlayers), 6f);
+			yield return new WaitForSeconds(6);
+			ResetGameKeepPlayers();
 		}
 
 		private static IEnumerator ResetPC(GameObject player, float time)

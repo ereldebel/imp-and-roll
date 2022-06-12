@@ -42,7 +42,8 @@ namespace UI
 
 		private void OnDestroy()
 		{
-			StopCoroutine(_timer);
+			if (_timer != null)
+				StopCoroutine(_timer);
 		}
 
 		public void Enter()
