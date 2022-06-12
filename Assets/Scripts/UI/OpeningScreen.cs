@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Managers;
+using Player;
 using UnityEngine;
 
 namespace UI
@@ -9,11 +11,13 @@ namespace UI
 	{
 		[SerializeField] private float transitionTime = 0.5f;
 		[SerializeField] private MinMax scale = new MinMax(1, 5);
+		[SerializeField] private float interval = 30;
 
 		private readonly MinMax _alpha = new MinMax(0, 1);
 		private RectTransform _rectTransform;
 		private CanvasGroup _canvasGroup;
 		private Vector3 _originalScale;
+		private Coroutine _timer;
 
 		[Serializable]
 		private struct MinMax
@@ -36,20 +40,41 @@ namespace UI
 			_originalScale = _rectTransform.localScale;
 		}
 
+		private void OnDestroy()
+		{
+			StopCoroutine(_timer);
+		}
+
 		public void Enter()
 		{
 			StartCoroutine(EnterScene());
 			AudioManager.TutorialScreenMusic();
+			if (_timer != null)
+				StopCoroutine(_timer);
+			_timer = StartCoroutine(Timer());
+		}
+
+		private IEnumerator Timer()
+		{
+			while (true)
+			{
+				yield return new WaitForSeconds(interval);
+				if (!PlayerController.Dirty)
+					GameManager.Shared.ExitToOpeningScreen();
+				PlayerController.Dirty = false;
+			}
 		}
 
 		public void Exit()
 		{
 			StartCoroutine(ExitScene());
 			AudioManager.OpeningScreenMusic();
+			StopCoroutine(_timer);
 		}
 
 		private IEnumerator EnterScene()
 		{
+			yield return null;
 			for (var time = 0f; time < transitionTime; time += Time.deltaTime)
 			{
 				_canvasGroup.alpha = Mathf.Lerp(_alpha.max, _alpha.min, time / transitionTime);
@@ -63,6 +88,7 @@ namespace UI
 
 		private IEnumerator ExitScene()
 		{
+			yield return null;
 			for (var time = 0f; time < transitionTime; time += Time.deltaTime)
 			{
 				_canvasGroup.alpha = Mathf.Lerp(_alpha.min, _alpha.max, time / transitionTime);

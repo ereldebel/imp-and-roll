@@ -46,7 +46,7 @@ namespace UI
 				yield return null;
 			SwitchMusicByScene();
 		}
-		
+
 		private IEnumerator PerformTransition(AsyncOperation asyncLoad, bool needsOrganizing, Action preSceneOrganizing)
 		{
 			var startTime = Time.time;
@@ -64,11 +64,11 @@ namespace UI
 			transitionScreen.alpha = alpha = 1;
 			if (needsOrganizing)
 				preSceneOrganizing();
-			while (!asyncLoad.isDone)
-				yield return null;
 			var leftOverToMin = minLoadTime - (Time.time - startTime);
 			if (leftOverToMin > 0)
 				yield return new WaitForSeconds(leftOverToMin);
+			while (!asyncLoad.isDone)
+				yield return null;
 			SwitchMusicByScene();
 
 			while (alpha > 0)

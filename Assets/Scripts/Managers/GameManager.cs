@@ -282,6 +282,11 @@ namespace Managers
 			Destroy(GetComponent<PlayerInputManager>());
 			_quit = true;
 		}
+		
+		public void ExitToOpeningScreen()
+		{
+			RemovePlayer(_players[0]);
+		}
 
 		#endregion
 
