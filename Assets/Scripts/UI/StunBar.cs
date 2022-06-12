@@ -23,11 +23,20 @@ namespace UI
 
 		private void Awake()
 		{
-			_playerBrain = GameManager.Players[playerNumber].GetComponent<PlayerBrain>();
 			_material = GetComponent<Image>().material;
 			_material.SetFloat(BarRotation, rotationRange.max);
-			_playerBrain.StunStarted += StunStarted;
 			MatchManager.MatchStarted += Reset;
+		}
+
+		private void OnEnable()
+		{
+			_playerBrain = GameManager.Players[playerNumber].GetComponent<PlayerBrain>();
+			_playerBrain.StunStarted += StunStarted;
+		}
+
+		private void OnDisable()
+		{
+			_playerBrain.StunStarted -= StunStarted;
 		}
 
 		private void Reset()
@@ -38,7 +47,6 @@ namespace UI
 		private void OnDestroy()
 		{
 			_material.SetFloat(BarRotation, 1);
-			_playerBrain.StunStarted -= StunStarted;
 			MatchManager.MatchStarted -= Reset;
 		}
 

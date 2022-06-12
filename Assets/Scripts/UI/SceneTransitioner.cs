@@ -14,6 +14,8 @@ namespace UI
 		[SerializeField] private Image tipImage;
 		[SerializeField] private float minLoadTime = 3;
 
+		public bool InTransition { get; private set; }
+		
 		private static int _tipIndex;
 		private CanvasGroup transitionScreen;
 
@@ -40,15 +42,18 @@ namespace UI
 		public void TransitionToScene(int sceneBuildIndex, Action preSceneOrganizing) =>
 			StartCoroutine(PerformTransition(SceneManager.LoadSceneAsync(sceneBuildIndex), true, preSceneOrganizing));
 
-		private static IEnumerator PerformQuickTransition(AsyncOperation asyncLoad)
+		private IEnumerator PerformQuickTransition(AsyncOperation asyncLoad)
 		{
+			InTransition = true;
 			while (!asyncLoad.isDone)
 				yield return null;
 			SwitchMusicByScene();
+			InTransition = false;
 		}
 
 		private IEnumerator PerformTransition(AsyncOperation asyncLoad, bool needsOrganizing, Action preSceneOrganizing)
 		{
+			InTransition = true;
 			var startTime = Time.time;
 			tipImage.sprite = tips[_tipIndex++];
 			_tipIndex %= tips.Length;
@@ -82,6 +87,7 @@ namespace UI
 			if (sceneIndex != 0 && sceneIndex <= 3)
 				MatchManager.StartMatch();
 			transitionScreen.alpha = 0;
+			InTransition = false;
 		}
 
 		private static void SwitchMusicByScene()

@@ -88,3 +88,6 @@ GoogleAarExplodeCache.xml
 web/Development
 web/TemplateData
 web/Release
+
+# Builds
+*Build*
