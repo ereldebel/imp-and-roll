@@ -406,11 +406,6 @@ namespace Player
 			else
 				_audio.Unready();
 		}
-
-		public void FlipReadyBubble()
-		{
-			readyBubble.GetComponent<SpriteRenderer>().flipX = true;
-		}
 		#endregion
 
 		#region Private Methods

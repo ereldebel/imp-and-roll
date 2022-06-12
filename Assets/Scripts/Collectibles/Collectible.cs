@@ -67,7 +67,7 @@ namespace Collectibles
 		private void OnDestroy()
 		{
 			if (_disappearance != null)
-				StopCoroutine(_disappearance);
+				GameManager.Shared.StopCoroutine(_disappearance);
 		}
 
 		private IEnumerator Disappear()
