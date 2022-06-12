@@ -281,10 +281,6 @@ namespace Managers
 			transitioner.TransitionToScene(0);
 			Destroy(GetComponent<PlayerInputManager>());
 			_quit = true;
-			// foreach (var player in Shared._players)
-			// 	Destroy(player);
-			// Destroy(Shared.gameObject);
-			// Shared = null;
 		}
 
 		#endregion
@@ -363,14 +359,13 @@ namespace Managers
 			_curScene = 0;
 			if (_players[1].GetComponent<AIController>() != null)
 				RemovePlayer(_players[1]);
-
 			for (var i = 0; i < _players.Count; i++)
 			{
 				var playerBrain = _players[i].GetComponent<PlayerBrain>();
 				playerBrain.Reset(false);
 				playerBrain.CharacterController.enabled = false;
 				SetUpPlayerForStartScene(_players[i], i);
-				StartCoroutine(ResetPC(_players[i], 1f));
+				playerBrain.CharacterController.enabled = true;
 			}
 
 			transitioner.TransitionToScene(0);
@@ -420,11 +415,10 @@ namespace Managers
 			Invoke(nameof(ResetGameKeepPlayers), 6f);
 		}
 
-		private IEnumerator ResetPC(GameObject player, float time)
+		private static IEnumerator ResetPC(GameObject player, float time)
 		{
 			yield return new WaitForSeconds(time);
 			player.GetComponent<CharacterController>().enabled = true;
-			// _gameStarted = true;
 		}
 
 		#endregion
