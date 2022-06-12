@@ -76,7 +76,6 @@ namespace Managers
 			_curScene = 0;
 			if (Shared != null && Shared._quit)
 			{
-				Destroy(Shared.GetComponent<PlayerInputManager>());
 				foreach (var player in Shared._players)
 					Destroy(player);
 				Destroy(Shared.gameObject);
@@ -128,9 +127,14 @@ namespace Managers
 
 		public void AddPlayer(PlayerInput input)
 		{
-			if (_curScene != 0 || _players == null)
+			var player = input.gameObject;
+			if (_players == null) return;
+			if (_curScene != 0 || _numPlayers >= 2)
 			{
-				Destroy(input.gameObject);
+				if (!_players.Contains(player))
+				{
+					Destroy(input.gameObject);
+				}
 				return;
 			}
 
@@ -139,7 +143,6 @@ namespace Managers
 			if (!powerUps.activeSelf)
 				powerUps.SetActive(true);
 
-			var player = input.gameObject;
 			DontDestroyOnLoad(player);
 			_players.Add(player);
 			_playerReadyStatus.Add(player, false);
@@ -362,6 +365,7 @@ namespace Managers
 			_redScore = 0;
 			_blueScore = 0;
 			_curScene = 0;
+			Destroy(Shared.GetComponent<PlayerInputManager>());
 			if (_players[1].GetComponent<AIController>() != null)
 				RemovePlayer(_players[1]);
 			for (var i = 0; i < _players.Count; i++)
