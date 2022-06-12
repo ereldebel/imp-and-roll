@@ -40,6 +40,7 @@ namespace Managers
 		private bool _paused;
 		private PlayerInput _pausedBy;
 		private Dictionary<PlayerInput, string> _playerInputs;
+		private bool _quit = false;
 
 		private readonly string[] _sceneNames = {"Opening Scene", "Original Arena", "Icy Arena", "Volcanic Arena"};
 		private int _curScene;
@@ -73,6 +74,14 @@ namespace Managers
 		{
 			openingScreen.gameObject.SetActive(true);
 			_curScene = 0;
+			if (Shared != null && Shared._quit)
+			{
+				Destroy(Shared.GetComponent<PlayerInputManager>());
+				foreach (var player in Shared._players)
+					Destroy(player);
+				Destroy(Shared.gameObject);
+				Shared = null;
+			}
 			if (Shared == null)
 			{
 				if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -90,27 +99,27 @@ namespace Managers
 			}
 			else
 			{
-				_playerReadyStatus = Shared._playerReadyStatus;
-				_players = Shared._players;
-				_playerInputs = Shared._playerInputs;
-				_numPlayers = Shared._numPlayers;
-				if (Shared != this)
-					Destroy(Shared.gameObject);
-				Shared = this;
-				openingScreen.Enter();
-				if (_numPlayers == 1)
-				{
-					huds[0].SetActive(true);
-					emptyHudAnimator.gameObject.SetActive(true);
-				}
-				else
-				{
-					foreach (var hud in huds)
-						hud.SetActive(true);
-				}
-
-				powerUps.SetActive(true);
+					_playerReadyStatus = Shared._playerReadyStatus;
+					_players = Shared._players;
+					_playerInputs = Shared._playerInputs;
+					_numPlayers = Shared._numPlayers;
+					if (Shared != this)
+						Destroy(Shared.gameObject);
+					Shared = this;
+					openingScreen.Enter();
+					if (_numPlayers == 1)
+					{
+						huds[0].SetActive(true);
+						emptyHudAnimator.gameObject.SetActive(true);
+					}
+					else
+					{
+						foreach (var hud in huds)
+							hud.SetActive(true);
+					}
 			}
+			powerUps.SetActive(true);
+			
 		}
 
 		#endregion
@@ -268,13 +277,14 @@ namespace Managers
 			Time.timeScale = _prevTimeScale;
 			_paused = false;
 			_pausedBy = null;
-			Destroy(GetComponent<PlayerInputManager>());
-			foreach (var player in Shared._players)
-				Destroy(player);
-			Destroy(Shared.gameObject);
-			Shared = null;
 			pauseCanvas.SetActive(false);
 			transitioner.TransitionToScene(0);
+			Destroy(GetComponent<PlayerInputManager>());
+			_quit = true;
+			// foreach (var player in Shared._players)
+			// 	Destroy(player);
+			// Destroy(Shared.gameObject);
+			// Shared = null;
 		}
 
 		#endregion
