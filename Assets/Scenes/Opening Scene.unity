@@ -231,7 +231,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f2cdc890f0f119e4a911049e90e022a6, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.09
   m_Pitch: 1
   Loop: 1
@@ -1282,6 +1282,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3396391708394289602, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 292563334}
     - target: {fileID: 4794844109148868267, guid: a4c63e5f5b2380340af970b54bf6d97e, type: 3}
       propertyPath: m_IsActive
       value: 1

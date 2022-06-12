@@ -2,7 +2,6 @@
 using Managers;
 using Player;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace UI

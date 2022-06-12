@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Environment;
 using Managers;
-using Player;
 using UnityEngine;
 
 public class PlayerReflection : MonoBehaviour

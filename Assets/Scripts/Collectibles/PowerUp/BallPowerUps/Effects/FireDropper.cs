@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Managers;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Collectibles.PowerUp.BallPowerUps.Effects

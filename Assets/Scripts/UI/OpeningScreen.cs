@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Linq;
 using Managers;
 using Player;
 using UnityEngine;
@@ -12,6 +11,7 @@ namespace UI
 		[SerializeField] private float transitionTime = 0.5f;
 		[SerializeField] private MinMax scale = new MinMax(1, 5);
 		[SerializeField] private float interval = 30;
+		[SerializeField] private AudioSource fireSound;
 
 		private readonly MinMax _alpha = new MinMax(0, 1);
 		private RectTransform _rectTransform;
@@ -52,6 +52,7 @@ namespace UI
 			if (_timer != null)
 				StopCoroutine(_timer);
 			_timer = StartCoroutine(Timer());
+			fireSound.Play();
 		}
 
 		private IEnumerator Timer()
@@ -70,6 +71,7 @@ namespace UI
 			StartCoroutine(ExitScene());
 			AudioManager.OpeningScreenMusic();
 			StopCoroutine(_timer);
+			fireSound.Stop();
 		}
 
 		private IEnumerator EnterScene()
