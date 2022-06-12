@@ -13,6 +13,7 @@ namespace Player
 		private Camera _camera;
 		private Plane _plane = new Plane(Vector3.up, 0);
 		private bool _usingMouse;
+		public static bool Dirty { get; set; } 
 
 		private void Awake()
 		{
@@ -30,7 +31,9 @@ namespace Player
 
 		public void OnMovement(InputAction.CallbackContext context)
 		{
-			_myBrain.MovementStick = context.ReadValue<Vector2>();
+			var direction = context.ReadValue<Vector2>();
+			_myBrain.MovementStick = direction;
+			Dirty = Dirty || direction != Vector2.zero;
 		}
 
 		public void OnAim(InputAction.CallbackContext context)
@@ -38,7 +41,11 @@ namespace Player
 			if (_usingMouse)
 				_myBrain.MousePos = ScreenToWorld2D(context.ReadValue<Vector2>());
 			else
-				_myBrain.AimingStick = context.ReadValue<Vector2>();
+			{
+				var direction = context.ReadValue<Vector2>();
+				_myBrain.AimingStick = direction;
+				Dirty = Dirty || direction != Vector2.zero;
+			}
 		}
 
 		public void OnThrow(InputAction.CallbackContext context)
@@ -48,24 +55,29 @@ namespace Player
 
 			if (context.canceled)
 				_myBrain.ThrowBall();
+			Dirty = true;
 		}
 
 		public void OnDodgeRoll(InputAction.CallbackContext context)
 		{
 			if (context.started)
 				_myBrain.DodgeRoll();
+			Dirty = true;
 		}
 
 		public void OnStart(InputAction.CallbackContext context)
 		{
+			
 			if (context.started)
 				_myBrain.PlayerReady();
+			Dirty = true;
 		}
 
 		public void OnTaunt(InputAction.CallbackContext context)
 		{
 			if (context.started)
 				_myBrain.Taunt();
+			Dirty = true;
 		}
 
 		public void OnDisconnect()

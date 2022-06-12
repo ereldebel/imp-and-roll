@@ -1,3 +1,4 @@
+using System.Collections;
 using Managers;
 using Player;
 using UnityEngine;
@@ -46,7 +47,7 @@ namespace ArenaDivision
 		private bool _dangerous;
 		private int _dangerLevel;
 		private bool _spinningLeft = true;
-		private bool _static = true;
+		private bool _static;
 
 		private static readonly int AnimatorZ = Animator.StringToHash("Z");
 		private static readonly int AnimatorX = Animator.StringToHash("X");
@@ -54,6 +55,7 @@ namespace ArenaDivision
 		private static readonly int AnimatorAttackX = Animator.StringToHash("Attack X");
 		private static readonly int AnimatorDangerLevel = Animator.StringToHash("Danger Level");
 		private static readonly int AnimatorAccelerate = Animator.StringToHash("Accelerate");
+		private static readonly int AnimatorSneeze = Animator.StringToHash("Sneeze");
 
 		#endregion
 
@@ -72,7 +74,6 @@ namespace ArenaDivision
 			_dividerChild = divider.GetChild(0);
 			OnValidate();
 			UpdateSpectralChain();
-			enabled = false;
 		}
 
 		private void Start()
@@ -87,13 +88,6 @@ namespace ArenaDivision
 			var speedMultiplier = Mathf.Log10(_timeStep) * speedUpMultiplier + 1;
 			_speed = _fixedBaseSpeed * speedMultiplier;
 			_ySpeed = _fixedBaseYSpeed * speedMultiplier;
-		}
-
-		private void OnBecameVisible()
-		{
-			enabled = true;
-			_audio.Sneeze();
-			Invoke(nameof(Continue), 2);
 		}
 
 		private void Update()
@@ -128,6 +122,22 @@ namespace ArenaDivision
 			_ball.gameObject.SetActive(false);
 			MatchManager.GameOver(transform.position.x > divider.position.x);
 			_gotEye = true;
+		}
+
+		#endregion
+
+		#region Public Methods
+
+		public void Sneeze()
+		{
+			_animator.SetTrigger(AnimatorSneeze);
+			StartCoroutine(SneezeDelayedSound(0.3f));
+		}
+
+		private IEnumerator SneezeDelayedSound(float delay)
+		{
+			yield return new WaitForSeconds(delay);
+			_audio.Sneeze();
 		}
 
 		#endregion

@@ -12,6 +12,7 @@ namespace UI
 		[SerializeField] private float transitionSpeed = 0.5f;
 		[SerializeField] private Sprite[] tips;
 		[SerializeField] private Image tipImage;
+		[SerializeField] private float minLoadTime = 3;
 
 		private static int _tipIndex;
 		private CanvasGroup transitionScreen;
@@ -45,9 +46,10 @@ namespace UI
 				yield return null;
 			SwitchMusicByScene();
 		}
-		
+
 		private IEnumerator PerformTransition(AsyncOperation asyncLoad, bool needsOrganizing, Action preSceneOrganizing)
 		{
+			var startTime = Time.time;
 			tipImage.sprite = tips[_tipIndex++];
 			_tipIndex %= tips.Length;
 			float alpha = 0;
@@ -62,6 +64,9 @@ namespace UI
 			transitionScreen.alpha = alpha = 1;
 			if (needsOrganizing)
 				preSceneOrganizing();
+			var leftOverToMin = minLoadTime - (Time.time - startTime);
+			if (leftOverToMin > 0)
+				yield return new WaitForSeconds(leftOverToMin);
 			while (!asyncLoad.isDone)
 				yield return null;
 			SwitchMusicByScene();
@@ -82,14 +87,19 @@ namespace UI
 			switch (sceneIndex)
 			{
 				case 0:
-					AudioManager.StartScreenMusic();
+					if (UICanvas.instance)
+						UICanvas.instance.gameObject.SetActive(true);
+					AudioManager.OpeningScreenMusic();
 					break;
 				case var _ when sceneIndex > 3:
+					if (UICanvas.instance)
+						UICanvas.instance.gameObject.SetActive(false);
 					AudioManager.WinMusic();
 					break;
 				default:
 					AudioManager.MatchStart();
 					AudioManager.MatchMusic();
+					MatchManager.StartMatch();
 					break;
 			}
 		}

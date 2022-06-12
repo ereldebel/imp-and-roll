@@ -1299,6 +1299,10 @@ PrefabInstance:
       propertyPath: divisionBorder
       value: 
       objectReference: {fileID: 442050005}
+    - target: {fileID: 6793810490810583996, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
+      propertyPath: monsterAnimator
+      value: 
+      objectReference: {fileID: 5851243974263786941}
     - target: {fileID: 6793810490810583997, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: m_Name
       value: Match Manager
@@ -2181,6 +2185,11 @@ PrefabInstance:
       objectReference: {fileID: 22100000, guid: 65bccbe6cfb2f244d81d823eda87bde2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5182d529ca1388347913065381b912e7, type: 3}
+--- !u!95 &5851243974263786941 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 199105405002544364, guid: 5182d529ca1388347913065381b912e7, type: 3}
+  m_PrefabInstance: {fileID: 5851243974263786940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5851243974263786945 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5851243975382083761, guid: 5182d529ca1388347913065381b912e7, type: 3}

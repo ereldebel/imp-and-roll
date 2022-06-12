@@ -57,6 +57,7 @@ namespace Collectibles
 
 		private void OnTriggerEnter(Collider other)
 		{
+			// AudioManager.PowerUpPickUp();
 			_collectible.Collect(other.gameObject);
 			if (_collectible is PowerUp.PowerUp powerUp)
 				other.GetComponent<PlayerBrain>()?.SetPowerUp(powerUp);
@@ -66,7 +67,7 @@ namespace Collectibles
 		private void OnDestroy()
 		{
 			if (_disappearance != null)
-				StopCoroutine(_disappearance);
+				GameManager.Shared.StopCoroutine(_disappearance);
 		}
 
 		private IEnumerator Disappear()

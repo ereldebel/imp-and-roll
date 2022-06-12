@@ -853,32 +853,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1132619801498085754, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1497058056039302520, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1497058056039302520, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714801354956504409, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 59e46a868db28324490f580bc07bf10e, type: 3}
-    - target: {fileID: 6714801354956504409, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714801354956504409, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714801354956504409, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714801354956504409, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
-      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6793810490810583986, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
@@ -953,6 +937,10 @@ PrefabInstance:
       propertyPath: divisionBorder
       value: 
       objectReference: {fileID: 442050005}
+    - target: {fileID: 6793810490810583996, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
+      propertyPath: monsterAnimator
+      value: 
+      objectReference: {fileID: 5851243974263786941}
     - target: {fileID: 6793810490810583997, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: m_Name
       value: Match Manager
@@ -960,10 +948,6 @@ PrefabInstance:
     - target: {fileID: 6793810490810583997, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8966164752936520956, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b546ad6cd487ddc4eb253230223dc1d3, type: 3}
@@ -1329,6 +1313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5182d529ca1388347913065381b912e7, type: 3}
+--- !u!95 &5851243974263786941 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 199105405002544364, guid: 5182d529ca1388347913065381b912e7, type: 3}
+  m_PrefabInstance: {fileID: 5851243974263786940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5851243974263786945 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5851243975382083761, guid: 5182d529ca1388347913065381b912e7, type: 3}

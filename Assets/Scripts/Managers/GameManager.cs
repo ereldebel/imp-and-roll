@@ -40,6 +40,7 @@ namespace Managers
 		private bool _paused;
 		private PlayerInput _pausedBy;
 		private Dictionary<PlayerInput, string> _playerInputs;
+		private bool _quit = false;
 
 		private readonly string[] _sceneNames = {"Opening Scene", "Original Arena", "Icy Arena", "Volcanic Arena"};
 		private int _curScene;
@@ -61,9 +62,9 @@ namespace Managers
 
 		public static GameManager Shared { get; private set; }
 		public static IReadOnlyList<GameObject> Players => Shared._players;
-		public static int BlueScore => Shared._blueScore;
-		public static int RedScore => Shared._redScore;
-		public static int CurScene => Shared._curScene;
+		public static int BlueScore => Shared ? Shared._blueScore : -1;
+		public static int RedScore => Shared ? Shared._redScore : -1;
+		public static int CurScene => Shared ? Shared._curScene : -1;
 
 		#endregion
 
@@ -73,6 +74,14 @@ namespace Managers
 		{
 			openingScreen.gameObject.SetActive(true);
 			_curScene = 0;
+			if (Shared != null && Shared._quit)
+			{
+				Destroy(Shared.GetComponent<PlayerInputManager>());
+				foreach (var player in Shared._players)
+					Destroy(player);
+				Destroy(Shared.gameObject);
+				Shared = null;
+			}
 			if (Shared == null)
 			{
 				if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -90,27 +99,27 @@ namespace Managers
 			}
 			else
 			{
-				_playerReadyStatus = Shared._playerReadyStatus;
-				_players = Shared._players;
-				_playerInputs = Shared._playerInputs;
-				_numPlayers = Shared._numPlayers;
-				if (Shared != this)
-					Destroy(Shared.gameObject);
-				Shared = this;
-				openingScreen.Enter();
-				if (_numPlayers == 1)
-				{
-					huds[0].SetActive(true);
-					emptyHudAnimator.gameObject.SetActive(true);
-				}
-				else
-				{
-					foreach (var hud in huds)
-						hud.SetActive(true);
-				}
-
-				powerUps.SetActive(true);
+					_playerReadyStatus = Shared._playerReadyStatus;
+					_players = Shared._players;
+					_playerInputs = Shared._playerInputs;
+					_numPlayers = Shared._numPlayers;
+					if (Shared != this)
+						Destroy(Shared.gameObject);
+					Shared = this;
+					openingScreen.Enter();
+					if (_numPlayers == 1)
+					{
+						huds[0].SetActive(true);
+						emptyHudAnimator.gameObject.SetActive(true);
+					}
+					else
+					{
+						foreach (var hud in huds)
+							hud.SetActive(true);
+					}
 			}
+			powerUps.SetActive(true);
+			
 		}
 
 		#endregion
@@ -268,15 +277,15 @@ namespace Managers
 			Time.timeScale = _prevTimeScale;
 			_paused = false;
 			_pausedBy = null;
-			Destroy(GetComponent<PlayerInputManager>());
-			foreach (var player in Shared._players)
-				Destroy(player);
-			Destroy(Shared.gameObject);
-			Shared = null;
 			pauseCanvas.SetActive(false);
-			// foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
-			// 	playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
 			transitioner.TransitionToScene(0);
+			Destroy(GetComponent<PlayerInputManager>());
+			_quit = true;
+		}
+		
+		public void ExitToOpeningScreen()
+		{
+			RemovePlayer(_players[0]);
 		}
 
 		#endregion
@@ -292,9 +301,7 @@ namespace Managers
 
 		private void MakePlayerRed(GameObject player)
 		{
-			var playerBrain = player.GetComponent<PlayerBrain>();
-			playerBrain.Animator.runtimeAnimatorController = redController;
-			playerBrain.FlipReadyBubble();
+			player.GetComponent<Animator>().runtimeAnimatorController = redController;
 		}
 
 		private void SetUpPlayerForGameScene(GameObject player, int playerID)
@@ -357,14 +364,13 @@ namespace Managers
 			_curScene = 0;
 			if (_players[1].GetComponent<AIController>() != null)
 				RemovePlayer(_players[1]);
-
 			for (var i = 0; i < _players.Count; i++)
 			{
 				var playerBrain = _players[i].GetComponent<PlayerBrain>();
 				playerBrain.Reset(false);
 				playerBrain.CharacterController.enabled = false;
 				SetUpPlayerForStartScene(_players[i], i);
-				StartCoroutine(ResetPC(_players[i], 1f));
+				playerBrain.CharacterController.enabled = true;
 			}
 
 			transitioner.TransitionToScene(0);
@@ -414,11 +420,10 @@ namespace Managers
 			Invoke(nameof(ResetGameKeepPlayers), 6f);
 		}
 
-		private IEnumerator ResetPC(GameObject player, float time)
+		private static IEnumerator ResetPC(GameObject player, float time)
 		{
 			yield return new WaitForSeconds(time);
 			player.GetComponent<CharacterController>().enabled = true;
-			// _gameStarted = true;
 		}
 
 		#endregion
