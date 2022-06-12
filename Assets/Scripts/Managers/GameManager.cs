@@ -72,6 +72,7 @@ namespace Managers
 
 		private void Awake()
 		{
+			Cursor.visible = false;
 			openingScreen.gameObject.SetActive(true);
 			_curScene = 0;
 			if (Shared != null && Shared._quit)
