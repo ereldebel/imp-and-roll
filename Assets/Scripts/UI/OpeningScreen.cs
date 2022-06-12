@@ -34,7 +34,6 @@ namespace UI
 			_rectTransform = GetComponent<RectTransform>();
 			_canvasGroup = GetComponent<CanvasGroup>();
 			_originalScale = _rectTransform.localScale;
-			AudioManager.OpeningScreenMusic();
 		}
 
 		public void Enter()

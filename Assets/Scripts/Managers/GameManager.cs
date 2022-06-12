@@ -61,9 +61,9 @@ namespace Managers
 
 		public static GameManager Shared { get; private set; }
 		public static IReadOnlyList<GameObject> Players => Shared._players;
-		public static int BlueScore => Shared._blueScore;
-		public static int RedScore => Shared._redScore;
-		public static int CurScene => Shared._curScene;
+		public static int BlueScore => Shared ? Shared._blueScore : -1;
+		public static int RedScore => Shared ? Shared._redScore : -1;
+		public static int CurScene => Shared ? Shared._curScene : -1;
 
 		#endregion
 
@@ -274,8 +274,6 @@ namespace Managers
 			Destroy(Shared.gameObject);
 			Shared = null;
 			pauseCanvas.SetActive(false);
-			// foreach (var playerAndActionMap in _playerInputs.Where(player => player.Key).ToList())
-			// 	playerAndActionMap.Key.SwitchCurrentActionMap("Start Menu");
 			transitioner.TransitionToScene(0);
 		}
 

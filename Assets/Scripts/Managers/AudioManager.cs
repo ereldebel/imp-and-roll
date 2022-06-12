@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +35,7 @@ namespace Managers
 			DontDestroyOnLoad(_shared.gameObject);
 			base.Awake();
 			SetObjectSet(new HashSet<AudioSource> {Audio});
+			OpeningScreenMusic();
 		}
 
 		public static void TutorialScreenMusic() => _shared.SwitchClip(_shared.tutorialMusic);
