@@ -149,6 +149,7 @@ namespace Managers
 				x = -x;
 			var velocity = new Vector3(x, 2, z);
 			var counterParent = counterAnimator.transform.parent;
+			counterParent.gameObject.SetActive(true);
 			counterAnimator.SetBool(AnimatorBlueStarts, x > 0);
 			AudioManager.Counter();
 			yield return new WaitForSeconds(delay - 0.5f);

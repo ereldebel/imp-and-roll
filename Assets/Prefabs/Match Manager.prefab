@@ -146,7 +146,7 @@ MonoBehaviour:
   timeBetweenPowerUpSpawns: 7
   minPowerUpDistFromPlayers: 7
   counterAnimator: {fileID: 7351077117021660324}
-  monsterAnimator: {fileID: 0}
+  monster: {fileID: 0}
   powerUpsInMatch: 01000000020000000300000000000000
 --- !u!1 &8966164752936520956
 GameObject:
@@ -166,7 +166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1169558194284163519
 RectTransform:
   m_ObjectHideFlags: 0

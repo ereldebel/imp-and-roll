@@ -78,6 +78,12 @@ namespace UI
 				yield return null;
 			}
 
+			var sceneIndex = SceneManager.GetActiveScene().buildIndex;
+			if (sceneIndex != 0 && SceneManager.GetActiveScene().buildIndex <= 3)
+			{
+				MatchManager.StartMatch();
+
+			}
 			transitionScreen.alpha = 0;
 		}
 
@@ -99,7 +105,6 @@ namespace UI
 				default:
 					AudioManager.MatchStart();
 					AudioManager.MatchMusic();
-					MatchManager.StartMatch();
 					break;
 			}
 		}
