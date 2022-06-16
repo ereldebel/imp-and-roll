@@ -424,13 +424,8 @@ namespace Managers
 			transitioner.QuickTransitionToScene($"{winner} won, arena {_curScene}");
 			SetUpPlayersForWinningScene();
 			yield return new WaitForSeconds(6);
-			ResetGameKeepPlayers();
-		}
-
-		private static IEnumerator ResetPC(GameObject player, float time)
-		{
-			yield return new WaitForSeconds(time);
-			player.GetComponent<CharacterController>().enabled = true;
+			// ResetGameKeepPlayers();
+			Quit();
 		}
 
 		#endregion
