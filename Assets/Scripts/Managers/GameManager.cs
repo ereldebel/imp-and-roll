@@ -318,7 +318,6 @@ namespace Managers
 			characterController.enabled = true;
 			if (playerBrain.PlayerInput)
 				playerBrain.PlayerInput.SwitchCurrentActionMap("Player");
-			player.GetComponent<PlayerController>()?.OnMatchStart();
 		}
 
 		private void StartGameMultiplePlayers(int sceneToStart, Action preparationAction = null)
