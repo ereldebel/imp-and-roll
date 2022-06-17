@@ -162,17 +162,6 @@
                 },
                 {
                     "name": "",
-                    "id": "2cd33bfe-5205-4cb3-b251-75c648becf6c",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d818274e-d0b5-4d4b-baa7-60f964af7254",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -411,17 +400,6 @@
                     "name": "",
                     "id": "be2d5c97-d0a1-405f-bf2c-27ff132e7c2e",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ef3fe332-18dc-44c0-9ee1-2b2d9ba3a680",
-                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",

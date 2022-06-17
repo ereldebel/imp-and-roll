@@ -13,13 +13,20 @@ namespace Player
 		private Camera _camera;
 		private Plane _plane = new Plane(Vector3.up, 0);
 		private bool _usingMouse;
-		public static bool Dirty { get; set; }
+		public static bool Dirty { get; set; } 
 
 		private void Awake()
 		{
 			_myBrain = GetComponent<PlayerBrain>();
 			_playerInput = GetComponent<PlayerInput>();
 			_camera = Camera.main;
+		}
+
+		public void OnMatchStart()
+		{
+			if (_playerInput.currentControlScheme != "Keyboard") return;
+			_usingMouse = true;
+			_plane = new Plane(Vector3.up, -1);
 		}
 
 		public void OnMovement(InputAction.CallbackContext context)
@@ -31,7 +38,7 @@ namespace Player
 
 		public void OnAim(InputAction.CallbackContext context)
 		{
-			if (_playerInput.currentControlScheme == "Keyboard")
+			if (_usingMouse)
 				_myBrain.MousePos = ScreenToWorld2D(context.ReadValue<Vector2>());
 			else
 			{
@@ -60,6 +67,7 @@ namespace Player
 
 		public void OnStart(InputAction.CallbackContext context)
 		{
+			
 			if (context.started)
 				_myBrain.PlayerReady();
 			Dirty = true;
@@ -76,7 +84,7 @@ namespace Player
 		{
 			GameManager.Shared.Pause(_playerInput);
 		}
-
+		
 		public void OnReconnect()
 		{
 			GameManager.Shared.Resume(_playerInput);
@@ -108,7 +116,6 @@ namespace Player
 
 		private Vector2 ScreenToWorld2D(Vector2 screenPos)
 		{
-			if (_camera == null) _camera = Camera.main;
 			if (_camera == null) return Vector2.zero;
 			var worldPos3d = Vector3.zero;
 			var ray = _camera.ScreenPointToRay(screenPos);

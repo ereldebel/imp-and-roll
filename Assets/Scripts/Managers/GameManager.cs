@@ -168,8 +168,6 @@ namespace Managers
 
 		private void RemovePlayer(GameObject player)
 		{
-			if (openingScreen.Showing)
-				Application.Quit();
 			if (_curScene != 0 || _players == null)
 			{
 				Destroy(player);
@@ -249,7 +247,7 @@ namespace Managers
 
 		public void Pause(PlayerInput playerInput)
 		{
-			if (_paused || transitioner.InTransition) return;
+			if (_paused) return;
 			_prevTimeScale = Time.timeScale;
 			Time.timeScale = 0;
 			_paused = true;
@@ -320,6 +318,7 @@ namespace Managers
 			characterController.enabled = true;
 			if (playerBrain.PlayerInput)
 				playerBrain.PlayerInput.SwitchCurrentActionMap("Player");
+			player.GetComponent<PlayerController>()?.OnMatchStart();
 		}
 
 		private void StartGameMultiplePlayers(int sceneToStart, Action preparationAction = null)

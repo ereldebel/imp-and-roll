@@ -11,7 +11,7 @@ namespace UI
 	{
 		[SerializeField] private int playerNumber;
 		[SerializeField] private CollectibleFactory collectibleFactory;
-
+		
 		private Image _image;
 		private readonly List<CollectibleType> _activatedPowerUps = new List<CollectibleType>();
 		private GameObject _owner;
@@ -19,17 +19,13 @@ namespace UI
 		private void Awake()
 		{
 			_image = GetComponent<Image>();
-		}
-
-		private void OnEnable()
-		{
 			_image.enabled = false;
 			_owner = GameManager.Players[playerNumber];
 			PowerUp.PowerUpActivated += PowerUpActivated;
 			PowerUp.PowerUpDeactivated += PowerUpDeactivated;
 		}
 
-		private void OnDisable()
+		private void OnDestroy()
 		{
 			PowerUp.PowerUpActivated -= PowerUpActivated;
 			PowerUp.PowerUpDeactivated -= PowerUpDeactivated;
