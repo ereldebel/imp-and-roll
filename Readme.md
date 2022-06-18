@@ -16,3 +16,8 @@ The game was created by Ofek Applebaum, Gal Rubin, Eran Kramf and I (with the fo
 Source code can be seen at Assets/Scripts
 
 <br>
+
+The game is available at:
+<p align='center'>
+  <a href="https://ofekap.itch.io/imp-roll"><img src="https://leafo.net/igjc-presentation/itchio-logo.png" width=550/></a>
+</p>
